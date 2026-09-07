@@ -1,7 +1,7 @@
-/tmp/tmp.JtaVzLUJ2p/mnt:
+/tmp/tmp.XYF0VFsxYY/mnt:
 total 655
 dr-xr-xr-x 1 root root   2048 Sep  7 13:33 .
-drwx------ 3 root root   4096 Sep  7 13:49 ..
+drwx------ 3 root root   4096 Sep  7 13:51 ..
 dr-xr-xr-x 1 root root   2048 Sep  7 13:33 .disk
 dr-xr-xr-x 1 root root   2048 Sep  7 13:33 EFI
 dr-xr-xr-x 1 root root   2048 Sep  7 13:33 boot
@@ -11,26 +11,26 @@ dr-xr-xr-x 1 root root   2048 Sep  7 13:33 live
 -r--r--r-- 1 root root    210 Sep  7 13:33 sha256sum.README
 -r--r--r-- 1 root root  29175 Sep  7 13:33 sha256sum.txt
 
-/tmp/tmp.JtaVzLUJ2p/mnt/EFI:
+/tmp/tmp.XYF0VFsxYY/mnt/EFI:
 total 6
 dr-xr-xr-x 1 root root 2048 Sep  7 13:33 .
 dr-xr-xr-x 1 root root 2048 Sep  7 13:33 ..
 dr-xr-xr-x 1 root root 2048 Sep  7 13:33 boot
 
-/tmp/tmp.JtaVzLUJ2p/mnt/EFI/boot:
+/tmp/tmp.XYF0VFsxYY/mnt/EFI/boot:
 total 3290
 dr-xr-xr-x 1 root root    2048 Sep  7 13:33 .
 dr-xr-xr-x 1 root root    2048 Sep  7 13:33 ..
 -r--r--r-- 1 root root 1036152 Jun 22 21:30 bootx64.efi
 -r--r--r-- 1 root root 2328000 Apr 30 19:02 grubx64.efi
 
-/tmp/tmp.JtaVzLUJ2p/mnt/live:
+/tmp/tmp.XYF0VFsxYY/mnt/live:
 total 1350069
 dr-xr-xr-x 1 root root       2048 Sep  7 13:33 .
 dr-xr-xr-x 1 root root       2048 Sep  7 13:33 ..
 -r--r--r-- 1 root root      34899 Sep  7 13:33 filesystem.packages
 -r--r--r-- 1 root root 1238069248 Sep  7 13:33 filesystem.squashfs
--r--r--r-- 2 root root   60037815 Sep  7 13:33 initrd.img
--r--r--r-- 2 root root   60037815 Sep  7 13:33 initrd.img-6.12.107+deb13-amd64
+-r--r--r-- 2 root root   60037799 Sep  7 13:33 initrd.img
+-r--r--r-- 2 root root   60037799 Sep  7 13:33 initrd.img-6.12.107+deb13-amd64
 -r--r--r-- 2 root root   12142528 Aug 29 04:19 vmlinuz
 -r--r--r-- 2 root root   12142528 Aug 29 04:19 vmlinuz-6.12.107+deb13-amd64

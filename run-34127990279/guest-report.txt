@@ -33,16 +33,16 @@ boot=live components apparmor=1 security=apparmor locales=ko_KR.UTF-8 keyboard-l
 [?2004hSHELL> echo '=== memory'; free -m; grep -E 'MemTotal|MemAvailable|AnonPages|Shmem:|Slab|SUnreclaim|KernelStack|PageTables' /proc/meminfo
 [?2004l=== memory
                총계         사용        여분      공유    버퍼/캐시    가용
-메모리:         1973         674         540          35         934        1299
+메모리:         1973         677         536          35         935        1296
 스  왑:          986           0         986
 MemTotal:        2020960 kB
-MemAvailable:    1330724 kB
-AnonPages:        393972 kB
+MemAvailable:    1327440 kB
+AnonPages:        395212 kB
 Shmem:             35920 kB
-Slab:              58712 kB
-SUnreclaim:        32256 kB
-KernelStack:        4640 kB
-PageTables:         8632 kB
+Slab:              58628 kB
+SUnreclaim:        32224 kB
+KernelStack:        4560 kB
+PageTables:         8504 kB
 SecPageTables:         0 kB
 [?2004hSHELL> echo '=== zram'; sudo /usr/sbin/zramctl 2>/dev/null || echo none
 [?2004l=== zram
@@ -50,52 +50,52 @@ NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
 /dev/zram0 zstd        986.8M   4K   59B   20K       2 [SWAP]
 [?2004hSHELL> echo '=== pss by process (MB)'; sudo sh -c 'for p in /proc/[0-9]*; do c=$(cat $p/comm 2>/dev/null); v=$(awk "/^Pss:/{s+=\$2}END{print s+0}" $p/smaps_rollup 2>/dev/null); [ -n "$v" ] && [ "$v" -gt 0 ] && echo "$v $c"; done | sort -rn | awk "{t+=\$1; printf \"%6.1f %s\\n\", \$1/1024, \$2} END{printf \"TOTAL %.0f MB\\n\", t/1024}" | head -30'
 [?2004l=== pss by process (MB)
-  77.1 xfwm4
+  78.0 xfwm4
   74.6 nm-applet
-  66.8 Xorg
-  55.7 xfce4-panel
-  54.5 xfdesktop
-  33.7 xfce4-session
-  26.8 unattended-upgr
-  20.5 fcitx5
-  12.2 tumblerd
+  69.4 Xorg
+  56.3 xfce4-panel
+  55.2 xfdesktop
+  34.0 xfce4-session
+  25.6 unattended-upgr
+  20.4 fcitx5
+  12.3 tumblerd
    9.7 xfsettingsd
    9.1 Thunar
-   8.9 xfce4-screensav
+   9.0 xfce4-screensav
    8.3 NetworkManager
    6.9 wireplumber
-   6.5 xdg-desktop-por
-   5.6 systemd
-   5.5 udisksd
+   6.4 xdg-desktop-por
+   5.7 systemd
+   5.4 udisksd
    5.3 pipewire
    4.8 xfce4-notifyd
-   4.5 systemd
+   4.6 systemd
    3.9 xdg-desktop-por
    3.7 systemd-udevd
    3.6 systemd-journal
-   3.3 xfce4-power-man
    3.3 polkitd
-   3.0 wpa_supplicant
+   3.3 xfce4-power-man
+   3.1 wpa_supplicant
    2.8 cupsd
    2.8 bash
-   2.7 bash
    2.7 polkit-mate-aut
+   2.7 bash
 [?2004hSHELL> echo '=== boot time'; systemd-analyze 2>/dev/null; systemd-analyze blame 2>/dev/null | head -12
 [?2004l=== boot time
-Startup finished in 3.246s (kernel) + 9.989s (userspace) = 13.236s 
-graphical.target reached after 9.982s in userspace.
-5.064s live-config.service
-2.893s ldconfig.service
-2.253s console-setup.service
-1.915s blueman-mechanism.service
-1.619s dev-sr0.device
-1.298s dev-loop0.device
- 729ms nftables.service
- 600ms systemd-udev-trigger.service
- 532ms NetworkManager.service
- 531ms systemd-modules-load.service
- 488ms systemd-journald.service
- 478ms accounts-daemon.service
+Startup finished in 3.504s (kernel) + 10.371s (userspace) = 13.875s 
+graphical.target reached after 10.367s in userspace.
+5.906s live-config.service
+3.710s ldconfig.service
+2.961s console-setup.service
+1.951s blueman-mechanism.service
+1.691s dev-sr0.device
+1.355s dev-loop0.device
+ 733ms nftables.service
+ 644ms systemd-modules-load.service
+ 566ms NetworkManager.service
+ 531ms systemd-udev-trigger.service
+ 497ms systemd-journald.service
+ 495ms modprobe@drm.service
 [?2004hSHELL> echo '=== failed units'; systemctl --failed --no-pager --no-legend
 [?2004l=== failed units
 [?2004hSHELL> echo '=== services'; for s in lightdm nftables apparmor zramswap unattended-upgrades NetworkManager; do printf '%s: %s\n' $s $(systemctl is-active $s); done
@@ -113,7 +113,7 @@ lockdown,capability,landlock,yama,apparmor,bpf,ipe,ima,evm
 ○ apparmor.service - Load AppArmor profiles
      Loaded: loaded (/usr/lib/systemd/system/apparmor.service; enabled; preset: enabled)
      Active: inactive (dead)
-  Condition: start condition unmet at Mon 2026-09-07 22:49:45 KST; 2min 55s ago
+  Condition: start condition unmet at Mon 2026-09-07 22:51:25 KST; 2min 55s ago
              └─ ConditionPathExists=!/run/live/overlay/work was not met
        Docs: man:apparmor(7)
 Failed to get profiles: 2....
