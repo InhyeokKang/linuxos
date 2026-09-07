@@ -68,6 +68,12 @@ if [ -f "${BG}/default.svg" ]; then
     # Fedora 기본 jxl 원본(f*/default/*.jxl)도 우리 png 내용으로 (심볼릭 링크 대상 교체)
     find /usr/share/backgrounds -maxdepth 3 -type f -name '*.jxl' -exec cp "${BG}/default.png" {} \;
 fi
+# 패널 기본 레이아웃을 xfce4-panel 의 default.xml 로도 설치: livesys-xfce 가 라이브 사용자 홈에
+# /etc/xdg/xfce4/panel/default.xml 을 복사하고, "패널 초기화" 도 이 파일을 쓰므로 여기에 kiyu 레이아웃을 둔다.
+if [ -f /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ]; then
+    mkdir -p /etc/xdg/xfce4/panel
+    cp /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml /etc/xdg/xfce4/panel/default.xml
+fi
 # 패널 플러그인 in-process (wrapper 프로세스 제거)
 for plug in whiskermenu docklike launcher tasklist clock showdesktop separator notification-plugin systray; do
     d="/usr/share/xfce4/panel/plugins/${plug}.desktop"
