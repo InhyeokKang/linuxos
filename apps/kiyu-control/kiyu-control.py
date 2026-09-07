@@ -20,7 +20,7 @@ from gi.repository import Gdk, GLib, Gtk  # noqa: E402
 
 STATE_DIR = os.path.join(GLib.get_user_config_dir(), "kiyu")
 MARGIN = 10
-PANEL_H = 52 + MARGIN
+PANEL_H = 46 + MARGIN
 
 
 def run(cmd, timeout=3):

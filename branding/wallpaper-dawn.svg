@@ -1,12 +1,49 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160" width="3840" height="2160">
+  <!-- kiyu 기본 배경 "새벽": 크림 종이 위로 부드러운 파스텔 곡선(언덕·노을)이 깔리고, 귤 단면 로고가 해처럼 떠 있다.
+       정적 PNG 로 렌더되므로 런타임 비용 0 -->
   <defs>
-    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#f7f3ec"/>
-      <stop offset="1" stop-color="#ebe4d6"/>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdfbf7"/>
+      <stop offset="0.55" stop-color="#f9f3ea"/>
+      <stop offset="1" stop-color="#f3ebde"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffd9a8" stop-opacity="0.75"/>
+      <stop offset="0.45" stop-color="#ffe6c4" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffefd6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hill1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe7cc"/>
+      <stop offset="1" stop-color="#ffd3a4"/>
+    </linearGradient>
+    <linearGradient id="hill2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffe3c6"/>
+      <stop offset="1" stop-color="#ffd0a2"/>
+    </linearGradient>
+    <linearGradient id="hill3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd9b4"/>
+      <stop offset="1" stop-color="#ffc28a"/>
+    </linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff4e6" stop-opacity="0"/>
+      <stop offset="1" stop-color="#ffe9d2" stop-opacity="0.9"/>
     </linearGradient>
   </defs>
   <rect width="3840" height="2160" fill="url(#paper)"/>
-  <g transform="translate(1600 760) scale(2.5)">
+  <!-- 노을빛 그라디언트 (아래로 갈수록 살구색) -->
+  <rect y="700" width="3840" height="1460" fill="url(#sky)"/>
+  <!-- 해무리: 로고 뒤의 부드러운 빛 -->
+  <circle cx="1920" cy="1010" r="900" fill="url(#glow)"/>
+  <!-- 뒤 언덕 (가장 옅음) -->
+  <path d="M-100 1560 C 600 1320, 1300 1300, 1920 1420 C 2540 1540, 3200 1360, 3940 1180 L3940 2260 L-100 2260 Z" fill="url(#hill1)" opacity="0.9"/>
+  <!-- 가운데 언덕 -->
+  <path d="M-100 1760 C 700 1520, 1500 1700, 2200 1620 C 2900 1540, 3400 1440, 3940 1560 L3940 2260 L-100 2260 Z" fill="url(#hill2)" opacity="0.9"/>
+  <!-- 앞 언덕 (가장 진함) -->
+  <path d="M-100 2000 C 500 1880, 1100 1960, 1800 1900 C 2500 1840, 3100 1740, 3940 1880 L3940 2260 L-100 2260 Z" fill="url(#hill3)" opacity="0.92"/>
+  <!-- 오른쪽 위 옅은 곡선 하이라이트 -->
+  <path d="M2400 -100 C 3000 300, 3500 200, 4000 600 L4000 -100 Z" fill="#fff2df" opacity="0.7"/>
+  <!-- 귤 단면 로고 (해) -->
+  <g transform="translate(1600 690) scale(2.5)">
 
   <circle cx="128" cy="128" r="122" fill="#f47c0c"/>
   <circle cx="128" cy="128" r="111" fill="#fff3c9"/>

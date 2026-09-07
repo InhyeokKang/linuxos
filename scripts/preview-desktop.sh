@@ -63,18 +63,16 @@ install_and_overlay() {
         fi
         cp /usr/share/backgrounds/kiyu/default.svg "$default_bg"
     fi
-    # 호스트에 docklike 플러그인이 없으면 프리뷰에서만 런처 3개 + 아이콘 전용 tasklist 로 흉내낸다
+    # 호스트에 docklike 플러그인이 없으면 프리뷰에서만 런처 3개 + 아이콘 전용 tasklist(id 20~23) 로 흉내낸다
     if ! ls /usr/lib/*/xfce4/panel/plugins/libdocklike.so >/dev/null 2>&1; then
         python3 - <<'PYX'
 p = "/etc/xdg/xdg-kiyu/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
 s = open(p).read()
-s = s.replace('<value type="int" value="2"/>\n      </property>\n    </property>\n    <property name="panel-2"',
-              '<value type="int" value="2"/>\n        <value type="int" value="3"/>\n        <value type="int" value="4"/>\n        <value type="int" value="5"/>\n      </property>\n    </property>\n    <property name="panel-2"')
+s = s.replace('<value type="int" value="2"/>', ''.join('<value type="int" value="%d"/>' % i for i in (20, 21, 22, 23)), 1)
+launcher = '<property name="plugin-%d" type="string" value="launcher"><property name="items" type="array"><value type="string" value="/usr/share/applications/%s.desktop"/></property><property name="show-label" type="bool" value="false"/></property>'
 s = s.replace('<property name="plugin-2" type="string" value="docklike"/>',
-              '<property name="plugin-2" type="string" value="launcher"><property name="items" type="array"><value type="string" value="/usr/share/applications/thunar.desktop"/></property><property name="show-label" type="bool" value="false"/></property>\n'
-              '    <property name="plugin-3" type="string" value="launcher"><property name="items" type="array"><value type="string" value="/usr/share/applications/taengja.desktop"/></property></property>\n'
-              '    <property name="plugin-4" type="string" value="launcher"><property name="items" type="array"><value type="string" value="/usr/share/applications/org.gnome.Software.desktop"/></property></property>\n'
-              '    <property name="plugin-5" type="string" value="tasklist"><property name="show-labels" type="bool" value="false"/><property name="flat-buttons" type="bool" value="true"/><property name="grouping" type="bool" value="true"/><property name="show-handle" type="bool" value="false"/></property>')
+              launcher % (20, "thunar") + launcher % (21, "taengja") + launcher % (22, "org.gnome.Software") +
+              '<property name="plugin-23" type="string" value="tasklist"><property name="show-labels" type="bool" value="false"/><property name="flat-buttons" type="bool" value="true"/><property name="grouping" type="bool" value="true"/><property name="show-handle" type="bool" value="false"/></property>')
 open(p, "w").write(s)
 PYX
     fi
