@@ -31,6 +31,7 @@ Xvfb 프리뷰에서 확인된 것:
 - [x] 탱자 브라우저 v0 (WebKitGTK): 탭·주소창·검색·즐겨찾기·다운로드, 샌드박스·ITP·추적기 차단·권한 기본 거부
 - [x] kiyu-superkey (Super 탭 → 시작 메뉴, Super+화살표 유지) — Xvfb 에서 검증
 - [ ] Fedora ISO 부팅 테스트: 자동 로그인, SELinux enforcing, firewalld 존, dnf-automatic, 메모리
+- [ ] docklike 작업표시줄 기본값(고정 앱 목록 `docklike-2.rc` 의 pinned 경로 형식) 실제 ISO 에서 확인
 - [ ] Anaconda 설치 흐름 (BIOS/UEFI, LUKS)
 - [ ] RPM Fusion 코덱 설치 도우미, 릴리스 업그레이드 도우미
 - [ ] 브라우저 v1: Vala/Rust 이식, EasyPrivacy 필터 자동 갱신, 비밀번호 관리자, WebRTC UI

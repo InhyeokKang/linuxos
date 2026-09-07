@@ -1,0 +1,14 @@
+# kiyu 작업표시줄(docklike) 기본값: 윈도우처럼 고정 앱과 실행 중 창을 한 버튼으로, 실행 중이면 아래에 점 표시
+[user]
+pinned=/usr/share/applications/thunar.desktop;/usr/share/applications/taengja.desktop;/usr/share/applications/org.gnome.Software.desktop;
+forceIconSize=true
+iconSize=24
+indicatorStyle=1
+indicatorOrientation=0
+showPreviews=true
+noWindowsListIfSingle=true
+showWindowCount=false
+keyComboActive=true
+keyAloneActive=false
+middleButtonBehavior=0
+dontShowGroupsByDefault=false

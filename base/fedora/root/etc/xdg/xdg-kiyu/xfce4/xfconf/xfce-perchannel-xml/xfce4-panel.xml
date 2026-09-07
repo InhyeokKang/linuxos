@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 하단 작업 표시줄: [시작] [고정 앱] [실행 중인 창들] ... [트레이] [소리] [전원] [시계] [알림] [바탕화면 보기] -->
+<!-- 하단 작업 표시줄: [시작] [고정 앱 + 실행 중 창 (docklike)] ... [트레이] [소리] [전원] [시계] [알림] [바탕화면 보기] -->
 <channel name="xfce4-panel" version="1.0">
   <property name="configver" type="int" value="2"/>
   <property name="panels" type="array">
@@ -16,8 +16,6 @@
       <property name="plugin-ids" type="array">
         <value type="int" value="1"/>
         <value type="int" value="2"/>
-        <value type="int" value="3"/>
-        <value type="int" value="4"/>
         <value type="int" value="5"/>
         <value type="int" value="6"/>
         <value type="int" value="7"/>
@@ -30,26 +28,8 @@
   </property>
   <property name="plugins" type="empty">
     <property name="plugin-1" type="string" value="whiskermenu"/>
-    <property name="plugin-2" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="/usr/share/applications/thunar.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-3" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="/usr/share/applications/taengja.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-4" type="string" value="tasklist">
-      <property name="grouping" type="bool" value="true"/>
-      <property name="show-labels" type="bool" value="false"/>
-      <property name="flat-buttons" type="bool" value="true"/>
-      <property name="show-handle" type="bool" value="false"/>
-      <property name="middle-click" type="uint" value="0"/>
-      <property name="window-scrolling" type="bool" value="false"/>
-      <property name="include-all-workspaces" type="bool" value="true"/>
-      <property name="sort-order" type="uint" value="0"/>
-    </property>
+    <!-- 윈도우식 작업표시줄: 고정 앱과 실행 중인 창을 한 버튼으로, 실행 중이면 아래에 점 (docklike) -->
+    <property name="plugin-2" type="string" value="docklike"/>
     <property name="plugin-5" type="string" value="separator">
       <property name="expand" type="bool" value="true"/>
       <property name="style" type="uint" value="0"/>

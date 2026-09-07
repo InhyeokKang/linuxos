@@ -151,6 +151,7 @@
     <package name="xfconf"/>
     <package name="xfce4-appfinder"/>
     <package name="xfce4-whiskermenu-plugin"/>
+    <package name="xfce4-docklike-plugin"/>
     <package name="xfce4-pulseaudio-plugin"/>
     <package name="xfce4-power-manager"/>
     <package name="xfce4-notifyd"/>
