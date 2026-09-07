@@ -1,0 +1,182 @@
+
+haneul login: live
+비밀번호: 
+Linux haneul 6.12.107+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.107-1 (2026-08-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+[?2004hlive@haneul:~$ 
+
+##### SERIAL SHELL: logged_in=True
+export PS1='SHELL> '; stty cols 200; export DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
+[?2004l[?2004hSHELL> echo '=== os-release'; cat /etc/os-release
+[?2004l=== os-release
+PRETTY_NAME="Haneul OS 0.1.0 (saebyeok)"
+NAME="Haneul OS"
+VERSION_ID="0.1.0"
+VERSION="0.1.0 (saebyeok)"
+VERSION_CODENAME=trixie
+ID=haneul
+ID_LIKE=debian
+HOME_URL="https://github.com/inhyeokkang/linuxos"
+SUPPORT_URL="https://github.com/inhyeokkang/linuxos"
+BUG_REPORT_URL="https://github.com/inhyeokkang/linuxos/issues"
+DEBIAN_CODENAME=trixie
+[?2004hSHELL> echo '=== uname'; uname -r; cat /proc/cmdline
+[?2004l=== uname
+6.12.107+deb13-amd64
+boot=live components apparmor=1 security=apparmor locales=ko_KR.UTF-8 keyboard-layouts=kr timezone=Asia/Seoul username=live hostname=haneul console=tty0 console=ttyS0,115200 systemd.show_status=1
+[?2004hSHELL> echo '=== memory'; free -m; grep -E 'MemTotal|MemAvailable|AnonPages|Shmem:|Slab|SUnreclaim|KernelStack|PageTables' /proc/meminfo
+[?2004l=== memory
+               총계         사용        여분      공유    버퍼/캐시    가용
+메모리:         1971         891         321          35         935        1080
+스  왑:          985           0         985
+MemTotal:        2018940 kB
+MemAvailable:    1105776 kB
+AnonPages:        601724 kB
+Shmem:             35936 kB
+Slab:              61248 kB
+SUnreclaim:        34524 kB
+KernelStack:        5104 kB
+PageTables:         9772 kB
+SecPageTables:         0 kB
+[?2004hSHELL> echo '=== zram'; sudo /usr/sbin/zramctl 2>/dev/null || echo none
+[?2004l=== zram
+NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
+/dev/zram0 zstd        985.8M   4K   59B   20K       2 [SWAP]
+[?2004hSHELL> echo '=== pss by process (MB)'; sudo sh -c 'for p in /proc/[0-9]*; do c=$(cat $p/comm 2>/dev/null); v=$(awk "/^Pss:/{s+=\$2}END{print s+0}" $p/smaps_rollup 2>/dev/null); [ -n "$v" ] && [ "$v" -gt 0 ] && echo "$v $c"; done | sort -rn | awk "{t+=\$1; printf \"%6.1f %s\\n\", \$1/1024, \$2} END{printf \"TOTAL %.0f MB\\n\", t/1024}" | head -30'
+[?2004l=== pss by process (MB)
+  75.9 xfwm4
+  72.6 nm-applet
+  69.2 Xorg
+  64.1 xfdesktop
+  46.2 wrapper-2.0
+  42.7 xfce4-panel
+  41.6 wrapper-2.0
+  41.6 wrapper-2.0
+  41.1 wrapper-2.0
+  39.5 wrapper-2.0
+  33.3 xfce4-session
+  27.0 unattended-upgr
+  22.6 fcitx5
+  12.2 tumblerd
+   9.2 xfsettingsd
+   8.9 Thunar
+   8.5 xfce4-screensav
+   8.3 NetworkManager
+   7.1 wireplumber
+   6.5 xdg-desktop-por
+   5.7 systemd
+   5.5 udisksd
+   5.2 pipewire
+   4.6 systemd
+   4.5 xfce4-notifyd
+   3.8 systemd-udevd
+   3.7 systemd-journal
+   3.6 xdg-desktop-por
+   3.2 polkitd
+   3.1 xfce4-power-man
+[?2004hSHELL> echo '=== boot time'; systemd-analyze 2>/dev/null; systemd-analyze blame 2>/dev/null | head -12
+[?2004l=== boot time
+Startup finished in 2.359s (kernel) + 5.680s (userspace) = 8.039s 
+graphical.target reached after 5.677s in userspace.
+2.363s live-config.service
+1.507s ldconfig.service
+1.495s dev-sr0.device
+1.203s blueman-mechanism.service
+1.065s nftables.service
+ 988ms dev-loop0.device
+ 748ms console-setup.service
+ 362ms systemd-modules-load.service
+ 284ms NetworkManager.service
+ 273ms udisks2.service
+ 263ms accounts-daemon.service
+ 246ms tmp.mount
+[?2004hSHELL> echo '=== failed units'; systemctl --failed --no-pager --no-legend
+[?2004l=== failed units
+[?2004hSHELL> echo '=== services'; for s in lightdm nftables apparmor zramswap unattended-upgrades NetworkManager; do printf '%s: %s\n' $s $(systemctl is-active $s); done
+[?2004l=== services
+lightdm: active
+nftables: active
+apparmor: inactive
+zramswap: active
+unattended-upgrades: active
+NetworkManager: active
+[?2004hSHELL> echo '=== apparmor'; cat /sys/module/apparmor/parameters/enabled 2>&1; cat /sys/kernel/security/lsm 2>&1; echo; systemctl status apparmor --no-pager 2>&1 | head -6; sudo /usr/sbin/aa-status 2>&1 | head -5
+[?2004l=== apparmor
+Y
+lockdown,capability,landlock,yama,apparmor,bpf,ipe,ima,evm
+○ apparmor.service - Load AppArmor profiles
+     Loaded: loaded (/usr/lib/systemd/system/apparmor.service; enabled; preset: enabled)
+     Active: inactive (dead)
+  Condition: start condition unmet at Mon 2026-09-07 22:14:45 KST; 2min 55s ago
+             └─ ConditionPathExists=!/run/live/overlay/work was not met
+       Docs: man:apparmor(7)
+Failed to get profiles: 2....
+apparmor module is loaded.
+[?2004hSHELL> echo '=== firewall'; sudo /usr/sbin/nft list ruleset | head -8
+[?2004l=== firewall
+table inet filter {
+	chain input {
+		type filter hook input priority filter; policy drop;
+		ct state invalid drop
+		ct state established,related accept
+		iif "lo" accept
+		ip protocol icmp icmp type { destination-unreachable, time-exceeded, parameter-problem } accept
+		ip protocol icmp icmp type echo-request limit rate 5/second burst 5 packets accept
+[?2004hSHELL> echo '=== sysctl'; /usr/sbin/sysctl kernel.kptr_restrict kernel.yama.ptrace_scope kernel.unprivileged_bpf_disabled vm.swappiness
+[?2004l=== sysctl
+kernel.kptr_restrict = 2
+kernel.yama.ptrace_scope = 1
+kernel.unprivileged_bpf_disabled = 1
+vm.swappiness = 150
+[?2004hSHELL> echo '=== xsession'; ps -eo comm | grep -E '^(Xorg|lightdm|xfce4-session|xfwm4|xfce4-panel|xfdesktop|xcape|fcitx5|blueman-applet|applet.py|nm-applet)$' | sort | uniq -c
+[?2004l=== xsession
+      1 Xorg
+      1 fcitx5
+      2 lightdm
+      1 nm-applet
+      1 xcape
+      1 xfce4-panel
+      1 xfce4-session
+      1 xfdesktop
+      1 xfwm4
+[?2004hSHELL> echo '=== wallpaper'; xfconf-query -c xfce4-desktop -l -v 2>/dev/null | grep last-image; ls -la /usr/share/backgrounds/xfce/ 2>&1 | head; dpkg-divert --list '*backgrounds*' 2>&1
+[?2004l=== wallpaper
+/backdrop/screen0/monitor0/workspace0/last-image   /usr/share/backgrounds/haneul/default.png
+합계 2388
+drwxr-xr-x 2 root root     266  9월  7일  21:54 .
+drwxr-xr-x 4 root root      41  9월  7일  21:54 ..
+-rw-r--r-- 1 root root  197011 2025년  3월  3일 xfce-blue.jpg
+-rw-r--r-- 1 root root   28575 2025년  3월  3일 xfce-cp-dark.svg
+-rw-r--r-- 1 root root   16972 2025년  3월  3일 xfce-flower.svg
+-rw-r--r-- 1 root root  160740 2025년  3월  3일 xfce-leaves.svg
+-rw-r--r-- 1 root root 1428420 2025년  3월  3일 xfce-light.svg
+-rw-r--r-- 1 root root  263520 2025년  3월  3일 xfce-mouserace.svg
+-rw-r--r-- 1 root root  322121 2025년  3월  3일 xfce-shapes.svg
+[?2004hSHELL> echo '=== im'; im-config -m 2>&1 | head -3; cat /etc/xdg/autostart/org.fcitx.Fcitx5.desktop 2>&1 | head -12; env | grep -E 'IM_MODULE|XMODIFIERS'
+[?2004l=== im
+default
+missing
+fcitx5
+cat: /etc/xdg/autostart/org.fcitx.Fcitx5.desktop: 그런 파일이나 디렉터리가 없습니다
+GTK_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+SDL_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+[?2004hSHELL> echo '=== flatpak'; flatpak remotes 2>/dev/null || echo none
+[?2004l=== flatpak
+[1mName    Options[22m
+flathub system
+[?2004hSHELL> echo '=== disk'; df -h / /run/live/medium 2>/dev/null
+[?2004l=== disk
+파일 시스템     크기  사용  가용 사용% 마운트위치
+overlay         986M   30M  957M    4% /
+/dev/sr0        1.3G  1.3G     0  100% /run/live/medium
+[?2004hSHELL> echo '=== END'
+[?2004l=== END
+[?2004hSHELL> 
