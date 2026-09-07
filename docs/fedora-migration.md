@@ -10,7 +10,7 @@
 | 설치 프로그램 | Calamares | Anaconda (`liveinst`) |
 | 라이브 사용자 | live-config (`live`/`live`) | livesys-scripts (`liveuser`, 비밀번호 없음) |
 | MAC | AppArmor | SELinux (enforcing, targeted) |
-| 방화벽 | nftables 직접 규칙 | firewalld, 기본 존 `kiyu` (target DROP) |
+| 방화벽 | nftables 직접 규칙 | nftables 직접 규칙 (firewalld 는 파이썬 데몬이라 35 MB 를 상시 사용해 제외) |
 | 자동 보안 업데이트 | unattended-upgrades | dnf5-automatic (`upgrade_type = security`) |
 | zram | zram-tools | zram-generator (RAM 50%, 최대 4 GB, zstd) |
 | 커널 파라미터 | live-build bootappend + grub.d | kiwi kernelcmdline + 첫 부팅 시 grubby 로 설치본 BLS 항목에 추가 |

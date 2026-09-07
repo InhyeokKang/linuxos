@@ -45,6 +45,6 @@ kiyu-info
 ## 포트 열기
 
 ```
-sudo firewall-cmd --permanent --add-port=27036/tcp     # 예: Steam 원격 플레이
-sudo firewall-cmd --reload
+sudo nano /etc/nftables/local.d/10-examples.nft   # 필요한 줄의 # 제거 (예: Steam 원격 플레이)
+sudo systemctl restart nftables
 ```

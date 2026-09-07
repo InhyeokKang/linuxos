@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-session" version="1.0">
+  <property name="general" type="empty">
+    <property name="FailsafeSessionName" type="string" value="Failsafe"/>
+    <property name="SaveOnExit" type="bool" value="false"/>
+    <property name="PromptOnLogout" type="bool" value="false"/>
+    <property name="LockCommand" type="string" value="xflock4"/>
+  </property>
+  <property name="shutdown" type="empty">
+    <property name="ShowHibernate" type="bool" value="false"/>
+    <property name="ShowHybridSleep" type="bool" value="false"/>
+    <property name="ShowSuspend" type="bool" value="true"/>
+    <property name="ShowSwitchUser" type="bool" value="true"/>
+  </property>
+  <property name="compat" type="empty">
+    <property name="LaunchGNOME" type="bool" value="false"/>
+    <property name="LaunchKDE" type="bool" value="false"/>
+  </property>
+</channel>

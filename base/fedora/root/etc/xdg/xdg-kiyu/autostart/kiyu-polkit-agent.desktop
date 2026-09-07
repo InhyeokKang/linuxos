@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Authentication agent
-Exec=/usr/lib/kiyu/polkit-agent
-NoDisplay=true
-OnlyShowIn=XFCE;

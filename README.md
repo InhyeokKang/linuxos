@@ -83,7 +83,7 @@ docs/                         설계 문서
 - **이름/버전 바꾸기**: `os.conf` 수정 후 `grep -ri kiyu config branding` 로 남은 곳 확인.
 - **앱 빼고 더하기**: `base/fedora/kiyu.kiwi` 의 `<packages type="image">` 편집.
 - **다른 언어 지원**: `kiyu.kiwi` 의 `<locale>`, `glibc-langpack-*`, 폰트·입력기 패키지 교체.
-- **포트 열기**: `sudo firewall-cmd --permanent --add-port=포트/tcp && sudo firewall-cmd --reload`.
+- **포트 열기**: `/etc/nftables/local.d/` 에 `.nft` 파일 추가 후 `sudo systemctl restart nftables` (예시 파일 포함).
 
 ## 현재 상태
 

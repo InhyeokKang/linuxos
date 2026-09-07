@@ -76,7 +76,7 @@
     <package name="dnf5-plugins"/>
     <package name="dnf5-plugin-automatic"/>
     <package name="selinux-policy-targeted"/>
-    <package name="firewalld"/>
+    <package name="nftables"/>
     <package name="zram-generator-defaults"/>
     <package name="fwupd"/>
     <package name="NetworkManager"/>
@@ -164,7 +164,6 @@
     <package name="thunar-archive-plugin"/>
     <package name="thunar-volman"/>
     <package name="tumbler"/>
-    <package name="mate-polkit"/>
     <package name="lightdm"/>
     <package name="lightdm-gtk"/>
     <package name="arc-theme"/>

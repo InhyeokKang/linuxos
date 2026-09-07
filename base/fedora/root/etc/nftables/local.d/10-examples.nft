@@ -1,0 +1,8 @@
+# 예시: 필요한 줄의 주석(#)을 지우고 `sudo systemctl restart nftables`
+table inet filter {
+    chain input {
+        # udp dport 5353 accept            # 프린터 자동 검색 (mDNS)
+        # udp dport 27031-27036 accept     # Steam 원격 플레이
+        # tcp dport 27036-27037 accept
+    }
+}

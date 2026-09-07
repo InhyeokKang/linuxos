@@ -11,7 +11,7 @@ if command -v zramctl >/dev/null 2>&1 && [ -n "$(zramctl --noheadings 2>/dev/nul
 else
     echo "꺼짐"
 fi
-printf '방화벽: %s (존: %s)\n' "$(systemctl is-active firewalld 2>/dev/null)" "$(firewall-cmd --get-default-zone 2>/dev/null || echo ?)"
+printf '방화벽: %s\n' "$(systemctl is-active nftables 2>/dev/null)"
 printf 'SELinux: %s\n' "$(getenforce 2>/dev/null || echo ?)"
 printf '자동 보안 업데이트: %s\n' "$(systemctl is-active dnf5-automatic.timer 2>/dev/null || systemctl is-active dnf-automatic.timer 2>/dev/null)"
 printf 'Secure Boot: '

@@ -24,7 +24,8 @@ echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager 2>/dev/null || true
 
 # ---- 보안 / 서비스 -----------------------------------------------------------
 en() { systemctl enable "$1" 2>/dev/null || echo "WARN: cannot enable $1"; }
-en firewalld.service
+en nftables.service
+systemctl disable firewalld.service 2>/dev/null || true
 en dnf5-automatic.timer || en dnf-automatic.timer
 en fstrim.timer
 en NetworkManager.service
@@ -35,10 +36,8 @@ systemctl disable ModemManager.service 2>/dev/null || true
 # Ctrl+Alt+Del 로 콘솔에서 재부팅되지 않게 (Fedora 는 /etc 에 링크가 이미 있어 mask 대신 직접 /dev/null 로)
 rm -f /etc/systemd/system/ctrl-alt-del.target
 ln -s /dev/null /etc/systemd/system/ctrl-alt-del.target
-# 기본 방화벽 존: kiyu (인바운드 전부 차단)
-if [ -f /etc/firewalld/firewalld.conf ]; then
-    sed -i 's/^DefaultZone=.*/DefaultZone=kiyu/' /etc/firewalld/firewalld.conf
-fi
+# 방화벽 규칙 문법 검사 (빌드 단계에서 오류를 잡음)
+nft -c -f /etc/nftables/kiyu.nft
 passwd -l root >/dev/null 2>&1 || true
 sed -i 's/^\(HOME_MODE\s\+\).*/\10700/' /etc/login.defs 2>/dev/null || true
 
@@ -94,6 +93,9 @@ fc-cache -f || true
 if [ -x /usr/sbin/setfiles ] && [ -f /etc/selinux/targeted/contexts/files/file_contexts ]; then
     setfiles -F -e /proc -e /sys -e /dev -e /run /etc/selinux/targeted/contexts/files/file_contexts / || true
 fi
+
+# ---- ld.so 캐시 (없으면 첫 부팅에 ldconfig.service 가 16초 걸림) ----------------------
+ldconfig || true
 
 # ---- 정리 ----------------------------------------------------------------------
 dnf5 clean all 2>/dev/null || dnf clean all 2>/dev/null || true

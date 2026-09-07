@@ -24,6 +24,8 @@ COMMANDS = [
     "echo '=== sysctl'; /usr/sbin/sysctl kernel.kptr_restrict kernel.yama.ptrace_scope kernel.unprivileged_bpf_disabled vm.swappiness",
     "echo '=== xsession'; ps -eo comm | grep -E '^(Xorg|lightdm|xfce4-session|xfwm4|xfce4-panel|xfdesktop|xcape|fcitx5|blueman-applet|applet.py|nm-applet)$' | sort | uniq -c",
     "echo '=== wallpaper'; xfconf-query -c xfce4-desktop -l -v 2>/dev/null | grep last-image; ls -la /usr/share/backgrounds/xfce/ 2>&1 | head; dpkg-divert --list '*backgrounds*' 2>&1",
+    "echo '=== xfconf-diag'; env | grep XDG_CONFIG_DIRS; systemctl --user show-environment 2>/dev/null | grep XDG_CONFIG_DIRS; ls ~/.config/xfce4/xfconf/xfce-perchannel-xml/ 2>&1; xfconf-query -c xfce4-panel -p /panels/panel-1/plugin-ids 2>&1 | head -3; xfconf-query -c xfce4-panel -l 2>&1 | head -5; rpm -q xfce4-docklike-plugin xfce-polkit mate-polkit 2>&1; ls /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/ 2>&1; ls /usr/libexec/livesys/sessions.d/ 2>&1",
+    "echo '=== wallpaper-diag'; ls -la /usr/share/backgrounds/ /usr/share/backgrounds/images/ 2>&1 | head -20; readlink -f /usr/share/backgrounds/images/default.png 2>&1; strings /usr/bin/xfdesktop | grep -i 'backgrounds\\|desktop-base' | head -3; xfconf-query -c xfce4-desktop -l -v 2>/dev/null | grep -i image",
     "echo '=== im'; im-config -m 2>&1 | head -3; cat /etc/xdg/autostart/org.fcitx.Fcitx5.desktop 2>&1 | head -12; env | grep -E 'IM_MODULE|XMODIFIERS'",
     "echo '=== flatpak'; flatpak remotes 2>/dev/null || echo none",
     "echo '=== disk'; df -h / /run/live/medium 2>/dev/null",
