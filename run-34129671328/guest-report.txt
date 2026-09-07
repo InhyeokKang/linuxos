@@ -33,16 +33,16 @@ boot=live components apparmor=1 security=apparmor locales=ko_KR.UTF-8 keyboard-l
 [?2004hSHELL> echo '=== memory'; free -m; grep -E 'MemTotal|MemAvailable|AnonPages|Shmem:|Slab|SUnreclaim|KernelStack|PageTables' /proc/meminfo
 [?2004l=== memory
                총계         사용        여분      공유    버퍼/캐시    가용
-메모리:         1973         677         536          35         935        1296
+메모리:         1973         690         523          35         935        1283
 스  왑:          986           0         986
 MemTotal:        2020960 kB
-MemAvailable:    1327440 kB
-AnonPages:        395212 kB
-Shmem:             35920 kB
-Slab:              58628 kB
-SUnreclaim:        32224 kB
-KernelStack:        4560 kB
-PageTables:         8504 kB
+MemAvailable:    1314100 kB
+AnonPages:        396016 kB
+Shmem:             35928 kB
+Slab:              59480 kB
+SUnreclaim:        33016 kB
+KernelStack:        4640 kB
+PageTables:         8536 kB
 SecPageTables:         0 kB
 [?2004hSHELL> echo '=== zram'; sudo /usr/sbin/zramctl 2>/dev/null || echo none
 [?2004l=== zram
@@ -50,19 +50,19 @@ NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
 /dev/zram0 zstd        986.8M   4K   59B   20K       2 [SWAP]
 [?2004hSHELL> echo '=== pss by process (MB)'; sudo sh -c 'for p in /proc/[0-9]*; do c=$(cat $p/comm 2>/dev/null); v=$(awk "/^Pss:/{s+=\$2}END{print s+0}" $p/smaps_rollup 2>/dev/null); [ -n "$v" ] && [ "$v" -gt 0 ] && echo "$v $c"; done | sort -rn | awk "{t+=\$1; printf \"%6.1f %s\\n\", \$1/1024, \$2} END{printf \"TOTAL %.0f MB\\n\", t/1024}" | head -30'
 [?2004l=== pss by process (MB)
-  78.0 xfwm4
+  78.4 xfwm4
   74.6 nm-applet
-  69.4 Xorg
+  67.1 Xorg
+  57.6 xfdesktop
   56.3 xfce4-panel
-  55.2 xfdesktop
-  34.0 xfce4-session
-  25.6 unattended-upgr
-  20.4 fcitx5
+  32.6 xfce4-session
+  25.4 unattended-upgr
+  20.6 fcitx5
   12.3 tumblerd
    9.7 xfsettingsd
-   9.1 Thunar
-   9.0 xfce4-screensav
-   8.3 NetworkManager
+   9.2 Thunar
+   8.9 xfce4-screensav
+   8.4 NetworkManager
    6.9 wireplumber
    6.4 xdg-desktop-por
    5.7 systemd
@@ -73,29 +73,29 @@ NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
    3.9 xdg-desktop-por
    3.7 systemd-udevd
    3.6 systemd-journal
-   3.3 polkitd
    3.3 xfce4-power-man
+   3.3 polkitd
    3.1 wpa_supplicant
-   2.8 cupsd
    2.8 bash
-   2.7 polkit-mate-aut
    2.7 bash
+   2.7 polkit-mate-aut
+   2.7 cupsd
 [?2004hSHELL> echo '=== boot time'; systemd-analyze 2>/dev/null; systemd-analyze blame 2>/dev/null | head -12
 [?2004l=== boot time
-Startup finished in 3.504s (kernel) + 10.371s (userspace) = 13.875s 
-graphical.target reached after 10.367s in userspace.
-5.906s live-config.service
-3.710s ldconfig.service
-2.961s console-setup.service
-1.951s blueman-mechanism.service
-1.691s dev-sr0.device
-1.355s dev-loop0.device
- 733ms nftables.service
- 644ms systemd-modules-load.service
- 566ms NetworkManager.service
- 531ms systemd-udev-trigger.service
- 497ms systemd-journald.service
- 495ms modprobe@drm.service
+Startup finished in 2.986s (kernel) + 7.651s (userspace) = 10.638s 
+graphical.target reached after 7.648s in userspace.
+3.010s live-config.service
+1.708s ldconfig.service
+1.468s blueman-mechanism.service
+1.268s console-setup.service
+1.119s dev-sr0.device
+ 870ms dev-loop0.device
+ 482ms nftables.service
+ 427ms udisks2.service
+ 412ms accounts-daemon.service
+ 401ms systemd-modules-load.service
+ 384ms NetworkManager.service
+ 380ms systemd-tmpfiles-setup.service
 [?2004hSHELL> echo '=== failed units'; systemctl --failed --no-pager --no-legend
 [?2004l=== failed units
 [?2004hSHELL> echo '=== services'; for s in lightdm nftables apparmor zramswap unattended-upgrades NetworkManager; do printf '%s: %s\n' $s $(systemctl is-active $s); done
@@ -113,7 +113,7 @@ lockdown,capability,landlock,yama,apparmor,bpf,ipe,ima,evm
 ○ apparmor.service - Load AppArmor profiles
      Loaded: loaded (/usr/lib/systemd/system/apparmor.service; enabled; preset: enabled)
      Active: inactive (dead)
-  Condition: start condition unmet at Mon 2026-09-07 22:51:25 KST; 2min 55s ago
+  Condition: start condition unmet at Mon 2026-09-07 23:08:56 KST; 2min 53s ago
              └─ ConditionPathExists=!/run/live/overlay/work was not met
        Docs: man:apparmor(7)
 Failed to get profiles: 2....
@@ -148,16 +148,16 @@ vm.swappiness = 150
 [?2004hSHELL> echo '=== wallpaper'; xfconf-query -c xfce4-desktop -l -v 2>/dev/null | grep last-image; ls -la /usr/share/backgrounds/xfce/ 2>&1 | head; dpkg-divert --list '*backgrounds*' 2>&1
 [?2004l=== wallpaper
 /backdrop/screen0/monitor0/workspace0/last-image   /usr/share/backgrounds/kiyu/default.png
-합계 2737
-drwxr-xr-x 2 root root     605  9월  7일  22:33 .
-drwxr-xr-x 4 root root      39  9월  7일  22:33 ..
--rw-r--r-- 1 root root  346414  9월  7일  22:33 xfce-blue.jpg
+합계 2566
+drwxr-xr-x 2 root root     605  9월  7일  22:51 .
+drwxr-xr-x 4 root root      39  9월  7일  22:51 ..
+-rw-r--r-- 1 root root  109683  9월  7일  22:51 xfce-blue.jpg
 -rw-r--r-- 1 root root  197011 2025년  3월  3일 xfce-blue.jpg.distrib
--rw-r--r-- 1 root root     863  9월  7일  22:33 xfce-cp-dark.svg
+-rw-r--r-- 1 root root    7101  9월  7일  22:51 xfce-cp-dark.svg
 -rw-r--r-- 1 root root   28575 2025년  3월  3일 xfce-cp-dark.svg.distrib
--rw-r--r-- 1 root root     863  9월  7일  22:33 xfce-flower.svg
+-rw-r--r-- 1 root root    7101  9월  7일  22:51 xfce-flower.svg
 -rw-r--r-- 1 root root   16972 2025년  3월  3일 xfce-flower.svg.distrib
--rw-r--r-- 1 root root     863  9월  7일  22:33 xfce-leaves.svg
+-rw-r--r-- 1 root root    7101  9월  7일  22:51 xfce-leaves.svg
 /usr/share/backgrounds/xfce/xfce-cp-dark.svg의 /usr/share/backgrounds/xfce/xfce-cp-dark.svg.distrib(으)로 전환, kiyu 패키지
 /usr/share/backgrounds/xfce/xfce-mouserace.svg의 /usr/share/backgrounds/xfce/xfce-mouserace.svg.distrib(으)로 전환, kiyu 패키지
 /usr/share/backgrounds/xfce/xfce-teal.svg의 /usr/share/backgrounds/xfce/xfce-teal.svg.distrib(으)로 전환, kiyu 패키지
