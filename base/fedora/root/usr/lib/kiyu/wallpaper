@@ -1,21 +1,24 @@
 #!/bin/sh
-# xfdesktop 은 배경을 모니터 이름별 속성에 저장한다. 값이 아직 XFCE 기본 배경이면
-# (사용자가 바꾼 적 없음) kiyu 기본 배경으로 바꾼다. 사용자가 고른 배경은 건드리지 않는다.
+# xfdesktop 은 배경을 모니터 이름별 속성(/backdrop/screen0/monitor<이름>/workspace0/last-image)에 저장한다.
+# 기본 XML 은 monitor0 만 정의하므로, 실제 모니터 이름(xrandr: Virtual-1, eDP-1 ...)에도 kiyu 기본 배경을 넣는다.
+# 값이 비어 있거나 XFCE/Fedora 기본 배경이면 바꾸고, 사용자가 고른 배경은 건드리지 않는다.
 BG=/usr/share/backgrounds/kiyu/default.png
 [ -f "$BG" ] || exit 0
 command -v xfconf-query >/dev/null 2>&1 || exit 0
-i=0
-while [ $i -lt 20 ]; do
-    props=$(xfconf-query -c xfce4-desktop -l 2>/dev/null | grep '/last-image$')
-    [ -n "$props" ] && break
-    sleep 1; i=$((i + 1))
-done
-for p in $props; do
+mons="monitor0"
+if command -v xrandr >/dev/null 2>&1; then
+    for m in $(xrandr --listmonitors 2>/dev/null | awk 'NR>1{print $NF}'); do mons="$mons monitor$m"; done
+fi
+# xfdesktop 이 이미 만든 속성도 포함
+existing=$(xfconf-query -c xfce4-desktop -l 2>/dev/null | grep '/last-image$' | sed 's|/workspace[0-9]*/last-image$||; s|^/backdrop/screen0/||' | sort -u)
+for m in $mons $existing; do
+    p="/backdrop/screen0/$m/workspace0/last-image"
     cur=$(xfconf-query -c xfce4-desktop -p "$p" 2>/dev/null)
     case "$cur" in
         ""|/usr/share/backgrounds/xfce/*|/usr/share/backgrounds/images/*|/usr/share/backgrounds/default*|/usr/share/backgrounds/f[0-9]*|/usr/share/images/desktop-base/*)
-            xfconf-query -c xfce4-desktop -p "$p" -s "$BG"
-            xfconf-query -c xfce4-desktop -p "${p%/last-image}/image-style" -n -t int -s 5
+            xfconf-query -c xfce4-desktop -p "$p" -n -t string -s "$BG"
+            xfconf-query -c xfce4-desktop -p "/backdrop/screen0/$m/workspace0/image-style" -n -t int -s 5
+            xfconf-query -c xfce4-desktop -p "/backdrop/screen0/$m/workspace0/color-style" -n -t int -s 0
             ;;
     esac
 done

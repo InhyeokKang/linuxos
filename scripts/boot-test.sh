@@ -52,6 +52,26 @@ if mount -o loop,ro "$ISO" "$TMP/mnt"; then
     cp "$KERNEL" "$TMP/vmlinuz"; cp "$INITRD" "$TMP/initrd.img"
     # shellcheck disable=SC2012  # 사람이 읽는 목록 보고용
     ls -laR "$TMP/mnt" 2>/dev/null | head -80 > "$OUT/iso-layout.txt"
+    # 루트 이미지에서 검증용 파일 추출 (kiwi: LiveOS/squashfs.img 안의 LiveOS/rootfs.img)
+    if command -v unsquashfs >/dev/null 2>&1 && [ -f "$TMP/mnt/LiveOS/squashfs.img" ]; then
+        mkdir -p "$OUT/rootfs" "$TMP/rootmnt"
+        if unsquashfs -q -n -d "$TMP/sq" "$TMP/mnt/LiveOS/squashfs.img" >/dev/null 2>&1; then
+            img=$(find "$TMP/sq" -name 'rootfs.img' | head -1)
+            if [ -n "$img" ] && mount -o loop,ro "$img" "$TMP/rootmnt" 2>/dev/null; then
+                for f in usr/share/backgrounds/kiyu/default.png etc/xdg/xfce4/panel/default.xml etc/xdg/xdg-kiyu/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml; do
+                    [ -f "$TMP/rootmnt/$f" ] && cp "$TMP/rootmnt/$f" "$OUT/rootfs/$(basename "$f")"
+                done
+                ls -la "$TMP/rootmnt/usr/share/backgrounds/" "$TMP/rootmnt/usr/share/backgrounds/kiyu/" > "$OUT/rootfs/backgrounds-ls.txt" 2>&1
+                umount "$TMP/rootmnt"
+                note "rootfs: files extracted to results/rootfs"
+            else
+                note "rootfs: rootfs.img not found/mountable"
+            fi
+            rm -rf "$TMP/sq"
+        else
+            note "rootfs: unsquashfs failed"
+        fi
+    fi
     umount "$TMP/mnt"
     note "base: $BASE kernel: $(basename "$KERNEL") initrd: $(basename "$INITRD")"
 else
