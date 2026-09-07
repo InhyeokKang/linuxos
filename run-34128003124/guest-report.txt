@@ -1,7 +1,7 @@
 
-haneul login: live
+kiyu login: live
 비밀번호: 
-Linux haneul 6.12.107+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.107-1 (2026-08-29) x86_64
+Linux kiyu 6.12.107+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.107-1 (2026-08-29) x86_64
 
 The programs included with the Debian GNU/Linux system are free software;
 the exact distribution terms for each program are described in the
@@ -9,18 +9,18 @@ individual files in /usr/share/doc/*/copyright.
 
 Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
 permitted by applicable law.
-[?2004hlive@haneul:~$ 
+[?2004hlive@kiyu:~$ 
 
 ##### SERIAL SHELL: logged_in=True
 export PS1='SHELL> '; stty cols 200; export DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
 [?2004l[?2004hSHELL> echo '=== os-release'; cat /etc/os-release
 [?2004l=== os-release
-PRETTY_NAME="Haneul OS 0.1.0 (saebyeok)"
-NAME="Haneul OS"
+PRETTY_NAME="kiyu 0.1.0 (saebyeok)"
+NAME="kiyu"
 VERSION_ID="0.1.0"
 VERSION="0.1.0 (saebyeok)"
 VERSION_CODENAME=trixie
-ID=haneul
+ID=kiyu
 ID_LIKE=debian
 HOME_URL="https://github.com/inhyeokkang/linuxos"
 SUPPORT_URL="https://github.com/inhyeokkang/linuxos"
@@ -29,20 +29,20 @@ DEBIAN_CODENAME=trixie
 [?2004hSHELL> echo '=== uname'; uname -r; cat /proc/cmdline
 [?2004l=== uname
 6.12.107+deb13-amd64
-boot=live components apparmor=1 security=apparmor locales=ko_KR.UTF-8 keyboard-layouts=kr timezone=Asia/Seoul username=live hostname=haneul console=tty0 console=ttyS0,115200 systemd.show_status=1
+boot=live components apparmor=1 security=apparmor locales=ko_KR.UTF-8 keyboard-layouts=kr timezone=Asia/Seoul username=live hostname=kiyu console=tty0 console=ttyS0,115200 systemd.show_status=1
 [?2004hSHELL> echo '=== memory'; free -m; grep -E 'MemTotal|MemAvailable|AnonPages|Shmem:|Slab|SUnreclaim|KernelStack|PageTables' /proc/meminfo
 [?2004l=== memory
                총계         사용        여분      공유    버퍼/캐시    가용
-메모리:         1973         677         537          35         935        1296
+메모리:         1973         674         540          35         934        1299
 스  왑:          986           0         986
 MemTotal:        2020960 kB
-MemAvailable:    1327204 kB
-AnonPages:        391916 kB
-Shmem:             35924 kB
-Slab:              58588 kB
-SUnreclaim:        32208 kB
-KernelStack:        4608 kB
-PageTables:         8536 kB
+MemAvailable:    1330724 kB
+AnonPages:        393972 kB
+Shmem:             35920 kB
+Slab:              58712 kB
+SUnreclaim:        32256 kB
+KernelStack:        4640 kB
+PageTables:         8632 kB
 SecPageTables:         0 kB
 [?2004hSHELL> echo '=== zram'; sudo /usr/sbin/zramctl 2>/dev/null || echo none
 [?2004l=== zram
@@ -50,31 +50,31 @@ NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
 /dev/zram0 zstd        986.8M   4K   59B   20K       2 [SWAP]
 [?2004hSHELL> echo '=== pss by process (MB)'; sudo sh -c 'for p in /proc/[0-9]*; do c=$(cat $p/comm 2>/dev/null); v=$(awk "/^Pss:/{s+=\$2}END{print s+0}" $p/smaps_rollup 2>/dev/null); [ -n "$v" ] && [ "$v" -gt 0 ] && echo "$v $c"; done | sort -rn | awk "{t+=\$1; printf \"%6.1f %s\\n\", \$1/1024, \$2} END{printf \"TOTAL %.0f MB\\n\", t/1024}" | head -30'
 [?2004l=== pss by process (MB)
-  77.5 xfwm4
+  77.1 xfwm4
   74.6 nm-applet
-  68.1 Xorg
-  56.2 xfce4-panel
+  66.8 Xorg
+  55.7 xfce4-panel
   54.5 xfdesktop
-  33.8 xfce4-session
-  23.1 unattended-upgr
-  20.4 fcitx5
-  12.3 tumblerd
+  33.7 xfce4-session
+  26.8 unattended-upgr
+  20.5 fcitx5
+  12.2 tumblerd
    9.7 xfsettingsd
-   9.2 Thunar
+   9.1 Thunar
    8.9 xfce4-screensav
-   8.4 NetworkManager
-   7.1 wireplumber
-   6.4 xdg-desktop-por
-   5.7 systemd
-   5.4 udisksd
+   8.3 NetworkManager
+   6.9 wireplumber
+   6.5 xdg-desktop-por
+   5.6 systemd
+   5.5 udisksd
    5.3 pipewire
-   4.7 xfce4-notifyd
-   4.6 systemd
+   4.8 xfce4-notifyd
+   4.5 systemd
    3.9 xdg-desktop-por
    3.7 systemd-udevd
    3.6 systemd-journal
+   3.3 xfce4-power-man
    3.3 polkitd
-   3.2 xfce4-power-man
    3.0 wpa_supplicant
    2.8 cupsd
    2.8 bash
@@ -82,20 +82,20 @@ NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
    2.7 polkit-mate-aut
 [?2004hSHELL> echo '=== boot time'; systemd-analyze 2>/dev/null; systemd-analyze blame 2>/dev/null | head -12
 [?2004l=== boot time
-Startup finished in 3.349s (kernel) + 9.825s (userspace) = 13.175s 
-graphical.target reached after 9.819s in userspace.
-4.419s live-config.service
-3.450s ldconfig.service
-2.232s console-setup.service
-1.666s systemd-binfmt.service
-1.655s blueman-mechanism.service
-1.513s dev-sr0.device
-1.477s proc-sys-fs-binfmt_misc.mount
-1.256s dev-loop0.device
- 641ms nftables.service
- 625ms NetworkManager.service
- 613ms systemd-modules-load.service
- 579ms udisks2.service
+Startup finished in 3.246s (kernel) + 9.989s (userspace) = 13.236s 
+graphical.target reached after 9.982s in userspace.
+5.064s live-config.service
+2.893s ldconfig.service
+2.253s console-setup.service
+1.915s blueman-mechanism.service
+1.619s dev-sr0.device
+1.298s dev-loop0.device
+ 729ms nftables.service
+ 600ms systemd-udev-trigger.service
+ 532ms NetworkManager.service
+ 531ms systemd-modules-load.service
+ 488ms systemd-journald.service
+ 478ms accounts-daemon.service
 [?2004hSHELL> echo '=== failed units'; systemctl --failed --no-pager --no-legend
 [?2004l=== failed units
 [?2004hSHELL> echo '=== services'; for s in lightdm nftables apparmor zramswap unattended-upgrades NetworkManager; do printf '%s: %s\n' $s $(systemctl is-active $s); done
@@ -113,7 +113,7 @@ lockdown,capability,landlock,yama,apparmor,bpf,ipe,ima,evm
 ○ apparmor.service - Load AppArmor profiles
      Loaded: loaded (/usr/lib/systemd/system/apparmor.service; enabled; preset: enabled)
      Active: inactive (dead)
-  Condition: start condition unmet at Mon 2026-09-07 22:41:24 KST; 2min 54s ago
+  Condition: start condition unmet at Mon 2026-09-07 22:49:45 KST; 2min 55s ago
              └─ ConditionPathExists=!/run/live/overlay/work was not met
        Docs: man:apparmor(7)
 Failed to get profiles: 2....
@@ -147,28 +147,28 @@ vm.swappiness = 150
       1 xfwm4
 [?2004hSHELL> echo '=== wallpaper'; xfconf-query -c xfce4-desktop -l -v 2>/dev/null | grep last-image; ls -la /usr/share/backgrounds/xfce/ 2>&1 | head; dpkg-divert --list '*backgrounds*' 2>&1
 [?2004l=== wallpaper
-/backdrop/screen0/monitor0/workspace0/last-image   /usr/share/backgrounds/haneul/default.png
-합계 2669
-drwxr-xr-x 2 root root     605  9월  7일  22:23 .
-drwxr-xr-x 4 root root      41  9월  7일  22:23 ..
--rw-r--r-- 1 root root  277504  9월  7일  22:23 xfce-blue.jpg
+/backdrop/screen0/monitor0/workspace0/last-image   /usr/share/backgrounds/kiyu/default.png
+합계 2737
+drwxr-xr-x 2 root root     605  9월  7일  22:33 .
+drwxr-xr-x 4 root root      39  9월  7일  22:33 ..
+-rw-r--r-- 1 root root  346414  9월  7일  22:33 xfce-blue.jpg
 -rw-r--r-- 1 root root  197011 2025년  3월  3일 xfce-blue.jpg.distrib
--rw-r--r-- 1 root root     827  9월  7일  22:23 xfce-cp-dark.svg
+-rw-r--r-- 1 root root     863  9월  7일  22:33 xfce-cp-dark.svg
 -rw-r--r-- 1 root root   28575 2025년  3월  3일 xfce-cp-dark.svg.distrib
--rw-r--r-- 1 root root     827  9월  7일  22:23 xfce-flower.svg
+-rw-r--r-- 1 root root     863  9월  7일  22:33 xfce-flower.svg
 -rw-r--r-- 1 root root   16972 2025년  3월  3일 xfce-flower.svg.distrib
--rw-r--r-- 1 root root     827  9월  7일  22:23 xfce-leaves.svg
-/usr/share/backgrounds/xfce/xfce-cp-dark.svg의 /usr/share/backgrounds/xfce/xfce-cp-dark.svg.distrib(으)로 전환, haneul 패키지
-/usr/share/backgrounds/xfce/xfce-mouserace.svg의 /usr/share/backgrounds/xfce/xfce-mouserace.svg.distrib(으)로 전환, haneul 패키지
-/usr/share/backgrounds/xfce/xfce-teal.svg의 /usr/share/backgrounds/xfce/xfce-teal.svg.distrib(으)로 전환, haneul 패키지
-/usr/share/backgrounds/xfce/xfce-leaves.svg의 /usr/share/backgrounds/xfce/xfce-leaves.svg.distrib(으)로 전환, haneul 패키지
-/usr/share/backgrounds/xfce/xfce-stripes.svg의 /usr/share/backgrounds/xfce/xfce-stripes.svg.distrib(으)로 전환, haneul 패키지
-/usr/share/backgrounds/xfce/xfce-flower.svg의 /usr/share/backgrounds/xfce/xfce-flower.svg.distrib(으)로 전환, haneul 패키지
-/usr/share/backgrounds/xfce/xfce-light.svg의 /usr/share/backgrounds/xfce/xfce-light.svg.distrib(으)로 전환, haneul 패키지
-/usr/share/backgrounds/xfce/xfce-x.svg의 /usr/share/backgrounds/xfce/xfce-x.svg.distrib(으)로 전환, haneul 패키지
-/usr/share/backgrounds/xfce/xfce-shapes.svg의 /usr/share/backgrounds/xfce/xfce-shapes.svg.distrib(으)로 전환, haneul 패키지
-/usr/share/backgrounds/xfce/xfce-blue.jpg의 /usr/share/backgrounds/xfce/xfce-blue.jpg.distrib(으)로 전환, haneul 패키지
-/usr/share/backgrounds/xfce/xfce-verticals.svg의 /usr/share/backgrounds/xfce/xfce-verticals.svg.distrib(으)로 전환, haneul 패키지
+-rw-r--r-- 1 root root     863  9월  7일  22:33 xfce-leaves.svg
+/usr/share/backgrounds/xfce/xfce-cp-dark.svg의 /usr/share/backgrounds/xfce/xfce-cp-dark.svg.distrib(으)로 전환, kiyu 패키지
+/usr/share/backgrounds/xfce/xfce-mouserace.svg의 /usr/share/backgrounds/xfce/xfce-mouserace.svg.distrib(으)로 전환, kiyu 패키지
+/usr/share/backgrounds/xfce/xfce-teal.svg의 /usr/share/backgrounds/xfce/xfce-teal.svg.distrib(으)로 전환, kiyu 패키지
+/usr/share/backgrounds/xfce/xfce-leaves.svg의 /usr/share/backgrounds/xfce/xfce-leaves.svg.distrib(으)로 전환, kiyu 패키지
+/usr/share/backgrounds/xfce/xfce-stripes.svg의 /usr/share/backgrounds/xfce/xfce-stripes.svg.distrib(으)로 전환, kiyu 패키지
+/usr/share/backgrounds/xfce/xfce-flower.svg의 /usr/share/backgrounds/xfce/xfce-flower.svg.distrib(으)로 전환, kiyu 패키지
+/usr/share/backgrounds/xfce/xfce-light.svg의 /usr/share/backgrounds/xfce/xfce-light.svg.distrib(으)로 전환, kiyu 패키지
+/usr/share/backgrounds/xfce/xfce-x.svg의 /usr/share/backgrounds/xfce/xfce-x.svg.distrib(으)로 전환, kiyu 패키지
+/usr/share/backgrounds/xfce/xfce-shapes.svg의 /usr/share/backgrounds/xfce/xfce-shapes.svg.distrib(으)로 전환, kiyu 패키지
+/usr/share/backgrounds/xfce/xfce-blue.jpg의 /usr/share/backgrounds/xfce/xfce-blue.jpg.distrib(으)로 전환, kiyu 패키지
+/usr/share/backgrounds/xfce/xfce-verticals.svg의 /usr/share/backgrounds/xfce/xfce-verticals.svg.distrib(으)로 전환, kiyu 패키지
 [?2004hSHELL> echo '=== im'; im-config -m 2>&1 | head -3; cat /etc/xdg/autostart/org.fcitx.Fcitx5.desktop 2>&1 | head -12; env | grep -E 'IM_MODULE|XMODIFIERS'
 [?2004l=== im
 default
