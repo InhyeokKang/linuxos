@@ -9,14 +9,13 @@ case "$mode" in
     q -c xsettings -p /Net/ThemeName -n -t string -s Adwaita-dark
     q -c xsettings -p /Net/IconThemeName -n -t string -s Papirus-Dark
     q -c xfce4-panel -p /panels/dark-mode -n -t bool -s true
-    gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ theme kiyu-dark 2>/dev/null
+    q -c xfce4-notifyd -p /theme -n -t string -s Default
     ;;
   *)
     mode=light
     q -c xsettings -p /Net/ThemeName -n -t string -s Adwaita
     q -c xsettings -p /Net/IconThemeName -n -t string -s Papirus
     q -c xfce4-panel -p /panels/dark-mode -n -t bool -s false
-    gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ theme kiyu 2>/dev/null
     ;;
 esac
 echo "$mode" > "$STATE/theme"

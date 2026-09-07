@@ -19,7 +19,7 @@ install_and_overlay() {
     apt-get install -y -qq --no-install-recommends \
         xvfb dbus-x11 x11-utils xdotool imagemagick locales \
         xfce4-session xfce4-panel xfce4-settings xfwm4 xfdesktop4 xfconf xfce4-appfinder \
-        xfce4-whiskermenu-plugin picom plank xfce4-power-manager xfce4-power-manager-plugins \
+        xfce4-whiskermenu-plugin picom xfce4-power-manager xfce4-power-manager-plugins \
         xfce4-notifyd xfce4-screenshooter xfce4-taskmanager xfce4-terminal xfce4-clipman-plugin \
         thunar tumbler mousepad ristretto galculator xarchiver mate-polkit xcape \
         arc-theme gtk2-engines-murrine papirus-icon-theme adwaita-icon-theme \
@@ -37,7 +37,7 @@ install_and_overlay() {
     cp -a "$A/usr/lib/kiyu" /usr/lib/
     mkdir -p /usr/share/themes && cp -a "$A/usr/share/themes/kiyu" /usr/share/themes/
     # ISO 와 같이 패널 플러그인을 in-process 로 (config.sh 와 동일 목록 + 프리뷰 대체 플러그인)
-    for plug in whiskermenu launcher tasklist clock showdesktop separator notification-plugin systray; do
+    for plug in whiskermenu docklike launcher tasklist clock showdesktop separator notification-plugin systray; do
         d="/usr/share/xfce4/panel/plugins/${plug}.desktop"; [ -f "$d" ] || continue
         if grep -q '^X-XFCE-Internal=' "$d"; then sed -i 's/^X-XFCE-Internal=.*/X-XFCE-Internal=true/' "$d"; else printf 'X-XFCE-Internal=true\n' >> "$d"; fi
     done
@@ -63,22 +63,34 @@ install_and_overlay() {
         fi
         cp /usr/share/backgrounds/kiyu/default.svg "$default_bg"
     fi
-    # Plank 독: 테마 + 런처 + 설정 (ISO 는 /etc/dconf 기본값, 프리뷰는 gsettings)
-    mkdir -p /usr/share/plank/themes && cp -a "$A/usr/share/plank/themes/." /usr/share/plank/themes/
-    rm -rf "$HOME/.config/plank" && mkdir -p "$HOME/.config" && cp -a "$A/etc/skel/.config/plank" "$HOME/.config/plank"
+    # 호스트에 docklike 플러그인이 없으면 프리뷰에서만 런처 3개 + 아이콘 전용 tasklist 로 흉내낸다
+    if ! ls /usr/lib/*/xfce4/panel/plugins/libdocklike.so >/dev/null 2>&1; then
+        python3 - <<'PYX'
+p = "/etc/xdg/xdg-kiyu/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
+s = open(p).read()
+s = s.replace('<value type="int" value="2"/>\n      </property>\n    </property>\n    <property name="panel-2"',
+              '<value type="int" value="2"/>\n        <value type="int" value="3"/>\n        <value type="int" value="4"/>\n        <value type="int" value="5"/>\n      </property>\n    </property>\n    <property name="panel-2"')
+s = s.replace('<property name="plugin-2" type="string" value="docklike"/>',
+              '<property name="plugin-2" type="string" value="launcher"><property name="items" type="array"><value type="string" value="/usr/share/applications/thunar.desktop"/></property><property name="show-label" type="bool" value="false"/></property>\n'
+              '    <property name="plugin-3" type="string" value="launcher"><property name="items" type="array"><value type="string" value="/usr/share/applications/taengja.desktop"/></property></property>\n'
+              '    <property name="plugin-4" type="string" value="launcher"><property name="items" type="array"><value type="string" value="/usr/share/applications/org.gnome.Software.desktop"/></property></property>\n'
+              '    <property name="plugin-5" type="string" value="tasklist"><property name="show-labels" type="bool" value="false"/><property name="flat-buttons" type="bool" value="true"/><property name="grouping" type="bool" value="true"/><property name="show-handle" type="bool" value="false"/></property>')
+open(p, "w").write(s)
+PYX
+    fi
     gtk-update-icon-cache -f -q /usr/share/icons/hicolor || true
     fc-cache -f >/dev/null || true
     update-desktop-database -q || true
 
     # 앱이 없어도 런처/즐겨찾기 아이콘이 보이도록 자리표시자
-    for app in "firefox-esr|Firefox|firefox" "org.gnome.Software|소프트웨어|system-software-install" "libreoffice-writer|LibreOffice Writer|libreoffice-writer"; do
+    for app in "firefox-esr|Firefox|firefox" "org.gnome.Software|소프트웨어|system-software-install" "libreoffice-writer|LibreOffice Writer|libreoffice-writer" "taengja|탱자|taengja"; do
         IFS='|' read -r id name icon <<<"$app"
         [ -f "/usr/share/applications/$id.desktop" ] || printf '[Desktop Entry]\nType=Application\nName=%s\nExec=xmessage %s\nIcon=%s\nCategories=Utility;\n' "$name" "$name" "$icon" > "/usr/share/applications/$id.desktop"
     done
 }
 
 start_session() {
-    for p in xfce4-session xfce4-panel xfdesktop xfwm4 xfsettingsd xfconfd xfce4-notifyd xcape picom plank Xvfb; do pkill -x "$p" 2>/dev/null || true; done
+    for p in xfce4-session xfce4-panel xfdesktop xfwm4 xfsettingsd xfconfd xfce4-notifyd xcape picom Xvfb; do pkill -x "$p" 2>/dev/null || true; done
     sleep 1
     rm -rf "$HOME/.config/xfce4" "$HOME/.cache/sessions" "$HOME/.cache/xfce4"
     cat > "$OUT/session.sh" <<SESSION
@@ -95,11 +107,6 @@ SESSION
     chmod +x "$OUT/session.sh"
     nohup setsid "$OUT/session.sh" >/dev/null 2>&1 &
     sleep 20
-    # Plank 설정 (세션 버스가 뜬 뒤 gsettings; plank 는 변경을 즉시 반영)
-    DBUS_SESSION_BUS_ADDRESS=$(cat "$OUT/dbus.addr") ; export DBUS_SESSION_BUS_ADDRESS
-    S="net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/"
-    sed -n '/^\[/!p' "$A/etc/dconf/db/local.d/00-kiyu-plank" | grep '=' | while IFS='=' read -r k v; do DISPLAY=$DISP gsettings set "$S" "$k" "$v" || true; done
-    sleep 3
 }
 
 shots() {

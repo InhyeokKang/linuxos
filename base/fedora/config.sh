@@ -68,10 +68,8 @@ if [ -f "${BG}/default.svg" ]; then
     # Fedora 기본 jxl 원본(f*/default/*.jxl)도 우리 png 내용으로 (심볼릭 링크 대상 교체)
     find /usr/share/backgrounds -maxdepth 3 -type f -name '*.jxl' -exec cp "${BG}/default.png" {} \;
 fi
-# Plank 독 기본값 (dconf 시스템 DB)
-command -v dconf >/dev/null 2>&1 && dconf update
 # 패널 플러그인 in-process (wrapper 프로세스 제거)
-for plug in whiskermenu launcher tasklist clock showdesktop separator notification-plugin systray; do
+for plug in whiskermenu docklike launcher tasklist clock showdesktop separator notification-plugin systray; do
     d="/usr/share/xfce4/panel/plugins/${plug}.desktop"
     [ -f "$d" ] || continue
     if grep -q '^X-XFCE-Internal=' "$d"; then sed -i 's/^X-XFCE-Internal=.*/X-XFCE-Internal=true/' "$d"; else printf 'X-XFCE-Internal=true\n' >> "$d"; fi

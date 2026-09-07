@@ -68,13 +68,8 @@ Recommends 를 끄고 빌드하므로(`--apt-recommends false`) 이미지가 작
 ### 5b. 룩앤필: 사양을 먹지 않는 "트렌디"
 
 - **배경**: 크림 종이 위 파스텔 곡선(새벽 언덕)과 귤 단면 로고. 정적 PNG 한 장이라 비용 0.
-- **독**: 가운데 떠 있는 독은 Plank (`plank` 패키지, `/etc/dconf/db/local.d/00-kiyu-plank`, 테마 `/usr/share/plank/themes/kiyu{,-dark}`).
-  고정 앱 + 실행 중 창을 한 아이콘으로, 실행 중이면 아래 점 (윈도우 작업표시줄과 같은 동작). 첫 아이콘(kiyu 로고)이 시작 메뉴.
-  xfce4-panel 은 화면 가장자리에서 띄우는 기능이 없어 독으로 쓰지 않는다. Plank 는 약 30~50 MB 상주.
-- **작업표시줄 알약**: 오른쪽 아래 xfce4-panel 하나 (트레이·빠른 설정·시계·알림·바탕화면 보기). whiskermenu 플러그인은
-  버튼을 숨긴 채 팝업 전용으로 들어 있다 (`xfce4-popup-whiskermenu --pointer` 가 독의 로고 클릭과 Super 키에서 호출).
+- **작업표시줄**: 가운데 독(시작 + 고정/실행 앱, docklike) + 오른쪽 알약(트레이·빠른 설정·시계·알림). 윈도우 11 배치에 macOS 독 느낌.
   배경은 xfconf 가 아니라 `~/.config/gtk-3.0/gtk.css` 의 `.xfce4-panel` 이 그려서 테마 색(다크 모드)을 따라간다.
-  Plank 는 이 알약이 예약한 공간 위에 놓이므로 자연스럽게 바닥에서 떠 있다.
 - **창**: xfwm4 자체 컴포지팅 대신 picom(xrender) — 둥근 모서리 12px, 부드러운 그림자, 짧은 페이드. CPU 1~3%.
   유리 블러(glx, dual_kawase)는 GPU 없는 기기에서 비싸므로 기본 OFF, 빠른 설정 "효과" 스위치로 켠다 (`/usr/lib/kiyu/compositor`).
 - **빠른 설정** (`apps/kiyu-control`): Wi-Fi/블루투스/다크 모드/효과 토글, 소리·밝기, 배터리. 상주하지 않는 Python GTK 창(열려 있을 때만 ~20 MB).

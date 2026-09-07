@@ -3,9 +3,9 @@
 ## 0.2 – Fedora + kiyu 룩 (진행 중)
 
 - [x] Fedora 44 + kiwi-ng 라이브 ISO, BIOS/UEFI(Secure Boot) 부팅, SELinux enforcing, nftables
-- [x] 탱자 브라우저 (WebKitGTK), Super 키 시작 메뉴
-- [x] 새벽 배경 + Plank 떠 있는 독 + 오른쪽 알약 + picom 둥근 창 + 빠른 설정(다크 모드·효과) — Xvfb 프리뷰 검증, ISO 검증 대기
-- [ ] 실제 ISO 에서 picom/빠른 설정/Plank 확인, 메모리 재측정
+- [x] 탱자 브라우저 (WebKitGTK), Super 키 시작 메뉴, docklike 작업표시줄
+- [x] 새벽 배경 + 가운데 독 + 오른쪽 알약 + picom 둥근 창 + 빠른 설정(다크 모드·효과) — Xvfb 프리뷰 검증, ISO 검증 대기
+- [ ] 실제 ISO 에서 picom/빠른 설정/docklike 확인, 메모리 재측정
 - [ ] 바탕화면 시계·달력 위젯(선택), 통합 검색 런처
 
 ## 0.1 – 스캐폴드 (현재)
@@ -39,7 +39,7 @@ Xvfb 프리뷰에서 확인된 것:
 - [x] 탱자 브라우저 v0 (WebKitGTK): 탭·주소창·검색·즐겨찾기·다운로드, 샌드박스·ITP·추적기 차단·권한 기본 거부
 - [x] kiyu-superkey (Super 탭 → 시작 메뉴, Super+화살표 유지) — Xvfb 에서 검증
 - [ ] Fedora ISO 부팅 테스트: 자동 로그인, SELinux enforcing, firewalld 존, dnf-automatic, 메모리
-- [ ] Plank 독 기본값(dconf 시스템 DB, skel 런처) 실제 ISO 에서 확인
+- [ ] docklike 작업표시줄 기본값(고정 앱 목록 `docklike-2.rc` 의 pinned 경로 형식) 실제 ISO 에서 확인
 - [ ] Anaconda 설치 흐름 (BIOS/UEFI, LUKS)
 - [ ] RPM Fusion 코덱 설치 도우미, 릴리스 업그레이드 도우미
 - [ ] 브라우저 v1: Vala/Rust 이식, EasyPrivacy 필터 자동 갱신, 비밀번호 관리자, WebRTC UI
