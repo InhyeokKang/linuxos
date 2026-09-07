@@ -61,7 +61,9 @@ XfdesktopIconView.view, .XfdesktopIconView.view, XfdesktopIconView, .XfdesktopIc
 XfdesktopIconView.view:selected, .XfdesktopIconView.view:selected, XfdesktopIconView:selected, .XfdesktopIconView:selected {
     color: #ffffff; background-color: alpha(@kiyu_accent, 0.85); border-radius: 8px; text-shadow: none; }
 
-/* 작업표시줄: 가운데 독 + 오른쪽 알약. 바닥에 붙고 위 모서리만 둥글다 (윈도우 11 식). 블러 없는 반투명 */
+/* 작업표시줄: 가운데 독 + 오른쪽 알약. 바닥에 붙고 위 모서리만 둥글다 (윈도우 11 식). 블러 없는 반투명.
+   xfce4-panel 은 화면 가장자리에서 띄우는(margin) 기능이 없다. 배경을 content-box 에만 그려 띄우는 방법은
+   플러그인(docklike 표시점, 버튼 하이라이트)이 투명 띠까지 그려져 어긋나므로 쓰지 않는다. */
 .xfce4-panel { background-color: alpha(@theme_bg_color, 0.92); border: 1px solid alpha(@theme_base_color, 0.7); border-bottom: none; border-radius: 18px 18px 0 0; padding: 4px 8px 2px 8px; color: @kiyu_text; }
 .xfce4-panel button, .xfce4-panel button.flat, .xfce4-panel button.toggle { border-radius: 12px; border: 1px solid transparent; background-color: transparent; background-image: none; box-shadow: none; padding: 4px 8px; }
 .xfce4-panel button:hover { background-color: alpha(@kiyu_accent, 0.12); }
