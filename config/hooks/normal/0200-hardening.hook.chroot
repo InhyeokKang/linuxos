@@ -31,7 +31,9 @@ sed -i 's/^\(HOME_MODE\s\+\).*/\10700/' /etc/login.defs 2>/dev/null || true
 # AppArmor 프로필: 기본 제공 프로필 중 데스크톱에 안전한 것들 enforce
 if [ -d /etc/apparmor.d ]; then
     for p in usr.bin.man usr.sbin.cupsd usr.sbin.cups-browsed; do
-        [ -f "/etc/apparmor.d/$p" ] && aa-enforce "/etc/apparmor.d/$p" >/dev/null 2>&1 || true
+        if [ -f "/etc/apparmor.d/$p" ]; then
+            aa-enforce "/etc/apparmor.d/$p" >/dev/null 2>&1 || true
+        fi
     done
 fi
 

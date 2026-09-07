@@ -22,7 +22,10 @@ while [ $# -gt 0 ]; do
     shift
 done
 [ -n "$ISO" ] || ISO=$(find . -maxdepth 1 -name "*.iso" -printf "%T@ %p\n" 2>/dev/null | sort -rn | head -1 | cut -d" " -f2-)
-[ -n "$ISO" ] && [ -f "$ISO" ] || { echo "ISO 파일이 없습니다. 먼저 빌드하세요." >&2; exit 1; }
+if [ -z "$ISO" ] || [ ! -f "$ISO" ]; then
+    echo "ISO 파일이 없습니다. 먼저 빌드하세요." >&2
+    exit 1
+fi
 
 command -v qemu-system-x86_64 >/dev/null || { echo "qemu-system-x86 를 설치하세요." >&2; exit 1; }
 

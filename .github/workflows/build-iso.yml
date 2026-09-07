@@ -1,8 +1,12 @@
 name: Build ISO
 
-# 수동 실행 (Actions 탭 > Build ISO > Run workflow). 40~90분 소요.
+# 수동 실행 (Actions 탭 > Build ISO > Run workflow), 또는 v* 태그 푸시,
+# 또는 이 워크플로 파일 자체가 바뀐 푸시. 40~90분 소요.
 on:
   workflow_dispatch:
+  push:
+    tags: ['v*']
+    paths: ['.github/workflows/build-iso.yml']
 
 jobs:
   build:
