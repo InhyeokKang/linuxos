@@ -17,33 +17,39 @@ jobs:
     name: kiwi-ng (Fedora)
     runs-on: ubuntu-latest
     timeout-minutes: 180
-    container:
-      image: registry.fedoraproject.org/fedora:44
-      options: --privileged
-      volumes:
-        - /mnt:/mnt      # 러너의 큰 임시 디스크 (루트 이미지 5~6 GB 가 여러 번 복사됨)
-    env:
-      KIYU_BUILD_DIR: /mnt/kiyu-build
     steps:
-      - name: Install build dependencies
-        run: |
-          dnf install -y --setopt=install_weak_deps=False \
-            kiwi-cli kiwi-systemdeps-core kiwi-systemdeps-iso-media kiwi-systemdeps-bootloaders \
-            kiwi-systemdeps-filesystems librsvg2-tools git python3 python3-pyyaml \
-            distribution-gpg-keys util-linux
-          kiwi-ng --version
       - uses: actions/checkout@v4
-      - name: Static checks
-        run: ./scripts/check.sh
-      - name: Build
+      - name: Free disk space on the runner
         run: |
-          df -h / /mnt
-          ./scripts/build-fedora.sh
-          df -h / /mnt
+          df -h /
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup \
+            /opt/hostedtoolcache/CodeQL /usr/local/share/powershell /usr/share/swift \
+            /usr/local/share/boost /usr/lib/jvm /opt/microsoft "$AGENT_TOOLSDIRECTORY" || true
+          sudo docker image prune -af >/dev/null 2>&1 || true
+          sudo apt-get clean
+          df -h /
+      - name: Build in a Fedora container
+        run: |
+          docker run --rm --privileged \
+            -v "$PWD:/work" -w /work \
+            -e KIYU_BUILD_DIR=/work/base/fedora/.build \
+            registry.fedoraproject.org/fedora:44 bash -ec '
+              dnf install -y --setopt=install_weak_deps=False \
+                kiwi-cli kiwi-systemdeps-core kiwi-systemdeps-iso-media kiwi-systemdeps-bootloaders \
+                kiwi-systemdeps-filesystems librsvg2-tools python3 python3-pyyaml \
+                distribution-gpg-keys util-linux >/tmp/dnf.log 2>&1 || { tail -20 /tmp/dnf.log; exit 1; }
+              kiwi-ng --version
+              ./scripts/check.sh
+              df -h /work
+              ./scripts/build-fedora.sh
+              df -h /work
+            '
+          sudo chown -R "$(id -u):$(id -g)" base/fedora/out
       - name: Collect build info
         if: always()
         run: |
           mkdir -p build-info
+          sudo chown -R "$(id -u):$(id -g)" base/fedora/out 2>/dev/null || true
           cp base/fedora/out/build.log build-info/ 2>/dev/null || true
           cp base/fedora/out/*.packages build-info/ 2>/dev/null || true
           cp base/fedora/out/*.sha256 build-info/ 2>/dev/null || true
