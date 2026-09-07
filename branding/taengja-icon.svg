@@ -1,17 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- 탱자: 껍질 깐 귤 한 알. 노란 돔, 둥근 모서리, 굵은 외곽선, 흰 과육 결. 상현달처럼 기울임 -->
-  <g transform="rotate(-70 128 150)">
-    <path d="M50 160 A78 78 0 0 1 206 160 A14 14 0 0 1 194 176 Q128 194 62 176 A14 14 0 0 1 50 160 Z" fill="#ffd21f" stroke="#1a1a1a" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
-    <g stroke="#ffffff" stroke-width="4.5" stroke-linecap="round">
-            <line x1="115.6" y1="177.4" x2="72.9" y2="135.5"/>
-      <line x1="118.6" y1="173.6" x2="86.2" y2="118.4"/>
-      <line x1="122.5" y1="171.1" x2="103.6" y2="107.4"/>
-      <line x1="126.8" y1="170.1" x2="122.6" y2="102.6"/>
-      <line x1="130.9" y1="170.3" x2="141.0" y2="103.8"/>
-      <line x1="135.0" y1="171.9" x2="159.2" y2="110.8"/>
-      <line x1="138.4" y1="174.6" x2="174.4" y2="123.0"/>
-      <line x1="140.7" y1="178.1" x2="184.6" y2="138.4"/>
+  <!-- 탱자: 껍질 깐 귤 한 알. kiyu 로고와 같은 팔레트(껍질/속껍질/과육/결), 외곽선 없음, 상현달처럼 살짝 기울임 -->
+  <g transform="rotate(-70 128 128)">
+    <path d="M20 178 A108 108 0 0 1 236 178 Z" fill="#f47c0c" stroke="#f47c0c" stroke-width="14" stroke-linejoin="round"/>
+    <path d="M30 172 A98 98 0 0 1 226 172 Z" fill="#fff3c9" stroke="#fff3c9" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M40 166 A88 88 0 0 1 216 166 Z" fill="#ff9a1c" stroke="#ff9a1c" stroke-width="10" stroke-linejoin="round"/>
+    <g stroke="#ffd36a" stroke-width="3.2" stroke-linecap="round" opacity="0.9">
+      <line x1="116.9" y1="163.5" x2="61.1" y2="139.3"/>
+      <line x1="118.8" y1="160.3" x2="72.7" y2="120.0"/>
+      <line x1="121.6" y1="157.8" x2="89.8" y2="105.2"/>
+      <line x1="125.1" y1="156.4" x2="110.5" y2="96.3"/>
+      <line x1="128.8" y1="156.0" x2="133.0" y2="94.4"/>
+      <line x1="132.5" y1="156.9" x2="155.0" y2="99.5"/>
+      <line x1="135.7" y1="158.8" x2="174.4" y2="111.1"/>
+      <line x1="138.2" y1="161.6" x2="189.2" y2="128.1"/>
+      <line x1="139.4" y1="164.3" x2="196.6" y2="144.1"/>
     </g>
-    <path d="M68.7 136.0 A64 64 0 0 1 116.9 97.0" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
   </g>
 </svg>
