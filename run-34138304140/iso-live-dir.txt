@@ -1,0 +1,6 @@
+loader
+boot_hybrid.img
+eltorito.img
+grub2
+initrd
+linux

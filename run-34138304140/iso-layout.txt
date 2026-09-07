@@ -1,0 +1,80 @@
+/tmp/tmp.0SPTPZWUzt/mnt:
+total 12
+drwxr-xr-x 1 root root 2048 Sep  7 15:54 .
+drwx------ 3 root root 4096 Sep  7 15:57 ..
+drwx------ 1 root root 2048 Sep  7 15:29 EFI
+drwxr-xr-x 1 root root 2048 Sep  7 15:54 LiveOS
+drwxr-xr-x 1 root root 2048 Sep  7 15:32 boot
+
+/tmp/tmp.0SPTPZWUzt/mnt/EFI:
+total 8
+drwx------ 1 root root 2048 Sep  7 15:29 .
+drwxr-xr-x 1 root root 2048 Sep  7 15:54 ..
+drwxr-xr-x 1 root root 2048 Sep  7 15:32 BOOT
+drwxr-xr-x 1 root root 2048 Sep  7 15:30 fedora
+
+/tmp/tmp.0SPTPZWUzt/mnt/EFI/BOOT:
+total 7029
+drwxr-xr-x 1 root root    2048 Sep  7 15:32 .
+drwx------ 1 root root    2048 Sep  7 15:29 ..
+-rwx------ 1 root root 1026520 Nov  3  2025 BOOTX64.EFI
+-rwx------ 1 root root 1026520 Sep  7 15:32 bootx64.efi
+-rwx------ 1 root root  119280 Nov  3  2025 fbx64.efi
+-rw-r--r-- 1 root root     111 Sep  7 15:32 grub.cfg
+-rwx------ 1 root root 4145576 Sep  7 15:32 grubx64.efi
+-rwx------ 1 root root  874352 Sep  7 15:32 mmx64.efi
+
+/tmp/tmp.0SPTPZWUzt/mnt/EFI/fedora:
+total 10961
+drwxr-xr-x 1 root root    2048 Sep  7 15:30 .
+drwx------ 1 root root    2048 Sep  7 15:29 ..
+-rw------- 1 root root     110 Nov  3  2025 BOOTX64.CSV
+-rwx------ 1 root root 4145576 Aug 13 00:00 gcdx64.efi
+-rw-r--r-- 1 root root     111 Sep  7 15:32 grub.cfg
+-rwx------ 1 root root 4145576 Aug 13 00:00 grubx64.efi
+-rwx------ 1 root root  874352 Nov  3  2025 mmx64.efi
+-rwx------ 1 root root 1026520 Nov  3  2025 shim.efi
+-rwx------ 1 root root 1026520 Nov  3  2025 shimx64.efi
+
+/tmp/tmp.0SPTPZWUzt/mnt/LiveOS:
+total 1443360
+drwxr-xr-x 1 root root       2048 Sep  7 15:54 .
+drwxr-xr-x 1 root root       2048 Sep  7 15:54 ..
+-rw-r--r-- 1 root root 1477996544 Sep  7 15:54 squashfs.img
+
+/tmp/tmp.0SPTPZWUzt/mnt/boot:
+total 9
+drwxr-xr-x 1 root root 2048 Sep  7 15:32 .
+drwxr-xr-x 1 root root 2048 Sep  7 15:54 ..
+-rw-r--r-- 1 root root   11 Sep  7 15:32 0xaff4ea7d
+drwxr-xr-x 1 root root 2048 Sep  7 15:32 grub2
+-rw-r--r-- 1 root root   11 Sep  7 15:32 mbrid
+drwxr-xr-x 1 root root 2048 Sep  7 15:32 x86_64
+
+/tmp/tmp.0SPTPZWUzt/mnt/boot/grub2:
+total 50
+drwxr-xr-x 1 root root  2048 Sep  7 15:32 .
+drwxr-xr-x 1 root root  2048 Sep  7 15:32 ..
+-rw-r--r-- 1 root root   111 Sep  7 15:32 earlyboot.cfg
+-rw-r--r-- 1 root root  2604 Sep  7 15:32 grub.cfg
+drwxr-xr-x 1 root root 40960 Sep  7 15:29 i386-pc
+-rw-r--r-- 1 root root    28 Sep  7 15:32 loopback.cfg
+drwxr-xr-x 1 root root  2048 Sep  7 15:32 themes
+
+/tmp/tmp.0SPTPZWUzt/mnt/boot/grub2/i386-pc:
+total 3432
+drwxr-xr-x 1 root root  40960 Sep  7 15:29 .
+drwxr-xr-x 1 root root   2048 Sep  7 15:32 ..
+-rw-r--r-- 1 root root  13876 Aug 13 00:00 acpi.mod
+-rw-r--r-- 1 root root   1416 Aug 13 00:00 adler32.mod
+-rw-r--r-- 1 root root   7388 Aug 13 00:00 affs.mod
+-rw-r--r-- 1 root root   9168 Aug 13 00:00 afs.mod
+-rw-r--r-- 1 root root   1764 Aug 13 00:00 afsplitter.mod
+-rw-r--r-- 1 root root  22996 Aug 13 00:00 ahci.mod
+-rw-r--r-- 1 root root    492 Aug 13 00:00 all_video.mod
+-rw-r--r-- 1 root root   1052 Aug 13 00:00 aout.mod
+-rw-r--r-- 1 root root  14852 Aug 13 00:00 appended_signature_test.mod
+-rw-r--r-- 1 root root  45548 Aug 13 00:00 appendedsig.mod
+-rw-r--r-- 1 root root   4064 Aug 13 00:00 archelp.mod
+-rw-r--r-- 1 root root  38292 Aug 13 00:00 asn1.mod
+-rw-r--r-- 1 root root   9492 Aug 13 00:00 at_keyboard.mod

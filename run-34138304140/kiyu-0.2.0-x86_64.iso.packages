@@ -20,6 +20,7 @@ acl|(none)|2.4.0|1.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later
 adobe-mappings-cmap-deprecated|(none)|20231115|5.fc44|noarch|(none)|BSD-3-Clause
 adobe-mappings-cmap|(none)|20231115|5.fc44|noarch|(none)|BSD-3-Clause
 adobe-mappings-pdf|(none)|20190401|12.fc44|noarch|(none)|BSD-3-Clause
+adobe-source-han-sans-kr-fonts|(none)|2.002|16.fc44|noarch|(none)|OFL-1.1
 adwaita-cursor-theme|(none)|50.0|1.fc44|noarch|(none)|LGPL-3.0-only OR CC-BY-SA-3.0
 adwaita-icon-theme-legacy|(none)|46.2|7.fc44|noarch|(none)|LGPL-3.0-only OR CC-BY-SA-3.0
 adwaita-icon-theme|(none)|50.0|1.fc44|noarch|(none)|LGPL-3.0-only OR CC-BY-SA-3.0
@@ -257,7 +258,6 @@ google-crosextra-caladea-fonts|1|1.002|0.22.20130214.fc44|noarch|(none)|Apache-2
 google-droid-sans-fonts|(none)|20200215|24.fc44|noarch|(none)|Apache-2.0
 google-noto-color-emoji-fonts|(none)|20250623|4.fc44|noarch|(none)|OFL-1.1 AND Apache-2.0
 google-noto-fonts-common|(none)|20251201|2.fc44|noarch|(none)|OFL-1.1
-google-noto-sans-cjk-fonts|1|2.004|11.fc44|noarch|(none)|OFL-1.1
 google-noto-sans-fonts|(none)|20251201|2.fc44|noarch|(none)|OFL-1.1
 google-noto-sans-mono-fonts|(none)|20251201|2.fc44|noarch|(none)|OFL-1.1
 google-noto-sans-vf-fonts|(none)|20251201|2.fc44|noarch|(none)|OFL-1.1
@@ -1038,6 +1038,7 @@ xeve-libs|(none)|0.5.1|6.fc44|x86_64|(none)|BSD-3-Clause
 xfce-polkit|(none)|0.3|17.fc44|x86_64|(none)|GPL-2.0-or-later
 xfce4-appfinder|(none)|4.20.0|4.fc44|x86_64|(none)|GPL-2.0-or-later
 xfce4-clipman-plugin|(none)|1.7.0|3.fc44|x86_64|(none)|GPL-2.0-or-later
+xfce4-docklike-plugin|(none)|0.5.1|1.fc44|x86_64|(none)|GPL-2.0-or-later AND GPL-3.0-or-later AND FSFUL
 xfce4-notifyd|(none)|0.9.7|4.fc44|x86_64|(none)|GPL-2.0-only
 xfce4-panel|(none)|4.20.7|2.fc44|x86_64|(none)|GPL-2.0-or-later AND LicenseRef-Callaway-LGPLv2+
 xfce4-power-manager|(none)|4.20.0|4.fc44|x86_64|(none)|GPL-2.0-or-later
