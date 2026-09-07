@@ -81,7 +81,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-            qemu-system-x86 ovmf imagemagick
+            qemu-system-x86 ovmf imagemagick squashfs-tools
           ls -la /dev/kvm || true
       - uses: actions/download-artifact@v4
         with:
