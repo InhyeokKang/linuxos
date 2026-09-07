@@ -1,40 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 하단 레이아웃 (윈도우 11 + macOS 독 절충):
-       panel-1  가운데 떠 있는 둥근 독:  [시작] [고정 앱 + 실행 중 창 (docklike)]
-       panel-2  오른쪽 알약:            [트레이] [빠른 설정] [시계] [알림] [바탕화면 보기]
-     소리/전원 애플릿은 빠른 설정(kiyu-control)으로 통합 -->
+<!-- 하단 레이아웃: 가운데 떠 있는 독은 Plank (/etc/dconf, /usr/share/plank/themes/kiyu), 여기는
+     오른쪽 알약 하나: [시작 메뉴(숨김 버튼, 팝업 전용)] [트레이] [빠른 설정] [시계] [알림] [바탕화면 보기]
+     whiskermenu 플러그인은 xfce4-popup-whiskermenu(독의 kiyu 아이콘, Super 키)가 메뉴를 띄우기 위해 필요하다. -->
 <channel name="xfce4-panel" version="1.0">
   <property name="configver" type="int" value="2"/>
   <property name="panels" type="array">
     <value type="int" value="1"/>
-    <value type="int" value="2"/>
     <property name="dark-mode" type="bool" value="false"/>
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=10;x=0;y=0"/>
+      <property name="position" type="string" value="p=4;x=0;y=0"/>
       <property name="length" type="uint" value="1"/>
       <property name="length-adjust" type="bool" value="true"/>
       <property name="position-locked" type="bool" value="true"/>
-      <property name="size" type="uint" value="52"/>
-      <property name="icon-size" type="uint" value="28"/>
+      <property name="size" type="uint" value="40"/>
+      <property name="icon-size" type="uint" value="18"/>
       <!-- 배경은 ~/.config/gtk-3.0/gtk.css 의 .xfce4-panel 이 그린다 (테마 색 따라 다크 모드 자동) -->
       <property name="background-style" type="uint" value="0"/>
       <property name="autohide-behavior" type="uint" value="0"/>
       <property name="plugin-ids" type="array">
         <value type="int" value="1"/>
-        <value type="int" value="2"/>
-      </property>
-    </property>
-    <property name="panel-2" type="empty">
-      <property name="position" type="string" value="p=4;x=0;y=0"/>
-      <property name="length" type="uint" value="1"/>
-      <property name="length-adjust" type="bool" value="true"/>
-      <property name="position-locked" type="bool" value="true"/>
-      <property name="size" type="uint" value="52"/>
-      <property name="icon-size" type="uint" value="20"/>
-      <!-- 배경은 ~/.config/gtk-3.0/gtk.css 의 .xfce4-panel 이 그린다 (테마 색 따라 다크 모드 자동) -->
-      <property name="background-style" type="uint" value="0"/>
-      <property name="autohide-behavior" type="uint" value="0"/>
-      <property name="plugin-ids" type="array">
         <value type="int" value="6"/>
         <value type="int" value="7"/>
         <value type="int" value="9"/>
@@ -45,11 +29,9 @@
   </property>
   <property name="plugins" type="empty">
     <property name="plugin-1" type="string" value="whiskermenu"/>
-    <!-- 윈도우식 작업표시줄: 고정 앱과 실행 중인 창을 한 버튼으로, 실행 중이면 아래에 점 (docklike) -->
-    <property name="plugin-2" type="string" value="docklike"/>
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
-      <property name="icon-size" type="int" value="20"/>
+      <property name="icon-size" type="int" value="18"/>
       <property name="hide-new-items" type="bool" value="false"/>
     </property>
     <!-- 빠른 설정: Wi-Fi / 블루투스 / 다크 모드 / 소리 / 밝기 / 배터리 / 효과 -->
@@ -65,8 +47,8 @@
       <property name="digital-layout" type="uint" value="1"/>
       <property name="digital-time-format" type="string" value="%H:%M"/>
       <property name="digital-date-format" type="string" value="%m/%d %a"/>
-      <property name="digital-time-font" type="string" value="Pretendard Semi-Bold 10"/>
-      <property name="digital-date-font" type="string" value="Pretendard 8"/>
+      <property name="digital-time-font" type="string" value="Pretendard Semi-Bold 9"/>
+      <property name="digital-date-font" type="string" value="Pretendard 7"/>
       <property name="tooltip-format" type="string" value="%A %x"/>
     </property>
     <property name="plugin-10" type="string" value="notification-plugin"/>

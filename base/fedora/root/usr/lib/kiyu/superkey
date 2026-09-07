@@ -1,6 +1,6 @@
 #!/bin/sh
 # Win(Super) 키를 혼자 눌렀다 떼면 시작 메뉴, 조합키(Win+E 등)는 그대로 통과.
-# kiyu-superkey(자체 구현) 가 Super 탭을 Alt+F1 로 바꾸고, Alt+F1 은 xfce4-popup-whiskermenu 에 바인딩되어 있다.
+# kiyu-superkey(자체 구현) 가 Super 탭을 Alt+F1 로 바꾸고, Alt+F1 은 "xfce4-popup-whiskermenu --pointer" 에 바인딩되어 있다.
 # 둘 다 없으면 Super_L 직접 바인딩으로 대체 (이 경우 xfwm4 의 Super+화살표 단축키는 동작하지 않음).
 pkill -x kiyu-superkey 2>/dev/null; pkill -x xcape 2>/dev/null
 if command -v kiyu-superkey >/dev/null 2>&1; then
@@ -10,7 +10,7 @@ elif command -v xcape >/dev/null 2>&1; then
 fi
 if command -v xfconf-query >/dev/null 2>&1; then
     for k in Super_L Super_R; do
-        xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/$k" -n -t string -s xfce4-popup-whiskermenu 2>/dev/null || true
+        xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/$k" -n -t string -s "xfce4-popup-whiskermenu --pointer" 2>/dev/null || true
     done
 fi
 exit 0

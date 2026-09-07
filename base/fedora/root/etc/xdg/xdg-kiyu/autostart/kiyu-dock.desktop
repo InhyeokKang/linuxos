@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=kiyu dock
+Exec=plank
+NoDisplay=true
+OnlyShowIn=XFCE;

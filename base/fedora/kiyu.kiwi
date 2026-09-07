@@ -151,7 +151,9 @@
     <package name="xfconf"/>
     <package name="xfce4-appfinder"/>
     <package name="xfce4-whiskermenu-plugin"/>
-    <package name="xfce4-docklike-plugin"/>
+    <!-- 가운데 떠 있는 독 -->
+    <package name="plank"/>
+    <package name="dconf"/>
     <!-- 컴포지터: 둥근 창 모서리·그림자 (xrender), 블러는 옵션 -->
     <package name="picom"/>
     <package name="brightnessctl"/>

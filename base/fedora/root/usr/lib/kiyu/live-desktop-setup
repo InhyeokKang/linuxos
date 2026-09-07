@@ -14,6 +14,10 @@ if [ -f /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ] && 
     fi
     (sleep 2; xfce4-panel -r) >/dev/null 2>&1 &
 fi
+# Plank 독 런처 (skel 이 복사되지 않은 경우 대비)
+if [ ! -d "$HOME/.config/plank/dock1/launchers" ] && [ -d /etc/skel/.config/plank ]; then
+    mkdir -p "$HOME/.config" && cp -a /etc/skel/.config/plank "$HOME/.config/plank"
+fi
 # livesys 가 helpers.rc 에 WebBrowser=firefox 를 써 두므로 kiyu 기본값(탱자)으로 되돌림
 if [ -f /etc/xdg/xdg-kiyu/xfce4/helpers.rc ]; then
     mkdir -p "$HOME/.config/xfce4"

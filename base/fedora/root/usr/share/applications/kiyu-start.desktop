@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=시작
+Name[en]=Start
+Comment=시작 메뉴
+Exec=xfce4-popup-whiskermenu --pointer
+Icon=kiyu
+NoDisplay=true
+StartupNotify=false

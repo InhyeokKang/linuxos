@@ -16,7 +16,7 @@ kiyu 는 Fedora 를 바탕으로 만든 데스크톱 운영체제입니다. 목�
 
 Xvfb 프리뷰(`make preview`)에서 찍은 실제 세션입니다. 앱 아이콘/번역은 호스트 배포판 기준이라 실제 ISO 와 조금 다를 수 있습니다.
 
-| 바탕화면 | 시작 메뉴 |
+| 바탕화면 (Plank 독 + 오른쪽 알약) | 시작 메뉴 (독의 kiyu 로고 또는 Win 키) |
 |---|---|
 | ![desktop](docs/screenshots/01-desktop.png) | ![start menu](docs/screenshots/02-start-menu.png) |
 

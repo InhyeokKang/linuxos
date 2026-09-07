@@ -1,0 +1,13 @@
+# kiyu 독 (Plank) 기본값. config.sh 가 `dconf update` 로 바이너리 DB 를 만든다.
+[net/launchpad/plank/docks/dock1]
+theme='kiyu'
+icon-size=40
+position='bottom'
+alignment='center'
+hide-mode='none'
+zoom-enabled=true
+zoom-percent=118
+show-dock-item=false
+pressure-reveal=false
+lock-items=false
+dock-items=['kiyu-start.dockitem', 'thunar.dockitem', 'taengja.dockitem', 'org.gnome.Software.dockitem']
