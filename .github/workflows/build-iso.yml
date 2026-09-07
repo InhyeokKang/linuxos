@@ -5,6 +5,7 @@ name: Build ISO
 on:
   workflow_dispatch:
   push:
+    branches: ['**']
     tags: ['v*']
     paths: ['.github/workflows/build-iso.yml']
 
