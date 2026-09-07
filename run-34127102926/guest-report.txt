@@ -33,69 +33,69 @@ boot=live components apparmor=1 security=apparmor locales=ko_KR.UTF-8 keyboard-l
 [?2004hSHELL> echo '=== memory'; free -m; grep -E 'MemTotal|MemAvailable|AnonPages|Shmem:|Slab|SUnreclaim|KernelStack|PageTables' /proc/meminfo
 [?2004l=== memory
                총계         사용        여분      공유    버퍼/캐시    가용
-메모리:         1971         891         321          35         935        1080
-스  왑:          985           0         985
-MemTotal:        2018940 kB
-MemAvailable:    1105776 kB
-AnonPages:        601724 kB
-Shmem:             35936 kB
-Slab:              61248 kB
-SUnreclaim:        34524 kB
-KernelStack:        5104 kB
-PageTables:         9772 kB
+메모리:         1973         677         537          35         935        1296
+스  왑:          986           0         986
+MemTotal:        2020960 kB
+MemAvailable:    1327204 kB
+AnonPages:        391916 kB
+Shmem:             35924 kB
+Slab:              58588 kB
+SUnreclaim:        32208 kB
+KernelStack:        4608 kB
+PageTables:         8536 kB
 SecPageTables:         0 kB
 [?2004hSHELL> echo '=== zram'; sudo /usr/sbin/zramctl 2>/dev/null || echo none
 [?2004l=== zram
 NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
-/dev/zram0 zstd        985.8M   4K   59B   20K       2 [SWAP]
+/dev/zram0 zstd        986.8M   4K   59B   20K       2 [SWAP]
 [?2004hSHELL> echo '=== pss by process (MB)'; sudo sh -c 'for p in /proc/[0-9]*; do c=$(cat $p/comm 2>/dev/null); v=$(awk "/^Pss:/{s+=\$2}END{print s+0}" $p/smaps_rollup 2>/dev/null); [ -n "$v" ] && [ "$v" -gt 0 ] && echo "$v $c"; done | sort -rn | awk "{t+=\$1; printf \"%6.1f %s\\n\", \$1/1024, \$2} END{printf \"TOTAL %.0f MB\\n\", t/1024}" | head -30'
 [?2004l=== pss by process (MB)
-  75.9 xfwm4
-  72.6 nm-applet
-  69.2 Xorg
-  64.1 xfdesktop
-  46.2 wrapper-2.0
-  42.7 xfce4-panel
-  41.6 wrapper-2.0
-  41.6 wrapper-2.0
-  41.1 wrapper-2.0
-  39.5 wrapper-2.0
-  33.3 xfce4-session
-  27.0 unattended-upgr
-  22.6 fcitx5
-  12.2 tumblerd
-   9.2 xfsettingsd
-   8.9 Thunar
-   8.5 xfce4-screensav
-   8.3 NetworkManager
+  77.5 xfwm4
+  74.6 nm-applet
+  68.1 Xorg
+  56.2 xfce4-panel
+  54.5 xfdesktop
+  33.8 xfce4-session
+  23.1 unattended-upgr
+  20.4 fcitx5
+  12.3 tumblerd
+   9.7 xfsettingsd
+   9.2 Thunar
+   8.9 xfce4-screensav
+   8.4 NetworkManager
    7.1 wireplumber
-   6.5 xdg-desktop-por
+   6.4 xdg-desktop-por
    5.7 systemd
-   5.5 udisksd
-   5.2 pipewire
+   5.4 udisksd
+   5.3 pipewire
+   4.7 xfce4-notifyd
    4.6 systemd
-   4.5 xfce4-notifyd
-   3.8 systemd-udevd
-   3.7 systemd-journal
-   3.6 xdg-desktop-por
-   3.2 polkitd
-   3.1 xfce4-power-man
+   3.9 xdg-desktop-por
+   3.7 systemd-udevd
+   3.6 systemd-journal
+   3.3 polkitd
+   3.2 xfce4-power-man
+   3.0 wpa_supplicant
+   2.8 cupsd
+   2.8 bash
+   2.7 bash
+   2.7 polkit-mate-aut
 [?2004hSHELL> echo '=== boot time'; systemd-analyze 2>/dev/null; systemd-analyze blame 2>/dev/null | head -12
 [?2004l=== boot time
-Startup finished in 2.359s (kernel) + 5.680s (userspace) = 8.039s 
-graphical.target reached after 5.677s in userspace.
-2.363s live-config.service
-1.507s ldconfig.service
-1.495s dev-sr0.device
-1.203s blueman-mechanism.service
-1.065s nftables.service
- 988ms dev-loop0.device
- 748ms console-setup.service
- 362ms systemd-modules-load.service
- 284ms NetworkManager.service
- 273ms udisks2.service
- 263ms accounts-daemon.service
- 246ms tmp.mount
+Startup finished in 3.349s (kernel) + 9.825s (userspace) = 13.175s 
+graphical.target reached after 9.819s in userspace.
+4.419s live-config.service
+3.450s ldconfig.service
+2.232s console-setup.service
+1.666s systemd-binfmt.service
+1.655s blueman-mechanism.service
+1.513s dev-sr0.device
+1.477s proc-sys-fs-binfmt_misc.mount
+1.256s dev-loop0.device
+ 641ms nftables.service
+ 625ms NetworkManager.service
+ 613ms systemd-modules-load.service
+ 579ms udisks2.service
 [?2004hSHELL> echo '=== failed units'; systemctl --failed --no-pager --no-legend
 [?2004l=== failed units
 [?2004hSHELL> echo '=== services'; for s in lightdm nftables apparmor zramswap unattended-upgrades NetworkManager; do printf '%s: %s\n' $s $(systemctl is-active $s); done
@@ -113,7 +113,7 @@ lockdown,capability,landlock,yama,apparmor,bpf,ipe,ima,evm
 ○ apparmor.service - Load AppArmor profiles
      Loaded: loaded (/usr/lib/systemd/system/apparmor.service; enabled; preset: enabled)
      Active: inactive (dead)
-  Condition: start condition unmet at Mon 2026-09-07 22:14:45 KST; 2min 55s ago
+  Condition: start condition unmet at Mon 2026-09-07 22:41:24 KST; 2min 54s ago
              └─ ConditionPathExists=!/run/live/overlay/work was not met
        Docs: man:apparmor(7)
 Failed to get profiles: 2....
@@ -148,16 +148,27 @@ vm.swappiness = 150
 [?2004hSHELL> echo '=== wallpaper'; xfconf-query -c xfce4-desktop -l -v 2>/dev/null | grep last-image; ls -la /usr/share/backgrounds/xfce/ 2>&1 | head; dpkg-divert --list '*backgrounds*' 2>&1
 [?2004l=== wallpaper
 /backdrop/screen0/monitor0/workspace0/last-image   /usr/share/backgrounds/haneul/default.png
-합계 2388
-drwxr-xr-x 2 root root     266  9월  7일  21:54 .
-drwxr-xr-x 4 root root      41  9월  7일  21:54 ..
--rw-r--r-- 1 root root  197011 2025년  3월  3일 xfce-blue.jpg
--rw-r--r-- 1 root root   28575 2025년  3월  3일 xfce-cp-dark.svg
--rw-r--r-- 1 root root   16972 2025년  3월  3일 xfce-flower.svg
--rw-r--r-- 1 root root  160740 2025년  3월  3일 xfce-leaves.svg
--rw-r--r-- 1 root root 1428420 2025년  3월  3일 xfce-light.svg
--rw-r--r-- 1 root root  263520 2025년  3월  3일 xfce-mouserace.svg
--rw-r--r-- 1 root root  322121 2025년  3월  3일 xfce-shapes.svg
+합계 2669
+drwxr-xr-x 2 root root     605  9월  7일  22:23 .
+drwxr-xr-x 4 root root      41  9월  7일  22:23 ..
+-rw-r--r-- 1 root root  277504  9월  7일  22:23 xfce-blue.jpg
+-rw-r--r-- 1 root root  197011 2025년  3월  3일 xfce-blue.jpg.distrib
+-rw-r--r-- 1 root root     827  9월  7일  22:23 xfce-cp-dark.svg
+-rw-r--r-- 1 root root   28575 2025년  3월  3일 xfce-cp-dark.svg.distrib
+-rw-r--r-- 1 root root     827  9월  7일  22:23 xfce-flower.svg
+-rw-r--r-- 1 root root   16972 2025년  3월  3일 xfce-flower.svg.distrib
+-rw-r--r-- 1 root root     827  9월  7일  22:23 xfce-leaves.svg
+/usr/share/backgrounds/xfce/xfce-cp-dark.svg의 /usr/share/backgrounds/xfce/xfce-cp-dark.svg.distrib(으)로 전환, haneul 패키지
+/usr/share/backgrounds/xfce/xfce-mouserace.svg의 /usr/share/backgrounds/xfce/xfce-mouserace.svg.distrib(으)로 전환, haneul 패키지
+/usr/share/backgrounds/xfce/xfce-teal.svg의 /usr/share/backgrounds/xfce/xfce-teal.svg.distrib(으)로 전환, haneul 패키지
+/usr/share/backgrounds/xfce/xfce-leaves.svg의 /usr/share/backgrounds/xfce/xfce-leaves.svg.distrib(으)로 전환, haneul 패키지
+/usr/share/backgrounds/xfce/xfce-stripes.svg의 /usr/share/backgrounds/xfce/xfce-stripes.svg.distrib(으)로 전환, haneul 패키지
+/usr/share/backgrounds/xfce/xfce-flower.svg의 /usr/share/backgrounds/xfce/xfce-flower.svg.distrib(으)로 전환, haneul 패키지
+/usr/share/backgrounds/xfce/xfce-light.svg의 /usr/share/backgrounds/xfce/xfce-light.svg.distrib(으)로 전환, haneul 패키지
+/usr/share/backgrounds/xfce/xfce-x.svg의 /usr/share/backgrounds/xfce/xfce-x.svg.distrib(으)로 전환, haneul 패키지
+/usr/share/backgrounds/xfce/xfce-shapes.svg의 /usr/share/backgrounds/xfce/xfce-shapes.svg.distrib(으)로 전환, haneul 패키지
+/usr/share/backgrounds/xfce/xfce-blue.jpg의 /usr/share/backgrounds/xfce/xfce-blue.jpg.distrib(으)로 전환, haneul 패키지
+/usr/share/backgrounds/xfce/xfce-verticals.svg의 /usr/share/backgrounds/xfce/xfce-verticals.svg.distrib(으)로 전환, haneul 패키지
 [?2004hSHELL> echo '=== im'; im-config -m 2>&1 | head -3; cat /etc/xdg/autostart/org.fcitx.Fcitx5.desktop 2>&1 | head -12; env | grep -E 'IM_MODULE|XMODIFIERS'
 [?2004l=== im
 default
@@ -175,7 +186,7 @@ flathub system
 [?2004hSHELL> echo '=== disk'; df -h / /run/live/medium 2>/dev/null
 [?2004l=== disk
 파일 시스템     크기  사용  가용 사용% 마운트위치
-overlay         986M   30M  957M    4% /
+overlay         987M   30M  958M    4% /
 /dev/sr0        1.3G  1.3G     0  100% /run/live/medium
 [?2004hSHELL> echo '=== END'
 [?2004l=== END
