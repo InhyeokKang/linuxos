@@ -10,7 +10,7 @@
 | 디스크 | LUKS 전체 디스크 암호화 (설치 시 체크박스 하나) | `calamares/modules/partition.conf` |
 | 커널 | kptr/dmesg 제한, 비특권 BPF 차단, ptrace 제한, ASLR 최대, `init_on_alloc`, `slab_nomerge`, `randomize_kstack_offset` | `etc/sysctl.d/90-kiyu-hardening.conf`, `etc/default/grub.d/10-kiyu.cfg` |
 | 커널 모듈 | 안 쓰는 네트워크 프로토콜/파일시스템/FireWire 로드 차단 | `etc/modprobe.d/10-kiyu-blacklist.conf` |
-| 네트워크 | firewalld 기본 존 `kiyu` (인바운드 전부 DROP), IPv4/6 리다이렉트·소스라우팅 무시, SYN 쿠키 | `etc/firewalld/zones/kiyu.xml`, sysctl |
+| 네트워크 | nftables 기본 차단(인바운드 전부 drop), IPv4/6 리다이렉트·소스라우팅 무시, SYN 쿠키 | `etc/nftables/kiyu.nft`, sysctl |
 | MAC | SELinux enforcing (targeted) | Fedora 기본, kiwi 빌드 시 relabel |
 | 앱 격리 | Flatpak(bubblewrap) 샌드박스 + 포털; 브라우저 웹 프로세스도 bubblewrap 샌드박스 | `xdg-desktop-portal/portals.conf`, `apps/taengja` |
 | 브라우저 | 추적 방지(ITP), 서드파티 쿠키·추적기 차단, 권한 기본 거부, HTTPS 우선 | [browser.md](browser.md) |
