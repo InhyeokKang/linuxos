@@ -19,16 +19,16 @@ make build      # = sudo ./scripts/build.sh
 
 `build.log` 에 전체 로그가 남습니다. 결과물:
 
-- `haneul-0.1.0-amd64.hybrid.iso` – USB/DVD/VM 공용
-- `haneul-0.1.0-amd64.hybrid.iso.sha256`
-- `haneul-0.1.0-amd64.packages` – 포함된 패키지 목록
+- `kiyu-0.1.0-amd64.hybrid.iso` – USB/DVD/VM 공용
+- `kiyu-0.1.0-amd64.hybrid.iso.sha256`
+- `kiyu-0.1.0-amd64.packages` – 포함된 패키지 목록
 
 ## ISO 없이 데스크톱 UI 만 보기
 
 ```bash
 sudo ./scripts/preview-desktop.sh     # = make preview
 ```
-Debian/Ubuntu 머신(컨테이너 가능)에 XFCE 와 Haneul 설정 트리를 올리고 Xvfb 에서 세션을 띄운 뒤
+Debian/Ubuntu 머신(컨테이너 가능)에 XFCE 와 kiyu 설정 트리를 올리고 Xvfb 에서 세션을 띄운 뒤
 `out/preview/*.png` 로 스크린샷을 남깁니다. 패널/테마/단축키/메뉴 설정을 빠르게 반복 수정할 때 씁니다.
 호스트 배포판의 XFCE 버전을 쓰므로 실제 ISO 와 세부 차이가 있을 수 있습니다.
 
@@ -41,14 +41,14 @@ make test-uefi          # QEMU, UEFI (OVMF 필요: apt install ovmf)
 ./scripts/test-qemu.sh --uefi --disk           # 가상 디스크 붙여서 설치까지
 ```
 
-라이브 세션 로그인은 자동입니다 (사용자 `live`, 비밀번호 `live`). 바탕화면의 **Haneul OS 설치** 아이콘으로 Calamares 를 실행합니다.
+라이브 세션 로그인은 자동입니다 (사용자 `live`, 비밀번호 `live`). 바탕화면의 **kiyu 설치** 아이콘으로 Calamares 를 실행합니다.
 
 ### 자원 사용량 측정
 
 라이브 세션 또는 설치본에서:
 
 ```bash
-haneul-info                               # 요약
+kiyu-info                               # 요약
 free -m                                   # RAM
 systemd-analyze                           # 부팅 시간
 systemd-analyze blame | head -20          # 느린 서비스

@@ -7,7 +7,7 @@
 
 Xvfb 프리뷰에서 확인된 것:
 
-- [x] `/etc/xdg/xdg-haneul` 오버라이드 트리가 xfconf 에 병합됨 (패널, 테마, 창 관리자, 단축키)
+- [x] `/etc/xdg/xdg-kiyu` 오버라이드 트리가 xfconf 에 병합됨 (패널, 테마, 창 관리자, 단축키)
 - [x] 패널 launcher 플러그인이 절대 경로 `.desktop` 항목을 받아들임
 - [x] Whisker 시작 메뉴 즐겨찾기/세션 버튼, Ctrl+Shift+Esc 작업 관리자, Win+E 탐색기, Win+←/→ 창 스냅, Alt+F4
 - [x] 기본 배경화면: xfdesktop 기본 배경 파일을 dpkg-divert 로 교체 (모니터 이름과 무관하게 첫 로그인부터 적용)
@@ -22,13 +22,13 @@ Xvfb 프리뷰에서 확인된 것:
 - [ ] 라이브 자동 로그인, 한글 입력 (fcitx5)
 - [ ] 실제 키보드에서 Win 키 탭 → 시작 메뉴 (xcape; Xvfb 의 합성 키 입력으로는 검증 불가), Win+D 바탕화면 보기
 - [ ] Calamares: 모듈 이름/설정 키가 trixie 의 3.3.x 와 맞는지, BIOS/UEFI 설치, LUKS 설치, 윈도우 듀얼부팅 감지
-- [ ] 설치 후 `live` 사용자 제거, 설치 아이콘 제거, `haneul-firstboot` 재실행
+- [ ] 설치 후 `live` 사용자 제거, 설치 아이콘 제거, `kiyu-firstboot` 재실행
 - [ ] 유휴 RAM 측정 → README 수치 갱신 (Xvfb 프리뷰에서 데스크톱 프로세스 PSS 합계 약 250 MB)
 
 ## 0.2 – 다듬기
 
 - 자체 앱 스토어 프론트엔드 검토 (GNOME Software 가 무겁다면 더 가벼운 대안)
-- 장치 관리자 GUI, 시스템 정보 GUI (`haneul-info` 의 GUI 판)
+- 장치 관리자 GUI, 시스템 정보 GUI (`kiyu-info` 의 GUI 판)
 - 첫 로그인 환영 앱: 언어/입력기, 테마(밝게/어둡게), 게임/윈도우앱 설정을 한 화면에서
 - 윈도우 11 스타일(가운데 정렬 패널) 옵션
 - 노트북 전원 최적화 프로필 (tlp 또는 power-profiles-daemon)
@@ -44,4 +44,4 @@ Xvfb 프리뷰에서 확인된 것:
 
 - ARM64 (라즈베리파이, Snapdragon 노트북) 이미지
 - OEM 모드 (제조사 프리인스톨)
-- 자체 미러/업데이트 채널 (Debian 위에 Haneul 전용 패키지 저장소)
+- 자체 미러/업데이트 채널 (Debian 위에 kiyu 전용 패키지 저장소)

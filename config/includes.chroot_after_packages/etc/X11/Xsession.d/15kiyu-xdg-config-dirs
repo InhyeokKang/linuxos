@@ -1,0 +1,9 @@
+# kiyu 세션이면 배포판 기본 설정 디렉터리를 XDG_CONFIG_DIRS 맨 앞에 둔다.
+# Xsession.d 의 20dbus_xdg-runtime 보다 먼저 실행되어야 D-Bus/systemd --user 로
+# 활성화되는 xfconfd 등도 같은 값을 물려받는다.
+case "${DESKTOP_SESSION:-}${XDG_SESSION_DESKTOP:-}" in
+  *kiyu*)
+    XDG_CONFIG_DIRS="/etc/xdg/xdg-kiyu:${XDG_CONFIG_DIRS:-/etc/xdg}"
+    export XDG_CONFIG_DIRS
+    ;;
+esac

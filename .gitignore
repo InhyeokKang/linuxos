@@ -27,7 +27,7 @@
 /config/bootloaders/
 
 # auto/config 가 생성하는 파일
-/config/includes.chroot_after_packages/usr/lib/haneul/os-release
+/config/includes.chroot_after_packages/usr/lib/kiyu/os-release
 /config/includes.chroot_after_packages/etc/issue
 /config/includes.chroot_after_packages/etc/issue.net
 

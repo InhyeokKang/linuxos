@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Authentication agent
-Exec=/usr/lib/haneul/polkit-agent
-NoDisplay=true
-OnlyShowIn=XFCE;

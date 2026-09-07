@@ -1,12 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0f1626"/>
-      <stop offset="1" stop-color="#1b2a4a"/>
+      <stop offset="0" stop-color="#101827"/>
+      <stop offset="1" stop-color="#1b2f4b"/>
     </linearGradient>
+    <radialGradient id="peel" cx="0.38" cy="0.32" r="0.75">
+      <stop offset="0" stop-color="#ffb648"/>
+      <stop offset="1" stop-color="#f0780f"/>
+    </radialGradient>
   </defs>
   <rect width="640" height="480" fill="url(#sky)"/>
-  <path d="M250 200 C 285 120, 355 120, 390 200" fill="none" stroke="#3daee9" stroke-width="16" stroke-linecap="round"/>
-  <circle cx="320" cy="108" r="14" fill="#ffffff"/>
-  <text x="320" y="270" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#ffffff">Haneul OS</text>
+  <g transform="translate(256 90) scale(0.5)">
+    <circle cx="128" cy="142" r="98" fill="url(#peel)"/>
+    <circle cx="128" cy="48" r="9" fill="#c9650e"/>
+    <path d="M128 48 C 128 36, 132 29, 139 24" stroke="#6b4a1e" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M138 42 C 150 18, 184 14, 200 28 C 186 46, 154 54, 138 42 Z" fill="#4caf50"/>
+  </g>
+  <text x="320" y="255" text-anchor="middle" font-family="sans-serif" font-size="40" fill="#ffffff">kiyu</text>
 </svg>

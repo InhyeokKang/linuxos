@@ -1,8 +1,8 @@
 #!/bin/sh
-# Flathub 저장소 등록 (빌드 중 네트워크가 있으면 여기서, 아니면 첫 부팅 시 haneul-firstboot 가 처리)
+# Flathub 저장소 등록 (빌드 중 네트워크가 있으면 여기서, 아니면 첫 부팅 시 kiyu-firstboot 가 처리)
 set -e
 if flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; then
     echo "flathub remote added at build time"
 else
-    echo "WARN: could not add flathub now; haneul-firstboot will retry on first boot"
+    echo "WARN: could not add flathub now; kiyu-firstboot will retry on first boot"
 fi

@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Install kiyu
+Name[ko]=kiyu 설치
+GenericName=System Installer
+GenericName[ko]=시스템 설치 프로그램
+Comment=Install kiyu to this computer
+Comment[ko]=이 컴퓨터에 kiyu 를 설치합니다
+Exec=pkexec calamares
+Icon=calamares
+Terminal=false
+Categories=System;
+StartupNotify=true

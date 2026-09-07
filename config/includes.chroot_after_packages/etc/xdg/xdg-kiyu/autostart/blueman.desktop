@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Blueman Applet
+Name[ko]=블루투스 관리자
+Exec=/usr/lib/kiyu/blueman-if-bt
+Icon=blueman
+NoDisplay=true
+OnlyShowIn=XFCE;

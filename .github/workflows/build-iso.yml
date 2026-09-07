@@ -43,7 +43,7 @@ jobs:
       - name: Upload ISO
         uses: actions/upload-artifact@v4
         with:
-          name: haneul-iso
+          name: kiyu-iso
           path: |
             *.iso
             *.iso.sha256
@@ -72,7 +72,7 @@ jobs:
           ls -la /dev/kvm || true
       - uses: actions/download-artifact@v4
         with:
-          name: haneul-iso
+          name: kiyu-iso
           path: iso
       - uses: actions/download-artifact@v4
         with:

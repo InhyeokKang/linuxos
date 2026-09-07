@@ -2,7 +2,7 @@
 # 배포판 정체성: os-release, 기본 앱 alternatives, 로케일 사전 생성
 set -e
 
-OS_ID=haneul
+OS_ID=kiyu
 if [ -f "/usr/lib/${OS_ID}/os-release" ]; then
     rm -f /etc/os-release
     cp "/usr/lib/${OS_ID}/os-release" /etc/os-release
@@ -76,7 +76,7 @@ for plug in whiskermenu pulseaudio power-manager-plugin notification-plugin syst
     fi
 done
 
-chmod 0755 /usr/bin/starthaneul /usr/lib/${OS_ID}/* /usr/local/bin/* 2>/dev/null || true
+chmod 0755 /usr/bin/startkiyu /usr/lib/${OS_ID}/* /usr/local/bin/* 2>/dev/null || true
 gtk-update-icon-cache -f -q /usr/share/icons/hicolor || true
 update-desktop-database -q || true
 fc-cache -f || true

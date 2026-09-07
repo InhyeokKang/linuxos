@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=kiyu wallpaper
+Exec=/usr/lib/kiyu/wallpaper
+NoDisplay=true
+OnlyShowIn=XFCE;

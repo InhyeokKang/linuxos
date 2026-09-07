@@ -33,7 +33,7 @@
 
 KDE 가 가장 윈도우 같지만 저사양 목표와 충돌한다. XFCE 는 패널·단축키·테마만 바꾸면 윈도우 10 배치가 되고(Zorin Lite, Linux Lite 가 같은 접근), 15년 넘게 안정적이다. LXQt 는 조금 더 가볍지만 Qt 앱 생태계와 문서가 부족해서 0.1 에서는 XFCE 를 고른다.
 
-기본 설정은 `/etc/xdg/xdg-haneul/` 에 두고, 세션 래퍼(`starthaneul`)가 `XDG_CONFIG_DIRS` 맨 앞에 붙인다. 그래서 XFCE 패키지의 기본 설정 파일을 덮어쓰지 않아 업그레이드 충돌이 없고, 사용자 설정은 늘 우선한다.
+기본 설정은 `/etc/xdg/xdg-kiyu/` 에 두고, 세션 래퍼(`startkiyu`)가 `XDG_CONFIG_DIRS` 맨 앞에 붙인다. 그래서 XFCE 패키지의 기본 설정 파일을 덮어쓰지 않아 업그레이드 충돌이 없고, 사용자 설정은 늘 우선한다.
 
 ### 3. X11 vs Wayland
 
@@ -50,7 +50,7 @@ Recommends 를 끄고 빌드하므로(`--apt-recommends false`) 이미지가 작
 ### 5. 용량과 메모리를 어디서 줄였나
 
 - `debootstrap --variant=minbase` + Recommends 없음 → 필요한 것만 명시적으로 나열.
-- dpkg `path-exclude` 로 man/doc/info, 한국어·영어 외 번역 미설치 (`01-haneul-lean`).
+- dpkg `path-exclude` 로 man/doc/info, 한국어·영어 외 번역 미설치 (`01-kiyu-lean`).
 - squashfs zstd 압축: xz 보다 저사양 CPU 에서 라이브 부팅이 훨씬 빠름.
 - zram 스왑(zstd, RAM 50%) + `vm.swappiness=150`: 2 GB 머신에서 브라우저 탭 여러 개가 버팀. 디스크 스왑 파일은 설치 시 선택.
 - 서비스 최소화: rsyslog/cron/avahi/ModemManager 없음. journald + systemd 타이머로 충분.

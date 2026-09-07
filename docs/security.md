@@ -8,12 +8,12 @@
 |---|---|---|
 | 부팅 | Secure Boot (Debian 서명 shim/GRUB/커널), 커널 lockdown | live-build `--uefi-secure-boot`, `shim-signed` |
 | 디스크 | LUKS 전체 디스크 암호화 (설치 시 체크박스 하나) | `calamares/modules/partition.conf` |
-| 커널 | kptr/dmesg 제한, 비특권 BPF 차단, ptrace 제한, ASLR 최대, `init_on_alloc`, `slab_nomerge`, `randomize_kstack_offset` | `etc/sysctl.d/90-haneul-hardening.conf`, `etc/default/grub.d/10-haneul.cfg` |
-| 커널 모듈 | 안 쓰는 네트워크 프로토콜/파일시스템/FireWire 로드 차단 | `etc/modprobe.d/10-haneul-blacklist.conf` |
+| 커널 | kptr/dmesg 제한, 비특권 BPF 차단, ptrace 제한, ASLR 최대, `init_on_alloc`, `slab_nomerge`, `randomize_kstack_offset` | `etc/sysctl.d/90-kiyu-hardening.conf`, `etc/default/grub.d/10-kiyu.cfg` |
+| 커널 모듈 | 안 쓰는 네트워크 프로토콜/파일시스템/FireWire 로드 차단 | `etc/modprobe.d/10-kiyu-blacklist.conf` |
 | 네트워크 | nftables 기본 차단(인바운드 전부 drop), IPv4/6 리다이렉트·소스라우팅 무시, SYN 쿠키 | `etc/nftables.conf` |
 | MAC | AppArmor enforce (Firefox 등 Debian 프로필) | `50-security.list.chroot`, 하드닝 훅 |
 | 앱 격리 | Flatpak(bubblewrap) 샌드박스 + 포털 | `20-desktop.list.chroot`, `xdg-desktop-portal/portals.conf` |
-| 업데이트 | 보안 업데이트 매일 자동 설치, 재부팅은 사용자 선택 | `etc/apt/apt.conf.d/20auto-upgrades`, `52haneul-unattended` |
+| 업데이트 | 보안 업데이트 매일 자동 설치, 재부팅은 사용자 선택 | `etc/apt/apt.conf.d/20auto-upgrades`, `52kiyu-unattended` |
 | 펌웨어 | fwupd (LVFS) 로 BIOS/SSD 펌웨어 업데이트 | `10-hardware.list.chroot` |
 | 계정 | root 잠금, sudo 는 비밀번호 필요, 홈 디렉터리 0700, 게스트 로그인 없음 | 하드닝 훅, `lightdm.conf.d` |
 | 화면 | 10분 유휴 시 화면 잠금, 절전 복귀 시 잠금 | `xfce4-screensaver.xml`, `xfce4-power-manager.xml` |
@@ -38,7 +38,7 @@
 ## 사용자가 확인하는 방법
 
 ```
-haneul-info
+kiyu-info
 ```
 방화벽/AppArmor/자동 업데이트/Secure Boot/디스크 암호화 상태를 한 번에 보여 줍니다.
 

@@ -1,8 +1,8 @@
-# Haneul OS
+# kiyu
 
 **윈도우처럼 쓰는, 훨씬 가볍고 안전한 리눅스.**
 
-Haneul(하늘) OS 는 Debian 13 을 바탕으로 만든 데스크톱 운영체제입니다. 목표는 단순합니다.
+kiyu 는 Debian 13 을 바탕으로 만든 데스크톱 운영체제입니다. 목표는 단순합니다.
 
 - **가볍게**: 유휴 상태 RAM 500MB 이하, 2GB RAM / 듀얼코어 / 내장 그래픽에서도 쾌적하게.
 - **안전하게**: 방화벽, AppArmor, 커널 하드닝, 자동 보안 업데이트, 앱 샌드박스, 디스크 암호화가 *기본값*.
@@ -36,7 +36,7 @@ make test           # QEMU 로 부팅 (2 CPU / 2GB RAM 저사양 재현)
 make test-uefi      # UEFI 모드
 ```
 
-빌드 결과물은 `haneul-0.1.0-amd64.hybrid.iso` 입니다. USB 에 그대로 쓰면(예: `dd`, Rufus, balenaEtcher) BIOS 와 UEFI(Secure Boot 포함) 모두에서 부팅됩니다.
+빌드 결과물은 `kiyu-0.1.0-amd64.hybrid.iso` 입니다. USB 에 그대로 쓰면(예: `dd`, Rufus, balenaEtcher) BIOS 와 UEFI(Secure Boot 포함) 모두에서 부팅됩니다.
 
 ## 무엇이 들어 있나
 
@@ -48,8 +48,8 @@ make test-uefi      # UEFI 모드
 | 브라우저 | Firefox ESR | Debian 보안팀이 패치, 텔레메트리 없음 |
 | 오피스 | LibreOffice (Writer/Calc/Impress) | MS Office 파일 호환, 동일 규격 폰트(Carlito/Caladea) 포함 |
 | 한국어 | fcitx5-hangul, Noto Sans CJK KR | 윈도우 폰트 이름(맑은 고딕 등) 자동 매핑 |
-| 게임 | `haneul-setup-gaming` | Steam(Flatpak) + Proton-GE + GameMode + MangoHud, NVIDIA 드라이버 선택 설치 |
-| 윈도우 앱 | `haneul-setup-windows-apps` | Wine + Bottles, .exe 더블클릭 |
+| 게임 | `kiyu-setup-gaming` | Steam(Flatpak) + Proton-GE + GameMode + MangoHud, NVIDIA 드라이버 선택 설치 |
+| 윈도우 앱 | `kiyu-setup-windows-apps` | Wine + Bottles, .exe 더블클릭 |
 | 설치 | Calamares | 전체 디스크 암호화, 윈도우 듀얼부팅 자동 감지 |
 
 보안 설계는 [docs/security.md](docs/security.md), 설계 근거는 [docs/architecture.md](docs/architecture.md), 윈도우 사용자용 대응표는 [docs/windows-user-guide.md](docs/windows-user-guide.md) 를 보세요.
@@ -64,9 +64,9 @@ config/hooks/normal/          빌드 중 chroot 안에서 실행되는 스크립
 config/includes.chroot_before_packages/   패키지 설치 *전* 에 넣을 파일 (dpkg 용량 절감 설정)
 config/includes.chroot_after_packages/    최종 시스템에 들어갈 파일
   etc/sysctl.d, nftables.conf, modprobe.d, apparmor  보안 기본값
-  etc/xdg/xdg-haneul/         XFCE 윈도우 스타일 기본 설정 (패널, 단축키, 테마)
+  etc/xdg/xdg-kiyu/         XFCE 윈도우 스타일 기본 설정 (패널, 단축키, 테마)
   etc/calamares/              설치 프로그램
-  usr/local/bin/haneul-*      게임/윈도우앱 설치, 상태 확인 스크립트
+  usr/local/bin/kiyu-*      게임/윈도우앱 설치, 상태 확인 스크립트
 branding/                     로고, 배경화면, 부트 스플래시 (SVG)
 scripts/                      build.sh, test-qemu.sh, check.sh
 docs/                         설계 문서
@@ -74,9 +74,9 @@ docs/                         설계 문서
 
 ## 커스터마이즈
 
-- **이름/버전 바꾸기**: `os.conf` 수정 후 `grep -ri haneul config branding` 로 남은 곳 확인.
+- **이름/버전 바꾸기**: `os.conf` 수정 후 `grep -ri kiyu config branding` 로 남은 곳 확인.
 - **앱 빼고 더하기**: `config/package-lists/30-apps.list.chroot` 편집. 파일을 지우면 그 묶음 전체가 빠집니다.
-- **다른 언어 지원**: `config/includes.chroot_before_packages/etc/dpkg/dpkg.cfg.d/01-haneul-lean` 에 `path-include=/usr/share/locale/<언어>/*` 추가, `40-korean.list.chroot` 를 해당 입력기로 교체.
+- **다른 언어 지원**: `config/includes.chroot_before_packages/etc/dpkg/dpkg.cfg.d/01-kiyu-lean` 에 `path-include=/usr/share/locale/<언어>/*` 추가, `40-korean.list.chroot` 를 해당 입력기로 교체.
 - **포트 열기**: `/etc/nftables.d/` 에 `.nft` 파일 추가 (예시 파일 포함).
 
 ## 현재 상태

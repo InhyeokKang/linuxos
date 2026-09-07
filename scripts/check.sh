@@ -20,7 +20,7 @@ fi
 echo "[2/5] 실행 권한"
 for f in auto/* scripts/*.sh config/hooks/normal/*.hook.chroot \
          config/includes.chroot_after_packages/usr/local/bin/* \
-         config/includes.chroot_after_packages/usr/lib/haneul/* \
+         config/includes.chroot_after_packages/usr/lib/kiyu/* \
          config/includes.chroot_after_packages/usr/bin/*; do
     [ -x "$f" ] || bad "실행 권한 없음: $f"
 done

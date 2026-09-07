@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=kiyu live desktop setup
+Exec=/usr/lib/kiyu/live-desktop-setup
+NoDisplay=true
+X-GNOME-Autostart-Phase=Applications

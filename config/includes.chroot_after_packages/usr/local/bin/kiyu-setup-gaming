@@ -1,0 +1,71 @@
+#!/bin/bash
+# kiyu 게임 환경 설치
+#  - Steam (Flatpak, Proton 으로 윈도우 게임 실행)
+#  - ProtonUp-Qt (Proton-GE 관리), GameMode, MangoHud
+#  - --all : Heroic (Epic/GOG), Lutris 추가
+#  - NVIDIA GPU 가 감지되면 전용 드라이버 설치 여부를 물어봅니다
+set -euo pipefail
+
+ALL=0
+for arg in "$@"; do
+    case "$arg" in
+        --all) ALL=1 ;;
+        -h|--help) sed -n '2,8p' "$0"; exit 0 ;;
+    esac
+done
+
+if [ "$(id -u)" -eq 0 ]; then
+    echo "일반 사용자로 실행하세요 (필요할 때 관리자 비밀번호를 묻습니다)." >&2
+    exit 1
+fi
+
+echo "== [1/4] 시스템 패키지 (GameMode, 32비트 Vulkan)"
+sudo dpkg --add-architecture i386
+sudo apt-get update
+sudo apt-get install -y gamemode mesa-vulkan-drivers:i386 libgl1-mesa-dri:i386
+
+echo "== [2/4] NVIDIA 확인"
+if lspci -nn 2>/dev/null | grep -qi 'VGA.*NVIDIA\|3D.*NVIDIA'; then
+    read -r -p "NVIDIA 그래픽이 감지되었습니다. 전용 드라이버를 설치할까요? [y/N] " yn
+    if [[ "${yn,,}" == y* ]]; then
+        sudo apt-get install -y linux-headers-amd64 nvidia-driver firmware-misc-nonfree nvidia-driver-libs:i386
+        echo "드라이버 설치 완료. 재부팅 후 적용됩니다."
+    fi
+else
+    echo "NVIDIA 그래픽 없음 (Mesa 드라이버가 이미 포함되어 있습니다)."
+fi
+
+echo "== [3/4] Flathub 확인"
+flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+echo "== [4/4] Steam 및 도구 설치"
+APPS=(
+    com.valvesoftware.Steam
+    net.davidotek.pupgui2
+    com.valvesoftware.Steam.CompatibilityTool.Proton-GE
+)
+if [ "$ALL" = 1 ]; then
+    APPS+=( com.heroicgameslauncher.hgl net.lutris.Lutris )
+fi
+flatpak install -y --system flathub "${APPS[@]}"
+
+# Steam 이 쓰는 런타임 브랜치에 맞춰 Vulkan 레이어(MangoHud, gamescope) 설치
+runtime=$(flatpak info --system --show-runtime com.valvesoftware.Steam 2>/dev/null || true)
+branch=${runtime##*/}
+if [ -n "$branch" ]; then
+    flatpak install -y --system flathub \
+        "org.freedesktop.Platform.VulkanLayer.MangoHud//${branch}" \
+        "org.freedesktop.Platform.VulkanLayer.gamescope//${branch}" || \
+        echo "경고: Vulkan 레이어 설치 실패 (선택 사항, 게임 실행에는 영향 없음)"
+fi
+
+# Steam 이 외부 드라이브의 게임 라이브러리를 볼 수 있게
+flatpak override --system --filesystem=/media --filesystem=/mnt --filesystem=/run/media com.valvesoftware.Steam
+
+cat <<MSG
+
+완료! 시작 메뉴 > 게임 > Steam 을 실행하세요.
+ - 윈도우 게임: Steam 설정 > 호환 > "모든 타이틀에 Steam Play 사용" 을 켜세요.
+ - Proton-GE 로 바꾸려면 ProtonUp-Qt 를 실행하세요.
+ - 게임 중 FPS 표시: MangoHud (Steam 실행 옵션에 "mangohud %command%").
+MSG

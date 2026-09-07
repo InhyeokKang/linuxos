@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ISO 를 굽지 않고 데스크톱 UI 만 미리 봅니다.
-# Debian/Ubuntu 머신(또는 컨테이너)에 XFCE 와 Haneul 설정 트리를 올리고 Xvfb 에서 띄운 뒤 스크린샷을 찍습니다.
+# Debian/Ubuntu 머신(또는 컨테이너)에 XFCE 와 kiyu 설정 트리를 올리고 Xvfb 에서 띄운 뒤 스크린샷을 찍습니다.
 #   sudo ./scripts/preview-desktop.sh            # 설치 + 세션 시작 + 스크린샷 (out/preview/*.png)
 #   sudo ./scripts/preview-desktop.sh --shots    # 이미 실행 중인 세션에서 스크린샷만
 # 실제 ISO 와의 차이: 호스트 배포판의 XFCE 버전을 쓰고, Firefox/LibreOffice 등 앱은 설치하지 않습니다.
@@ -28,28 +28,28 @@ install_and_overlay() {
     locale-gen >/dev/null
 
     # 라이브 이미지에서 includes 가 하는 일을 그대로 재현
-    cp -a "$A/etc/xdg/xdg-haneul" /etc/xdg/
+    cp -a "$A/etc/xdg/xdg-kiyu" /etc/xdg/
     cp -a "$A/etc/fonts/conf.d/." /etc/fonts/conf.d/
     cp -a "$A/etc/X11/Xsession.d/." /etc/X11/Xsession.d/
-    cp -a "$A/usr/bin/starthaneul" /usr/bin/
-    cp -a "$A/usr/lib/haneul" /usr/lib/
-    cp -a "$A/usr/share/backgrounds/haneul" /usr/share/backgrounds/
-    cp -a "$A/usr/share/icons/hicolor/scalable/apps/haneul.svg" /usr/share/icons/hicolor/scalable/apps/
+    cp -a "$A/usr/bin/startkiyu" /usr/bin/
+    cp -a "$A/usr/lib/kiyu" /usr/lib/
+    cp -a "$A/usr/share/backgrounds/kiyu" /usr/share/backgrounds/
+    cp -a "$A/usr/share/icons/hicolor/scalable/apps/kiyu.svg" /usr/share/icons/hicolor/scalable/apps/
     cp -a "$A/usr/share/applications/." /usr/share/applications/
     cp -a "$A/usr/local/bin/." /usr/local/bin/
-    chmod +x /usr/bin/starthaneul /usr/lib/haneul/* /usr/local/bin/haneul-*
+    chmod +x /usr/bin/startkiyu /usr/lib/kiyu/* /usr/local/bin/kiyu-*
 
     # 훅(0100-identity)이 하는 일 중 UI 에 관계된 부분
-    rsvg-convert -w 3840 -h 2160 /usr/share/backgrounds/haneul/default.svg -o /usr/share/backgrounds/haneul/default.png
+    rsvg-convert -w 3840 -h 2160 /usr/share/backgrounds/kiyu/default.svg -o /usr/share/backgrounds/kiyu/default.png
     mkdir -p /usr/share/pixmaps
-    rsvg-convert -w 48 -h 48 /usr/share/icons/hicolor/scalable/apps/haneul.svg -o /usr/share/pixmaps/haneul.png
+    rsvg-convert -w 48 -h 48 /usr/share/icons/hicolor/scalable/apps/kiyu.svg -o /usr/share/pixmaps/kiyu.png
     default_bg=$(strings /usr/bin/xfdesktop | grep -m1 '^/usr/share/backgrounds/' || true)
     if [ -n "$default_bg" ]; then
         mkdir -p "$(dirname "$default_bg")"
         if [ -e "$default_bg" ] && ! dpkg-divert --list "$default_bg" | grep -q .; then
-            dpkg-divert --package haneul --add --rename --divert "${default_bg}.distrib" "$default_bg"
+            dpkg-divert --package kiyu --add --rename --divert "${default_bg}.distrib" "$default_bg"
         fi
-        cp /usr/share/backgrounds/haneul/default.svg "$default_bg"
+        cp /usr/share/backgrounds/kiyu/default.svg "$default_bg"
     fi
     gtk-update-icon-cache -f -q /usr/share/icons/hicolor || true
     fc-cache -f >/dev/null || true
@@ -68,14 +68,14 @@ start_session() {
     rm -rf "$HOME/.config/xfce4" "$HOME/.cache/sessions" "$HOME/.cache/xfce4"
     cat > "$OUT/session.sh" <<SESSION
 #!/bin/bash
-export DISPLAY=$DISP LANG=ko_KR.UTF-8 LC_ALL=ko_KR.UTF-8 DESKTOP_SESSION=haneul
+export DISPLAY=$DISP LANG=ko_KR.UTF-8 LC_ALL=ko_KR.UTF-8 DESKTOP_SESSION=kiyu
 Xvfb $DISP -screen 0 1600x900x24 -nolisten tcp >/dev/null 2>&1 &
 sleep 2
-. /etc/X11/Xsession.d/15haneul-xdg-config-dirs
+. /etc/X11/Xsession.d/15kiyu-xdg-config-dirs
 eval "\$(dbus-launch --sh-syntax)"
 export DBUS_SESSION_BUS_ADDRESS
 echo "\$DBUS_SESSION_BUS_ADDRESS" > "$OUT/dbus.addr"
-starthaneul >"$OUT/session.log" 2>&1 &
+startkiyu >"$OUT/session.log" 2>&1 &
 SESSION
     chmod +x "$OUT/session.sh"
     nohup setsid "$OUT/session.sh" >/dev/null 2>&1 &
@@ -83,7 +83,7 @@ SESSION
 }
 
 shots() {
-    export DISPLAY=$DISP XDG_CONFIG_DIRS=/etc/xdg/xdg-haneul:/etc/xdg HOME=${HOME:-/root} LANG=ko_KR.UTF-8
+    export DISPLAY=$DISP XDG_CONFIG_DIRS=/etc/xdg/xdg-kiyu:/etc/xdg HOME=${HOME:-/root} LANG=ko_KR.UTF-8
     DBUS_SESSION_BUS_ADDRESS=$(cat "$OUT/dbus.addr"); export DBUS_SESSION_BUS_ADDRESS
     import -window root "$OUT/01-desktop.png"
     xdotool key alt+F1; sleep 2; import -window root "$OUT/02-start-menu.png"; xdotool key Escape; sleep 1

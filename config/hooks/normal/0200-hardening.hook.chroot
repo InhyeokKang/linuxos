@@ -10,7 +10,7 @@ systemctl enable fstrim.timer
 systemctl enable unattended-upgrades.service
 systemctl enable NetworkManager.service
 systemctl enable lightdm.service
-systemctl enable haneul-firstboot.service
+systemctl enable kiyu-firstboot.service
 systemctl set-default graphical.target
 
 # 콘솔에서 Ctrl+Alt+Del 로 재부팅되지 않게 (데스크톱에서는 작업 관리자로 매핑)
