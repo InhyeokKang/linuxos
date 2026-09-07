@@ -34,3 +34,5 @@
 # QEMU 테스트 디스크
 /.qemu/
 /out/
+/base/fedora/out/
+/base/fedora/.build/

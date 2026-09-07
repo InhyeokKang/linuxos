@@ -20,6 +20,10 @@ jobs:
     container:
       image: registry.fedoraproject.org/fedora:44
       options: --privileged
+      volumes:
+        - /mnt:/mnt      # 러너의 큰 임시 디스크 (루트 이미지 5~6 GB 가 여러 번 복사됨)
+    env:
+      KIYU_BUILD_DIR: /mnt/kiyu-build
     steps:
       - name: Install build dependencies
         run: |
@@ -32,7 +36,10 @@ jobs:
       - name: Static checks
         run: ./scripts/check.sh
       - name: Build
-        run: ./scripts/build-fedora.sh
+        run: |
+          df -h / /mnt
+          ./scripts/build-fedora.sh
+          df -h / /mnt
       - name: Collect build info
         if: always()
         run: |
