@@ -67,6 +67,7 @@ boost-locale|(none)|1.90.0|7.fc44|x86_64|(none)|BSL-1.0 AND MIT AND Python-2.0.1
 boost-random|(none)|1.90.0|7.fc44|x86_64|(none)|BSL-1.0 AND MIT AND Python-2.0.1
 boost-regex|(none)|1.90.0|7.fc44|x86_64|(none)|BSL-1.0 AND MIT AND Python-2.0.1
 boost-thread|(none)|1.90.0|7.fc44|x86_64|(none)|BSL-1.0 AND (MIT OR NCSA)
+brightnessctl|(none)|0.5.1|16.fc44|x86_64|(none)|MIT
 btrfs-progs|(none)|7.1|1.fc44|x86_64|(none)|GPL-2.0-only
 bubblewrap|(none)|0.12.0|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 bzip2-libs|(none)|1.0.8|23.fc44|x86_64|(none)|BSD-4-Clause
@@ -356,7 +357,6 @@ kernel-modules-extra|(none)|7.1.13|200.fc44|x86_64|(none)|((GPL-2.0-only WITH Li
 kernel-modules|(none)|7.1.13|200.fc44|x86_64|(none)|((GPL-2.0-only WITH Linux-syscall-note) OR BSD-2-Clause) AND ((GPL-2.0-only WITH Linux-syscall-note) OR BSD-3-Clause) AND ((GPL-2.0-only WITH Linux-syscall-note) OR CDDL-1.0) AND ((GPL-2.0-only WITH Linux-syscall-note) OR Linux-OpenIB) AND ((GPL-2.0-only WITH Linux-syscall-note) OR MIT) AND ((GPL-2.0-or-later WITH Linux-syscall-note) OR BSD-3-Clause) AND ((GPL-2.0-or-later WITH Linux-syscall-note) OR MIT) AND 0BSD AND BSD-2-Clause AND (BSD-2-Clause OR Apache-2.0) AND BSD-3-Clause AND BSD-3-Clause-Clear AND CC0-1.0 AND GFDL-1.1-no-invariants-or-later AND GPL-1.0-or-later AND (GPL-1.0-or-later OR BSD-3-Clause) AND (GPL-1.0-or-later WITH Linux-syscall-note) AND GPL-2.0-only AND (GPL-2.0-only OR Apache-2.0) AND (GPL-2.0-only OR BSD-2-Clause) AND (GPL-2.0-only OR BSD-3-Clause) AND (GPL-2.0-only OR CDDL-1.0) AND (GPL-2.0-only OR GFDL-1.1-no-invariants-or-later) AND (GPL-2.0-only OR GFDL-1.2-no-invariants-only) AND (GPL-2.0-only OR GFDL-1.2-no-invariants-or-later) AND (GPL-2.0-only WITH Linux-syscall-note) AND GPL-2.0-or-later AND (GPL-2.0-or-later OR BSD-2-Clause) AND (GPL-2.0-or-later OR BSD-3-Clause) AND (GPL-2.0-or-later OR CC-BY-4.0) AND (GPL-2.0-or-later WITH GCC-exception-2.0) AND (GPL-2.0-or-later WITH Linux-syscall-note) AND ISC AND LGPL-2.0-or-later AND (LGPL-2.0-or-later OR BSD-2-Clause) AND (LGPL-2.0-or-later WITH Linux-syscall-note) AND LGPL-2.1-only AND (LGPL-2.1-only OR BSD-2-Clause) AND (LGPL-2.1-only WITH Linux-syscall-note) AND LGPL-2.1-or-later AND (LGPL-2.1-or-later WITH Linux-syscall-note) AND (Linux-OpenIB OR GPL-2.0-only) AND (Linux-OpenIB OR GPL-2.0-only OR BSD-2-Clause) AND Linux-man-pages-copyleft AND MIT AND (MIT OR Apache-2.0) AND (MIT OR GPL-2.0-only) AND (MIT OR GPL-2.0-or-later) AND (MIT OR LGPL-2.1-only) AND (MPL-1.1 OR GPL-2.0-only) AND (X11 OR GPL-2.0-only) AND (X11 OR GPL-2.0-or-later) AND Zlib AND (copyleft-next-0.3.1 OR GPL-2.0-or-later)
 kernel|(none)|7.1.13|200.fc44|x86_64|(none)|((GPL-2.0-only WITH Linux-syscall-note) OR BSD-2-Clause) AND ((GPL-2.0-only WITH Linux-syscall-note) OR BSD-3-Clause) AND ((GPL-2.0-only WITH Linux-syscall-note) OR CDDL-1.0) AND ((GPL-2.0-only WITH Linux-syscall-note) OR Linux-OpenIB) AND ((GPL-2.0-only WITH Linux-syscall-note) OR MIT) AND ((GPL-2.0-or-later WITH Linux-syscall-note) OR BSD-3-Clause) AND ((GPL-2.0-or-later WITH Linux-syscall-note) OR MIT) AND 0BSD AND BSD-2-Clause AND (BSD-2-Clause OR Apache-2.0) AND BSD-3-Clause AND BSD-3-Clause-Clear AND CC0-1.0 AND GFDL-1.1-no-invariants-or-later AND GPL-1.0-or-later AND (GPL-1.0-or-later OR BSD-3-Clause) AND (GPL-1.0-or-later WITH Linux-syscall-note) AND GPL-2.0-only AND (GPL-2.0-only OR Apache-2.0) AND (GPL-2.0-only OR BSD-2-Clause) AND (GPL-2.0-only OR BSD-3-Clause) AND (GPL-2.0-only OR CDDL-1.0) AND (GPL-2.0-only OR GFDL-1.1-no-invariants-or-later) AND (GPL-2.0-only OR GFDL-1.2-no-invariants-only) AND (GPL-2.0-only OR GFDL-1.2-no-invariants-or-later) AND (GPL-2.0-only WITH Linux-syscall-note) AND GPL-2.0-or-later AND (GPL-2.0-or-later OR BSD-2-Clause) AND (GPL-2.0-or-later OR BSD-3-Clause) AND (GPL-2.0-or-later OR CC-BY-4.0) AND (GPL-2.0-or-later WITH GCC-exception-2.0) AND (GPL-2.0-or-later WITH Linux-syscall-note) AND ISC AND LGPL-2.0-or-later AND (LGPL-2.0-or-later OR BSD-2-Clause) AND (LGPL-2.0-or-later WITH Linux-syscall-note) AND LGPL-2.1-only AND (LGPL-2.1-only OR BSD-2-Clause) AND (LGPL-2.1-only WITH Linux-syscall-note) AND LGPL-2.1-or-later AND (LGPL-2.1-or-later WITH Linux-syscall-note) AND (Linux-OpenIB OR GPL-2.0-only) AND (Linux-OpenIB OR GPL-2.0-only OR BSD-2-Clause) AND Linux-man-pages-copyleft AND MIT AND (MIT OR Apache-2.0) AND (MIT OR GPL-2.0-only) AND (MIT OR GPL-2.0-or-later) AND (MIT OR LGPL-2.1-only) AND (MPL-1.1 OR GPL-2.0-only) AND (X11 OR GPL-2.0-only) AND (X11 OR GPL-2.0-or-later) AND Zlib AND (copyleft-next-0.3.1 OR GPL-2.0-or-later)
 kexec-tools|(none)|2.0.32|3.fc44|x86_64|(none)|GPL-2.0-only
-keybinder3|(none)|0.3.2|22.fc44|x86_64|(none)|MIT
 keyutils-libs|(none)|1.6.3|7.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later
 kf6-filesystem|(none)|6.29.0|1.fc44|x86_64|(none)|BSD-3-Clause
 kf6-karchive|(none)|6.29.0|1.fc44|x86_64|(none)|LGPL-2.0-or-later AND BSD-2-Clause
@@ -495,6 +495,7 @@ liberation-serif-fonts|1|2.1.5|15.fc44|noarch|(none)|OFL-1.1-RFN
 libetonyek|(none)|0.1.13|2.fc44|x86_64|(none)|MPL-2.0
 libevdev|(none)|1.13.7|1.fc44|x86_64|(none)|MIT
 libevent|(none)|2.1.12|17.fc44|x86_64|(none)|BSD-3-Clause AND ISC AND LicenseRef-Fedora-Public-Domain
+libev|(none)|4.33|15.fc44|x86_64|(none)|BSD-2-Clause OR GPL-2.0-or-later
 libexif|(none)|0.6.26|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 libexttextcat|(none)|3.4.6|13.fc44|x86_64|(none)|BSD-3-Clause
 libfdisk|(none)|2.41.5|1.fc44|x86_64|(none)|LGPL-2.1-or-later
@@ -811,6 +812,7 @@ pciutils|(none)|3.15.0|1.fc44|x86_64|(none)|GPL-2.0-or-later
 pcre2-syntax|(none)|10.47|1.fc44.1|noarch|(none)|BSD-3-Clause AND FSFULLR AND X11 AND GPL-2.0-or-later AND FSFAP AND FSFUL AND GPL-3.0-or-later
 pcre2-utf16|(none)|10.47|1.fc44.1|x86_64|(none)|BSD-3-Clause AND FSFULLR AND X11 AND GPL-2.0-or-later AND FSFAP AND FSFUL AND GPL-3.0-or-later
 pcre2|(none)|10.47|1.fc44.1|x86_64|(none)|BSD-3-Clause AND FSFULLR AND X11 AND GPL-2.0-or-later AND FSFAP AND FSFUL AND GPL-3.0-or-later
+picom|(none)|13|1.fc44|x86_64|(none)|MPL-2.0 AND MIT
 pipewire-alsa|(none)|1.6.8|1.fc44|x86_64|(none)|MIT
 pipewire-libs|(none)|1.6.8|1.fc44|x86_64|(none)|MIT AND GPL-2.0-or-later AND BSD-2-Clause AND LGPL-2.0-or-later
 pipewire-pulseaudio|(none)|1.6.8|1.fc44|x86_64|(none)|MIT
@@ -1039,7 +1041,6 @@ xfce4-docklike-plugin|(none)|0.5.1|1.fc44|x86_64|(none)|GPL-2.0-or-later AND GPL
 xfce4-notifyd|(none)|0.9.7|4.fc44|x86_64|(none)|GPL-2.0-only
 xfce4-panel|(none)|4.20.7|2.fc44|x86_64|(none)|GPL-2.0-or-later AND LicenseRef-Callaway-LGPLv2+
 xfce4-power-manager|(none)|4.20.0|4.fc44|x86_64|(none)|GPL-2.0-or-later
-xfce4-pulseaudio-plugin|(none)|0.5.1|3.fc44|x86_64|(none)|GPL-2.0-or-later
 xfce4-screensaver|(none)|4.20.0|2.fc44|x86_64|(none)|GPL-2.0-only AND LicenseRef-Callaway-LGPLv2
 xfce4-screenshooter|(none)|1.11.2|3.fc44|x86_64|(none)|GPL-2.0-or-later
 xfce4-session|(none)|4.20.3|2.fc44|x86_64|(none)|GPL-2.0-or-later

@@ -1,1 +1,0 @@
--rw-r--r-- 1 runner runner 1650583552 Sep  7 17:14 base/fedora/out/kiyu-0.2.0-x86_64.iso
