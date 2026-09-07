@@ -82,11 +82,11 @@ jobs:
         run: |
           iso=$(ls iso/*.iso | head -1)
           sudo ./scripts/boot-test.sh "$iso" results 150 || true
+          sudo chown -R "$(id -u):$(id -g)" results
           cp build-info/*.packages results/ 2>/dev/null || true
           cp build-info/iso-size.txt results/ 2>/dev/null || true
           tail -n 300 build-info/build.log > results/build-log-tail.txt 2>/dev/null || true
           grep -nE "^E: |Err:|dpkg: error|Unable to locate|hook.*(error|fail)" build-info/build.log > results/build-log-errors.txt 2>/dev/null || true
-          sudo chown -R "$(id -u):$(id -g)" results
           cat results/summary.txt
       - name: Upload boot-test results
         if: always()

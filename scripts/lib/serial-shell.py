@@ -64,7 +64,7 @@ for _ in range(8):
         break
     if wait_for(r"login:", 10):
         send(USER + "\n")
-        if wait_for(r"[Pp]assword:", 10):
+        if wait_for(r"[Pp]assword:|비밀번호:", 10):
             send(PASSWORD + "\n")
         if wait_for(r"\$ ?$|\$ \r?\n?$", 10) or wait_for(r"live@", 5):
             logged_in = True

@@ -19,6 +19,7 @@ console-setup
 keyboard-configuration
 kbd
 sudo
+user-setup
 polkitd
 pkexec
 ca-certificates
