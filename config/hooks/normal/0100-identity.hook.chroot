@@ -46,17 +46,35 @@ if [ -f "${ICON}" ]; then
     rsvg-convert -w 48 -h 48 "${ICON}" -o "/usr/share/pixmaps/${OS_ID}.png"
 fi
 
-# 기본 배경화면: xfdesktop 은 모니터 이름별로 설정을 저장하므로 xfconf 기본값만으로는
-# 첫 로그인에 배경이 보장되지 않는다. 바이너리에 박힌 기본 배경 파일 자체를 우리 것으로 교체.
-default_bg=$(strings /usr/bin/xfdesktop 2>/dev/null | grep -m1 '^/usr/share/backgrounds/' || true)
-if [ -n "${default_bg}" ] && [ -f "${BG}/default.svg" ]; then
-    mkdir -p "$(dirname "${default_bg}")"
-    if [ -e "${default_bg}" ] && ! dpkg-divert --list "${default_bg}" | grep -q .; then
-        dpkg-divert --package "${OS_ID}" --add --rename --divert "${default_bg}.distrib" "${default_bg}"
-    fi
-    cp "${BG}/default.svg" "${default_bg}"
-    echo "default backdrop replaced: ${default_bg}"
+# 기본 배경화면: xfdesktop 4.20 은 사용자가 바꾸기 전까지 xfconf 를 쓰지 않고 컴파일된 기본
+# 배경 파일을 그대로 쓴다 (경로 문자열이 실행 시 조합되어 strings 로도 안 잡힘). 그래서
+# XFCE 기본 배경 파일들을 전부 dpkg-divert 로 비켜 두고 같은 이름으로 우리 배경을 넣는다.
+if [ -d /usr/share/backgrounds/xfce ] && [ -f "${BG}/default.svg" ]; then
+    for f in /usr/share/backgrounds/xfce/*; do
+        [ -f "$f" ] || continue
+        case "$f" in *.distrib) continue ;; esac
+        if ! dpkg-divert --list "$f" | grep -q .; then
+            dpkg-divert --package "${OS_ID}" --add --rename --divert "${f}.distrib" "$f" >/dev/null
+        fi
+        case "$f" in
+            *.svg) cp "${BG}/default.svg" "$f" ;;
+            *)     cp "${BG}/default.png" "$f" ;;   # png/jpg 확장자여도 gdk-pixbuf 는 내용으로 판별
+        esac
+    done
+    echo "xfce default backdrops replaced with ${OS_ID} wallpaper"
 fi
+
+# 패널 플러그인을 패널 프로세스 안에서 실행 (플러그인마다 GTK 를 따로 올리는 wrapper 프로세스 제거,
+# 저사양에서 100MB 안팎 절약). 플러그인 하나가 죽으면 패널이 재시작되는 대가가 있다.
+for plug in whiskermenu pulseaudio power-manager-plugin notification-plugin systray; do
+    d="/usr/share/xfce4/panel/plugins/${plug}.desktop"
+    [ -f "$d" ] || continue
+    if grep -q '^X-XFCE-Internal=' "$d"; then
+        sed -i 's/^X-XFCE-Internal=.*/X-XFCE-Internal=true/' "$d"
+    else
+        printf 'X-XFCE-Internal=true\n' >> "$d"
+    fi
+done
 
 chmod 0755 /usr/bin/starthaneul /usr/lib/${OS_ID}/* /usr/local/bin/* 2>/dev/null || true
 gtk-update-icon-cache -f -q /usr/share/icons/hicolor || true

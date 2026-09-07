@@ -29,6 +29,12 @@
 - LUKS1 기본: GRUB 이 `/boot` 를 해독해야 하는 구성에서 LUKS2 argon2 는 GRUB 버전에 따라 부팅이 안 될 수 있어 검증된 LUKS1 을 씁니다. `/boot` 를 별도 파티션으로 두는 수동 파티셔닝에서는 LUKS2 사용 가능.
 - `mitigations=auto`(기본값) 유지: CPU 취약점 완화를 끄면 빨라지지만 보안 목표와 어긋납니다.
 
+## 라이브 세션과 설치본의 차이
+
+라이브 USB 로 부팅한 세션에서는 `apparmor.service` 가 inactive 로 보입니다. Debian 의 apparmor.service 에
+`ConditionPathExists=!/run/live/overlay/work` 조건이 있어 라이브 overlay 위에서는 프로필을 로드하지 않기 때문입니다.
+커널 LSM 목록에는 apparmor 가 들어 있고(`cat /sys/kernel/security/lsm`), 디스크에 설치한 뒤에는 정상 동작합니다.
+
 ## 사용자가 확인하는 방법
 
 ```
