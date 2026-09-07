@@ -72,8 +72,13 @@ Recommends 를 끄고 빌드하므로(`--apt-recommends false`) 이미지가 작
   panel-1(전체 폭)은 양쪽 확장 구분선 사이에 [시작][고정 앱 + 실행 중 창 (docklike)]만 두어 대칭으로 정확히 가운데,
   panel-2(오른쪽 아래, 배경 투명)가 그 위에 [트레이][빠른 설정][시계][알림][바탕화면 보기]를 얹는다.
   두 패널이 같은 46px 을 예약하므로 창 배치엔 영향이 없다. 배경색은 xfconf background-rgba 이고 다크 모드 스크립트가 panel-1 을 바꾼다.
-- **창**: xfwm4 자체 컴포지팅 대신 picom(xrender) — 둥근 모서리 12px, 부드러운 그림자, 짧은 페이드. CPU 1~3%.
-  유리 블러(glx, dual_kawase)는 GPU 없는 기기에서 비싸므로 기본 OFF, 빠른 설정 "효과" 스위치로 켠다 (`/usr/lib/kiyu/compositor`).
+- **창**: xfwm4 자체 컴포지팅 대신 picom — 둥근 모서리 12px, 부드러운 그림자, 짧은 페이드. `/usr/lib/kiyu/compositor` 가
+  glx 백엔드(GPU 합성)를 먼저 띄우고, GL 이 안 되면 xrender 로 폴백한다 (xrender 는 24비트 창의 둥근 모서리 바깥을 검게
+  남기는 picom 문제가 있어 그때는 모서리를 둥글리지 않는다). xfwm4 테마 "kiyu" 는 Default 테마의 투명 픽셀을 채운 것 —
+  picom 아래에서 투명 픽셀이 검게 찍히기 때문. 유리 블러(dual_kawase)는 기본 OFF, 빠른 설정 "효과" 스위치로 켠다.
+- **파일 탐색기**: Thunar 를 윈도우 탐색기처럼 — 메뉴바 숨김(왼쪽 ⋮), [뒤로][앞으로][위로][홈][주소 경로][검색] 한 줄,
+  자세히 보기(이름 · 수정한 날짜 · 유형 · 크기), 사이드바 즐겨찾기(다운로드·문서·사진·음악·비디오는 `/usr/lib/kiyu/user-setup`
+  이 첫 로그인에 GTK 북마크로 만든다).
 - **빠른 설정** (`apps/kiyu-control`): Wi-Fi/블루투스/다크 모드/효과 토글, 소리·밝기, 배터리. 상주하지 않는 Python GTK 창(열려 있을 때만 ~20 MB).
   소리·전원 패널 애플릿을 대체했고 볼륨 키는 `/usr/lib/kiyu/volume` + OSD 알림이 맡는다.
 - **다크 모드** (`/usr/lib/kiyu/theme`): Adwaita ↔ Adwaita-dark, Papirus ↔ Papirus-Dark, 패널 dark-mode 를 한 번에. gtk.css 는 `@theme_*` 색을 섞어 쓰므로 재시작 없이 따라온다.

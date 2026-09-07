@@ -1,6 +1,9 @@
 #!/bin/sh
 # kiyu 컴포지터 시작: picom 이 있으면 xfwm4 자체 컴포지팅을 끄고 picom (둥근 모서리·그림자)을 띄운다.
-# 효과(블러)는 ~/.config/kiyu/effects=on 일 때만 추가 설정을 합친다. picom 이 없으면 xfwm4 컴포지팅으로 돌아간다.
+#  - 백엔드: glx 를 먼저 시도하고(GPU 합성), 몇 초 안에 죽으면 xrender 로 폴백. xrender 에서는 24비트 창의
+#    둥근 모서리 바깥이 검게 남는 picom 문제가 있어 corner-radius 를 0 으로 둔다.
+#  - 효과(블러)는 ~/.config/kiyu/effects=on 일 때만(그리고 glx 일 때만) 추가 설정을 합친다.
+#  - picom 이 없으면 xfwm4 컴포지팅으로 돌아간다.
 CONF_DIR=/etc/xdg/xdg-kiyu/picom
 STATE="${XDG_CONFIG_HOME:-$HOME/.config}/kiyu"
 mkdir -p "$STATE"
@@ -8,14 +11,29 @@ if ! command -v picom >/dev/null 2>&1; then
     xfconf-query -c xfwm4 -p /general/use_compositing -n -t bool -s true 2>/dev/null
     exit 0
 fi
-# picom 이 이미 돌고 있으면 다시 시작 (효과 전환용)
+# picom 이 이미 돌고 있으면 종료 (효과 전환용 재시작)
 for p in /proc/[0-9]*; do
     [ "$(tr '\0' ' ' < "$p/cmdline" 2>/dev/null | cut -d' ' -f1 | xargs basename 2>/dev/null)" = picom ] && kill "${p#/proc/}" 2>/dev/null
 done
 xfconf-query -c xfwm4 -p /general/use_compositing -n -t bool -s false 2>/dev/null
 CONF="$STATE/picom.conf"
-cat "$CONF_DIR/picom.conf" > "$CONF"
-if [ "$(cat "$STATE/effects" 2>/dev/null)" = on ] && [ -f "$CONF_DIR/effects-on.conf" ]; then
-    cat "$CONF_DIR/effects-on.conf" >> "$CONF"
-fi
+make_conf() {  # $1 backend  $2 corner-radius  $3 effects(on/off)
+    sed -e "s/^backend = .*/backend = \"$1\";/" -e "s/^corner-radius = .*/corner-radius = $2;/" "$CONF_DIR/picom.conf" > "$CONF"
+    [ "$3" = on ] && [ -f "$CONF_DIR/effects-on.conf" ] && cat "$CONF_DIR/effects-on.conf" >> "$CONF"
+}
+EFFECTS=$(cat "$STATE/effects" 2>/dev/null)
+# glx 시도. xfwm4/이전 picom 이 컴포지터 선택권을 아직 놓지 않았으면("Another composite manager") 잠시 기다려 재시도
+i=0
+while [ $i -lt 6 ]; do
+    make_conf glx 12 "$EFFECTS"
+    picom --config "$CONF" >"$STATE/picom.log" 2>&1 &
+    PID=$!
+    sleep 2
+    if kill -0 "$PID" 2>/dev/null; then echo glx > "$STATE/backend"; exit 0; fi
+    grep -q "Another composite manager" "$STATE/picom.log" 2>/dev/null || break
+    i=$((i + 1)); sleep 1
+done
+# glx 실패 → xrender, 둥근 모서리 없음, 블러 없음
+make_conf xrender 0 off
+echo xrender > "$STATE/backend"
 exec picom --config "$CONF" -b

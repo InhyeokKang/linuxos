@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=kiyu user setup
+Exec=/usr/lib/kiyu/user-setup
+NoDisplay=true
+OnlyShowIn=XFCE;

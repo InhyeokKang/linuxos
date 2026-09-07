@@ -74,6 +74,9 @@ for plug in whiskermenu docklike launcher tasklist clock showdesktop separator n
     [ -f "$d" ] || continue
     if grep -q '^X-XFCE-Internal=' "$d"; then sed -i 's/^X-XFCE-Internal=.*/X-XFCE-Internal=true/' "$d"; else printf 'X-XFCE-Internal=true\n' >> "$d"; fi
 done
+# picom 패키지의 자체 자동 시작은 끔 (/usr/lib/kiyu/compositor 가 백엔드 선택 후 띄움)
+f=/etc/xdg/autostart/picom.desktop
+if [ -f "$f" ] && ! grep -q '^Hidden=' "$f"; then echo 'Hidden=true' >> "$f"; fi
 # 프린터 큐 트레이 애플릿 끔 (메모리)
 for f in /etc/xdg/autostart/print-applet.desktop /etc/xdg/autostart/system-config-printer-applet.desktop; do
     if [ -f "$f" ] && ! grep -q '^Hidden=' "$f"; then echo 'Hidden=true' >> "$f"; fi

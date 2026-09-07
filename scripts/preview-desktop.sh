@@ -36,6 +36,8 @@ install_and_overlay() {
     cp -a "$A/usr/bin/startkiyu" /usr/bin/
     cp -a "$A/usr/lib/kiyu" /usr/lib/
     mkdir -p /usr/share/themes && cp -a "$A/usr/share/themes/kiyu" /usr/share/themes/
+    # picom 패키지 자체 자동 시작 끔 (ISO 의 config.sh 와 동일)
+    f=/etc/xdg/autostart/picom.desktop; [ -f "$f" ] && ! grep -q '^Hidden=' "$f" && echo 'Hidden=true' >> "$f"
     # ISO 와 같이 패널 플러그인을 in-process 로 (config.sh 와 동일 목록 + 프리뷰 대체 플러그인)
     for plug in whiskermenu docklike launcher tasklist clock showdesktop separator notification-plugin systray; do
         d="/usr/share/xfce4/panel/plugins/${plug}.desktop"; [ -f "$d" ] || continue

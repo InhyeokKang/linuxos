@@ -1,0 +1,15 @@
+#!/bin/sh
+# 첫 로그인 사용자 설정 (매 로그인마다 실행되지만 이미 되어 있으면 바로 끝남)
+#  - 파일 탐색기 사이드바 즐겨찾기: 다운로드 · 문서 · 사진 · 음악 · 비디오 (윈도우 탐색기의 즐겨찾기처럼)
+B="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/bookmarks"
+[ -s "$B" ] && exit 0   # 비어 있지 않으면 이미 설정됨
+command -v xdg-user-dirs-update >/dev/null 2>&1 && xdg-user-dirs-update >/dev/null 2>&1
+mkdir -p "$(dirname "$B")"
+: > "$B"
+for k in DOWNLOAD DOCUMENTS PICTURES MUSIC VIDEOS; do
+    d=$(xdg-user-dir "$k" 2>/dev/null)
+    [ -n "$d" ] && [ "$d" != "$HOME" ] || continue
+    mkdir -p "$d"
+    echo "file://$d" >> "$B"
+done
+exit 0

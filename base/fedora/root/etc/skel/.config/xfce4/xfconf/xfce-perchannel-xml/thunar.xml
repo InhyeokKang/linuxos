@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 파일 탐색기(Thunar) 를 윈도우 탐색기처럼:
+       메뉴바 숨김(왼쪽 ⋮ 버튼) + [뒤로][앞으로][위로][홈] [주소 경로 버튼] [검색] 도구 모음,
+       자세히 보기(이름 · 수정한 날짜 · 유형 · 크기), 폴더 먼저, 두 번 클릭, 삭제 메뉴,
+       왼쪽 사이드바에 즐겨찾기 폴더(다운로드·문서·사진·음악·비디오 — /usr/lib/kiyu/user-setup 이 첫 로그인에 만듦) -->
 <channel name="thunar" version="1.0">
-  <property name="default-view" type="string" value="ThunarIconView"/>
-  <property name="last-view" type="string" value="ThunarIconView"/>
+  <property name="default-view" type="string" value="ThunarDetailsView"/>
+  <property name="last-view" type="string" value="ThunarDetailsView"/>
+  <property name="last-menubar-visible" type="bool" value="false"/>
   <property name="last-location-bar" type="string" value="ThunarLocationButtons"/>
   <property name="last-side-pane" type="string" value="ThunarShortcutsPane"/>
+  <property name="last-statusbar-visible" type="bool" value="true"/>
   <property name="last-icon-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_NORMAL"/>
+  <property name="last-details-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_SMALLER"/>
+  <property name="last-details-view-visible-columns" type="string" value="THUNAR_COLUMN_DATE_MODIFIED,THUNAR_COLUMN_NAME,THUNAR_COLUMN_SIZE,THUNAR_COLUMN_TYPE"/>
+  <property name="last-details-view-column-order" type="string" value="THUNAR_COLUMN_NAME,THUNAR_COLUMN_DATE_MODIFIED,THUNAR_COLUMN_TYPE,THUNAR_COLUMN_SIZE,THUNAR_COLUMN_DATE_ACCESSED,THUNAR_COLUMN_DATE_CREATED,THUNAR_COLUMN_DATE_DELETED,THUNAR_COLUMN_RECENCY,THUNAR_COLUMN_LOCATION,THUNAR_COLUMN_GROUP,THUNAR_COLUMN_MIME_TYPE,THUNAR_COLUMN_OWNER,THUNAR_COLUMN_PERMISSIONS,THUNAR_COLUMN_SIZE_IN_BYTES,THUNAR_COLUMN_FILE_NAME"/>
+  <property name="last-sort-column" type="string" value="THUNAR_COLUMN_NAME"/>
+  <property name="last-sort-order" type="string" value="GTK_SORT_ASCENDING"/>
+  <property name="misc-date-style" type="string" value="THUNAR_DATE_STYLE_CUSTOM"/>
+  <property name="misc-date-custom-style" type="string" value="%Y-%m-%d %H:%M"/>
   <property name="misc-single-click" type="bool" value="false"/>
   <property name="misc-folders-first" type="bool" value="true"/>
   <property name="misc-show-delete-action" type="bool" value="true"/>
@@ -12,4 +25,5 @@
   <property name="misc-thumbnail-mode" type="string" value="THUNAR_THUMBNAIL_MODE_ONLY_LOCAL"/>
   <property name="misc-volume-management" type="bool" value="true"/>
   <property name="misc-open-new-window-as-tab" type="bool" value="false"/>
+  <property name="misc-folder-item-count" type="string" value="THUNAR_FOLDER_ITEM_COUNT_NEVER"/>
 </channel>

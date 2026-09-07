@@ -56,6 +56,12 @@ infobar.info *, infobar.warning * { color: @kiyu_text; }
 headerbar, .titlebar { background-color: @kiyu_paper; border-bottom: 1px solid @kiyu_border; box-shadow: none; }
 *:link, link, .link { color: @kiyu_accent_dark; }
 
+/* 파일 탐색기 (Thunar): 윈도우 탐색기 느낌 — 도구 모음 한 줄, 주소 경로 버튼은 한 상자 안에, 옅은 사이드바 */
+.thunar toolbar, window.thunar toolbar { padding: 4px 8px; }
+.thunar toolbar button, window.thunar toolbar button { border-color: transparent; background-color: transparent; padding: 4px 6px; }
+.thunar toolbar button:hover { background-color: alpha(@kiyu_accent, 0.10); }
+.thunar treeview.view header button { padding: 4px 8px; border-bottom: 1px solid @kiyu_border; }
+
 /* 바탕화면 아이콘 글자 */
 XfdesktopIconView.view, .XfdesktopIconView.view, XfdesktopIconView, .XfdesktopIconView { color: #2b2a28; text-shadow: 0 0 3px rgba(255,255,255,0.9); }
 XfdesktopIconView.view:selected, .XfdesktopIconView.view:selected, XfdesktopIconView:selected, .XfdesktopIconView:selected {
