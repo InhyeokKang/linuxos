@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Haneul wallpaper
+Exec=/usr/lib/haneul/wallpaper
+NoDisplay=true
+OnlyShowIn=XFCE;

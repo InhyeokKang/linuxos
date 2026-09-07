@@ -53,7 +53,7 @@ COMMON=(-m 2048 -smp 2 -display none -vga std -device virtio-net-pci,netdev=n0 -
 note "== BIOS direct-kernel boot"
 qemu-system-x86_64 "${KVM[@]}" "${COMMON[@]}" -cdrom "$ISO" \
     -kernel "$TMP/vmlinuz" -initrd "$TMP/initrd.img" \
-    -append "boot=live components locales=ko_KR.UTF-8 keyboard-layouts=kr timezone=Asia/Seoul username=live hostname=haneul console=tty0 console=ttyS0,115200 systemd.show_status=1" \
+    -append "boot=live components apparmor=1 security=apparmor locales=ko_KR.UTF-8 keyboard-layouts=kr timezone=Asia/Seoul username=live hostname=haneul console=tty0 console=ttyS0,115200 systemd.show_status=1" \
     -serial "unix:$TMP/serial,server,nowait" -monitor "unix:$TMP/mon1,server,nowait" \
     -pidfile "$TMP/qemu1.pid" >"$OUT/qemu-bios.log" 2>&1 &
 sleep 5

@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 . ./os.conf
 
 # 커널 하드닝 파라미터 (라이브/설치본 공통). 설치본은 etc/default/grub.d 에도 있음.
-KERNEL_HARDENING="slab_nomerge init_on_alloc=1 randomize_kstack_offset=on page_alloc.shuffle=1"
+KERNEL_HARDENING="apparmor=1 security=apparmor slab_nomerge init_on_alloc=1 randomize_kstack_offset=on page_alloc.shuffle=1"
 
 lb config noauto \
     --distribution "${DEBIAN_DIST}" \

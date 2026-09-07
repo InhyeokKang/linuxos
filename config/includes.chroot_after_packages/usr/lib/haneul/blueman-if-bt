@@ -1,0 +1,6 @@
+#!/bin/sh
+# 블루투스 어댑터가 있을 때만 blueman 트레이 애플릿 실행 (없는 기기에서 100MB 절약)
+if [ -d /sys/class/bluetooth ] && [ -n "$(ls -A /sys/class/bluetooth 2>/dev/null)" ]; then
+    exec blueman-applet
+fi
+exit 0

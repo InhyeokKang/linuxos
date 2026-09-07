@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Fcitx 5 (Haneul)
+Exec=sh -c 'command -v fcitx5 >/dev/null && ! pgrep -x fcitx5 >/dev/null && exec fcitx5 -d'
+NoDisplay=true
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-Phase=Applications

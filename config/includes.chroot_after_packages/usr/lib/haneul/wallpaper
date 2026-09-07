@@ -1,0 +1,22 @@
+#!/bin/sh
+# xfdesktop 은 배경을 모니터 이름별 속성에 저장한다. 값이 아직 XFCE 기본 배경이면
+# (사용자가 바꾼 적 없음) Haneul 기본 배경으로 바꾼다. 사용자가 고른 배경은 건드리지 않는다.
+BG=/usr/share/backgrounds/haneul/default.png
+[ -f "$BG" ] || exit 0
+command -v xfconf-query >/dev/null 2>&1 || exit 0
+i=0
+while [ $i -lt 20 ]; do
+    props=$(xfconf-query -c xfce4-desktop -l 2>/dev/null | grep '/last-image$')
+    [ -n "$props" ] && break
+    sleep 1; i=$((i + 1))
+done
+for p in $props; do
+    cur=$(xfconf-query -c xfce4-desktop -p "$p" 2>/dev/null)
+    case "$cur" in
+        ""|/usr/share/backgrounds/xfce/*|/usr/share/images/desktop-base/*)
+            xfconf-query -c xfce4-desktop -p "$p" -s "$BG"
+            xfconf-query -c xfce4-desktop -p "${p%/last-image}/image-style" -n -t int -s 5
+            ;;
+    esac
+done
+exit 0

@@ -9,18 +9,19 @@ deadline = time.time() + float(sys.argv[3] if len(sys.argv) > 3 else 180)
 USER, PASSWORD = "live", "live"
 COMMANDS = [
     "echo '=== os-release'; cat /etc/os-release",
-    "echo '=== uname'; uname -r",
-    "echo '=== memory'; free -m",
-    "echo '=== zram'; zramctl 2>/dev/null || echo none",
-    "echo '=== top rss'; ps -eo rss,comm --sort=-rss | head -15",
+    "echo '=== uname'; uname -r; cat /proc/cmdline",
+    "echo '=== memory'; free -m; grep -E 'MemTotal|MemAvailable|AnonPages|Shmem:|Slab|SUnreclaim|KernelStack|PageTables' /proc/meminfo",
+    "echo '=== zram'; sudo /usr/sbin/zramctl 2>/dev/null || echo none",
+    "echo '=== pss by process (MB)'; sudo sh -c 'for p in /proc/[0-9]*; do c=$(cat $p/comm 2>/dev/null); v=$(awk \"/^Pss:/{s+=\\$2}END{print s+0}\" $p/smaps_rollup 2>/dev/null); [ -n \"$v\" ] && [ \"$v\" -gt 0 ] && echo \"$v $c\"; done | sort -rn | awk \"{t+=\\$1; printf \\\"%6.1f %s\\\\n\\\", \\$1/1024, \\$2} END{printf \\\"TOTAL %.0f MB\\\\n\\\", t/1024}\" | head -30'",
     "echo '=== boot time'; systemd-analyze 2>/dev/null; systemd-analyze blame 2>/dev/null | head -12",
     "echo '=== failed units'; systemctl --failed --no-pager --no-legend",
     "echo '=== services'; for s in lightdm nftables apparmor zramswap unattended-upgrades NetworkManager; do printf '%s: %s\\n' $s $(systemctl is-active $s); done",
-    "echo '=== firewall'; sudo nft list ruleset | head -30",
-    "echo '=== apparmor'; sudo aa-status --json 2>/dev/null | head -c 400; echo",
-    "echo '=== sysctl'; sysctl kernel.kptr_restrict kernel.yama.ptrace_scope kernel.unprivileged_bpf_disabled",
-    "echo '=== cmdline'; cat /proc/cmdline",
-    "echo '=== xsession'; ps -eo comm | grep -E '^(Xorg|lightdm|xfce4-session|xfwm4|xfce4-panel|xfdesktop|xcape|fcitx5)$' | sort | uniq -c",
+    "echo '=== apparmor'; cat /sys/module/apparmor/parameters/enabled 2>&1; cat /sys/kernel/security/lsm 2>&1; echo; systemctl status apparmor --no-pager 2>&1 | head -6; sudo /usr/sbin/aa-status 2>&1 | head -5",
+    "echo '=== firewall'; sudo /usr/sbin/nft list ruleset | head -8",
+    "echo '=== sysctl'; /usr/sbin/sysctl kernel.kptr_restrict kernel.yama.ptrace_scope kernel.unprivileged_bpf_disabled vm.swappiness",
+    "echo '=== xsession'; ps -eo comm | grep -E '^(Xorg|lightdm|xfce4-session|xfwm4|xfce4-panel|xfdesktop|xcape|fcitx5|blueman-applet|applet.py|nm-applet)$' | sort | uniq -c",
+    "echo '=== wallpaper'; xfconf-query -c xfce4-desktop -l -v 2>/dev/null | grep last-image; ls -la /usr/share/backgrounds/xfce/ 2>&1 | head; dpkg-divert --list '*backgrounds*' 2>&1",
+    "echo '=== im'; im-config -m 2>&1 | head -3; cat /etc/xdg/autostart/org.fcitx.Fcitx5.desktop 2>&1 | head -12; env | grep -E 'IM_MODULE|XMODIFIERS'",
     "echo '=== flatpak'; flatpak remotes 2>/dev/null || echo none",
     "echo '=== disk'; df -h / /run/live/medium 2>/dev/null",
     "echo '=== END'",
@@ -76,7 +77,7 @@ for _ in range(8):
 
 log.write(b"\n\n##### SERIAL SHELL: logged_in=%s\n" % str(logged_in).encode())
 if logged_in:
-    send("export PS1='SHELL> '; stty cols 200\n")
+    send("export PS1='SHELL> '; stty cols 200; export DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus\n")
     read_for(2)
     for cmd in COMMANDS:
         if time.time() > deadline:
