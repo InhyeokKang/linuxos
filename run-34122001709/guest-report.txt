@@ -1,0 +1,135 @@
+
+haneul login: live
+비밀번호: 
+Linux haneul 6.12.107+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.107-1 (2026-08-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+[?2004hlive@haneul:~$ 
+
+##### SERIAL SHELL: logged_in=True
+export PS1='SHELL> '; stty cols 200
+[?2004l[?2004hSHELL> echo '=== os-release'; cat /etc/os-release
+[?2004l=== os-release
+PRETTY_NAME="Haneul OS 0.1.0 (saebyeok)"
+NAME="Haneul OS"
+VERSION_ID="0.1.0"
+VERSION="0.1.0 (saebyeok)"
+VERSION_CODENAME=trixie
+ID=haneul
+ID_LIKE=debian
+HOME_URL="https://github.com/inhyeokkang/linuxos"
+SUPPORT_URL="https://github.com/inhyeokkang/linuxos"
+BUG_REPORT_URL="https://github.com/inhyeokkang/linuxos/issues"
+DEBIAN_CODENAME=trixie
+[?2004hSHELL> echo '=== uname'; uname -r
+[?2004l=== uname
+6.12.107+deb13-amd64
+[?2004hSHELL> echo '=== memory'; free -m
+[?2004l=== memory
+               총계         사용        여분      공유    버퍼/캐시    가용
+메모리:         1973         931         294          34         923        1041
+스  왑:          986           0         986
+[?2004hSHELL> echo '=== zram'; zramctl 2>/dev/null || echo none
+[?2004l=== zram
+none
+[?2004hSHELL> echo '=== top rss'; ps -eo rss,comm --sort=-rss | head -15
+[?2004l=== top rss
+  RSS COMMAND
+143212 xfwm4
+112708 blueman-applet
+112328 Xorg
+106628 nm-applet
+100376 xfdesktop
+82644 wrapper-2.0
+80752 xfce4-session
+77800 xfce4-panel
+73396 wrapper-2.0
+73060 wrapper-2.0
+72888 wrapper-2.0
+43880 applet.py
+34396 unattended-upgr
+28604 xfsettingsd
+[?2004hSHELL> echo '=== boot time'; systemd-analyze 2>/dev/null; systemd-analyze blame 2>/dev/null | head -12
+[?2004l=== boot time
+Startup finished in 3.288s (kernel) + 10.134s (userspace) = 13.422s 
+graphical.target reached after 10.128s in userspace.
+4.624s live-config.service
+3.298s ldconfig.service
+2.448s console-setup.service
+1.923s blueman-mechanism.service
+1.477s systemd-binfmt.service
+1.473s dev-sr0.device
+1.222s dev-loop0.device
+ 718ms nftables.service
+ 610ms systemd-tmpfiles-setup.service
+ 576ms systemd-modules-load.service
+ 552ms udisks2.service
+ 521ms systemd-udev-trigger.service
+[?2004hSHELL> echo '=== failed units'; systemctl --failed --no-pager --no-legend
+[?2004l=== failed units
+[?2004hSHELL> echo '=== services'; for s in lightdm nftables apparmor zramswap unattended-upgrades NetworkManager; do printf '%s: %s\n' $s $(systemctl is-active $s); done
+[?2004l=== services
+lightdm: active
+nftables: active
+apparmor: inactive
+zramswap: active
+unattended-upgrades: active
+NetworkManager: active
+[?2004hSHELL> echo '=== firewall'; sudo nft list ruleset | head -30
+[?2004l=== firewall
+table inet filter {
+	chain input {
+		type filter hook input priority filter; policy drop;
+		ct state invalid drop
+		ct state established,related accept
+		iif "lo" accept
+		ip protocol icmp icmp type { destination-unreachable, time-exceeded, parameter-problem } accept
+		ip protocol icmp icmp type echo-request limit rate 5/second burst 5 packets accept
+		icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem, mld-listener-query, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert } accept
+		icmpv6 type echo-request limit rate 5/second burst 5 packets accept
+		ip6 daddr fe80::/64 udp dport 546 accept
+	}
+
+	chain forward {
+		type filter hook forward priority filter; policy drop;
+	}
+
+	chain output {
+		type filter hook output priority filter; policy accept;
+	}
+}
+[?2004hSHELL> echo '=== apparmor'; sudo aa-status --json 2>/dev/null | head -c 400; echo
+[?2004l=== apparmor
+
+[?2004hSHELL> echo '=== sysctl'; sysctl kernel.kptr_restrict kernel.yama.ptrace_scope kernel.unprivileged_bpf_disabled
+[?2004l=== sysctl
+-bash: sysctl: 명령어를 찾을 수 없음
+[?2004hSHELL> echo '=== cmdline'; cat /proc/cmdline
+[?2004l=== cmdline
+boot=live components locales=ko_KR.UTF-8 keyboard-layouts=kr timezone=Asia/Seoul username=live hostname=haneul console=tty0 console=ttyS0,115200 systemd.show_status=1
+[?2004hSHELL> echo '=== xsession'; ps -eo comm | grep -E '^(Xorg|lightdm|xfce4-session|xfwm4|xfce4-panel|xfdesktop|xcape|fcitx5)$' | sort | uniq -c
+[?2004l=== xsession
+      1 Xorg
+      2 lightdm
+      1 xcape
+      1 xfce4-panel
+      1 xfce4-session
+      1 xfdesktop
+      1 xfwm4
+[?2004hSHELL> echo '=== flatpak'; flatpak remotes 2>/dev/null || echo none
+[?2004l=== flatpak
+[1mName    Options[22m
+flathub system
+[?2004hSHELL> echo '=== disk'; df -h / /run/live/medium 2>/dev/null
+[?2004l=== disk
+파일 시스템     크기  사용  가용 사용% 마운트위치
+overlay         987M   30M  958M    3% /
+/dev/sr0        1.3G  1.3G     0  100% /run/live/medium
+[?2004hSHELL> echo '=== END'
+[?2004l=== END
+[?2004hSHELL> 

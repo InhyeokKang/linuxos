@@ -1,7 +1,7 @@
 kvm: yes
 kernel: vmlinuz initrd: initrd.img
 == BIOS direct-kernel boot
-guest shell: login failed
+guest shell: ok
          Starting lightdm.service - Light Display Manager...
 [  OK  ] Reached target graphical.target - Graphical Interface.
 [  OK  ] Started lightdm.service - Light Display Manager.
