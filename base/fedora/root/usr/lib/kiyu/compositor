@@ -22,6 +22,17 @@ make_conf() {  # $1 backend  $2 corner-radius  $3 effects(on/off)
     [ "$3" = on ] && [ -f "$CONF_DIR/effects-on.conf" ] && cat "$CONF_DIR/effects-on.conf" >> "$CONF"
 }
 EFFECTS=$(cat "$STATE/effects" 2>/dev/null)
+finish() {  # 컴포지터가 뜬 뒤 바탕화면을 다시 그리게 해 첫 화면이 검게 남지 않도록
+    echo "$1" > "$STATE/backend"
+    (sleep 2; command -v xfdesktop >/dev/null 2>&1 && xfdesktop --reload) >/dev/null 2>&1 &
+}
+# GPU 가속(렌더 노드)이 없으면 소프트웨어 GL 이라 glx 가 느리고 화면이 검게 남는 문제가 있어 xrender 로 간다
+if ! ls /dev/dri/renderD* >/dev/null 2>&1; then
+    make_conf xrender 0 off
+    picom --config "$CONF" -b
+    finish xrender
+    exit 0
+fi
 # glx 시도. xfwm4/이전 picom 이 컴포지터 선택권을 아직 놓지 않았으면("Another composite manager") 잠시 기다려 재시도
 i=0
 while [ $i -lt 6 ]; do
@@ -29,11 +40,11 @@ while [ $i -lt 6 ]; do
     picom --config "$CONF" >"$STATE/picom.log" 2>&1 &
     PID=$!
     sleep 2
-    if kill -0 "$PID" 2>/dev/null; then echo glx > "$STATE/backend"; exit 0; fi
+    if kill -0 "$PID" 2>/dev/null; then finish glx; exit 0; fi
     grep -q "Another composite manager" "$STATE/picom.log" 2>/dev/null || break
     i=$((i + 1)); sleep 1
 done
 # glx 실패 → xrender, 둥근 모서리 없음, 블러 없음
 make_conf xrender 0 off
-echo xrender > "$STATE/backend"
-exec picom --config "$CONF" -b
+picom --config "$CONF" -b
+finish xrender
