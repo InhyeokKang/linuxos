@@ -14,6 +14,10 @@ clean:
 check:
 	./scripts/check.sh
 
+## 데스크톱 UI 미리보기 (ISO 없이, Xvfb)
+preview:
+	sudo ./scripts/preview-desktop.sh
+
 ## QEMU 로 부팅 (BIOS)
 test:
 	./scripts/test-qemu.sh

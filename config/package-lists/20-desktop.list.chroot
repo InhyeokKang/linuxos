@@ -21,6 +21,7 @@ thunar-archive-plugin
 thunar-volman
 tumbler
 mate-polkit
+xcape
 
 # 로그인 화면
 lightdm
@@ -40,6 +41,7 @@ fonts-crosextra-carlito
 fonts-crosextra-caladea
 fonts-dejavu-core
 librsvg2-bin
+librsvg2-common
 
 # 앱 설치 (Flatpak + 앱스토어, .deb 더블클릭 설치)
 flatpak

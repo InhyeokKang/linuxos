@@ -2,18 +2,28 @@
 
 ## 0.1 – 스캐폴드 (현재)
 
-설정 트리, 정적 검사, 문서 완료. **아직 실제 빌드/부팅 검증 전.** 첫 빌드에서 확인할 것:
+설정 트리, 정적 검사, 문서 완료. 데스크톱 UI 는 `scripts/preview-desktop.sh` (Xvfb) 로 검증했고
+결과는 `docs/screenshots/` 에 있습니다. **ISO 빌드/부팅은 아직 미검증.**
 
-- [ ] 모든 패키지 이름이 trixie 에 존재하는지 (`E: Unable to locate package`)
+Xvfb 프리뷰에서 확인된 것:
+
+- [x] `/etc/xdg/xdg-haneul` 오버라이드 트리가 xfconf 에 병합됨 (패널, 테마, 창 관리자, 단축키)
+- [x] 패널 launcher 플러그인이 절대 경로 `.desktop` 항목을 받아들임
+- [x] Whisker 시작 메뉴 즐겨찾기/세션 버튼, Ctrl+Shift+Esc 작업 관리자, Win+E 탐색기, Win+←/→ 창 스냅, Alt+F4
+- [x] 기본 배경화면: xfdesktop 기본 배경 파일을 dpkg-divert 로 교체 (모니터 이름과 무관하게 첫 로그인부터 적용)
+- [x] `mate-polkit` 에이전트 경로 자동 탐색
+- [x] 발견한 버그 수정: `librsvg2-common` (SVG 아이콘/배경 로더) 누락, Super 단독 바인딩이 Super+화살표를 가로채는 문제 → xcape 로 해결, XDG_CONFIG_DIRS 가 D-Bus 활성화 데몬에 전달되지 않던 문제 → Xsession.d 스크립트 추가
+
+첫 ISO 빌드에서 확인할 것:
+
+- [ ] 모든 패키지 이름이 trixie 에 존재하는지 (`E: Unable to locate package`), 특히 `xcape`, `7zip`, `fcitx5-frontend-qt6`
 - [ ] live-build 버전이 `includes.chroot_before_packages` 를 지원하는지 (bookworm 1:20230502 이상)
 - [ ] `--uefi-secure-boot auto` 로 Secure Boot 켠 VM 에서 부팅
-- [ ] 라이브 자동 로그인, 패널 배치, 단축키, 한글 입력
-- [ ] xfdesktop 이 `monitor0` 기본 배경을 실제 모니터 이름으로 이관하는지 (아니면 훅에서 모니터별 설정 필요)
-- [ ] 패널 launcher 플러그인이 절대 경로 `.desktop` 항목을 받아들이는지
-- [ ] `mate-polkit` 에이전트 경로 (`/usr/lib/haneul/polkit-agent` 후보 목록)
+- [ ] 라이브 자동 로그인, 한글 입력 (fcitx5)
+- [ ] 실제 키보드에서 Win 키 탭 → 시작 메뉴 (xcape; Xvfb 의 합성 키 입력으로는 검증 불가), Win+D 바탕화면 보기
 - [ ] Calamares: 모듈 이름/설정 키가 trixie 의 3.3.x 와 맞는지, BIOS/UEFI 설치, LUKS 설치, 윈도우 듀얼부팅 감지
 - [ ] 설치 후 `live` 사용자 제거, 설치 아이콘 제거, `haneul-firstboot` 재실행
-- [ ] 유휴 RAM 측정 → README 수치 갱신
+- [ ] 유휴 RAM 측정 → README 수치 갱신 (Xvfb 프리뷰에서 데스크톱 프로세스 PSS 합계 약 250 MB)
 
 ## 0.2 – 다듬기
 

@@ -23,6 +23,15 @@ make build      # = sudo ./scripts/build.sh
 - `haneul-0.1.0-amd64.hybrid.iso.sha256`
 - `haneul-0.1.0-amd64.packages` – 포함된 패키지 목록
 
+## ISO 없이 데스크톱 UI 만 보기
+
+```bash
+sudo ./scripts/preview-desktop.sh     # = make preview
+```
+Debian/Ubuntu 머신(컨테이너 가능)에 XFCE 와 Haneul 설정 트리를 올리고 Xvfb 에서 세션을 띄운 뒤
+`out/preview/*.png` 로 스크린샷을 남깁니다. 패널/테마/단축키/메뉴 설정을 빠르게 반복 수정할 때 씁니다.
+호스트 배포판의 XFCE 버전을 쓰므로 실제 ISO 와 세부 차이가 있을 수 있습니다.
+
 ## 테스트
 
 ```bash

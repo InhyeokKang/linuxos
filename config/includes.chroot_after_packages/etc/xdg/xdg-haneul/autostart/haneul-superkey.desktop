@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Super key handler
+Exec=/usr/lib/haneul/superkey
+NoDisplay=true
+OnlyShowIn=XFCE;

@@ -4,7 +4,7 @@
 
 | 윈도우 | Haneul OS | 동작 |
 |---|---|---|
-| `Win` | `Win` | 시작 메뉴 |
+| `Win` | `Win` (혼자 눌렀다 뗌) | 시작 메뉴. `Alt+F1` 도 동일 |
 | `Win+E` | `Win+E` | 파일 탐색기 (Thunar) |
 | `Win+D` | `Win+D` | 바탕화면 보기 |
 | `Win+L` | `Win+L` | 화면 잠금 |

@@ -61,7 +61,7 @@ Recommends 를 끄고 빌드하므로(`--apt-recommends false`) 이미지가 작
 
 - 하단 패널: [시작][탐색기][브라우저][실행 중 창들] … [트레이][소리][전원][시계][알림][바탕화면 보기]
 - 시작 메뉴(Whisker): 검색창 위, 즐겨찾기, 전원 버튼 하단.
-- 단축키: `docs/windows-user-guide.md` 참조. `Super` 단독 = 시작 메뉴.
+- 단축키: `docs/windows-user-guide.md` 참조. `Super` 를 혼자 눌렀다 떼면 시작 메뉴 (xcape 가 Alt+F1 로 변환). Super_L 을 xfsettingsd 에 직접 바인딩하면 xfwm4 의 Super+화살표 단축키가 죽기 때문에 이 방식을 쓴다.
 - 창: 제목 왼쪽 정렬, 최소화/최대화/닫기 오른쪽, 더블클릭 최대화, 가장자리 드래그 스냅(Aero Snap), 작업공간 1개.
 - 바탕화면 아이콘: 내 컴퓨터(파일시스템), 홈, 휴지통, 이동식 드라이브.
 - 폰트: 맑은 고딕/Segoe UI/Arial/Calibri 요청 시 동일 규격 대체 폰트로 자동 매핑 (fontconfig).

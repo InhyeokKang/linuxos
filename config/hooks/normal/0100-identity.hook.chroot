@@ -46,6 +46,18 @@ if [ -f "${ICON}" ]; then
     rsvg-convert -w 48 -h 48 "${ICON}" -o "/usr/share/pixmaps/${OS_ID}.png"
 fi
 
+# 기본 배경화면: xfdesktop 은 모니터 이름별로 설정을 저장하므로 xfconf 기본값만으로는
+# 첫 로그인에 배경이 보장되지 않는다. 바이너리에 박힌 기본 배경 파일 자체를 우리 것으로 교체.
+default_bg=$(strings /usr/bin/xfdesktop 2>/dev/null | grep -m1 '^/usr/share/backgrounds/' || true)
+if [ -n "${default_bg}" ] && [ -f "${BG}/default.svg" ]; then
+    mkdir -p "$(dirname "${default_bg}")"
+    if [ -e "${default_bg}" ] && ! dpkg-divert --list "${default_bg}" | grep -q .; then
+        dpkg-divert --package "${OS_ID}" --add --rename --divert "${default_bg}.distrib" "${default_bg}"
+    fi
+    cp "${BG}/default.svg" "${default_bg}"
+    echo "default backdrop replaced: ${default_bg}"
+fi
+
 chmod 0755 /usr/bin/starthaneul /usr/lib/${OS_ID}/* /usr/local/bin/* 2>/dev/null || true
 gtk-update-icon-cache -f -q /usr/share/icons/hicolor || true
 update-desktop-database -q || true

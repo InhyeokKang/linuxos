@@ -11,6 +11,18 @@ Haneul(하늘) OS 는 Debian 13 을 바탕으로 만든 데스크톱 운영체�
 
 > 이 저장소는 ISO 를 **재현 가능하게 빌드하는 설정 트리**입니다. 바이너리를 커밋하지 않습니다.
 
+## 스크린샷
+
+Xvfb 프리뷰(`make preview`)에서 찍은 실제 세션입니다. 앱 아이콘/번역은 호스트 배포판 기준이라 실제 ISO 와 조금 다를 수 있습니다.
+
+| 바탕화면 | 시작 메뉴 |
+|---|---|
+| ![desktop](docs/screenshots/01-desktop.png) | ![start menu](docs/screenshots/02-start-menu.png) |
+
+| 창 (Arc 테마, 윈도우식 버튼 배치) | Ctrl+Shift+Esc 작업 관리자 |
+|---|---|
+| ![windows](docs/screenshots/03-windows.png) | ![task manager](docs/screenshots/04-task-manager.png) |
+
 ## 빠른 시작
 
 ```bash
@@ -18,6 +30,7 @@ Haneul(하늘) OS 는 Debian 13 을 바탕으로 만든 데스크톱 운영체�
 sudo apt-get install live-build debootstrap squashfs-tools xorriso librsvg2-bin
 git clone https://github.com/inhyeokkang/linuxos.git && cd linuxos
 make check          # 정적 검사 (빌드 불필요)
+make preview        # ISO 없이 데스크톱 UI 미리보기 (Xvfb, 스크린샷 생성)
 make build          # ISO 빌드 (30~90분, 약 10GB 디스크 필요)
 make test           # QEMU 로 부팅 (2 CPU / 2GB RAM 저사양 재현)
 make test-uefi      # UEFI 모드
@@ -68,7 +81,7 @@ docs/                         설계 문서
 
 ## 현재 상태
 
-0.1.0 은 **첫 번째 빌드 가능한 스캐폴드**입니다. 설정 트리와 정적 검사는 완료됐지만, 실제 ISO 빌드와 하드웨어 테스트는 아직 이 저장소의 CI(`Build ISO` 워크플로)나 로컬에서 직접 돌려야 합니다. 알려진 검증 항목은 [docs/roadmap.md](docs/roadmap.md) 에 있습니다.
+0.1.0 은 **첫 번째 빌드 가능한 스캐폴드**입니다. 설정 트리, 정적 검사, 데스크톱 UI(Xvfb 프리뷰)까지 확인했지만, 실제 ISO 빌드와 하드웨어 테스트는 아직 이 저장소의 CI(`Build ISO` 워크플로)나 로컬에서 직접 돌려야 합니다. 알려진 검증 항목은 [docs/roadmap.md](docs/roadmap.md) 에 있습니다.
 
 ## 라이선스
 

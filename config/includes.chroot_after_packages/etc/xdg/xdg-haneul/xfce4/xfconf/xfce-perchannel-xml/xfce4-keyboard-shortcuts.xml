@@ -3,9 +3,10 @@
 <channel name="xfce4-keyboard-shortcuts" version="1.0">
   <property name="commands" type="empty">
     <property name="default" type="empty">
-      <!-- Win 키: 시작 메뉴 -->
-      <property name="Super_L" type="string" value="xfce4-popup-whiskermenu"/>
-      <property name="Super_R" type="string" value="xfce4-popup-whiskermenu"/>
+      <!-- Win 키 단독: 시작 메뉴. Super_L 을 직접 바인딩하면 xfsettingsd 가 키를 잡아
+           xfwm4 의 Super+화살표 단축키가 죽는다. 대신 xcape 가 "Super 탭" 을 Alt+F1 로 바꿔 준다
+           (/usr/lib/haneul/superkey). -->
+      <property name="&lt;Alt&gt;F1" type="string" value="xfce4-popup-whiskermenu"/>
       <!-- Win+E: 파일 탐색기 -->
       <property name="&lt;Super&gt;e" type="string" value="thunar"/>
       <!-- Win+R: 실행 -->
