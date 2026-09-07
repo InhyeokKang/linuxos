@@ -1,0 +1,5 @@
+# kiyu 기본 프로그램 (Xfce 선호 프로그램)
+WebBrowser=taengja
+FileManager=Thunar
+TerminalEmulator=xfce4-terminal
+MailReader=

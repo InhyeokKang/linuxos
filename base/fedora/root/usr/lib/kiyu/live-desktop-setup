@@ -14,6 +14,11 @@ if [ -f /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ] && 
     fi
     (sleep 2; xfce4-panel -r) >/dev/null 2>&1 &
 fi
+# livesys 가 helpers.rc 에 WebBrowser=firefox 를 써 두므로 kiyu 기본값(탱자)으로 되돌림
+if [ -f /etc/xdg/xdg-kiyu/xfce4/helpers.rc ]; then
+    mkdir -p "$HOME/.config/xfce4"
+    cp /etc/xdg/xdg-kiyu/xfce4/helpers.rc "$HOME/.config/xfce4/helpers.rc"
+fi
 command -v xdg-user-dir >/dev/null 2>&1 && dest="$(xdg-user-dir DESKTOP)" || dest="$HOME/Desktop"
 mkdir -p "$dest"
 src=/usr/share/applications/kiyu-install.desktop
