@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- kiyu 업데이트 아이콘: 둥근 화살표 -->
+  <path d="M128 40 A88 88 0 1 1 52 84" fill="none" stroke="#f47c0c" stroke-width="22" stroke-linecap="round"/>
+  <path d="M40 44 L56 96 L108 82 Z" fill="#ff9a1c"/>
+  <circle cx="128" cy="128" r="26" fill="#ffd36a"/>
+</svg>

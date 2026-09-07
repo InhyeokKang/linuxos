@@ -195,6 +195,9 @@
     <package name="xdg-desktop-portal"/>
     <package name="xdg-desktop-portal-gtk"/>
     <package name="gnome-software"/>
+    <!-- 설정 > 업데이트 (kiyu-update) 가 쓰는 PackageKit -->
+    <package name="PackageKit"/>
+    <package name="PackageKit-glib"/>
 
     <!-- 기본 앱 -->
     <package name="mousepad"/>

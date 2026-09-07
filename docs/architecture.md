@@ -76,6 +76,9 @@ Recommends 를 끄고 빌드하므로(`--apt-recommends false`) 이미지가 작
   glx 백엔드(GPU 합성)를 먼저 띄우고, GL 이 안 되면 xrender 로 폴백한다 (xrender 는 24비트 창의 둥근 모서리 바깥을 검게
   남기는 picom 문제가 있어 그때는 모서리를 둥글리지 않는다). xfwm4 테마 "kiyu" 는 Default 테마의 투명 픽셀을 채운 것 —
   picom 아래에서 투명 픽셀이 검게 찍히기 때문. 유리 블러(dual_kawase)는 기본 OFF, 빠른 설정 "효과" 스위치로 켠다.
+- **업데이트** (`apps/kiyu-update`): 설정 > 업데이트. PackageKit(GLib 바인딩)으로 확인·다운로드·설치 진행률을 보여 주고 Flatpak 도 함께
+  갱신한다. polkit 규칙(`50-kiyu-update.rules`)으로 로그인한 wheel 사용자는 암호 없이 진행. 커널·systemd·glibc 가 바뀌면
+  [지금 다시 시작] 을 띄운다. 무인 보안 업데이트(dnf5-automatic)는 그대로 병행.
 - **파일 탐색기**: Thunar 를 윈도우 탐색기처럼 — 메뉴바 숨김(왼쪽 ⋮), [뒤로][앞으로][위로][홈][주소 경로][검색] 한 줄,
   자세히 보기(이름 · 수정한 날짜 · 유형 · 크기), 사이드바 즐겨찾기(다운로드·문서·사진·음악·비디오는 `/usr/lib/kiyu/user-setup`
   이 첫 로그인에 GTK 북마크로 만든다).

@@ -1,0 +1,9 @@
+// kiyu: 로컬에서 로그인한 관리자(wheel)는 암호 없이 업데이트 확인·설치 (설정 > 업데이트)
+polkit.addRule(function(action, subject) {
+    if ((action.id == "org.freedesktop.packagekit.system-update" ||
+         action.id == "org.freedesktop.packagekit.system-sources-refresh" ||
+         action.id == "org.freedesktop.packagekit.upgrade-system") &&
+        subject.active && subject.local && subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});

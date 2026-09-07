@@ -45,6 +45,8 @@ install_and_overlay() {
     done
     mkdir -p /usr/lib/kiyu-control && cp -a apps/kiyu-control/kiyu-control.py /usr/lib/kiyu-control/ && cp -a apps/kiyu-control/kiyu-control /usr/bin/
     cp -a branding/control-icon.svg /usr/share/icons/hicolor/scalable/apps/kiyu-control.svg
+    mkdir -p /usr/lib/kiyu-update && cp -a apps/kiyu-update/kiyu-update.py /usr/lib/kiyu-update/ && cp -a apps/kiyu-update/kiyu-update /usr/bin/ && cp -a apps/kiyu-update/kiyu-update.desktop /usr/share/applications/
+    cp -a branding/update-icon.svg /usr/share/icons/hicolor/scalable/apps/kiyu-update.svg
     cp -a "$A/usr/share/backgrounds/kiyu" /usr/share/backgrounds/
     cp -a "$A/usr/share/icons/hicolor/scalable/apps/kiyu.svg" /usr/share/icons/hicolor/scalable/apps/
     cp -a branding/taengja-icon.svg /usr/share/icons/hicolor/scalable/apps/taengja.svg

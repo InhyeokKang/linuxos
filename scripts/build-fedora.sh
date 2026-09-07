@@ -69,6 +69,12 @@ cp apps/kiyu-control/kiyu-control.py "$WORK/root/usr/lib/kiyu-control/"
 cp apps/kiyu-control/kiyu-control "$WORK/root/usr/bin/kiyu-control"
 cp branding/control-icon.svg "$WORK/root/usr/share/icons/hicolor/scalable/apps/kiyu-control.svg"
 chmod 0755 "$WORK/root/usr/bin/kiyu-control" "$WORK/root/usr/lib/kiyu-control/kiyu-control.py"
+mkdir -p "$WORK/root/usr/lib/kiyu-update"
+cp apps/kiyu-update/kiyu-update.py "$WORK/root/usr/lib/kiyu-update/"
+cp apps/kiyu-update/kiyu-update "$WORK/root/usr/bin/kiyu-update"
+cp apps/kiyu-update/kiyu-update.desktop "$WORK/root/usr/share/applications/kiyu-update.desktop"
+cp branding/update-icon.svg "$WORK/root/usr/share/icons/hicolor/scalable/apps/kiyu-update.svg"
+chmod 0755 "$WORK/root/usr/bin/kiyu-update" "$WORK/root/usr/lib/kiyu-update/kiyu-update.py"
 
 KEYS=()
 k="/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-${FEDORA_RELEASE}-primary"

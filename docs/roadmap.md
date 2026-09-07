@@ -5,7 +5,8 @@
 - [x] Fedora 44 + kiwi-ng 라이브 ISO, BIOS/UEFI(Secure Boot) 부팅, SELinux enforcing, nftables
 - [x] 탱자 브라우저 (WebKitGTK), Super 키 시작 메뉴, docklike 작업표시줄
 - [x] 새벽 배경 + 가운데 정렬 작업표시줄 + picom 둥근 창 + 빠른 설정(다크 모드·효과) — Xvfb 프리뷰 검증, ISO 검증 대기
-- [ ] 실제 ISO 에서 picom/빠른 설정/docklike 확인, 메모리 재측정
+- [x] 설정 > 업데이트 (kiyu-update, PackageKit + Flatpak) — 프리뷰 UI 검증, 실제 ISO 검증 대기
+- [ ] 실제 ISO 에서 picom/빠른 설정/docklike/업데이트 확인, 메모리 재측정
 - [ ] 바탕화면 시계·달력 위젯(선택), 통합 검색 런처
 
 ## 0.1 – 스캐폴드 (현재)

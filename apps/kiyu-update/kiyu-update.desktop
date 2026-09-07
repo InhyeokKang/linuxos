@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=업데이트
+Name[en]=Update
+Comment=시스템과 앱 업데이트 확인, 다운로드, 설치
+Comment[en]=Check, download and install system and app updates
+Exec=kiyu-update
+Icon=kiyu-update
+Categories=Settings;System;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
+Keywords=update;upgrade;업데이트;업그레이드;
+StartupNotify=true
