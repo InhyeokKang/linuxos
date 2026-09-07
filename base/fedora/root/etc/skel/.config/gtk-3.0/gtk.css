@@ -1,17 +1,65 @@
-/* kiyu: 흰 배경화면 위에서 바탕화면 아이콘 글자가 보이도록 (xfdesktop 전용 셀렉터). GTK 는 /etc 가 아니라 ~/.config/gtk-3.0/gtk.css 만 읽으므로 /etc/skel 로 배포 */
-XfdesktopIconView.view,
-.XfdesktopIconView.view,
-XfdesktopIconView,
-.XfdesktopIconView {
+/* kiyu 룩 — 사양에 영향 없는 시각 요소만: 둥근 모서리, 강조색, 블러 없는 반투명, 밝은 테두리.
+   GTK 는 /etc 가 아니라 ~/.config/gtk-3.0/gtk.css 만 읽으므로 /etc/skel 로 배포 */
+@define-color kiyu_accent #f47c0c;
+@define-color kiyu_accent_dark #d96a08;
+@define-color kiyu_paper #f7f3ec;
+
+/* 바탕화면 아이콘 글자 (밝은 배경) */
+XfdesktopIconView.view, .XfdesktopIconView.view, XfdesktopIconView, .XfdesktopIconView {
+    color: #2b2b2b; text-shadow: 0 0 3px rgba(255,255,255,0.9);
+}
+XfdesktopIconView.view:selected, .XfdesktopIconView.view:selected, XfdesktopIconView:selected, .XfdesktopIconView:selected {
+    color: #ffffff; background-color: alpha(@kiyu_accent, 0.85); border-radius: 6px; text-shadow: none;
+}
+
+/* 강조색: 선택, 포커스, 스위치, 진행 막대 */
+*:selected, *:selected:focus, treeview.view:selected, row:selected, row:selected:focus,
+.view:selected, iconview:selected, calendar:selected, label selection, entry selection {
+    background-color: @kiyu_accent; color: #ffffff;
+}
+entry:focus, entry.flat:focus, spinbutton:focus { border-color: @kiyu_accent; box-shadow: inset 0 0 0 1px alpha(@kiyu_accent, 0.35); }
+switch:checked { background-color: @kiyu_accent; border-color: @kiyu_accent_dark; }
+switch:checked slider { border-color: @kiyu_accent_dark; }
+check:checked, radio:checked, check:indeterminate, radio:indeterminate {
+    background-color: @kiyu_accent; border-color: @kiyu_accent_dark; color: #ffffff;
+}
+progressbar progress, scale highlight, scale trough highlight, levelbar block.filled {
+    background-color: @kiyu_accent; border-color: @kiyu_accent_dark;
+}
+button.suggested-action, button.suggested-action:hover { background-color: @kiyu_accent; border-color: @kiyu_accent_dark; color: #ffffff; }
+notebook > header > tabs > tab:checked { box-shadow: inset 0 -2px @kiyu_accent; }
+*:link, link, .link { color: @kiyu_accent_dark; }
+
+/* 둥근 모서리 */
+button, entry, spinbutton, combobox button, searchbar entry { border-radius: 8px; }
+menu, .menu, .context-menu, popover, popover.background, .popover, tooltip, .tooltip {
+    border-radius: 12px; border: 1px solid rgba(255,255,255,0.55);
+}
+menu, .menu, .context-menu { padding: 6px; }
+menuitem { border-radius: 6px; padding: 5px 8px; }
+notebook > header > tabs > tab { border-radius: 8px 8px 0 0; }
+frame > border, .frame { border-radius: 8px; }
+scrolledwindow.frame { border-radius: 8px; }
+infobar { border-radius: 8px; }
+.csd.popup decoration { border-radius: 12px; }
+
+/* 작업표시줄: 블러 없는 반투명 크림, 위쪽 밝은 선, 윗모서리 둥글게 */
+.xfce4-panel {
+    background-color: rgba(247, 243, 236, 0.88);
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
     color: #2b2b2b;
-    text-shadow: 0 0 3px rgba(255, 255, 255, 0.9);
 }
-XfdesktopIconView.view:selected,
-.XfdesktopIconView.view:selected,
-XfdesktopIconView:selected,
-.XfdesktopIconView:selected {
-    color: #ffffff;
-    background-color: rgba(244, 124, 12, 0.85);
-    border-radius: 4px;
-    text-shadow: none;
+.xfce4-panel button { border-radius: 8px; }
+.xfce4-panel #whiskermenu-button { border-radius: 8px; }
+.xfce4-panel #whiskermenu-button:checked, .xfce4-panel button:checked { background-color: alpha(@kiyu_accent, 0.22); }
+
+/* 시작 메뉴 */
+#whiskermenu-window, #whiskermenu-window.background {
+    border-radius: 14px; border: 1px solid rgba(255,255,255,0.6);
+    background-color: rgba(247, 243, 236, 0.94);
 }
+#whiskermenu-window entry { border-radius: 20px; }
+#whiskermenu-window treeview.view:selected, #whiskermenu-window .view:selected { background-color: @kiyu_accent; color: #ffffff; }
+
+/* 알림 */
+#XfceNotifyWindow { border-radius: 12px; border: 1px solid rgba(255,255,255,0.6); }

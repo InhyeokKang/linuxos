@@ -27,9 +27,14 @@
     <property name="zoom_desktop" type="bool" value="true"/>
     <property name="use_compositing" type="bool" value="true"/>
     <property name="vblank_mode" type="string" value="auto"/>
-    <property name="show_frame_shadow" type="bool" value="false"/>
-    <property name="show_popup_shadow" type="bool" value="false"/>
+    <property name="show_frame_shadow" type="bool" value="true"/>
+    <property name="show_popup_shadow" type="bool" value="true"/>
     <property name="show_dock_shadow" type="bool" value="false"/>
+    <property name="shadow_opacity" type="int" value="35"/>
+    <property name="shadow_delta_height" type="int" value="4"/>
+    <property name="shadow_delta_width" type="int" value="4"/>
+    <property name="shadow_delta_x" type="int" value="0"/>
+    <property name="shadow_delta_y" type="int" value="6"/>
     <property name="frame_opacity" type="int" value="100"/>
     <property name="inactive_opacity" type="int" value="100"/>
     <property name="move_opacity" type="int" value="100"/>
