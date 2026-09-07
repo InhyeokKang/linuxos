@@ -1,12 +1,15 @@
 name: Build ISO
 
 # 수동 실행 (Actions 탭 > Build ISO > Run workflow), 또는 v* 태그 푸시,
-# 또는 이 워크플로 파일 자체가 바뀐 푸시. 40~90분 소요.
+# 또는 이 워크플로 파일 자체가 바뀐 푸시. 빌드 약 20분 + 부팅 테스트 약 10분.
 on:
   workflow_dispatch:
   push:
     tags: ['v*']
     paths: ['.github/workflows/build-iso.yml']
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -28,6 +31,14 @@ jobs:
         run: ./scripts/check.sh
       - name: Build
         run: ./scripts/build.sh
+      - name: Collect build info
+        if: always()
+        run: |
+          mkdir -p build-info
+          cp build.log build-info/ 2>/dev/null || true
+          cp ./*.packages build-info/ 2>/dev/null || true
+          cp ./*.iso.sha256 build-info/ 2>/dev/null || true
+          ls -la ./*.iso > build-info/iso-size.txt 2>/dev/null || true
       - name: Upload ISO
         uses: actions/upload-artifact@v4
         with:
@@ -38,9 +49,69 @@ jobs:
             *.packages
           if-no-files-found: error
           compression-level: 0
-      - name: Upload build log on failure
-        if: failure()
+      - name: Upload build info
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-log
-          path: build.log
+          name: build-info
+          path: build-info/
+
+  boot-test:
+    name: QEMU boot test (BIOS + UEFI)
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install QEMU
+        run: |
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            qemu-system-x86 ovmf imagemagick
+          ls -la /dev/kvm || true
+      - uses: actions/download-artifact@v4
+        with:
+          name: haneul-iso
+          path: iso
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-info
+          path: build-info
+      - name: Boot the ISO
+        run: |
+          iso=$(ls iso/*.iso | head -1)
+          sudo ./scripts/boot-test.sh "$iso" results 150 || true
+          cp build-info/*.packages results/ 2>/dev/null || true
+          cp build-info/iso-size.txt results/ 2>/dev/null || true
+          tail -n 300 build-info/build.log > results/build-log-tail.txt 2>/dev/null || true
+          grep -nE "^E: |Err:|dpkg: error|Unable to locate|hook.*(error|fail)" build-info/build.log > results/build-log-errors.txt 2>/dev/null || true
+          sudo chown -R "$(id -u):$(id -g)" results
+          cat results/summary.txt
+      - name: Upload boot-test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: boot-test
+          path: results/
+      - name: Publish results to ci-results branch
+        if: always()
+        env:
+          RUN: ${{ github.run_id }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -rf /tmp/ci-results && mkdir -p /tmp/ci-results
+          cp -r results/. /tmp/ci-results/
+          git fetch origin ci-results && git checkout -B ci-results origin/ci-results || git checkout --orphan ci-results
+          git rm -rfq . >/dev/null 2>&1 || true
+          rm -rf ./* 
+          mkdir -p "run-$RUN"
+          cp -r /tmp/ci-results/. "run-$RUN/"
+          find "run-$RUN" -name '*.ppm' -delete
+          printf 'run: %s\nsha: %s\ndate: %s\n' "$RUN" "$SHA" "$(date -u +%FT%TZ)" > "run-$RUN/RUN.txt"
+          ln -sfn "run-$RUN" latest
+          git add -A
+          git commit -qm "boot-test results for run $RUN ($SHA)" || echo "nothing to commit"
+          git push -f origin ci-results
