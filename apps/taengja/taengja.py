@@ -1,11 +1,12 @@
 #!/usr/bin/python3
-# kiyu 브라우저 — 프로토타입 (v0)
+# 탱자 (taengja) — kiyu 의 웹 브라우저, 프로토타입 (v0)
 #
 # 엔진: WebKitGTK (Fedora/Debian 이 보안 패치를 배포). 이 파일은 그 위의 "브라우저" 부분:
 # 창/탭/주소창, 보안 기본값(샌드박스, 추적 방지, 서드파티 쿠키 차단, 추적기 차단 목록, 권한 기본 거부),
 # 저사양 튜닝(탭별 프로세스 수 제한, 메모리 상한, 필요할 때만 GPU), 윈도우/크롬식 단축키, 한국어 UI.
 #
 # 의존: python3-gobject, gtk3, webkit2gtk4.1 (Fedora) / python3-gi, gir1.2-webkit2-4.1 (Debian)
+# 이름: 탱자(trifoliate orange) — kiyu(귤) 의 형제 과일
 import json
 import os
 import sys
@@ -17,12 +18,12 @@ gi.require_version("Gtk", "3.0")
 gi.require_version("WebKit2", "4.1")
 from gi.repository import Gdk, Gio, GLib, Gtk, WebKit2  # noqa: E402
 
-APP_ID = "org.kiyu.Browser"
-APP_NAME = "kiyu 브라우저"
+APP_ID = "org.kiyu.Taengja"
+APP_NAME = "탱자"
 VERSION = "0.1.0"
-CONFIG_DIR = os.path.join(GLib.get_user_config_dir(), "kiyu-browser")
-DATA_DIR = os.path.join(GLib.get_user_data_dir(), "kiyu-browser")
-CACHE_DIR = os.path.join(GLib.get_user_cache_dir(), "kiyu-browser")
+CONFIG_DIR = os.path.join(GLib.get_user_config_dir(), "taengja")
+DATA_DIR = os.path.join(GLib.get_user_data_dir(), "taengja")
+CACHE_DIR = os.path.join(GLib.get_user_cache_dir(), "taengja")
 
 SEARCH_ENGINES = {
     "duckduckgo": ("DuckDuckGo", "https://duckduckgo.com/?q={}"),
@@ -39,7 +40,7 @@ DEFAULT_CONFIG = {
 }
 
 # 추적기/광고 차단 목록 (WebKit content-blocker 규칙). v0 는 대표적인 추적 도메인만 내장.
-# 이후 EasyPrivacy 등을 빌드 시 변환해 /usr/share/kiyu-browser/filters.json 로 제공 예정.
+# 이후 EasyPrivacy 등을 빌드 시 변환해 /usr/share/taengja/filters.json 로 제공 예정.
 TRACKER_DOMAINS = [
     "google-analytics.com", "googletagmanager.com", "googletagservices.com", "googlesyndication.com",
     "doubleclick.net", "googleadservices.com", "adservice.google.com", "connect.facebook.net",
@@ -70,7 +71,7 @@ def _filter_rules():
     return json.dumps(rules)
 
 
-HOME_HTML = """<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>kiyu</title>
+HOME_HTML = """<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>새 탭</title>
 <style>
  body{margin:0;font-family:"Noto Sans","Noto Sans CJK KR",sans-serif;background:linear-gradient(#f7f3ec,#ebe4d6);
       color:#333;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -208,7 +209,7 @@ class Browser(Gtk.Application):
                 for view in self.window.views():
                     view.get_user_content_manager().add_filter(self.content_filter)
         except GLib.Error as e:
-            print("kiyu-browser: 필터 컴파일 실패:", e, file=sys.stderr)
+            print("taengja: 필터 컴파일 실패:", e, file=sys.stderr)
 
     def _on_kiyu_scheme(self, request):
         uri = request.get_uri()
@@ -303,7 +304,7 @@ class BrowserWindow(Gtk.ApplicationWindow):
         super().__init__(application=app, title=APP_NAME)
         self.app = app
         self.set_default_size(1200, 800)
-        self.set_icon_name("kiyu-browser")
+        self.set_icon_name("taengja")
         self._build_ui()
 
     # ---------- UI ----------
@@ -398,7 +399,7 @@ class BrowserWindow(Gtk.ApplicationWindow):
         box.pack_start(self.bm_box, False, False, 0)
         box.pack_start(Gtk.Separator(), False, False, 4)
 
-        for label, action in (("다운로드 폴더 열기", self._open_downloads), ("kiyu 브라우저 정보", self._about)):
+        for label, action in (("다운로드 폴더 열기", self._open_downloads), ("탱자 정보", self._about)):
             b = Gtk.ModelButton(text=label)
             b.connect("clicked", lambda _b, a=action: (pop.popdown(), a()))
             box.pack_start(b, False, False, 0)
@@ -434,7 +435,7 @@ class BrowserWindow(Gtk.ApplicationWindow):
         d = Gtk.AboutDialog(transient_for=self, program_name=APP_NAME, version=VERSION,
                             comments=f"WebKitGTK {WebKit2.get_major_version()}.{WebKit2.get_minor_version()}.{WebKit2.get_micro_version()} 엔진\n"
                                      "샌드박스, 추적 방지, 서드파티 쿠키 차단, 추적기 차단 기본 적용",
-                            website="https://github.com/inhyeokkang/linuxos", logo_icon_name="kiyu")
+                            website="https://github.com/inhyeokkang/linuxos", logo_icon_name="taengja")
         d.run()
         d.destroy()
 
@@ -465,7 +466,7 @@ class BrowserWindow(Gtk.ApplicationWindow):
         s.set_hardware_acceleration_policy(WebKit2.HardwareAccelerationPolicy.ON_DEMAND)
         s.set_default_font_family("Noto Sans")
         s.set_default_charset("utf-8")
-        s.set_user_agent_with_application_details("kiyu", VERSION)
+        s.set_user_agent_with_application_details("Taengja", VERSION)
         view.set_zoom_level(self.app.config["zoom"])
         if self.app.content_filter is not None:
             view.get_user_content_manager().add_filter(self.app.content_filter)
@@ -683,6 +684,6 @@ class BrowserWindow(Gtk.ApplicationWindow):
 
 
 if __name__ == "__main__":
-    GLib.set_prgname("kiyu-browser")
+    GLib.set_prgname("taengja")
     GLib.set_application_name(APP_NAME)
     sys.exit(Browser().run(sys.argv))

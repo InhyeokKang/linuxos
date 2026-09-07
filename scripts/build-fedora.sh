@@ -57,13 +57,13 @@ cp branding/wallpaper.svg "$WORK/root/usr/share/backgrounds/${OS_ID}/default.svg
 cp branding/logo.svg "$WORK/root/usr/share/icons/hicolor/scalable/apps/${OS_ID}.svg"
 
 # 자체 앱 (apps/) 을 오버레이에 배치
-mkdir -p "$WORK/root/usr/src/${OS_ID}" "$WORK/root/usr/lib/${OS_ID}-browser" "$WORK/root/usr/bin" "$WORK/root/usr/share/applications" "$WORK/root/usr/share/icons/hicolor/scalable/apps"
+mkdir -p "$WORK/root/usr/src/${OS_ID}" "$WORK/root/usr/lib/taengja" "$WORK/root/usr/bin" "$WORK/root/usr/share/applications" "$WORK/root/usr/share/icons/hicolor/scalable/apps"
 cp apps/kiyu-superkey/kiyu-superkey.c "$WORK/root/usr/src/${OS_ID}/"
-cp apps/kiyu-browser/kiyu-browser.py "$WORK/root/usr/lib/${OS_ID}-browser/"
-cp apps/kiyu-browser/kiyu-browser "$WORK/root/usr/bin/${OS_ID}-browser"
-cp apps/kiyu-browser/kiyu-browser.desktop "$WORK/root/usr/share/applications/${OS_ID}-browser.desktop"
-cp branding/browser-icon.svg "$WORK/root/usr/share/icons/hicolor/scalable/apps/${OS_ID}-browser.svg"
-chmod 0755 "$WORK/root/usr/bin/${OS_ID}-browser" "$WORK/root/usr/lib/${OS_ID}-browser/kiyu-browser.py"
+cp apps/taengja/taengja.py "$WORK/root/usr/lib/taengja/"
+cp apps/taengja/taengja "$WORK/root/usr/bin/taengja"
+cp apps/taengja/taengja.desktop "$WORK/root/usr/share/applications/taengja.desktop"
+cp branding/taengja-icon.svg "$WORK/root/usr/share/icons/hicolor/scalable/apps/taengja.svg"
+chmod 0755 "$WORK/root/usr/bin/taengja" "$WORK/root/usr/lib/taengja/taengja.py"
 
 KEYS=()
 k="/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-${FEDORA_RELEASE}-primary"

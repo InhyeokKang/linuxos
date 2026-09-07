@@ -37,7 +37,7 @@
     </property>
     <property name="plugin-3" type="string" value="launcher">
       <property name="items" type="array">
-        <value type="string" value="/usr/share/applications/kiyu-browser.desktop"/>
+        <value type="string" value="/usr/share/applications/taengja.desktop"/>
       </property>
     </property>
     <property name="plugin-4" type="string" value="tasklist">

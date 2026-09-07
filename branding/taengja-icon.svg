@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- 탱자: 귤 한 알 -->
+  <defs>
+    <radialGradient id="peel" cx="0.36" cy="0.30" r="0.78">
+      <stop offset="0" stop-color="#ffc25c"/>
+      <stop offset="0.55" stop-color="#ff9a1c"/>
+      <stop offset="1" stop-color="#e8700a"/>
+    </radialGradient>
+    <radialGradient id="shine" cx="0.32" cy="0.26" r="0.32">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6cc04a"/>
+      <stop offset="1" stop-color="#2e7d32"/>
+    </linearGradient>
+  </defs>
+  <!-- 그림자 -->
+  <ellipse cx="128" cy="232" rx="78" ry="12" fill="#000000" fill-opacity="0.12"/>
+  <!-- 몸통 -->
+  <circle cx="128" cy="140" r="96" fill="url(#peel)"/>
+  <circle cx="128" cy="140" r="96" fill="url(#shine)"/>
+  <!-- 껍질 질감 -->
+  <g fill="#d9650a" fill-opacity="0.18">
+    <circle cx="96" cy="150" r="2.2"/><circle cx="118" cy="182" r="2"/><circle cx="150" cy="170" r="2.4"/>
+    <circle cx="168" cy="132" r="2"/><circle cx="140" cy="200" r="1.8"/><circle cx="82" cy="120" r="1.9"/>
+    <circle cx="110" cy="112" r="1.7"/><circle cx="176" cy="164" r="1.8"/><circle cx="88" cy="184" r="1.9"/>
+  </g>
+  <!-- 꼭지 -->
+  <circle cx="128" cy="48" r="10" fill="#c9650e"/>
+  <circle cx="128" cy="48" r="5" fill="#a8520a"/>
+  <path d="M128 46 C 128 34, 131 27, 138 22" stroke="#6b4a1e" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <!-- 잎 -->
+  <path d="M137 41 C 148 16, 184 12, 202 27 C 188 47, 154 55, 137 41 Z" fill="url(#leaf)"/>
+  <path d="M142 39 C 160 31, 178 28, 196 29" stroke="#1b5e20" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-opacity="0.8"/>
+</svg>

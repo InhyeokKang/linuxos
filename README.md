@@ -24,7 +24,7 @@ Xvfb 프리뷰(`make preview`)에서 찍은 실제 세션입니다. 앱 아이�
 |---|---|
 | ![windows](docs/screenshots/03-windows.png) | ![task manager](docs/screenshots/04-task-manager.png) |
 
-| kiyu 브라우저 새 탭 | HTTPS 사이트 (프록시 환경이라 외부 CSS 는 차단됨) |
+| 탱자 새 탭 | HTTPS 사이트 (프록시 환경이라 외부 CSS 는 차단됨) |
 |---|---|
 | ![browser home](docs/screenshots/05-browser-home.png) | ![browser site](docs/screenshots/06-browser-site.png) |
 
@@ -50,7 +50,7 @@ make test-uefi      # UEFI 모드
 | 베이스 | Fedora 44 | 최신 커널·드라이버, SELinux 기본, 강한 보안 기본값. 13개월 지원 주기는 업그레이드 도우미로 대응 ([docs/fedora-migration.md](docs/fedora-migration.md)) |
 | 데스크톱 | XFCE 4.20 (윈도우 배치) | 유휴 250~350MB, GPU 거의 안 씀, 안정적 |
 | 앱 설치 | Flatpak + Flathub, GNOME Software, dnf | 앱 스토어 UX + 샌드박스 |
-| 브라우저 | kiyu 브라우저 (WebKitGTK) | 엔진은 Fedora 가 패치, 브라우저는 우리가 만듦. 추적기 차단·샌드박스 기본 |
+| 브라우저 | 탱자 브라우저 (WebKitGTK) | 엔진은 Fedora 가 패치, 브라우저는 우리가 만듦. 추적기 차단·샌드박스 기본 |
 | 오피스 | LibreOffice (Writer/Calc/Impress) | MS Office 파일 호환, 동일 규격 폰트(Carlito/Caladea) 포함 |
 | 한국어 | fcitx5-hangul, Noto Sans CJK KR | 윈도우 폰트 이름(맑은 고딕 등) 자동 매핑 |
 | 게임 | `kiyu-setup-gaming` | Steam(Flatpak) + Proton-GE + GameMode + MangoHud, NVIDIA 드라이버 선택 설치 |
@@ -71,7 +71,7 @@ base/fedora/                  기본 베이스 (kiwi-ng)
     etc/xdg/xdg-kiyu/         XFCE 윈도우 스타일 기본 설정 (패널, 단축키, 테마)
     usr/lib/kiyu/, usr/local/bin/kiyu-*        세션 도우미, 게임/윈도우앱 설치 스크립트
 base/debian/                  0.1 의 Debian live-build 트리 (보존용, 수동 워크플로)
-apps/kiyu-browser/            kiyu 브라우저 (WebKitGTK)
+apps/taengja/            탱자 브라우저 (WebKitGTK)
 apps/kiyu-superkey/           Win 키 탭 → 시작 메뉴 (C)
 branding/                     로고, 배경화면, 부트 스플래시 (SVG)
 scripts/                      build.sh, build-fedora.sh, boot-test.sh, preview-desktop.sh, check.sh

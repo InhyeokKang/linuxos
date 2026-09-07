@@ -36,3 +36,4 @@
 /out/
 /base/fedora/out/
 /base/fedora/.build/
+__pycache__/

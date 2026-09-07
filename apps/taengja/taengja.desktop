@@ -1,22 +1,22 @@
 [Desktop Entry]
 Type=Application
 Version=1.0
-Name=kiyu Browser
-Name[ko]=kiyu 브라우저
+Name=Taengja
+Name[ko]=탱자
 GenericName=Web Browser
 GenericName[ko]=웹 브라우저
-Comment=Fast, private web browser built for kiyu
-Comment[ko]=kiyu 를 위해 만든 빠르고 프라이빗한 웹 브라우저
-Exec=kiyu-browser %U
-Icon=kiyu-browser
+Comment=kiyu's fast, private web browser
+Comment[ko]=kiyu 의 빠르고 프라이빗한 웹 브라우저
+Exec=taengja %U
+Icon=taengja
 Terminal=false
 Categories=Network;WebBrowser;
 MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
 StartupNotify=true
-StartupWMClass=kiyu-browser
+StartupWMClass=taengja
 Actions=new-window;
 
 [Desktop Action new-window]
 Name=New Window
 Name[ko]=새 창
-Exec=kiyu-browser
+Exec=taengja

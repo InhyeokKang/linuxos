@@ -206,7 +206,7 @@
     <package name="libreoffice-gtk3"/>
     <package name="libreoffice-langpack-ko"/>
 
-    <!-- kiyu 브라우저 프로토타입 런타임 (WebKitGTK) -->
+    <!-- 탱자 브라우저 프로토타입 런타임 (WebKitGTK) -->
     <package name="python3-gobject"/>
     <package name="webkit2gtk4.1"/>
 

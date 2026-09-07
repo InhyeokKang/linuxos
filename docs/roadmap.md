@@ -25,10 +25,10 @@ Xvfb 프리뷰에서 확인된 것:
 - [ ] 설치 후 `live` 사용자 제거, 설치 아이콘 제거, `kiyu-firstboot` 재실행
 - [ ] 유휴 RAM 측정 → README 수치 갱신 (Xvfb 프리뷰에서 데스크톱 프로세스 PSS 합계 약 250 MB)
 
-## 0.2 – Fedora 전환 + kiyu 브라우저 (진행 중)
+## 0.2 – Fedora 전환 + 탱자 브라우저 (진행 중)
 
 - [x] Fedora 44 kiwi 이미지 정의, kiwi 스키마 검증, CI 컨테이너 빌드
-- [x] kiyu 브라우저 v0 (WebKitGTK): 탭·주소창·검색·즐겨찾기·다운로드, 샌드박스·ITP·추적기 차단·권한 기본 거부
+- [x] 탱자 브라우저 v0 (WebKitGTK): 탭·주소창·검색·즐겨찾기·다운로드, 샌드박스·ITP·추적기 차단·권한 기본 거부
 - [x] kiyu-superkey (Super 탭 → 시작 메뉴, Super+화살표 유지) — Xvfb 에서 검증
 - [ ] Fedora ISO 부팅 테스트: 자동 로그인, SELinux enforcing, firewalld 존, dnf-automatic, 메모리
 - [ ] Anaconda 설치 흐름 (BIOS/UEFI, LUKS)

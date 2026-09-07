@@ -12,7 +12,7 @@
 | 커널 모듈 | 안 쓰는 네트워크 프로토콜/파일시스템/FireWire 로드 차단 | `etc/modprobe.d/10-kiyu-blacklist.conf` |
 | 네트워크 | firewalld 기본 존 `kiyu` (인바운드 전부 DROP), IPv4/6 리다이렉트·소스라우팅 무시, SYN 쿠키 | `etc/firewalld/zones/kiyu.xml`, sysctl |
 | MAC | SELinux enforcing (targeted) | Fedora 기본, kiwi 빌드 시 relabel |
-| 앱 격리 | Flatpak(bubblewrap) 샌드박스 + 포털; 브라우저 웹 프로세스도 bubblewrap 샌드박스 | `xdg-desktop-portal/portals.conf`, `apps/kiyu-browser` |
+| 앱 격리 | Flatpak(bubblewrap) 샌드박스 + 포털; 브라우저 웹 프로세스도 bubblewrap 샌드박스 | `xdg-desktop-portal/portals.conf`, `apps/taengja` |
 | 브라우저 | 추적 방지(ITP), 서드파티 쿠키·추적기 차단, 권한 기본 거부, HTTPS 우선 | [browser.md](browser.md) |
 | 업데이트 | 보안 업데이트 매일 자동 설치(dnf5-automatic), 재부팅은 사용자 선택 | `etc/dnf/automatic.conf` |
 | 펌웨어 | fwupd (LVFS) 로 BIOS/SSD 펌웨어 업데이트 | `10-hardware.list.chroot` |

@@ -37,8 +37,8 @@
       <!-- 멀티미디어 키 -->
       <property name="XF86Calculator" type="string" value="galculator"/>
       <property name="XF86Explorer" type="string" value="thunar"/>
-      <property name="XF86HomePage" type="string" value="kiyu-browser"/>
-      <property name="XF86WWW" type="string" value="kiyu-browser"/>
+      <property name="XF86HomePage" type="string" value="taengja"/>
+      <property name="XF86WWW" type="string" value="taengja"/>
       <property name="XF86Display" type="string" value="xfce4-display-settings --minimal"/>
     </property>
   </property>
