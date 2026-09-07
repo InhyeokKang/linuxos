@@ -1,30 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- 탱자: 껍질을 깐 귤 한 알(조각) -->
-  <defs>
-    <linearGradient id="flesh" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffb640"/>
-      <stop offset="1" stop-color="#f0780c"/>
-    </linearGradient>
-    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffd27a"/>
-      <stop offset="1" stop-color="#f7a13a"/>
-    </linearGradient>
-  </defs>
-  <g transform="rotate(-12 128 128) translate(0 30)">
-    <path d="M30 150 C52 20,204 20,226 150 C196 166,60 166,30 150 Z" fill="url(#flesh)" stroke="#f0780c" stroke-width="18" stroke-linejoin="round"/>
-    <path d="M30 150 C52 20,204 20,226 150 C196 166,60 166,30 150 Z" fill="none" stroke="url(#skin)" stroke-width="5" stroke-linejoin="round" stroke-opacity="0.95"/>
-    <g stroke="#ffe3a6" stroke-width="2.6" stroke-linecap="round" stroke-opacity="0.7">
-            <line x1="40.5" y1="150.3" x2="39.4" y2="125.7"/>
-      <line x1="55.4" y1="150.6" x2="53.8" y2="106.3"/>
-      <line x1="73.7" y1="150.8" x2="72.2" y2="91.8"/>
-      <line x1="94.4" y1="151.0" x2="93.4" y2="82.1"/>
-      <line x1="116.6" y1="151.0" x2="116.3" y2="77.2"/>
-      <line x1="139.4" y1="151.0" x2="139.7" y2="77.2"/>
-      <line x1="161.6" y1="151.0" x2="162.6" y2="82.1"/>
-      <line x1="182.3" y1="150.8" x2="183.8" y2="91.8"/>
-      <line x1="200.6" y1="150.6" x2="202.2" y2="106.3"/>
-      <line x1="215.5" y1="150.3" x2="216.6" y2="125.7"/>
+  <!-- 탱자: 껍질 깐 귤 한 알, 상현달(D) 구도, 굵은 외곽선 -->
+  <g transform="rotate(28 128 128) translate(14 0)">
+    <path d="M100 36 A92 92 0 0 1 100 220 Z" fill="#ffab1f" stroke="#1a1a1a" stroke-width="11" stroke-linejoin="round"/>
+    <g stroke="#ffffff" stroke-width="4" stroke-linecap="round">
+            <line x1="107.9" y1="111.8" x2="130.7" y2="65.1"/>
+      <line x1="112.5" y1="115.1" x2="148.6" y2="77.6"/>
+      <line x1="115.9" y1="119.5" x2="161.8" y2="95.1"/>
+      <line x1="117.7" y1="124.9" x2="168.9" y2="115.8"/>
+      <line x1="117.8" y1="130.5" x2="169.3" y2="137.7"/>
+      <line x1="116.2" y1="135.9" x2="162.9" y2="158.7"/>
+      <line x1="112.9" y1="140.5" x2="150.4" y2="176.6"/>
+      <line x1="108.5" y1="143.9" x2="132.9" y2="189.8"/>
     </g>
-    <path d="M62 92 C 92 58, 164 56, 194 88" stroke="#ffffff" stroke-width="7" stroke-linecap="round" fill="none" stroke-opacity="0.35"/>
+    <path d="M126.7 54.7 A78 78 0 0 1 174.2 103.9" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
   </g>
 </svg>

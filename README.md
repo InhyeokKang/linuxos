@@ -52,7 +52,7 @@ make test-uefi      # UEFI 모드
 | 앱 설치 | Flatpak + Flathub, GNOME Software, dnf | 앱 스토어 UX + 샌드박스 |
 | 브라우저 | 탱자 브라우저 (WebKitGTK) | 엔진은 Fedora 가 패치, 브라우저는 우리가 만듦. 추적기 차단·샌드박스 기본 |
 | 오피스 | LibreOffice (Writer/Calc/Impress) | MS Office 파일 호환, 동일 규격 폰트(Carlito/Caladea) 포함 |
-| 한국어 | fcitx5-hangul, Noto Sans CJK KR | 윈도우 폰트 이름(맑은 고딕 등) 자동 매핑 |
+| 한국어 | fcitx5-hangul, 본고딕(Source Han Sans KR) 기본 글꼴 | 윈도우 폰트 이름(맑은 고딕 등) 자동 매핑 |
 | 게임 | `kiyu-setup-gaming` | Steam(Flatpak) + Proton-GE + GameMode + MangoHud, NVIDIA 드라이버 선택 설치 |
 | 윈도우 앱 | `kiyu-setup-windows-apps` | Wine + Bottles, .exe 더블클릭 |
 | 설치 | Anaconda | 전체 디스크 암호화, 윈도우 듀얼부팅 |

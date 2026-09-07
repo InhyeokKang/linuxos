@@ -176,7 +176,7 @@
     <!-- 폰트 / 한국어 -->
     <package name="google-noto-sans-fonts"/>
     <package name="google-noto-sans-mono-fonts"/>
-    <package name="google-noto-sans-cjk-fonts"/>
+    <package name="adobe-source-han-sans-kr-fonts"/>
     <package name="google-noto-serif-cjk-fonts"/>
     <package name="google-noto-color-emoji-fonts"/>
     <package name="liberation-fonts"/>

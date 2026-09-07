@@ -73,7 +73,7 @@ def _filter_rules():
 
 HOME_HTML = """<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>새 탭</title>
 <style>
- body{margin:0;font-family:"Noto Sans","Noto Sans CJK KR",sans-serif;background:linear-gradient(#f7f3ec,#ebe4d6);
+ body{margin:0;font-family:"Source Han Sans KR","본고딕","Noto Sans",sans-serif;background:linear-gradient(#f7f3ec,#ebe4d6);
       color:#333;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
  .logo{width:96px;height:96px;margin-bottom:18px}
  form{display:flex;width:min(640px,90vw);box-shadow:0 2px 12px rgba(0,0,0,.12);border-radius:28px;overflow:hidden;background:#fff}
@@ -464,7 +464,7 @@ class BrowserWindow(Gtk.ApplicationWindow):
         s.set_enable_site_specific_quirks(True)
         s.set_enable_back_forward_navigation_gestures(True)
         s.set_hardware_acceleration_policy(WebKit2.HardwareAccelerationPolicy.ON_DEMAND)
-        s.set_default_font_family("Noto Sans")
+        s.set_default_font_family("Source Han Sans KR")
         s.set_default_charset("utf-8")
         s.set_user_agent_with_application_details("Taengja", VERSION)
         view.set_zoom_level(self.app.config["zoom"])
@@ -658,7 +658,7 @@ class BrowserWindow(Gtk.ApplicationWindow):
         # 인증서 오류: 페이지를 열지 않고 안내 (예외 허용은 v1 에서 명시적 UI 로)
         host = urllib.parse.urlparse(uri).hostname
         view.load_alternate_html(
-            f"<html lang='ko'><body style='font-family:Noto Sans,sans-serif;padding:40px;color:#333'>"
+            f"<html lang='ko'><body style='font-family:Source Han Sans KR,Noto Sans,sans-serif;padding:40px;color:#333'>"
             f"<h2>안전하지 않은 연결</h2><p><b>{host}</b> 의 보안 인증서를 확인할 수 없어 페이지를 열지 않았습니다.</p>"
             f"<p style='color:#777'>공용 Wi-Fi 의 로그인 페이지이거나, 사이트 설정 문제이거나, 누군가 연결을 가로채고 있을 수 있습니다.</p></body></html>",
             uri, None)

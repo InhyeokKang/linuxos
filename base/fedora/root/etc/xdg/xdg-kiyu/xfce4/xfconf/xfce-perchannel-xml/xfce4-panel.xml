@@ -70,8 +70,8 @@
       <property name="digital-layout" type="uint" value="1"/>
       <property name="digital-time-format" type="string" value="%H:%M"/>
       <property name="digital-date-format" type="string" value="%Y-%m-%d"/>
-      <property name="digital-time-font" type="string" value="Noto Sans 10"/>
-      <property name="digital-date-font" type="string" value="Noto Sans 8"/>
+      <property name="digital-time-font" type="string" value="Source Han Sans KR 10"/>
+      <property name="digital-date-font" type="string" value="Source Han Sans KR 8"/>
       <property name="tooltip-format" type="string" value="%A %x"/>
     </property>
     <property name="plugin-10" type="string" value="notification-plugin"/>
