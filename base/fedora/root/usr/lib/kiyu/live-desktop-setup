@@ -1,6 +1,19 @@
 #!/bin/sh
 # 라이브 세션에서만: 바탕화면에 "설치" 아이콘을 놓습니다.
 [ -d /run/initramfs/live ] || [ -d /run/live/medium ] || exit 0
+# livesys(Fedora 라이브 스크립트)가 패널 설정을 Fedora 기본으로 바꿔 두었으면 kiyu 기본값으로 복원
+PANEL="$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
+if [ -f /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ] && ! grep -q whiskermenu "$PANEL" 2>/dev/null; then
+    mkdir -p "$(dirname "$PANEL")"
+    cp /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml "$PANEL"
+    cp /etc/skel/.config/xfce4/panel/*.rc "$HOME/.config/xfce4/panel/" 2>/dev/null || true
+    if command -v xfconf-query >/dev/null 2>&1; then
+        # 실행 중인 xfconfd 에 반영: 채널을 통째로 다시 읽게 패널 재시작 전에 속성 제거
+        xfconf-query -c xfce4-panel -p /panels -r -R 2>/dev/null || true
+        xfconf-query -c xfce4-panel -p /plugins -r -R 2>/dev/null || true
+    fi
+    (sleep 2; xfce4-panel -r) >/dev/null 2>&1 &
+fi
 command -v xdg-user-dir >/dev/null 2>&1 && dest="$(xdg-user-dir DESKTOP)" || dest="$HOME/Desktop"
 mkdir -p "$dest"
 src=/usr/share/applications/kiyu-install.desktop

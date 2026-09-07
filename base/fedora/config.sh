@@ -53,17 +53,20 @@ fi
 # Fedora 는 /usr/share/backgrounds/default.png(.xml) 과 images/ 아래를 기본으로 가리킴)
 if [ -f "${BG}/default.svg" ]; then
     find /usr/share/backgrounds -maxdepth 2 -type f ! -path "${BG}/*" \
-        \( -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.svg' -o -name '*.webp' \) | while read -r f; do
+        \( -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.svg' -o -name '*.webp' -o -name '*.jxl' \) | while read -r f; do
         case "$f" in *.svg) cp "${BG}/default.svg" "$f" ;; *) cp "${BG}/default.png" "$f" ;; esac
     done
     # 슬라이드쇼 xml 은 우리 png 하나만 가리키게
     find /usr/share/backgrounds -maxdepth 3 -type f -name '*.xml' | while read -r f; do
         printf '<background><static><duration>86400</duration><file>%s</file></static></background>\n' "${BG}/default.png" > "$f"
     done
-    # 흔한 기본 경로 심볼릭 링크
-    for link in /usr/share/backgrounds/default.png /usr/share/backgrounds/images/default.png; do
-        [ -e "$link" ] && cp "${BG}/default.png" "$link"
+    # xfdesktop(Fedora) 의 컴파일된 기본 경로: images/default.png 가 최우선 → 우리 png 로 생성
+    mkdir -p /usr/share/backgrounds/images
+    for f in /usr/share/backgrounds/images/default.png /usr/share/backgrounds/default.png; do
+        rm -f "$f"; cp "${BG}/default.png" "$f"
     done
+    # Fedora 기본 jxl 원본(f*/default/*.jxl)도 우리 png 내용으로 (심볼릭 링크 대상 교체)
+    find /usr/share/backgrounds -maxdepth 3 -type f -name '*.jxl' -exec cp "${BG}/default.png" {} \;
 fi
 # 패널 플러그인 in-process (wrapper 프로세스 제거)
 for plug in whiskermenu pulseaudio power-manager-plugin notification-plugin systray; do
