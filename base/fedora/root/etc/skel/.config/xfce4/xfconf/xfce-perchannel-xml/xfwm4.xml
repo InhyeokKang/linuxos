@@ -2,9 +2,9 @@
 <!-- 창 관리자: 윈도우식 버튼 배치, 가장자리 스냅, 작업공간 1개 -->
 <channel name="xfwm4" version="1.0">
   <property name="general" type="empty">
-    <property name="theme" type="string" value="Arc"/>
-    <property name="title_font" type="string" value="Source Han Sans KR Bold 9"/>
-    <property name="title_alignment" type="string" value="left"/>
+    <property name="theme" type="string" value="Default"/>
+    <property name="title_font" type="string" value="Pretendard Semi-Bold 10"/>
+    <property name="title_alignment" type="string" value="center"/>
     <property name="button_layout" type="string" value="O|HMC"/>
     <property name="workspace_count" type="int" value="1"/>
     <property name="wrap_workspaces" type="bool" value="false"/>

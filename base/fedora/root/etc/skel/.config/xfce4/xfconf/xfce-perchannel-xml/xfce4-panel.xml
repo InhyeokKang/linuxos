@@ -6,11 +6,12 @@
     <value type="int" value="1"/>
     <property name="dark-mode" type="bool" value="false"/>
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=8;x=0;y=0"/>
+      <property name="position" type="string" value="p=10;x=0;y=0"/>
       <property name="length" type="uint" value="100"/>
+      <property name="length-adjust" type="bool" value="true"/>
       <property name="position-locked" type="bool" value="true"/>
-      <property name="size" type="uint" value="44"/>
-      <property name="icon-size" type="uint" value="24"/>
+      <property name="size" type="uint" value="48"/>
+      <property name="icon-size" type="uint" value="26"/>
       <property name="background-style" type="uint" value="1"/>
       <property name="background-rgba" type="array">
         <value type="double" value="0.968"/>
@@ -56,8 +57,8 @@
       <property name="digital-layout" type="uint" value="1"/>
       <property name="digital-time-format" type="string" value="%H:%M"/>
       <property name="digital-date-format" type="string" value="%Y-%m-%d"/>
-      <property name="digital-time-font" type="string" value="Source Han Sans KR 10"/>
-      <property name="digital-date-font" type="string" value="Source Han Sans KR 8"/>
+      <property name="digital-time-font" type="string" value="Pretendard 10"/>
+      <property name="digital-date-font" type="string" value="Pretendard 8"/>
       <property name="tooltip-format" type="string" value="%A %x"/>
     </property>
     <property name="plugin-10" type="string" value="notification-plugin"/>

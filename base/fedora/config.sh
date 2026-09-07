@@ -97,6 +97,21 @@ if [ -x /usr/sbin/setfiles ] && [ -f /etc/selinux/targeted/contexts/files/file_c
     setfiles -F -e /proc -e /sys -e /dev -e /run /etc/selinux/targeted/contexts/files/file_contexts / || true
 fi
 
+# ---- 글꼴: IBM Plex Sans KR / Inter (있으면), Pretendard (GitHub 릴리스, 실패해도 빌드는 계속) --------
+dnf -y install --setopt=install_weak_deps=False ibm-plex-sans-kr-fonts rsms-inter-fonts 2>/dev/null \
+    || dnf -y install --setopt=install_weak_deps=False ibm-plex-sans-kr-fonts 2>/dev/null || echo "WARN: optional fonts not installed"
+PRET_VER=1.3.9
+if curl -fsSL --retry 2 -o /tmp/pretendard.zip "https://github.com/orioncactus/pretendard/releases/download/v${PRET_VER}/Pretendard-${PRET_VER}.zip"; then
+    mkdir -p /usr/share/fonts/pretendard
+    unzip -qo -j /tmp/pretendard.zip '*/variable/PretendardVariable.ttf' -d /usr/share/fonts/pretendard/ \
+        || unzip -qo -j /tmp/pretendard.zip '*PretendardVariable.ttf' -d /usr/share/fonts/pretendard/ || true
+    rm -f /tmp/pretendard.zip
+    ls /usr/share/fonts/pretendard/ || true
+else
+    echo "WARN: Pretendard download failed; falling back to Plex/Source Han"
+fi
+fc-cache -f || true
+
 # ---- ld.so 캐시 (없으면 첫 부팅에 ldconfig.service 가 16초 걸림) ----------------------
 ldconfig || true
 
