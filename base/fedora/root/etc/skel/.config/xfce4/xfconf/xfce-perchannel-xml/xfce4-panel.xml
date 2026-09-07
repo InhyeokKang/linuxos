@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 하단 작업표시줄 (윈도우 11 식): 전체 폭 한 줄, 가운데 [시작] [고정 앱 + 실행 중 창 (docklike)],
-     오른쪽 [트레이] [빠른 설정] [시계] [알림] [바탕화면 보기]. 소리/전원은 빠른 설정(kiyu-control)에 통합 -->
+<!-- 하단 작업표시줄 (윈도우 11 식). 아이콘을 화면 중심에 정확히 놓기 위해 패널 두 개를 겹친다:
+       panel-1  바닥 전체 폭: [확장 구분선][시작][고정 앱 + 실행 중 창 (docklike)][확장 구분선]  → 대칭이라 정확히 가운데
+       panel-2  오른쪽 아래, 배경 투명, panel-1 위에 겹침: [트레이][빠른 설정][시계][알림][바탕화면 보기]
+     배경색은 xfconf(background-rgba)가 그리고 다크 모드 스크립트가 panel-1 의 색을 바꾼다. 소리/전원은 빠른 설정에 통합 -->
 <channel name="xfce4-panel" version="1.0">
   <property name="configver" type="int" value="2"/>
   <property name="panels" type="array">
     <value type="int" value="1"/>
+    <value type="int" value="2"/>
     <property name="dark-mode" type="bool" value="false"/>
     <property name="panel-1" type="empty">
       <!-- 바닥 전체 폭 (p=8: 왼쪽 아래에서 시작, 길이 100%) -->
@@ -14,14 +17,37 @@
       <property name="position-locked" type="bool" value="true"/>
       <property name="size" type="uint" value="46"/>
       <property name="icon-size" type="uint" value="24"/>
-      <!-- 배경은 ~/.config/gtk-3.0/gtk.css 의 .xfce4-panel 이 그린다 (테마 색 따라 다크 모드 자동) -->
-      <property name="background-style" type="uint" value="0"/>
+      <property name="background-style" type="uint" value="1"/>
+      <property name="background-rgba" type="array">
+        <value type="double" value="0.992"/>
+        <value type="double" value="0.984"/>
+        <value type="double" value="0.969"/>
+        <value type="double" value="0.92"/>
+      </property>
       <property name="autohide-behavior" type="uint" value="0"/>
       <property name="plugin-ids" type="array">
         <value type="int" value="3"/>
         <value type="int" value="1"/>
         <value type="int" value="2"/>
         <value type="int" value="5"/>
+      </property>
+    </property>
+    <property name="panel-2" type="empty">
+      <property name="position" type="string" value="p=4;x=0;y=0"/>
+      <property name="length" type="uint" value="1"/>
+      <property name="length-adjust" type="bool" value="true"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="size" type="uint" value="46"/>
+      <property name="icon-size" type="uint" value="20"/>
+      <property name="background-style" type="uint" value="1"/>
+      <property name="background-rgba" type="array">
+        <value type="double" value="0"/>
+        <value type="double" value="0"/>
+        <value type="double" value="0"/>
+        <value type="double" value="0"/>
+      </property>
+      <property name="autohide-behavior" type="uint" value="0"/>
+      <property name="plugin-ids" type="array">
         <value type="int" value="6"/>
         <value type="int" value="7"/>
         <value type="int" value="9"/>

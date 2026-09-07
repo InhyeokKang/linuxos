@@ -9,6 +9,7 @@ case "$mode" in
     q -c xsettings -p /Net/ThemeName -n -t string -s Adwaita-dark
     q -c xsettings -p /Net/IconThemeName -n -t string -s Papirus-Dark
     q -c xfce4-panel -p /panels/dark-mode -n -t bool -s true
+    q -c xfce4-panel -p /panels/panel-1/background-rgba -n -t double -t double -t double -t double -s 0.12 -s 0.12 -s 0.13 -s 0.92
     q -c xfce4-notifyd -p /theme -n -t string -s Default
     ;;
   *)
@@ -16,6 +17,7 @@ case "$mode" in
     q -c xsettings -p /Net/ThemeName -n -t string -s Adwaita
     q -c xsettings -p /Net/IconThemeName -n -t string -s Papirus
     q -c xfce4-panel -p /panels/dark-mode -n -t bool -s false
+    q -c xfce4-panel -p /panels/panel-1/background-rgba -n -t double -t double -t double -t double -s 0.992 -s 0.984 -s 0.969 -s 0.92
     ;;
 esac
 echo "$mode" > "$STATE/theme"

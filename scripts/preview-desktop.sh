@@ -68,7 +68,7 @@ install_and_overlay() {
         python3 - <<'PYX'
 p = "/etc/xdg/xdg-kiyu/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
 s = open(p).read()
-s = s.replace('<value type="int" value="2"/>', ''.join('<value type="int" value="%d"/>' % i for i in (20, 21, 22, 23)), 1)
+s = s.replace('        <value type="int" value="2"/>', ''.join('        <value type="int" value="%d"/>\n' % i for i in (20, 21, 22, 23)).rstrip("\n"), 1)  # plugin-ids 안의 항목(8칸 들여쓰기)만
 launcher = '<property name="plugin-%d" type="string" value="launcher"><property name="items" type="array"><value type="string" value="/usr/share/applications/%s.desktop"/></property><property name="show-label" type="bool" value="false"/></property>'
 s = s.replace('<property name="plugin-2" type="string" value="docklike"/>',
               launcher % (20, "thunar") + launcher % (21, "taengja") + launcher % (22, "org.gnome.Software") +

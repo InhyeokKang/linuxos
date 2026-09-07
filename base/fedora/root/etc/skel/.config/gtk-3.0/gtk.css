@@ -62,7 +62,7 @@ XfdesktopIconView.view:selected, .XfdesktopIconView.view:selected, XfdesktopIcon
     color: #ffffff; background-color: alpha(@kiyu_accent, 0.85); border-radius: 8px; text-shadow: none; }
 
 /* 작업표시줄: 바닥 전체 폭 한 줄 (윈도우 11 식), 아이콘은 가운데. 블러 없는 반투명 */
-.xfce4-panel { background-color: alpha(@theme_bg_color, 0.92); border-top: 1px solid alpha(@theme_base_color, 0.7); border-radius: 0; padding: 2px 6px; color: @kiyu_text; }
+.xfce4-panel { border-top: 1px solid alpha(@theme_base_color, 0.6); border-radius: 0; padding: 2px 6px; color: @kiyu_text; }  /* 배경색은 xfconf background-rgba */
 .xfce4-panel button, .xfce4-panel button.flat, .xfce4-panel button.toggle { border-radius: 12px; border: 1px solid transparent; background-color: transparent; background-image: none; box-shadow: none; padding: 4px 8px; }
 .xfce4-panel button:hover { background-color: alpha(@kiyu_accent, 0.12); }
 .xfce4-panel button:checked, .xfce4-panel button:active { background-color: alpha(@kiyu_accent, 0.20); }
