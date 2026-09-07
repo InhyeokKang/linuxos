@@ -26,6 +26,8 @@ button:active, button:checked { background-color: alpha(@kiyu_accent, 0.18); bor
 button.flat { background-color: transparent; border-color: transparent; }
 button.flat:hover { background-color: alpha(@kiyu_accent, 0.10); }
 button.suggested-action, button.suggested-action:hover { background-color: @kiyu_accent; border-color: @kiyu_accent_dark; color: #ffffff; }
+button.suggested-action:disabled { background-color: alpha(@kiyu_accent, 0.35); border-color: transparent; color: alpha(#ffffff, 0.8); }
+button:disabled { color: alpha(@kiyu_text, 0.45); }
 entry, spinbutton, searchbar entry { border-radius: 10px; border: 1px solid @kiyu_border; background-color: @kiyu_surface; box-shadow: none; padding: 6px 10px; }
 entry:focus, spinbutton:focus { border-color: @kiyu_accent; box-shadow: 0 0 0 3px alpha(@kiyu_accent, 0.18); }
 combobox button { border-radius: 10px; }
