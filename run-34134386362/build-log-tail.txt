@@ -1,0 +1,300 @@
+[ INFO    ]: 14:47:12 | Writing KIWI template grub.cfg file
+[ DEBUG   ]: 14:47:12 | Creating directory /work/base/fedora/.build/build/live-media.qvhcmis2/boot/grub2
+[ DEBUG   ]: 14:47:12 | Looking for setfiles in /work/base/fedora/.build/build/build/image-root/usr/local/bin:/work/base/fedora/.build/build/build/image-root/usr/bin
+[ INFO    ]: 14:47:12 | Processing SELinux file security contexts
+[ DEBUG   ]: 14:47:12 | Looking for chroot in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:12 | EXEC: [chroot /work/base/fedora/.build/build/build/image-root setfiles --help]
+[ DEBUG   ]: 14:47:12 | Looking for chroot in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:12 | EXEC: [chroot /work/base/fedora/.build/build/build/image-root setfiles -T0 -F -p -c /etc/selinux/targeted/policy/policy.35 -e /proc -e /sys -e /dev /etc/selinux/targeted/contexts/files/file_contexts /]
+[ INFO    ]: 14:47:15 | Creating live ISO boot image(s)
+[ INFO    ]: 14:47:15 | Creating generic dracut initrd archive
+[ DEBUG   ]: 14:47:15 | Looking for cp in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:15 | EXEC: [cp /work/base/fedora/.build/tmp/kiwi_bl6la103 /work/base/fedora/.build/tmp/kiwi__6qtcb69]
+[ DEBUG   ]: 14:47:15 | Looking for bash in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:15 | EXEC: [bash -c source /usr/lib/python3.14/site-packages/kiwi/config/functions.sh; baseQuoteFile /work/base/fedora/.build/tmp/kiwi__6qtcb69]
+[ DEBUG   ]: 14:47:15 | --> kiwi_align='1048576'
+[ DEBUG   ]: 14:47:15 | --> kiwi_boot_timeout='8'
+[ DEBUG   ]: 14:47:15 | --> kiwi_bootkernel=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_bootloader='grub2'
+[ DEBUG   ]: 14:47:15 | --> kiwi_bootloader_console='default:default'
+[ DEBUG   ]: 14:47:15 | --> kiwi_bootprofile=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_btrfs_root_is_snapper_snapshot=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_btrfs_root_is_snapshot=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_cmdline='quiet rd.live.image slab_nomerge init_on_alloc=1 randomize_kstack_offset=on page_alloc.shuffle=1'
+[ DEBUG   ]: 14:47:15 | --> kiwi_compressed=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_delete=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_devicepersistency=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_displayname='kiyu-0.2.0-x86_64'
+[ DEBUG   ]: 14:47:15 | --> kiwi_drivers=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_firmware='uefi'
+[ DEBUG   ]: 14:47:15 | --> kiwi_fsmountoptions=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_gpt_hybrid_mbr=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_hybridpersistent='true'
+[ DEBUG   ]: 14:47:15 | --> kiwi_hybridpersistent_filesystem='ext4'
+[ DEBUG   ]: 14:47:15 | --> kiwi_iname='kiyu-0.2.0-x86_64'
+[ DEBUG   ]: 14:47:15 | --> kiwi_initrd_system='dracut'
+[ DEBUG   ]: 14:47:15 | --> kiwi_installboot=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_iversion='0.2.0'
+[ DEBUG   ]: 14:47:15 | --> kiwi_keytable='kr'
+[ DEBUG   ]: 14:47:15 | --> kiwi_language='ko_KR'
+[ DEBUG   ]: 14:47:15 | --> kiwi_live_volid='kiyu-0.2.0'
+[ DEBUG   ]: 14:47:15 | --> kiwi_luks_empty_passphrase='false'
+[ DEBUG   ]: 14:47:15 | --> kiwi_profiles=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_ramonly=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_revision='$Format:%H$'
+[ DEBUG   ]: 14:47:15 | --> kiwi_rootpartuuid=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_sectorsize='512'
+[ DEBUG   ]: 14:47:15 | --> kiwi_showlicense=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_startsector='2048'
+[ DEBUG   ]: 14:47:15 | --> kiwi_strip_delete=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_strip_libs=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_strip_tools=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_target_blocksize=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_target_removable=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_timezone='Asia/Seoul'
+[ DEBUG   ]: 14:47:15 | --> kiwi_type='iso'
+[ DEBUG   ]: 14:47:15 | --> kiwi_vga=''
+[ DEBUG   ]: 14:47:15 | --> kiwi_wwid_wait_timeout=''
+[ DEBUG   ]: 14:47:15 | Creating directory /work/base/fedora/.build/build/build/image-root/dev
+[ DEBUG   ]: 14:47:15 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:15 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 14:47:15 | Looking for mount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:15 | EXEC: [mount -n --bind /dev /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 14:47:15 | Creating directory /work/base/fedora/.build/build/build/image-root/proc
+[ DEBUG   ]: 14:47:15 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:15 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/proc]
+[ DEBUG   ]: 14:47:15 | Looking for mount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:15 | EXEC: [mount -n --bind /proc /work/base/fedora/.build/build/build/image-root/proc]
+[ DEBUG   ]: 14:47:15 | Looking for chroot in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:15 | EXEC: [chroot /work/base/fedora/.build/build/build/image-root dracut --verbose --reproducible --no-hostonly --no-hostonly-cmdline --install /.profile --add  dmsquash-live livenet pollcdrom  --omit  multipath  kiyu-0.2.0-x86_64.x86_64-0.2.0.initrd 7.1.13-200.fc44.x86_64]
+[ DEBUG   ]: 14:47:49 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/proc]
+[ DEBUG   ]: 14:47:49 | Looking for umount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [umount /work/base/fedora/.build/build/build/image-root/proc]
+[ DEBUG   ]: 14:47:49 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 14:47:49 | Looking for umount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [umount /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 14:47:49 | /usr/bin/dracut: line 1140: /sys/module/firmware_class/parameters/path: No such file or directory
+dracut[E]: No '/dev/log' or 'logger' included for syslog logging
+dracut[I]: Detected container-other container.
+dracut[I]: Executing: /usr/bin/dracut --verbose --reproducible --no-hostonly --no-hostonly-cmdline --install /.profile --add " dmsquash-live livenet pollcdrom " --omit " multipath " kiyu-0.2.0-x86_64.x86_64-0.2.0.initrd 7.1.13-200.fc44.x86_64
+dracut[I]: 74nfs: Could not find any command of 'rpcbind portmap'!
+dracut[I]: *** Including module: nss-softokn ***
+dracut[I]: *** Including module: bash ***
+dracut[I]: *** Including module: systemd ***
+dracut[I]: *** Including module: fips ***
+dracut[I]: *** Including module: fips-crypto-policies ***
+dracut[I]: *** Including module: systemd-ask-password ***
+dracut[I]: *** Including module: systemd-battery-check ***
+dracut[I]: *** Including module: systemd-cryptsetup ***
+dracut[I]: *** Including module: systemd-initrd ***
+dracut[I]: *** Including module: systemd-journald ***
+dracut[I]: *** Including module: systemd-modules-load ***
+dracut[I]: *** Including module: systemd-pcrphase ***
+dracut[I]: *** Including module: systemd-sysctl ***
+dracut[I]: *** Including module: systemd-tmpfiles ***
+dracut[I]: *** Including module: systemd-udevd ***
+dracut[I]: *** Including module: dbus-broker ***
+dracut[I]: *** Including module: dbus ***
+dracut[I]: *** Including module: i18n ***
+dracut[I]: *** Including module: network-manager ***
+dracut[I]: *** Including module: network ***
+dracut[I]: *** Including module: net-lib ***
+dracut[I]: *** Including module: url-lib ***
+dracut[I]: *** Including module: systemd-sysusers ***
+dracut[I]: *** Including module: btrfs ***
+dracut[I]: *** Including module: crypt ***
+dracut[I]: *** Including module: dm ***
+dracut[I]: *** Including module: dmsquash-live ***
+dracut[I]: *** Including module: fs-lib ***
+dracut[I]: *** Including module: img-lib ***
+dracut[I]: *** Including module: kernel-modules ***
+dracut[I]: *** Including module: kernel-modules-extra ***
+dracut[I]: *** Including module: kernel-network-modules ***
+dracut[I]: *** Including module: livenet ***
+dracut[I]: *** Including module: lvm ***
+dracut[I]: *** Including module: mdraid ***
+dracut[I]: *** Including module: nvdimm ***
+dracut[I]: *** Including module: overlayfs ***
+dracut[I]: *** Including module: qemu ***
+dracut[I]: *** Including module: qemu-net ***
+dracut[I]: *** Including module: fido2 ***
+dracut[I]: *** Including module: pkcs11 ***
+dracut[I]: *** Including module: hwdb ***
+dracut[I]: *** Including module: iscsi ***
+dracut[I]: *** Including module: lunmask ***
+dracut[I]: *** Including module: resume ***
+dracut[I]: *** Including module: rootfs-block ***
+dracut[I]: *** Including module: terminfo ***
+dracut[I]: *** Including module: udev-rules ***
+dracut[I]: *** Including module: virtiofs ***
+dracut[I]: *** Including module: dracut-systemd ***
+dracut[I]: *** Including module: initqueue ***
+dracut[I]: *** Including module: pollcdrom ***
+dracut[I]: *** Including module: usrmount ***
+dracut[I]: *** Including module: base ***
+dracut[I]: *** Including module: shell-interpreter ***
+dracut[I]: *** Including module: shutdown ***
+dracut[I]: *** Including module: openssl ***
+dracut[I]: *** Including modules done ***
+dracut[I]: *** Installing kernel module dependencies ***
+dracut[I]: *** Installing kernel module dependencies done ***
+dracut[I]: *** Resolving executable dependencies ***
+dracut[I]: *** Resolving executable dependencies done ***
+dracut[I]: *** Generating early-microcode cpio image ***
+dracut[I]: *** Constructing GenuineIntel.bin ***
+dracut[I]: *** Store current command line parameters ***
+dracut[I]: *** Creating image file '/kiyu-0.2.0-x86_64.x86_64-0.2.0.initrd' ***
+dracut[I]: *** Hardlinking files ***
+dracut[I]: *** Hardlinking files done ***
+dracut[I]: Using auto-determined compression method 'zstd'
+dracut[I]: *** Creating initramfs image file '/kiyu-0.2.0-x86_64.x86_64-0.2.0.initrd' done ***
+
+[ DEBUG   ]: 14:47:49 | Looking for mv in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [mv /work/base/fedora/.build/build/build/image-root/kiyu-0.2.0-x86_64.x86_64-0.2.0.initrd /work/base/fedora/.build/build]
+[ DEBUG   ]: 14:47:49 | Looking for chmod in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [chmod 644 /work/base/fedora/.build/build/kiyu-0.2.0-x86_64.x86_64-0.2.0.initrd]
+[ DEBUG   ]: 14:47:49 | Looking for rsync in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [rsync --archive --hard-links --xattrs --acls --one-file-system --inplace /work/base/fedora/.build/build/live-media.qvhcmis2/EFI/ /work/base/fedora/.build/tmp/efi_folderep7iv7hb]
+[ DEBUG   ]: 14:47:49 | Looking for qemu-img in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [qemu-img create /work/base/fedora/.build/build/efi-loader.g_kb6d5o 20M]
+[ DEBUG   ]: 14:47:49 | Looking for mkdosfs in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [mkdosfs -n BOOT /work/base/fedora/.build/build/efi-loader.g_kb6d5o]
+[ DEBUG   ]: 14:47:49 | Looking for mcopy in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [mcopy -Do -s -i /work/base/fedora/.build/build/efi-loader.g_kb6d5o /work/base/fedora/.build/tmp/efi_folderep7iv7hb ::EFI]
+[ INFO    ]: 14:47:49 | Setting up kernel file(s) and boot image in ISO boot layout
+[ DEBUG   ]: 14:47:49 | Creating directory /work/base/fedora/.build/build/live-media.qvhcmis2/boot/x86_64/loader
+[ DEBUG   ]: 14:47:49 | Looking for cp in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [cp /work/base/fedora/.build/build/build/image-root/boot/vmlinuz-7.1.13-200.fc44.x86_64 /work/base/fedora/.build/build/live-media.qvhcmis2/boot/x86_64/loader//linux]
+[ DEBUG   ]: 14:47:49 | Looking for du in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [du -s --apparent-size --block-size 1 --exclude /work/base/fedora/.build/build/live-media.qvhcmis2/proc --exclude /work/base/fedora/.build/build/live-media.qvhcmis2/sys --exclude /work/base/fedora/.build/build/live-media.qvhcmis2/dev /work/base/fedora/.build/build/live-media.qvhcmis2]
+[ INFO    ]: 14:47:49 | Packing system into dracut live ISO type: dmsquash
+[ DEBUG   ]: 14:47:49 | Looking for setfiles in /work/base/fedora/.build/build/build/image-root/usr/local/bin:/work/base/fedora/.build/build/build/image-root/usr/bin
+[ INFO    ]: 14:47:49 | Processing SELinux file security contexts
+[ DEBUG   ]: 14:47:49 | Looking for chroot in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [chroot /work/base/fedora/.build/build/build/image-root setfiles --help]
+[ DEBUG   ]: 14:47:49 | Looking for chroot in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:49 | EXEC: [chroot /work/base/fedora/.build/build/build/image-root setfiles -T0 -F -p -c /etc/selinux/targeted/policy/policy.35 -e /proc -e /sys -e /dev /etc/selinux/targeted/contexts/files/file_contexts /]
+[ DEBUG   ]: 14:47:52 | Looking for du in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:52 | EXEC: [du -s --apparent-size --block-size 1 --exclude /work/base/fedora/.build/build/build/image-root/proc --exclude /work/base/fedora/.build/build/build/image-root/sys --exclude /work/base/fedora/.build/build/build/image-root/dev /work/base/fedora/.build/build/build/image-root]
+[ DEBUG   ]: 14:47:53 | Looking for bash in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:53 | EXEC: [bash -c find /work/base/fedora/.build/build/build/image-root | wc -l]
+[ INFO    ]: 14:47:53 | Using calculated size: 5782 MB
+[ DEBUG   ]: 14:47:53 | Looking for qemu-img in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:53 | EXEC: [qemu-img create /work/base/fedora/.build/tmp/kiwi_pfo_j2kr 5782M]
+[ DEBUG   ]: 14:47:53 | Looking for losetup in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:53 | EXEC: [losetup -f --show /work/base/fedora/.build/tmp/kiwi_pfo_j2kr]
+[ DEBUG   ]: 14:47:53 | Looking for mkfs.ext4 in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:53 | EXEC: [mkfs.ext4 /dev/loop0]
+[ INFO    ]: 14:47:53 | --> Syncing data to ext4 root image
+[ DEBUG   ]: 14:47:53 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:53 | EXEC: [mountpoint -q /work/base/fedora/.build/tmp/kiwi_mount_manager.598q6won]
+[ DEBUG   ]: 14:47:53 | Looking for mount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:53 | EXEC: [mount /dev/loop0 /work/base/fedora/.build/tmp/kiwi_mount_manager.598q6won]
+[ DEBUG   ]: 14:47:53 | Looking for rsync in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:47:53 | EXEC: [rsync --archive --hard-links --xattrs --acls --one-file-system --inplace --exclude /image --exclude /.kconfig --exclude /run/* --exclude /tmp/* --exclude /.buildenv --exclude /var/cache/kiwi /work/base/fedora/.build/build/build/image-root/ /work/base/fedora/.build/tmp/kiwi_mount_manager.598q6won]
+[ INFO    ]: 14:48:32 | umount FileSystemExt4 instance
+[ DEBUG   ]: 14:48:32 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:48:32 | EXEC: [mountpoint -q /work/base/fedora/.build/tmp/kiwi_mount_manager.598q6won]
+[ DEBUG   ]: 14:48:32 | Looking for umount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:48:32 | EXEC: [umount /work/base/fedora/.build/tmp/kiwi_mount_manager.598q6won]
+[ DEBUG   ]: 14:48:34 | Looking for losetup in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:48:34 | EXEC: [losetup -d /dev/loop0]
+[ INFO    ]: 14:48:34 | --> Creating squashfs container for root image
+[ DEBUG   ]: 14:48:34 | Creating directory /work/base/fedora/.build/build/live-container.kl7s2d14/LiveOS
+[ DEBUG   ]: 14:49:21 | Looking for mksquashfs in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 14:49:21 | EXEC: [mksquashfs /work/base/fedora/.build/build/live-container.kl7s2d14 /work/base/fedora/.build/tmp/kiwi_ata4p5zm -noappend -b 1M -comp xz -Xbcj x86]
+[ DEBUG   ]: 15:12:55 | Creating directory /work/base/fedora/.build/build/live-media.qvhcmis2/LiveOS
+[ INFO    ]: 15:13:07 | Creating live ISO image
+[ DEBUG   ]: 15:13:07 | Looking for xorriso in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:07 | EXEC: [/usr/bin/xorriso -application_id 0xcccd8950 -publisher SUSE LINUX GmbH -preparer_id KIWI - https://github.com/OSInside/kiwi -volid kiyu-0.2.0 -joliet on -padding 0 -compliance no_emul_toc -outdev /work/base/fedora/.build/build/kiyu-0.2.0-x86_64.x86_64-0.2.0.iso -map /work/base/fedora/.build/build/live-media.qvhcmis2 / -chmod 0755 / -- -boot_image grub bin_path=boot/x86_64/loader/eltorito.img -boot_image grub grub2_mbr=/work/base/fedora/.build/build/live-media.qvhcmis2/boot/x86_64/loader/boot_hybrid.img -boot_image grub grub2_boot_info=on -boot_image any partition_offset=16 -boot_image any cat_path=boot/x86_64/boot.catalog -boot_image any cat_hidden=on -boot_image any boot_info_table=on -boot_image any platform_id=0x00 -boot_image any emul_type=no_emulation -boot_image any load_size=2048 -boot_image any appended_part_as=gpt -append_partition 2 0xef /work/base/fedora/.build/build/efi-loader.g_kb6d5o -boot_image any next -boot_image any efi_path=--interval:appended_partition_2:all:: -boot_image any platform_id=0xef -boot_image any emul_type=no_emulation]
+[ DEBUG   ]: 15:13:22 | Looking for xorriso in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [/usr/bin/xorriso -indev /work/base/fedora/.build/build/kiyu-0.2.0-x86_64.x86_64-0.2.0.iso -report_system_area plain]
+[ DEBUG   ]: 15:13:22 | System area options: 0x00004201
+System area summary: MBR protective-msdos-label grub2-mbr cyl-align-off GPT
+ISO image size/512 : 3363108
+Partition offset   : 16
+MBR heads per cyl  : 0
+MBR secs per head  : 0
+MBR partition table:   N Status  Type        Start       Blocks
+MBR partition      :   1   0x00  0xee            1      3363107
+GPT                :   N  Info
+GPT disk GUID      :      78ea5c497d7762468d05da743885b2cd
+GPT entry array    :      2  248  separated
+GPT lba range      :      64  3363044  3363107
+GPT partition name :   1  490053004f003900360036003000
+GPT partname local :   1  ISO9660
+GPT partition GUID :   1  78ea5c497d7762468d04da743885b2cd
+GPT type GUID      :   1  a2a0d0ebe5b9334487c068b6b72699c7
+GPT partition flags:   1  0x1000000000000001
+GPT start and size :   1  64  3322020
+GPT partition name :   2  41007000700065006e006400650064003200
+GPT partname local :   2  Appended2
+GPT partition GUID :   2  78ea5c497d7762468d07da743885b2cd
+GPT type GUID      :   2  28732ac11ff8d211ba4b00a0c93ec93b
+GPT partition flags:   2  0x0000000000000000
+GPT start and size :   2  3322084  40960
+
+[ INFO    ]: 15:13:22 | Export rpm packages metadata
+[ DEBUG   ]: 15:13:22 | Creating directory /work/base/fedora/.build/build/build/image-root/dev
+[ DEBUG   ]: 15:13:22 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for mount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [mount -n --bind /dev /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for rpmdb in /work/base/fedora/.build/build/build/image-root/usr/local/bin:/work/base/fedora/.build/build/build/image-root/usr/bin
+[ DEBUG   ]: 15:13:22 | Looking for chroot in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [chroot /work/base/fedora/.build/build/build/image-root rpm -E %_dbpath]
+[ DEBUG   ]: 15:13:22 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for umount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [umount -l /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for rpm in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [rpm --root /work/base/fedora/.build/build/build/image-root -qa --qf %{NAME}|%{EPOCH}|%{VERSION}|%{RELEASE}|%{ARCH}|%{DISTURL}|%{LICENSE}\n --dbpath /usr/lib/sysimage/rpm]
+[ INFO    ]: 15:13:22 | Export rpm packages changelog metadata
+[ DEBUG   ]: 15:13:22 | Creating directory /work/base/fedora/.build/build/build/image-root/dev
+[ DEBUG   ]: 15:13:22 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for mount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [mount -n --bind /dev /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for rpmdb in /work/base/fedora/.build/build/build/image-root/usr/local/bin:/work/base/fedora/.build/build/build/image-root/usr/bin
+[ DEBUG   ]: 15:13:22 | Looking for chroot in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [chroot /work/base/fedora/.build/build/build/image-root rpm -E %_dbpath]
+[ DEBUG   ]: 15:13:22 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for umount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [umount -l /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:22 | Looking for rpm in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:22 | EXEC: [rpm --root /work/base/fedora/.build/build/build/image-root -qa --qf %{NAME}|\n --changelog --dbpath /usr/lib/sysimage/rpm]
+[ INFO    ]: 15:13:23 | Export rpm verification metadata
+[ DEBUG   ]: 15:13:23 | Creating directory /work/base/fedora/.build/build/build/image-root/dev
+[ DEBUG   ]: 15:13:23 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:23 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:23 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:23 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:23 | Looking for mount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:23 | EXEC: [mount -n --bind /dev /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:23 | Looking for rpmdb in /work/base/fedora/.build/build/build/image-root/usr/local/bin:/work/base/fedora/.build/build/build/image-root/usr/bin
+[ DEBUG   ]: 15:13:23 | Looking for chroot in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:23 | EXEC: [chroot /work/base/fedora/.build/build/build/image-root rpm -E %_dbpath]
+[ DEBUG   ]: 15:13:23 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:23 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:23 | Looking for mountpoint in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:23 | EXEC: [mountpoint -q /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:23 | Looking for umount in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:23 | EXEC: [umount -l /work/base/fedora/.build/build/build/image-root/dev]
+[ DEBUG   ]: 15:13:23 | Looking for rpm in /usr/local/bin:/usr/bin
+[ DEBUG   ]: 15:13:23 | EXEC: [rpm --root /work/base/fedora/.build/build/build/image-root -Va --dbpath /usr/lib/sysimage/rpm]
+[ INFO    ]: 15:13:46 | Result files:
+[ INFO    ]: 15:13:46 | --> image_changes: /work/base/fedora/.build/build/kiyu-0.2.0-x86_64.x86_64-0.2.0.changes
+[ INFO    ]: 15:13:46 | --> image_packages: /work/base/fedora/.build/build/kiyu-0.2.0-x86_64.x86_64-0.2.0.packages
+[ INFO    ]: 15:13:46 | --> image_verified: /work/base/fedora/.build/build/kiyu-0.2.0-x86_64.x86_64-0.2.0.verified
+[ INFO    ]: 15:13:46 | --> live_image: /work/base/fedora/.build/build/kiyu-0.2.0-x86_64.x86_64-0.2.0.iso

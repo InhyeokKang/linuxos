@@ -1,6 +1,0 @@
-filesystem.packages
-filesystem.squashfs
-initrd.img
-initrd.img-6.12.107+deb13-amd64
-vmlinuz
-vmlinuz-6.12.107+deb13-amd64
