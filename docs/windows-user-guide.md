@@ -29,7 +29,7 @@
 | 윈도우 | kiyu | 비고 |
 |---|---|---|
 | 파일 탐색기 | Thunar | 경로 표시줄, 주소 직접 입력, 휴지통, 외장 드라이브 자동 마운트, 윈도우 NTFS 파티션 읽기/쓰기 |
-| Edge | Firefox | PDF 도 열림 |
+| Edge | kiyu 브라우저 | 추적기 차단·샌드박스 기본. Chromium 전용 사이트는 "Chromium 설치" 안내 |
 | 메모장 | Mousepad | |
 | 사진 | Ristretto | |
 | 미디어 플레이어 | mpv | 거의 모든 코덱 내장 |
@@ -38,7 +38,7 @@
 | Word / Excel / PowerPoint | LibreOffice Writer / Calc / Impress | docx/xlsx/pptx 열고 저장 가능 |
 | 작업 관리자 | 작업 관리자 (xfce4-taskmanager) | |
 | 설정 | 설정 관리자 | |
-| Microsoft Store | 소프트웨어 (GNOME Software) | Flathub 앱 + Debian 패키지 |
+| Microsoft Store | 소프트웨어 (GNOME Software) | Flathub 앱 + Fedora 패키지 |
 | 디스크 관리 | GParted | |
 | 장치 관리자 | (터미널) `lspci`, `lsusb` | GUI 는 로드맵 |
 | 제어판 > 프린터 | 프린터 설정 (system-config-printer) | |
@@ -51,7 +51,7 @@
 
 - **관리자 비밀번호 창** = UAC. 프로그램 설치, 설정 변경 때 뜹니다. 본인 계정 비밀번호를 입력하세요.
 - **C: 드라이브가 없다.** 모든 것이 `/` 아래 하나의 트리입니다. 내 문서는 `홈` 폴더. 외장 드라이브는 왼쪽 사이드바에 자동으로 나타납니다.
-- **프로그램 설치는 스토어에서.** 웹에서 설치 파일을 받아 실행하는 방식은 예외적입니다. `.deb` 파일은 더블클릭하면 됩니다.
+- **프로그램 설치는 스토어에서.** 웹에서 설치 파일을 받아 실행하는 방식은 예외적입니다. `.rpm` 파일은 더블클릭하면 됩니다.
 - **백신이 없다.** 앱은 스토어(서명 검증), 샌드박스, 방화벽, 자동 업데이트로 보호됩니다. `kiyu-info` 로 상태 확인.
 - **재부팅이 드물다.** 업데이트 후에도 대부분 재부팅이 필요 없습니다. 커널 업데이트 때만 알림이 뜹니다.
 

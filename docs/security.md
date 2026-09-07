@@ -10,10 +10,11 @@
 | 디스크 | LUKS 전체 디스크 암호화 (설치 시 체크박스 하나) | `calamares/modules/partition.conf` |
 | 커널 | kptr/dmesg 제한, 비특권 BPF 차단, ptrace 제한, ASLR 최대, `init_on_alloc`, `slab_nomerge`, `randomize_kstack_offset` | `etc/sysctl.d/90-kiyu-hardening.conf`, `etc/default/grub.d/10-kiyu.cfg` |
 | 커널 모듈 | 안 쓰는 네트워크 프로토콜/파일시스템/FireWire 로드 차단 | `etc/modprobe.d/10-kiyu-blacklist.conf` |
-| 네트워크 | nftables 기본 차단(인바운드 전부 drop), IPv4/6 리다이렉트·소스라우팅 무시, SYN 쿠키 | `etc/nftables.conf` |
-| MAC | AppArmor enforce (Firefox 등 Debian 프로필) | `50-security.list.chroot`, 하드닝 훅 |
-| 앱 격리 | Flatpak(bubblewrap) 샌드박스 + 포털 | `20-desktop.list.chroot`, `xdg-desktop-portal/portals.conf` |
-| 업데이트 | 보안 업데이트 매일 자동 설치, 재부팅은 사용자 선택 | `etc/apt/apt.conf.d/20auto-upgrades`, `52kiyu-unattended` |
+| 네트워크 | firewalld 기본 존 `kiyu` (인바운드 전부 DROP), IPv4/6 리다이렉트·소스라우팅 무시, SYN 쿠키 | `etc/firewalld/zones/kiyu.xml`, sysctl |
+| MAC | SELinux enforcing (targeted) | Fedora 기본, kiwi 빌드 시 relabel |
+| 앱 격리 | Flatpak(bubblewrap) 샌드박스 + 포털; 브라우저 웹 프로세스도 bubblewrap 샌드박스 | `xdg-desktop-portal/portals.conf`, `apps/kiyu-browser` |
+| 브라우저 | 추적 방지(ITP), 서드파티 쿠키·추적기 차단, 권한 기본 거부, HTTPS 우선 | [browser.md](browser.md) |
+| 업데이트 | 보안 업데이트 매일 자동 설치(dnf5-automatic), 재부팅은 사용자 선택 | `etc/dnf/automatic.conf` |
 | 펌웨어 | fwupd (LVFS) 로 BIOS/SSD 펌웨어 업데이트 | `10-hardware.list.chroot` |
 | 계정 | root 잠금, sudo 는 비밀번호 필요, 홈 디렉터리 0700, 게스트 로그인 없음 | 하드닝 훅, `lightdm.conf.d` |
 | 화면 | 10분 유휴 시 화면 잠금, 절전 복귀 시 잠금 | `xfce4-screensaver.xml`, `xfce4-power-manager.xml` |
@@ -31,9 +32,8 @@
 
 ## 라이브 세션과 설치본의 차이
 
-라이브 USB 로 부팅한 세션에서는 `apparmor.service` 가 inactive 로 보입니다. Debian 의 apparmor.service 에
-`ConditionPathExists=!/run/live/overlay/work` 조건이 있어 라이브 overlay 위에서는 프로필을 로드하지 않기 때문입니다.
-커널 LSM 목록에는 apparmor 가 들어 있고(`cat /sys/kernel/security/lsm`), 디스크에 설치한 뒤에는 정상 동작합니다.
+라이브 세션은 livesys 가 편의를 위해 일부 정책(자동 로그인, 비밀번호 없는 sudo)을 완화합니다. 디스크에 설치한 뒤에는 정상 정책이 적용됩니다.
+(0.1 Debian 이미지에서는 `apparmor.service` 가 라이브 overlay 조건 때문에 inactive 였습니다. 같은 이유의 라이브 전용 완화입니다.)
 
 ## 사용자가 확인하는 방법
 
@@ -45,6 +45,6 @@ kiyu-info
 ## 포트 열기
 
 ```
-sudo nano /etc/nftables.d/10-local-examples.nft   # 필요한 줄의 # 제거
-sudo systemctl reload nftables
+sudo firewall-cmd --permanent --add-port=27036/tcp     # 예: Steam 원격 플레이
+sudo firewall-cmd --reload
 ```

@@ -130,7 +130,6 @@
     <package name="xorg-x11-server-Xorg"/>
     <package name="xorg-x11-drv-libinput"/>
     <package name="xorg-x11-drv-amdgpu"/>
-    <package name="xorg-x11-drv-vesa"/>
     <package name="xorg-x11-drv-vmware"/>
     <package name="xorg-x11-xinit"/>
     <package name="xorg-x11-xauth"/>
@@ -167,7 +166,6 @@
     <package name="mate-polkit"/>
     <package name="lightdm"/>
     <package name="lightdm-gtk"/>
-    <package name="xcape"/>
     <package name="arc-theme"/>
     <package name="papirus-icon-theme"/>
     <package name="adwaita-icon-theme"/>
@@ -188,7 +186,6 @@
     <package name="fcitx5-qt"/>
     <package name="fcitx5-configtool"/>
     <package name="imsettings"/>
-    <package name="imsettings-fcitx5"/>
 
     <!-- 앱 설치 (Flatpak + 스토어) -->
     <package name="flatpak"/>
@@ -197,7 +194,6 @@
     <package name="gnome-software"/>
 
     <!-- 기본 앱 -->
-    <package name="firefox"/>
     <package name="mousepad"/>
     <package name="ristretto"/>
     <package name="mpv"/>
@@ -213,5 +209,24 @@
     <!-- kiyu 브라우저 프로토타입 런타임 (WebKitGTK) -->
     <package name="python3-gobject"/>
     <package name="webkit2gtk4.1"/>
+
+    <!-- 빌드 전용: kiyu-superkey (Super 탭 → 시작 메뉴) 컴파일. 아래 uninstall 로 이미지에서 제거 -->
+    <package name="gcc"/>
+    <package name="make"/>
+    <package name="libX11-devel"/>
+    <package name="libXtst-devel"/>
+  </packages>
+
+  <packages type="uninstall">
+    <package name="gcc"/>
+    <package name="cpp"/>
+    <package name="make"/>
+    <package name="libX11-devel"/>
+    <package name="libXtst-devel"/>
+    <package name="libXext-devel"/>
+    <package name="xorg-x11-proto-devel"/>
+    <package name="glibc-devel"/>
+    <package name="kernel-headers"/>
+    <package name="libxcrypt-devel"/>
   </packages>
 </image>

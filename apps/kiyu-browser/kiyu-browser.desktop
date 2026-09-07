@@ -1,0 +1,22 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=kiyu Browser
+Name[ko]=kiyu 브라우저
+GenericName=Web Browser
+GenericName[ko]=웹 브라우저
+Comment=Fast, private web browser built for kiyu
+Comment[ko]=kiyu 를 위해 만든 빠르고 프라이빗한 웹 브라우저
+Exec=kiyu-browser %U
+Icon=kiyu-browser
+Terminal=false
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
+StartupWMClass=kiyu-browser
+Actions=new-window;
+
+[Desktop Action new-window]
+Name=New Window
+Name[ko]=새 창
+Exec=kiyu-browser

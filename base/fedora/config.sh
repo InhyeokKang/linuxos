@@ -65,6 +65,13 @@ for f in /etc/xdg/autostart/print-applet.desktop /etc/xdg/autostart/system-confi
     if [ -f "$f" ] && ! grep -q '^Hidden=' "$f"; then echo 'Hidden=true' >> "$f"; fi
 done
 
+# ---- kiyu-superkey 컴파일 (Super 탭 → 시작 메뉴; 소스는 apps/kiyu-superkey) ----------
+if [ -f /usr/src/kiyu/kiyu-superkey.c ] && command -v gcc >/dev/null 2>&1; then
+    gcc -O2 -o /usr/bin/kiyu-superkey /usr/src/kiyu/kiyu-superkey.c -lX11 -lXtst
+    chmod 0755 /usr/bin/kiyu-superkey
+    echo "kiyu-superkey built"
+fi
+
 # ---- 기본 앱 / 권한 --------------------------------------------------------------
 chmod 0755 /usr/bin/startkiyu /usr/lib/${OS_ID}/* /usr/local/bin/* /etc/X11/xinit/xinitrc.d/*.sh 2>/dev/null || true
 gtk-update-icon-cache -f -q /usr/share/icons/hicolor || true

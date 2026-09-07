@@ -1,0 +1,4 @@
+#!/bin/sh
+# kiyu 브라우저 실행 래퍼
+export GDK_BACKEND="${GDK_BACKEND:-x11}"
+exec /usr/bin/python3 /usr/lib/kiyu-browser/kiyu-browser.py "$@"

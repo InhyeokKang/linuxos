@@ -14,13 +14,21 @@
 
 ## 핵심 결정
 
-### 1. 왜 Debian stable 인가 (Alpine, Arch, Ubuntu 가 아니라)
+### 1. 베이스: 0.1 은 Debian, 0.2 부터 Fedora
+
+0.1 은 아래 이유로 Debian stable 을 골랐고, 0.2 에서 최신 하드웨어 지원과 SELinux 등 강한 보안 기본값을 우선해 Fedora 로 전환했습니다 (비교는 [fedora-migration.md](fedora-migration.md)). 13개월 지원 주기는 릴리스 업그레이드 도우미로 대응합니다.
+
+#### 0.1 에서 Debian 을 고른 이유
 
 - **보안 업데이트가 보장된다.** Debian 보안팀이 5년간 패치. 자동 보안 업데이트를 켜 두면 사용자가 신경 쓸 게 없다.
 - **glibc.** Alpine(musl) 은 더 가볍지만 Steam, Wine, 상용 앱, NVIDIA 드라이버가 사실상 안 된다. "게임과 프로그램 설치에 제약이 없어야 한다"는 요구와 충돌한다.
 - **stable 이라 갑자기 깨지지 않는다.** Arch 는 롤링이라 일반 사용자에게 위험하다.
 - **Ubuntu 대비**: snap 강제, 서드파티 텔레메트리, 무거운 기본 서비스가 없다. 최신 하드웨어는 `trixie-backports` 커널로 커버.
 - **live-build** 로 ISO 를 재현 가능하게 만들 수 있다 (Debian 공식 라이브 이미지와 같은 도구).
+
+### 1b. 브라우저: 엔진은 WebKitGTK, 브라우저는 kiyu
+
+Firefox/Chrome 대신 kiyu 가 직접 만든 브라우저를 기본으로 씁니다. 엔진을 새로 만드는 것은 불가능에 가깝고, 엔진 위의 브라우저(UI·정책·차단·권한)를 만드는 것이 정석입니다. 근거와 설계는 [browser.md](browser.md).
 
 ### 2. 왜 XFCE 인가 (KDE, GNOME, LXQt 가 아니라)
 
