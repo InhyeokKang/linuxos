@@ -38,12 +38,17 @@ mkdir -p "$TMP/mnt"
 if mount -o loop,ro "$ISO" "$TMP/mnt"; then
     if [ -d "$TMP/mnt/live" ]; then
         BASE=debian; LIVEDIR="$TMP/mnt/live"
+    elif [ -d "$TMP/mnt/boot/x86_64/loader" ]; then
+        BASE=fedora; LIVEDIR="$TMP/mnt/boot/x86_64/loader"      # kiwi
     else
-        BASE=fedora; LIVEDIR="$TMP/mnt/images/pxeboot"
+        BASE=fedora; LIVEDIR="$TMP/mnt/images/pxeboot"          # lorax
     fi
     find "$LIVEDIR" -maxdepth 1 -printf '%f\n' > "$OUT/iso-live-dir.txt"
-    KERNEL=$(find "$LIVEDIR" -maxdepth 1 -name 'vmlinuz*' | head -1)
+    KERNEL=$(find "$LIVEDIR" -maxdepth 1 \( -name 'vmlinuz*' -o -name 'linux' \) | head -1)
     INITRD=$(find "$LIVEDIR" -maxdepth 1 -name 'initrd*' | head -1)
+    for g in "$TMP/mnt/boot/grub2/grub.cfg" "$TMP/mnt/EFI/BOOT/grub.cfg" "$TMP/mnt/boot/grub/grub.cfg"; do
+        [ -f "$g" ] && { echo "### $g"; cat "$g"; } >> "$OUT/iso-grub.cfg"
+    done
     cp "$KERNEL" "$TMP/vmlinuz"; cp "$INITRD" "$TMP/initrd.img"
     # shellcheck disable=SC2012  # 사람이 읽는 목록 보고용
     ls -laR "$TMP/mnt" 2>/dev/null | head -80 > "$OUT/iso-layout.txt"

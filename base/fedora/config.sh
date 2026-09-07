@@ -50,11 +50,20 @@ if [ -f "${ICON}" ]; then
     mkdir -p /usr/share/pixmaps
     rsvg-convert -w 48 -h 48 "${ICON}" -o "/usr/share/pixmaps/${OS_ID}.png"
 fi
-# XFCE 기본 배경 파일들을 우리 배경으로 교체 (xfdesktop 4.20 은 첫 로그인에 컴파일된 기본 파일을 씀)
-if [ -d /usr/share/backgrounds/xfce ] && [ -f "${BG}/default.svg" ]; then
-    for f in /usr/share/backgrounds/xfce/*; do
-        [ -f "$f" ] || continue
+# XFCE/Fedora 기본 배경 파일들을 우리 배경으로 교체 (xfdesktop 4.20 은 첫 로그인에 컴파일된 기본 파일을 씀;
+# Fedora 는 /usr/share/backgrounds/default.png(.xml) 과 images/ 아래를 기본으로 가리킴)
+if [ -f "${BG}/default.svg" ]; then
+    find /usr/share/backgrounds -maxdepth 2 -type f ! -path "${BG}/*" \
+        \( -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.svg' -o -name '*.webp' \) | while read -r f; do
         case "$f" in *.svg) cp "${BG}/default.svg" "$f" ;; *) cp "${BG}/default.png" "$f" ;; esac
+    done
+    # 슬라이드쇼 xml 은 우리 png 하나만 가리키게
+    find /usr/share/backgrounds -maxdepth 3 -type f -name '*.xml' | while read -r f; do
+        printf '<background><static><duration>86400</duration><file>%s</file></static></background>\n' "${BG}/default.png" > "$f"
+    done
+    # 흔한 기본 경로 심볼릭 링크
+    for link in /usr/share/backgrounds/default.png /usr/share/backgrounds/images/default.png; do
+        [ -e "$link" ] && cp "${BG}/default.png" "$link"
     done
 fi
 # 패널 플러그인 in-process (wrapper 프로세스 제거)

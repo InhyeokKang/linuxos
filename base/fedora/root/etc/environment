@@ -1,0 +1,6 @@
+# kiyu: 배포판 기본 설정 디렉터리를 XDG 검색 경로 맨 앞에 (모든 세션, systemd --user 서비스 포함)
+XDG_CONFIG_DIRS=/etc/xdg/xdg-kiyu:/etc/xdg
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+SDL_IM_MODULE=fcitx

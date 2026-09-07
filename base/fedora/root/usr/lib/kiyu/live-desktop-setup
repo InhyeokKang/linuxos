@@ -7,6 +7,10 @@ src=/usr/share/applications/kiyu-install.desktop
 if [ -f "$src" ] && [ ! -f "$dest/kiyu-install.desktop" ]; then
     cp "$src" "$dest/kiyu-install.desktop"; chmod +x "$dest/kiyu-install.desktop"
 fi
-# livesys 가 놓는 Fedora 기본 설치 아이콘은 중복이므로 제거
-rm -f "$dest/liveinst.desktop" 2>/dev/null
+# livesys 가 놓는 Fedora 기본 설치 아이콘(이름은 버전마다 다름)은 중복이므로 제거
+for f in "$dest"/*.desktop; do
+    [ -f "$f" ] || continue
+    case "$f" in *kiyu-install.desktop) continue ;; esac
+    grep -q 'liveinst\|anaconda' "$f" 2>/dev/null && rm -f "$f"
+done
 exit 0

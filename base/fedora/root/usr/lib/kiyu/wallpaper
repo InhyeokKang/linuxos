@@ -13,7 +13,7 @@ done
 for p in $props; do
     cur=$(xfconf-query -c xfce4-desktop -p "$p" 2>/dev/null)
     case "$cur" in
-        ""|/usr/share/backgrounds/xfce/*|/usr/share/images/desktop-base/*)
+        ""|/usr/share/backgrounds/xfce/*|/usr/share/backgrounds/images/*|/usr/share/backgrounds/default*|/usr/share/backgrounds/f[0-9]*|/usr/share/images/desktop-base/*)
             xfconf-query -c xfce4-desktop -p "$p" -s "$BG"
             xfconf-query -c xfce4-desktop -p "${p%/last-image}/image-style" -n -t int -s 5
             ;;
