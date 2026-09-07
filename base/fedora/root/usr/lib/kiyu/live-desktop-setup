@@ -1,0 +1,12 @@
+#!/bin/sh
+# 라이브 세션에서만: 바탕화면에 "설치" 아이콘을 놓습니다.
+[ -d /run/initramfs/live ] || [ -d /run/live/medium ] || exit 0
+command -v xdg-user-dir >/dev/null 2>&1 && dest="$(xdg-user-dir DESKTOP)" || dest="$HOME/Desktop"
+mkdir -p "$dest"
+src=/usr/share/applications/kiyu-install.desktop
+if [ -f "$src" ] && [ ! -f "$dest/kiyu-install.desktop" ]; then
+    cp "$src" "$dest/kiyu-install.desktop"; chmod +x "$dest/kiyu-install.desktop"
+fi
+# livesys 가 놓는 Fedora 기본 설치 아이콘은 중복이므로 제거
+rm -f "$dest/liveinst.desktop" 2>/dev/null
+exit 0

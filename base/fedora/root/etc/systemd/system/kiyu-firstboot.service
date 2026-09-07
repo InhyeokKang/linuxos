@@ -1,0 +1,12 @@
+[Unit]
+Description=kiyu first boot setup
+ConditionPathExists=!/var/lib/kiyu/firstboot-done
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/kiyu/firstboot
+
+[Install]
+WantedBy=multi-user.target

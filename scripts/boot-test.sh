@@ -32,20 +32,36 @@ shot() {  # 스크린샷 (ppm -> png)
     if command -v convert >/dev/null 2>&1; then convert "$TMP/shot.ppm" "$2" 2>/dev/null || cp "$TMP/shot.ppm" "${2%.png}.ppm"; else cp "$TMP/shot.ppm" "${2%.png}.ppm"; fi
 }
 
-# 커널/initrd 추출
+# 커널/initrd 추출 (Debian live-build: live/, Fedora kiwi: images/pxeboot/ + LiveOS/)
+BASE=${BASE:-fedora}
 mkdir -p "$TMP/mnt"
 if mount -o loop,ro "$ISO" "$TMP/mnt"; then
-    ls "$TMP/mnt/live" > "$OUT/iso-live-dir.txt"
-    KERNEL=$(find "$TMP/mnt/live" -maxdepth 1 -name 'vmlinuz*' | head -1)
-    INITRD=$(find "$TMP/mnt/live" -maxdepth 1 -name 'initrd*' | head -1)
+    if [ -d "$TMP/mnt/live" ]; then
+        BASE=debian; LIVEDIR="$TMP/mnt/live"
+    else
+        BASE=fedora; LIVEDIR="$TMP/mnt/images/pxeboot"
+    fi
+    find "$LIVEDIR" -maxdepth 1 -printf '%f\n' > "$OUT/iso-live-dir.txt"
+    KERNEL=$(find "$LIVEDIR" -maxdepth 1 -name 'vmlinuz*' | head -1)
+    INITRD=$(find "$LIVEDIR" -maxdepth 1 -name 'initrd*' | head -1)
     cp "$KERNEL" "$TMP/vmlinuz"; cp "$INITRD" "$TMP/initrd.img"
-    ls -la "$TMP/mnt" "$TMP/mnt/live" "$TMP/mnt/EFI" "$TMP/mnt/EFI/boot" 2>/dev/null > "$OUT/iso-layout.txt"
+    # shellcheck disable=SC2012  # 사람이 읽는 목록 보고용
+    ls -laR "$TMP/mnt" 2>/dev/null | head -80 > "$OUT/iso-layout.txt"
     umount "$TMP/mnt"
-    note "kernel: $(basename "$KERNEL") initrd: $(basename "$INITRD")"
+    note "base: $BASE kernel: $(basename "$KERNEL") initrd: $(basename "$INITRD")"
 else
     note "FAIL: ISO mount"
     exit 1
 fi
+VOLID=$(blkid -o value -s LABEL "$ISO" 2>/dev/null || true)
+if [ "$BASE" = fedora ]; then
+    APPEND="root=live:CDLABEL=${VOLID} rd.live.image console=tty0 console=ttyS0,115200 systemd.show_status=1"
+    GUEST_USER=liveuser; GUEST_PASS=""
+else
+    APPEND="boot=live components apparmor=1 security=apparmor locales=ko_KR.UTF-8 keyboard-layouts=kr timezone=Asia/Seoul username=live hostname=kiyu console=tty0 console=ttyS0,115200 systemd.show_status=1"
+    GUEST_USER=live; GUEST_PASS=live
+fi
+note "volid: ${VOLID:-?}"
 
 COMMON=(-m 2048 -smp 2 -display none -vga std -device virtio-net-pci,netdev=n0 -netdev user,id=n0 -usb -device usb-tablet -no-reboot)
 
@@ -53,7 +69,7 @@ COMMON=(-m 2048 -smp 2 -display none -vga std -device virtio-net-pci,netdev=n0 -
 note "== BIOS direct-kernel boot"
 qemu-system-x86_64 "${KVM[@]}" "${COMMON[@]}" -cdrom "$ISO" \
     -kernel "$TMP/vmlinuz" -initrd "$TMP/initrd.img" \
-    -append "boot=live components apparmor=1 security=apparmor locales=ko_KR.UTF-8 keyboard-layouts=kr timezone=Asia/Seoul username=live hostname=kiyu console=tty0 console=ttyS0,115200 systemd.show_status=1" \
+    -append "$APPEND" \
     -serial "unix:$TMP/serial,server,nowait" -monitor "unix:$TMP/mon1,server,nowait" \
     -pidfile "$TMP/qemu1.pid" >"$OUT/qemu-bios.log" 2>&1 &
 sleep 5
@@ -75,7 +91,7 @@ for t in 30 60 90 120 "$WAIT"; do
 done
 kill "$TAIL_PID" 2>/dev/null
 # 게스트 안에서 측정
-if python3 "$HERE/lib/serial-shell.py" "$TMP/serial" "$OUT/guest-report.txt" 200; then note "guest shell: ok"; else note "guest shell: login failed"; fi
+if GUEST_USER="$GUEST_USER" GUEST_PASS="$GUEST_PASS" GUEST_BASE="$BASE" python3 "$HERE/lib/serial-shell.py" "$TMP/serial" "$OUT/guest-report.txt" 200; then note "guest shell: ok"; else note "guest shell: login failed"; fi
 shot "$TMP/mon1" "$OUT/bios-final.png"
 mon "$TMP/mon1" "quit"; sleep 2; kill "$(cat "$TMP/qemu1.pid" 2>/dev/null)" 2>/dev/null
 

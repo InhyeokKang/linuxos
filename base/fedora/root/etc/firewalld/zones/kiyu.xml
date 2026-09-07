@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- kiyu 기본 존: 들어오는 연결은 전부 차단, 나가는 연결은 허용.
+     포트 열기: firewall-cmd 에 permanent 와 add-port=포트/tcp 옵션을 주고 reload (docs/security.md 참고) -->
+<zone target="DROP">
+  <short>kiyu</short>
+  <description>Deny all inbound. Outbound allowed.</description>
+  <service name="dhcpv6-client"/>
+</zone>

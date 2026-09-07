@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=kiyu Desktop
+Name[ko]=kiyu 데스크톱
+Comment=Lightweight desktop for everyone
+Comment[ko]=가볍고 안전한 데스크톱
+Exec=startkiyu
+TryExec=startxfce4
+Icon=kiyu
+Type=Application
+DesktopNames=XFCE

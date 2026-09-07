@@ -6,7 +6,10 @@ import socket, sys, time, re
 
 sock_path, out_path = sys.argv[1], sys.argv[2]
 deadline = time.time() + float(sys.argv[3] if len(sys.argv) > 3 else 180)
-USER, PASSWORD = "live", "live"
+import os
+USER = os.environ.get("GUEST_USER", "live")
+PASSWORD = os.environ.get("GUEST_PASS", "live")
+BASE = os.environ.get("GUEST_BASE", "debian")
 COMMANDS = [
     "echo '=== os-release'; cat /etc/os-release",
     "echo '=== uname'; uname -r; cat /proc/cmdline",
@@ -15,9 +18,9 @@ COMMANDS = [
     "echo '=== pss by process (MB)'; sudo sh -c 'for p in /proc/[0-9]*; do c=$(cat $p/comm 2>/dev/null); v=$(awk \"/^Pss:/{s+=\\$2}END{print s+0}\" $p/smaps_rollup 2>/dev/null); [ -n \"$v\" ] && [ \"$v\" -gt 0 ] && echo \"$v $c\"; done | sort -rn | awk \"{t+=\\$1; printf \\\"%6.1f %s\\\\n\\\", \\$1/1024, \\$2} END{printf \\\"TOTAL %.0f MB\\\\n\\\", t/1024}\" | head -30'",
     "echo '=== boot time'; systemd-analyze 2>/dev/null; systemd-analyze blame 2>/dev/null | head -12",
     "echo '=== failed units'; systemctl --failed --no-pager --no-legend",
-    "echo '=== services'; for s in lightdm nftables apparmor zramswap unattended-upgrades NetworkManager; do printf '%s: %s\\n' $s $(systemctl is-active $s); done",
-    "echo '=== apparmor'; cat /sys/module/apparmor/parameters/enabled 2>&1; cat /sys/kernel/security/lsm 2>&1; echo; systemctl status apparmor --no-pager 2>&1 | head -6; sudo /usr/sbin/aa-status 2>&1 | head -5",
-    "echo '=== firewall'; sudo /usr/sbin/nft list ruleset | head -8",
+    "echo '=== services'; for s in lightdm nftables firewalld apparmor zramswap dnf5-automatic.timer unattended-upgrades NetworkManager livesys; do printf '%s: %s\\n' $s $(systemctl is-active $s 2>/dev/null); done",
+    "echo '=== mac'; cat /sys/kernel/security/lsm 2>&1; echo; getenforce 2>/dev/null; sestatus 2>/dev/null | head -3; systemctl status apparmor --no-pager 2>&1 | head -4",
+    "echo '=== firewall'; sudo firewall-cmd --get-default-zone 2>/dev/null; sudo firewall-cmd --list-all 2>/dev/null | head -12; sudo /usr/sbin/nft list ruleset 2>/dev/null | head -8",
     "echo '=== sysctl'; /usr/sbin/sysctl kernel.kptr_restrict kernel.yama.ptrace_scope kernel.unprivileged_bpf_disabled vm.swappiness",
     "echo '=== xsession'; ps -eo comm | grep -E '^(Xorg|lightdm|xfce4-session|xfwm4|xfce4-panel|xfdesktop|xcape|fcitx5|blueman-applet|applet.py|nm-applet)$' | sort | uniq -c",
     "echo '=== wallpaper'; xfconf-query -c xfce4-desktop -l -v 2>/dev/null | grep last-image; ls -la /usr/share/backgrounds/xfce/ 2>&1 | head; dpkg-divert --list '*backgrounds*' 2>&1",
@@ -65,7 +68,7 @@ for _ in range(8):
         break
     if wait_for(r"login:", 10):
         send(USER + "\n")
-        if wait_for(r"[Pp]assword:|비밀번호:", 10):
+        if wait_for(r"[Pp]assword:|비밀번호:|암호:", 8):
             send(PASSWORD + "\n")
         if wait_for(r"\$ ?$|\$ \r?\n?$", 10) or wait_for(r"live@", 5):
             logged_in = True

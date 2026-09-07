@@ -6,7 +6,8 @@
 # 실제 ISO 와의 차이: 호스트 배포판의 XFCE 버전을 쓰고, Firefox/LibreOffice 등 앱은 설치하지 않습니다.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-A=config/includes.chroot_after_packages
+A=base/fedora/root
+D=base/debian/config/includes.chroot_after_packages
 OUT=out/preview
 DISP=:99
 mkdir -p "$OUT"
@@ -30,13 +31,14 @@ install_and_overlay() {
     # 라이브 이미지에서 includes 가 하는 일을 그대로 재현
     cp -a "$A/etc/xdg/xdg-kiyu" /etc/xdg/
     cp -a "$A/etc/fonts/conf.d/." /etc/fonts/conf.d/
-    cp -a "$A/etc/X11/Xsession.d/." /etc/X11/Xsession.d/
+    cp -a "$D/etc/X11/Xsession.d/." /etc/X11/Xsession.d/
     mkdir -p "$HOME/.config/gtk-3.0" && cp -a "$A/etc/skel/.config/gtk-3.0/gtk.css" "$HOME/.config/gtk-3.0/gtk.css"
     cp -a "$A/usr/bin/startkiyu" /usr/bin/
     cp -a "$A/usr/lib/kiyu" /usr/lib/
     cp -a "$A/usr/share/backgrounds/kiyu" /usr/share/backgrounds/
     cp -a "$A/usr/share/icons/hicolor/scalable/apps/kiyu.svg" /usr/share/icons/hicolor/scalable/apps/
     cp -a "$A/usr/share/applications/." /usr/share/applications/
+    cp -a "$D/usr/share/applications/kiyu-install.desktop" /usr/share/applications/ 2>/dev/null || true
     cp -a "$A/usr/local/bin/." /usr/local/bin/
     chmod +x /usr/bin/startkiyu /usr/lib/kiyu/* /usr/local/bin/kiyu-*
 

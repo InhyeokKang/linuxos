@@ -1,0 +1,22 @@
+#!/bin/sh
+# 현재 시스템 상태 요약 (자원 사용량 / 보안 상태)
+. /etc/os-release
+printf '%s\n' "$PRETTY_NAME"
+printf '커널: %s\n' "$(uname -r)"
+printf '메모리: '
+free -m | awk '/^Mem:/{printf "%d MB 사용 / %d MB 전체\n", $3, $2}'
+printf 'zram: '
+if command -v zramctl >/dev/null 2>&1 && [ -n "$(zramctl --noheadings 2>/dev/null)" ]; then
+    zramctl --noheadings --output DISKSIZE,DATA,COMPR,ALGORITHM 2>/dev/null | head -1
+else
+    echo "꺼짐"
+fi
+printf '방화벽: %s (존: %s)\n' "$(systemctl is-active firewalld 2>/dev/null)" "$(firewall-cmd --get-default-zone 2>/dev/null || echo ?)"
+printf 'SELinux: %s\n' "$(getenforce 2>/dev/null || echo ?)"
+printf '자동 보안 업데이트: %s\n' "$(systemctl is-active dnf5-automatic.timer 2>/dev/null || systemctl is-active dnf-automatic.timer 2>/dev/null)"
+printf 'Secure Boot: '
+if command -v mokutil >/dev/null 2>&1; then mokutil --sb-state 2>/dev/null | head -1; else
+    if [ -d /sys/firmware/efi ]; then echo "UEFI (mokutil 없음)"; else echo "BIOS 모드"; fi
+fi
+printf '디스크 암호화: '
+if lsblk -o TYPE 2>/dev/null | grep -q crypt; then echo "켜짐"; else echo "꺼짐"; fi

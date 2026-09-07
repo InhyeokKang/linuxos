@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
-# ISO 빌드. Debian 12/13 (또는 그 컨테이너) 에서 root 로 실행하세요.
+# ISO 빌드. os.conf 의 BASE 에 따라 Fedora(kiwi) 또는 Debian(live-build) 빌드를 실행합니다.
 #   sudo ./scripts/build.sh            # 전체 빌드
 #   sudo ./scripts/build.sh --clean    # 캐시 포함 전부 정리
+#   BASE=debian sudo ./scripts/build.sh  # 베이스 강제 지정
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# shellcheck disable=SC1091
+. ./os.conf
+BASE="${BASE:-${OS_BASE:-fedora}}"
+if [ "$BASE" = "fedora" ]; then
+    exec ./scripts/build-fedora.sh "$@"
+fi
+cd base/debian
 
 if [ "$(id -u)" -ne 0 ]; then
     echo "root 권한이 필요합니다: sudo $0 $*" >&2
@@ -23,9 +31,6 @@ if [ "${1:-}" = "--clean" ]; then
     ./auto/clean
     exit 0
 fi
-
-# shellcheck disable=SC1091
-. ./os.conf
 
 echo "==> lb clean"
 lb clean

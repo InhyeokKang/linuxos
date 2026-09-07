@@ -1,0 +1,17 @@
+#!/bin/sh
+# 첫 부팅 시 한 번 실행: 설치본 커널 파라미터(하드닝) 적용, Flathub 등록
+set -u
+mkdir -p /var/lib/kiyu
+ok=1
+# 설치본(라이브가 아닐 때)에는 하드닝 커널 파라미터를 BLS 항목에 추가
+if [ ! -d /run/initramfs/live ] && command -v grubby >/dev/null 2>&1; then
+    for arg in slab_nomerge init_on_alloc=1 randomize_kstack_offset=on page_alloc.shuffle=1; do
+        grep -q "$arg" /proc/cmdline || grubby --update-kernel=ALL --args="$arg" 2>/dev/null || true
+    done
+    grubby --update-kernel=ALL --remove-args="rhgb" 2>/dev/null || true
+fi
+if ! flatpak remotes --system 2>/dev/null | grep -q '^flathub'; then
+    flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo || ok=0
+fi
+[ "$ok" = 1 ] && date -u +%FT%TZ > /var/lib/kiyu/firstboot-done
+exit 0

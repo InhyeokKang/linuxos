@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Super key handler
+Exec=/usr/lib/kiyu/superkey
+NoDisplay=true
+OnlyShowIn=XFCE;

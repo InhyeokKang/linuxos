@@ -1,60 +1,56 @@
-name: Build ISO
+name: Build ISO (Debian, legacy)
 
-# 수동 실행 (Actions 탭 > Build ISO > Run workflow), v* 태그 푸시,
-# 또는 이 워크플로 파일이 바뀐 푸시. Fedora 베이스 (kiwi-ng). 빌드 약 20~30분 + 부팅 테스트 약 10분.
+# 수동 실행 (Actions 탭 > Build ISO > Run workflow), 또는 v* 태그 푸시,
+# 또는 이 워크플로 파일 자체가 바뀐 푸시. 빌드 약 20분 + 부팅 테스트 약 10분.
 on:
   workflow_dispatch:
-  push:
-    branches: ['**']
-    tags: ['v*']
-    paths: ['.github/workflows/build-iso.yml']
 
 permissions:
   contents: write
 
 jobs:
   build:
-    name: kiwi-ng (Fedora)
+    name: live-build (Debian trixie)
     runs-on: ubuntu-latest
     timeout-minutes: 180
     container:
-      image: registry.fedoraproject.org/fedora:44
+      image: debian:trixie
       options: --privileged
     steps:
       - name: Install build dependencies
         run: |
-          dnf install -y --setopt=install_weak_deps=False \
-            kiwi-cli kiwi-systemdeps-core kiwi-systemdeps-iso-media kiwi-systemdeps-bootloaders \
-            kiwi-systemdeps-filesystems librsvg2-tools git python3 python3-pyyaml \
-            distribution-gpg-keys util-linux
-          kiwi-ng --version
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            live-build debootstrap squashfs-tools xorriso librsvg2-bin \
+            git ca-certificates python3 python3-yaml nftables
       - uses: actions/checkout@v4
       - name: Static checks
         run: ./scripts/check.sh
       - name: Build
-        run: ./scripts/build-fedora.sh
+        run: BASE=debian ./scripts/build.sh
       - name: Collect build info
         if: always()
         run: |
           mkdir -p build-info
-          cp base/fedora/out/build.log build-info/ 2>/dev/null || true
-          cp base/fedora/out/*.packages build-info/ 2>/dev/null || true
-          cp base/fedora/out/*.sha256 build-info/ 2>/dev/null || true
-          ls -la base/fedora/out/*.iso > build-info/iso-size.txt 2>/dev/null || true
+          cp base/debian/build.log build-info/ 2>/dev/null || true
+          cp base/debian/*.packages build-info/ 2>/dev/null || true
+          cp base/debian/*.iso.sha256 build-info/ 2>/dev/null || true
+          ls -la base/debian/*.iso > build-info/iso-size.txt 2>/dev/null || true
       - name: Upload ISO
         uses: actions/upload-artifact@v4
         with:
-          name: kiyu-iso
+          name: kiyu-iso-debian
           path: |
-            base/fedora/out/*.iso
-            base/fedora/out/*.sha256
+            base/debian/*.iso
+            base/debian/*.iso.sha256
+            base/debian/*.packages
           if-no-files-found: error
           compression-level: 0
       - name: Upload build info
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-info
+          name: build-info-debian
           path: build-info/
 
   boot-test:
@@ -72,27 +68,27 @@ jobs:
           ls -la /dev/kvm || true
       - uses: actions/download-artifact@v4
         with:
-          name: kiyu-iso
+          name: kiyu-iso-debian
           path: iso
       - uses: actions/download-artifact@v4
         with:
-          name: build-info
+          name: build-info-debian
           path: build-info
       - name: Boot the ISO
         run: |
           iso=$(find iso -name '*.iso' | head -1)
-          sudo BASE=fedora ./scripts/boot-test.sh "$iso" results 180 || true
+          sudo BASE=debian ./scripts/boot-test.sh "$iso" results 150 || true
           sudo chown -R "$(id -u):$(id -g)" results
           cp build-info/*.packages results/ 2>/dev/null || true
           cp build-info/iso-size.txt results/ 2>/dev/null || true
           tail -n 300 build-info/build.log > results/build-log-tail.txt 2>/dev/null || true
-          grep -nE "error|Error|ERROR|No match|Failed" build-info/build.log > results/build-log-errors.txt 2>/dev/null || true
+          grep -nE "^E: |Err:|dpkg: error|Unable to locate|hook.*(error|fail)" build-info/build.log > results/build-log-errors.txt 2>/dev/null || true
           cat results/summary.txt
       - name: Upload boot-test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: boot-test
+          name: boot-test-debian
           path: results/
       - name: Publish results to ci-results branch
         if: always()
@@ -105,9 +101,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           rm -rf /tmp/ci-results && mkdir -p /tmp/ci-results
           cp -r results/. /tmp/ci-results/
-          git fetch origin ci-results && git checkout -B ci-results origin/ci-results || git checkout --orphan ci-results
+          git fetch origin ci-results-debian && git checkout -B ci-results-debian origin/ci-results-debian || git checkout --orphan ci-results-debian
           git rm -rfq . >/dev/null 2>&1 || true
-          rm -rf ./*
+          rm -rf ./* 
           mkdir -p "run-$RUN"
           cp -r /tmp/ci-results/. "run-$RUN/"
           find "run-$RUN" -name '*.ppm' -delete
@@ -115,4 +111,4 @@ jobs:
           ln -sfn "run-$RUN" latest
           git add -A
           git commit -qm "boot-test results for run $RUN ($SHA)" || echo "nothing to commit"
-          git push -f origin ci-results
+          git push -f origin ci-results-debian

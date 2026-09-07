@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=kiyu Gaming Setup
+Name[ko]=kiyu 게임 설정
+Comment=Install Steam, Proton tools and GameMode
+Comment[ko]=Steam, Proton 도구, GameMode 를 설치합니다
+Exec=xfce4-terminal --title="kiyu 게임 설정" -e "bash -c 'kiyu-setup-gaming; echo; read -p \"Enter 를 누르면 닫힙니다.\"'"
+Icon=input-gaming
+Terminal=false
+Categories=Game;Settings;

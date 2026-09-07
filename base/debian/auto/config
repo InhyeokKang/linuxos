@@ -3,7 +3,8 @@
 set -e
 
 cd "$(dirname "$0")/.."
-. ./os.conf
+# shellcheck disable=SC1091
+. ../../os.conf
 
 # 커널 하드닝 파라미터 (라이브/설치본 공통). 설치본은 etc/default/grub.d 에도 있음.
 KERNEL_HARDENING="apparmor=1 security=apparmor slab_nomerge init_on_alloc=1 randomize_kstack_offset=on page_alloc.shuffle=1"
@@ -84,10 +85,10 @@ if [ -d "${LB_TEMPLATES}" ]; then
     done
     find config/bootloaders -type f \( -name '*.cfg' -o -name '*.cfg.in' \) \
         -exec sed -i "s|Debian GNU/Linux|${OS_NAME}|g" {} +
-    if [ -f branding/boot-splash.svg ]; then
-        cp branding/boot-splash.svg config/bootloaders/isolinux/splash.svg 2>/dev/null || true
+    if [ -f ../../branding/boot-splash.svg ]; then
+        cp ../../branding/boot-splash.svg config/bootloaders/isolinux/splash.svg 2>/dev/null || true
         if command -v rsvg-convert >/dev/null 2>&1; then
-            rsvg-convert -w 640 -h 480 branding/boot-splash.svg -o config/bootloaders/grub-pc/splash.png
+            rsvg-convert -w 640 -h 480 ../../branding/boot-splash.svg -o config/bootloaders/grub-pc/splash.png
         fi
     fi
 fi

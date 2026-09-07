@@ -1,0 +1,19 @@
+#!/bin/bash
+# kiyu 윈도우 프로그램(.exe) 실행 환경 설치 (Fedora): Wine + Bottles
+set -euo pipefail
+[ "$(id -u)" -ne 0 ] || { echo "일반 사용자로 실행하세요." >&2; exit 1; }
+echo "== [1/3] Wine 설치"
+sudo dnf install -y wine winetricks
+echo "== [2/3] Bottles 설치 (Flatpak)"
+flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install -y --system flathub com.usebottles.bottles
+echo "== [3/3] .exe 파일을 더블클릭하면 Wine 으로 열리도록 설정"
+for mime in application/x-ms-dos-executable application/x-msdownload application/x-msi application/vnd.microsoft.portable-executable; do
+    xdg-mime default wine.desktop "$mime" || true
+done
+cat <<MSG
+
+완료! .exe 파일을 더블클릭하면 Wine 으로 실행됩니다.
+ - 제대로 안 되는 프로그램은 Bottles 에서 새 병(bottle)을 만들어 설치해 보세요.
+ - 한글이 네모로 보이면: winetricks cjkfonts
+MSG

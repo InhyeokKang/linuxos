@@ -1,35 +1,35 @@
 # live-build 산출물
-/cache/
-/chroot/
-/chroot.*/
-/binary/
-/binary.*/
-/local/
-/.build/
-/build.log
-/*.iso
-/*.iso.sha256
-/*.contents
-/*.packages
-/*.files
-/*.log
-/*.zsync
-/*.sha256
-/*.sha512
+/base/debian/cache/
+/base/debian/chroot/
+/base/debian/chroot.*/
+/base/debian/binary/
+/base/debian/binary.*/
+/base/debian/local/
+/base/debian/.build/
+/base/debian/build.log
+/base/debian/*.iso
+/base/debian/*.iso.sha256
+/base/debian/*.contents
+/base/debian/*.packages
+/base/debian/*.files
+/base/debian/*.log
+/base/debian/*.zsync
+/base/debian/*.sha256
+/base/debian/*.sha512
 
 # lb config 가 생성하는 파일
-/config/binary
-/config/bootstrap
-/config/build
-/config/chroot
-/config/common
-/config/source
-/config/bootloaders/
+/base/debian/config/binary
+/base/debian/config/bootstrap
+/base/debian/config/build
+/base/debian/config/chroot
+/base/debian/config/common
+/base/debian/config/source
+/base/debian/config/bootloaders/
 
 # auto/config 가 생성하는 파일
-/config/includes.chroot_after_packages/usr/lib/kiyu/os-release
-/config/includes.chroot_after_packages/etc/issue
-/config/includes.chroot_after_packages/etc/issue.net
+/base/debian/config/includes.chroot_after_packages/usr/lib/kiyu/os-release
+/base/debian/config/includes.chroot_after_packages/etc/issue
+/base/debian/config/includes.chroot_after_packages/etc/issue.net
 
 # QEMU 테스트 디스크
 /.qemu/

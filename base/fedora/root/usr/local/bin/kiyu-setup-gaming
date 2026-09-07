@@ -1,0 +1,46 @@
+#!/bin/bash
+# kiyu 게임 환경 설치 (Fedora)
+#  - Steam (Flatpak, Proton 으로 윈도우 게임 실행), ProtonUp-Qt, MangoHud, GameMode
+#  - --all : Heroic (Epic/GOG), Lutris 추가
+#  - NVIDIA GPU 가 감지되면 RPM Fusion 의 전용 드라이버 설치 여부를 물어봅니다
+set -euo pipefail
+ALL=0
+for arg in "$@"; do case "$arg" in --all) ALL=1 ;; -h|--help) sed -n '2,6p' "$0"; exit 0 ;; esac; done
+[ "$(id -u)" -ne 0 ] || { echo "일반 사용자로 실행하세요." >&2; exit 1; }
+
+echo "== [1/4] GameMode"
+sudo dnf install -y gamemode
+
+echo "== [2/4] NVIDIA 확인"
+if lspci -nn 2>/dev/null | grep -qiE '(VGA|3D).*NVIDIA'; then
+    read -r -p "NVIDIA 그래픽이 감지되었습니다. RPM Fusion 에서 전용 드라이버를 설치할까요? [y/N] " yn
+    if [[ "${yn,,}" == y* ]]; then
+        rel=$(rpm -E %fedora)
+        sudo dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${rel}.noarch.rpm" \
+                            "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${rel}.noarch.rpm"
+        sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda
+        echo "드라이버 빌드가 백그라운드에서 진행됩니다. 5분쯤 뒤 재부팅하세요."
+    fi
+else
+    echo "NVIDIA 그래픽 없음 (Mesa 드라이버가 이미 포함되어 있습니다)."
+fi
+
+echo "== [3/4] Flathub 확인"
+flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+echo "== [4/4] Steam 및 도구 설치"
+APPS=( com.valvesoftware.Steam net.davidotek.pupgui2 com.valvesoftware.Steam.CompatibilityTool.Proton-GE )
+[ "$ALL" = 1 ] && APPS+=( com.heroicgameslauncher.hgl net.lutris.Lutris )
+flatpak install -y --system flathub "${APPS[@]}"
+runtime=$(flatpak info --system --show-runtime com.valvesoftware.Steam 2>/dev/null || true); branch=${runtime##*/}
+if [ -n "$branch" ]; then
+    flatpak install -y --system flathub "org.freedesktop.Platform.VulkanLayer.MangoHud//${branch}" \
+        "org.freedesktop.Platform.VulkanLayer.gamescope//${branch}" || echo "경고: Vulkan 레이어 설치 실패 (선택 사항)"
+fi
+flatpak override --system --filesystem=/media --filesystem=/mnt --filesystem=/run/media com.valvesoftware.Steam
+cat <<MSG
+
+완료! 시작 메뉴 > 게임 > Steam 을 실행하세요.
+ - 윈도우 게임: Steam 설정 > 호환 > "모든 타이틀에 Steam Play 사용" 을 켜세요.
+ - Proton-GE 로 바꾸려면 ProtonUp-Qt 를 실행하세요.
+MSG
