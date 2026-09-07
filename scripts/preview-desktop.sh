@@ -31,6 +31,7 @@ install_and_overlay() {
     cp -a "$A/etc/xdg/xdg-kiyu" /etc/xdg/
     cp -a "$A/etc/fonts/conf.d/." /etc/fonts/conf.d/
     cp -a "$A/etc/X11/Xsession.d/." /etc/X11/Xsession.d/
+    mkdir -p "$HOME/.config/gtk-3.0" && cp -a "$A/etc/skel/.config/gtk-3.0/gtk.css" "$HOME/.config/gtk-3.0/gtk.css"
     cp -a "$A/usr/bin/startkiyu" /usr/bin/
     cp -a "$A/usr/lib/kiyu" /usr/lib/
     cp -a "$A/usr/share/backgrounds/kiyu" /usr/share/backgrounds/
