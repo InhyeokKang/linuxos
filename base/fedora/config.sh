@@ -19,19 +19,22 @@ LIVESYS
 
 # ---- 디스플레이 매니저 / 세션 ----------------------------------------------------
 systemctl set-default graphical.target
-systemctl enable lightdm.service
+systemctl enable lightdm.service 2>/dev/null || echo "WARN: cannot enable lightdm"
 echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager 2>/dev/null || true
 
 # ---- 보안 / 서비스 -----------------------------------------------------------
-systemctl enable firewalld.service
-systemctl enable dnf5-automatic.timer 2>/dev/null || systemctl enable dnf-automatic.timer 2>/dev/null || true
-systemctl enable fstrim.timer
-systemctl enable NetworkManager.service
-systemctl enable chronyd.service 2>/dev/null || true
-systemctl enable kiyu-firstboot.service
-systemctl enable livesys.service livesys-late.service 2>/dev/null || true
-systemctl mask ctrl-alt-del.target
+en() { systemctl enable "$1" 2>/dev/null || echo "WARN: cannot enable $1"; }
+en firewalld.service
+en dnf5-automatic.timer || en dnf-automatic.timer
+en fstrim.timer
+en NetworkManager.service
+en chronyd.service
+en kiyu-firstboot.service
+en livesys.service; en livesys-late.service
 systemctl disable ModemManager.service 2>/dev/null || true
+# Ctrl+Alt+Del 로 콘솔에서 재부팅되지 않게 (Fedora 는 /etc 에 링크가 이미 있어 mask 대신 직접 /dev/null 로)
+rm -f /etc/systemd/system/ctrl-alt-del.target
+ln -s /dev/null /etc/systemd/system/ctrl-alt-del.target
 # 기본 방화벽 존: kiyu (인바운드 전부 차단)
 if [ -f /etc/firewalld/firewalld.conf ]; then
     sed -i 's/^DefaultZone=.*/DefaultZone=kiyu/' /etc/firewalld/firewalld.conf
