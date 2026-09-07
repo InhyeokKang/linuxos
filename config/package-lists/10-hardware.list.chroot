@@ -1,0 +1,54 @@
+# 펌웨어 / 마이크로코드 / 그래픽 드라이버
+firmware-linux
+firmware-linux-nonfree
+firmware-misc-nonfree
+firmware-iwlwifi
+firmware-realtek
+firmware-atheros
+firmware-brcm80211
+firmware-mediatek
+firmware-sof-signed
+firmware-intel-sound
+bluez-firmware
+intel-microcode
+amd64-microcode
+fwupd
+
+# Xorg (modesetting 드라이버가 intel/amd/nouveau 를 모두 담당)
+xserver-xorg-core
+xserver-xorg-input-libinput
+xserver-xorg-video-amdgpu
+xserver-xorg-video-vesa
+xserver-xorg-video-fbdev
+xserver-xorg-video-qxl
+xserver-xorg-video-vmware
+x11-xserver-utils
+x11-utils
+xdg-utils
+xdg-user-dirs
+
+# Mesa: OpenGL / Vulkan / 하드웨어 비디오 디코딩
+libgl1-mesa-dri
+mesa-vulkan-drivers
+libvulkan1
+mesa-va-drivers
+intel-media-va-driver
+
+# 네트워크
+network-manager
+network-manager-gnome
+wpasupplicant
+wireless-regdb
+bluez
+blueman
+
+# 오디오 (PipeWire)
+pipewire
+pipewire-audio
+alsa-utils
+pavucontrol
+
+# 프린터 (mDNS 자동검색은 보안상 제외, IP/USB 프린터 지원)
+cups
+cups-filters
+system-config-printer

@@ -1,0 +1,12 @@
+#!/bin/sh
+# 첫 부팅 시 한 번 실행: Flathub 등록 등 네트워크가 필요한 마무리 작업
+set -u
+mkdir -p /var/lib/haneul
+ok=1
+if ! flatpak remotes --system 2>/dev/null | grep -q '^flathub'; then
+    flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo || ok=0
+fi
+if [ "$ok" = 1 ]; then
+    date -u +%FT%TZ > /var/lib/haneul/firstboot-done
+fi
+exit 0

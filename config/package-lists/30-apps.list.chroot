@@ -1,0 +1,15 @@
+# 기본 앱 (윈도우 기본 앱에 대응). 이 파일을 지우면 순수 데스크톱만 남습니다.
+firefox-esr
+firefox-esr-l10n-ko
+mousepad
+ristretto
+mpv
+xarchiver
+galculator
+gparted
+libreoffice-writer
+libreoffice-calc
+libreoffice-impress
+libreoffice-gtk3
+libreoffice-l10n-ko
+hunspell-ko

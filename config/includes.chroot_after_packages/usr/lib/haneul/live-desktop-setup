@@ -1,0 +1,11 @@
+#!/bin/sh
+# 라이브 세션에서만: 바탕화면에 "설치" 아이콘을 놓습니다.
+[ -d /run/live/medium ] || exit 0
+command -v xdg-user-dir >/dev/null 2>&1 && dest="$(xdg-user-dir DESKTOP)" || dest="$HOME/Desktop"
+mkdir -p "$dest"
+src=/usr/share/applications/haneul-install.desktop
+if [ -f "$src" ] && [ ! -f "$dest/haneul-install.desktop" ]; then
+    cp "$src" "$dest/haneul-install.desktop"
+    chmod +x "$dest/haneul-install.desktop"
+fi
+exit 0

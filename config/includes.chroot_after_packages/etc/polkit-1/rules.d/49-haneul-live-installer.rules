@@ -1,0 +1,6 @@
+// 라이브 세션의 live 사용자는 비밀번호 없이 설치 프로그램을 실행. 설치 후 제거됨.
+polkit.addRule(function(action, subject) {
+    if (action.id == "com.github.calamares.calamares" && subject.user == "live") {
+        return polkit.Result.YES;
+    }
+});

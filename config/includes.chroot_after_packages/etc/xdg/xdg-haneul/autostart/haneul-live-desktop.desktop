@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Haneul live desktop setup
+Exec=/usr/lib/haneul/live-desktop-setup
+NoDisplay=true
+X-GNOME-Autostart-Phase=Applications

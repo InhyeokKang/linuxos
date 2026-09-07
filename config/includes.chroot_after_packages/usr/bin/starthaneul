@@ -1,0 +1,6 @@
+#!/bin/sh
+# Haneul 세션 시작: 배포판 기본 설정 디렉터리를 XDG 검색 경로 맨 앞에 둔 뒤 XFCE 실행
+export XDG_CONFIG_DIRS="/etc/xdg/xdg-haneul:${XDG_CONFIG_DIRS:-/etc/xdg}"
+export XDG_CURRENT_DESKTOP=XFCE
+export XDG_SESSION_DESKTOP=haneul
+exec startxfce4 "$@"

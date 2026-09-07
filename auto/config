@@ -1,0 +1,93 @@
+#!/bin/sh
+# live-build 설정. `lb config` 는 이 파일을 통해 실행됩니다.
+set -e
+
+cd "$(dirname "$0")/.."
+. ./os.conf
+
+# 커널 하드닝 파라미터 (라이브/설치본 공통). 설치본은 etc/default/grub.d 에도 있음.
+KERNEL_HARDENING="slab_nomerge init_on_alloc=1 randomize_kstack_offset=on page_alloc.shuffle=1"
+
+lb config noauto \
+    --distribution "${DEBIAN_DIST}" \
+    --architectures "${ARCH}" \
+    --archive-areas "main contrib non-free non-free-firmware" \
+    --mirror-bootstrap "${DEBIAN_MIRROR}" \
+    --mirror-chroot "${DEBIAN_MIRROR}" \
+    --mirror-binary "${DEBIAN_MIRROR}" \
+    --security true \
+    --updates true \
+    --backports true \
+    --debootstrap-options "--variant=minbase" \
+    --apt-recommends false \
+    --apt-indices false \
+    --apt-source-archives false \
+    --cache-packages true \
+    --linux-flavours "${ARCH}" \
+    --linux-packages "linux-image" \
+    --firmware-binary false \
+    --firmware-chroot false \
+    --binary-images iso-hybrid \
+    --bootloaders "syslinux,grub-efi" \
+    --uefi-secure-boot auto \
+    --chroot-squashfs-compression-type zstd \
+    --chroot-squashfs-compression-level 19 \
+    --debian-installer none \
+    --memtest none \
+    --win32-loader false \
+    --zsync false \
+    --checksums sha256 \
+    --iso-application "${OS_NAME}" \
+    --iso-publisher "${OS_NAME}; ${OS_HOME_URL}" \
+    --iso-preparer "live-build" \
+    --iso-volume "${OS_NAME} ${OS_VERSION}" \
+    --image-name "${OS_ID}-${OS_VERSION}" \
+    --bootappend-live "boot=live components quiet locales=${LIVE_LOCALE} keyboard-layouts=${LIVE_KEYBOARD} timezone=${LIVE_TIMEZONE} username=${LIVE_USER} hostname=${LIVE_HOSTNAME} ${KERNEL_HARDENING}" \
+    --bootappend-live-failsafe "boot=live components memtest noapic noapm nodma nomce nolapic nosmp nosplash vga=normal nomodeset username=${LIVE_USER} hostname=${LIVE_HOSTNAME}" \
+    "${@}"
+
+# ---------------------------------------------------------------------------
+# 빌드 시점에 생성되는 파일들 (이름/버전이 바뀌면 자동으로 따라감)
+# ---------------------------------------------------------------------------
+INC="config/includes.chroot_after_packages"
+mkdir -p "${INC}/usr/lib/${OS_ID}" "${INC}/etc"
+
+# /etc/os-release 는 심볼릭 링크라 include 로 덮어쓰지 않고 훅에서 설치합니다.
+cat > "${INC}/usr/lib/${OS_ID}/os-release" <<OSREL
+PRETTY_NAME="${OS_NAME} ${OS_VERSION} (${OS_CODENAME})"
+NAME="${OS_NAME}"
+VERSION_ID="${OS_VERSION}"
+VERSION="${OS_VERSION} (${OS_CODENAME})"
+VERSION_CODENAME=${DEBIAN_DIST}
+ID=${OS_ID}
+ID_LIKE=debian
+HOME_URL="${OS_HOME_URL}"
+SUPPORT_URL="${OS_HOME_URL}"
+BUG_REPORT_URL="${OS_BUG_URL}"
+DEBIAN_CODENAME=${DEBIAN_DIST}
+OSREL
+
+cat > "${INC}/etc/issue" <<ISSUE
+${OS_NAME} ${OS_VERSION} \\n \\l
+
+ISSUE
+printf '%s\n' "${OS_NAME} ${OS_VERSION}" > "${INC}/etc/issue.net"
+
+# 부트로더 메뉴 문구 바꾸기: live-build 템플릿을 복사해서 "Debian GNU/Linux" 를 배포판 이름으로.
+LB_TEMPLATES="/usr/share/live/build/bootloaders"
+if [ -d "${LB_TEMPLATES}" ]; then
+    mkdir -p config/bootloaders
+    for bl in isolinux grub-pc; do
+        if [ -d "${LB_TEMPLATES}/${bl}" ] && [ ! -d "config/bootloaders/${bl}" ]; then
+            cp -a "${LB_TEMPLATES}/${bl}" "config/bootloaders/${bl}"
+        fi
+    done
+    find config/bootloaders -type f \( -name '*.cfg' -o -name '*.cfg.in' \) \
+        -exec sed -i "s|Debian GNU/Linux|${OS_NAME}|g" {} +
+    if [ -f branding/boot-splash.svg ]; then
+        cp branding/boot-splash.svg config/bootloaders/isolinux/splash.svg 2>/dev/null || true
+        if command -v rsvg-convert >/dev/null 2>&1; then
+            rsvg-convert -w 640 -h 480 branding/boot-splash.svg -o config/bootloaders/grub-pc/splash.png
+        fi
+    fi
+fi

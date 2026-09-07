@@ -1,0 +1,10 @@
+#!/bin/sh
+# 이미지 용량 정리
+set -e
+apt-get -y autoremove --purge || true
+apt-get clean
+rm -rf /var/lib/apt/lists/* /var/cache/apt/*.bin
+rm -rf /tmp/* /var/tmp/*
+find /var/log -type f -exec truncate -s 0 {} + 2>/dev/null || true
+rm -f /var/lib/dbus/machine-id /etc/machine-id
+touch /etc/machine-id

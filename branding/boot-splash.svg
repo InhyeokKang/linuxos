@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f1626"/>
+      <stop offset="1" stop-color="#1b2a4a"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#sky)"/>
+  <path d="M250 200 C 285 120, 355 120, 390 200" fill="none" stroke="#3daee9" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="320" cy="108" r="14" fill="#ffffff"/>
+  <text x="320" y="270" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#ffffff">Haneul OS</text>
+</svg>

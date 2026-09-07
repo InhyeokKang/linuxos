@@ -1,0 +1,18 @@
+# 설치 용량을 줄이기 위해 문서/매뉴얼/불필요한 번역을 처음부터 설치하지 않습니다.
+# 다른 언어를 지원하려면 path-include 줄을 추가하세요.
+path-exclude=/usr/share/doc/*
+path-include=/usr/share/doc/*/copyright
+path-exclude=/usr/share/man/*
+path-exclude=/usr/share/info/*
+path-exclude=/usr/share/lintian/*
+path-exclude=/usr/share/linda/*
+path-exclude=/usr/share/locale/*
+path-include=/usr/share/locale/locale.alias
+path-include=/usr/share/locale/ko/*
+path-include=/usr/share/locale/ko_KR/*
+path-include=/usr/share/locale/en/*
+path-include=/usr/share/locale/en_GB/*
+path-include=/usr/share/locale/en_US/*
+path-exclude=/usr/share/help/*
+path-include=/usr/share/help/C/*
+path-include=/usr/share/help/ko/*

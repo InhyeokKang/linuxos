@@ -1,0 +1,14 @@
+# 예시: 필요한 줄의 주석(#)을 지우고 `sudo systemctl reload nftables`
+# 같은 table/chain 이름으로 선언하면 규칙이 기본 규칙 뒤에 추가됩니다.
+table inet filter {
+    chain input {
+        # 프린터 자동 검색 (mDNS)
+        # udp dport 5353 accept
+        # Steam 원격 플레이 / 로컬 네트워크 게임 검색
+        # udp dport 27031-27036 accept
+        # tcp dport 27036-27037 accept
+        # KDE Connect / 파일 공유
+        # tcp dport 1714-1764 accept
+        # udp dport 1714-1764 accept
+    }
+}

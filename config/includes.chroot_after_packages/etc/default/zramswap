@@ -1,0 +1,4 @@
+# zram 압축 스왑: RAM 의 50% 크기, zstd 압축. 디스크 스왑 없이도 2GB 머신이 버팁니다.
+ALGO=zstd
+PERCENT=50
+PRIORITY=100

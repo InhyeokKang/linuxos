@@ -1,0 +1,14 @@
+#!/bin/sh
+# 관리자 권한이 필요할 때 비밀번호 창을 띄우는 에이전트 (윈도우 UAC 에 해당)
+for agent in \
+    /usr/lib/*/polkit-mate/polkit-mate-authentication-agent-1 \
+    /usr/lib/polkit-mate/polkit-mate-authentication-agent-1 \
+    /usr/libexec/polkit-mate/polkit-mate-authentication-agent-1 \
+    /usr/lib/*/polkit-gnome/polkit-gnome-authentication-agent-1 \
+    /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1; do
+    if [ -x "$agent" ]; then
+        exec "$agent"
+    fi
+done
+echo "haneul: no polkit agent found" >&2
+exit 1

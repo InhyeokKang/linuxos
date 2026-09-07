@@ -1,0 +1,42 @@
+name: Build ISO
+
+# 수동 실행 (Actions 탭 > Build ISO > Run workflow). 40~90분 소요.
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: live-build (Debian trixie)
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    container:
+      image: debian:trixie
+      options: --privileged
+    steps:
+      - name: Install build dependencies
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            live-build debootstrap squashfs-tools xorriso librsvg2-bin \
+            git ca-certificates python3 python3-yaml nftables
+      - uses: actions/checkout@v4
+      - name: Static checks
+        run: ./scripts/check.sh
+      - name: Build
+        run: ./scripts/build.sh
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: haneul-iso
+          path: |
+            *.iso
+            *.iso.sha256
+            *.packages
+          if-no-files-found: error
+          compression-level: 0
+      - name: Upload build log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log

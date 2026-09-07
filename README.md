@@ -1,0 +1,75 @@
+# Haneul OS
+
+**윈도우처럼 쓰는, 훨씬 가볍고 안전한 리눅스.**
+
+Haneul(하늘) OS 는 Debian 13 을 바탕으로 만든 데스크톱 운영체제입니다. 목표는 단순합니다.
+
+- **가볍게**: 유휴 상태 RAM 500MB 이하, 2GB RAM / 듀얼코어 / 내장 그래픽에서도 쾌적하게.
+- **안전하게**: 방화벽, AppArmor, 커널 하드닝, 자동 보안 업데이트, 앱 샌드박스, 디스크 암호화가 *기본값*.
+- **익숙하게**: 하단 작업 표시줄, 시작 메뉴, Win+E / Win+D / Ctrl+Shift+Esc 같은 윈도우 단축키가 그대로.
+- **제약 없이**: 웹 브라우징, 오피스, 앱 스토어(Flathub), .deb 더블클릭 설치, Steam/Proton 게임, Wine 으로 .exe 실행.
+
+> 이 저장소는 ISO 를 **재현 가능하게 빌드하는 설정 트리**입니다. 바이너리를 커밋하지 않습니다.
+
+## 빠른 시작
+
+```bash
+# Debian 12/13 (또는 debian:trixie 컨테이너) 에서
+sudo apt-get install live-build debootstrap squashfs-tools xorriso librsvg2-bin
+git clone https://github.com/inhyeokkang/linuxos.git && cd linuxos
+make check          # 정적 검사 (빌드 불필요)
+make build          # ISO 빌드 (30~90분, 약 10GB 디스크 필요)
+make test           # QEMU 로 부팅 (2 CPU / 2GB RAM 저사양 재현)
+make test-uefi      # UEFI 모드
+```
+
+빌드 결과물은 `haneul-0.1.0-amd64.hybrid.iso` 입니다. USB 에 그대로 쓰면(예: `dd`, Rufus, balenaEtcher) BIOS 와 UEFI(Secure Boot 포함) 모두에서 부팅됩니다.
+
+## 무엇이 들어 있나
+
+| 영역 | 선택 | 이유 |
+|---|---|---|
+| 베이스 | Debian 13 (trixie) stable | 보안 업데이트 보장, 방대한 패키지, glibc 라 Steam/Wine 호환 |
+| 데스크톱 | XFCE 4.20 (윈도우 배치) | 유휴 250~350MB, GPU 거의 안 씀, 안정적 |
+| 앱 설치 | Flatpak + Flathub, GNOME Software, apt | 앱 스토어 UX + 샌드박스, .deb 더블클릭 |
+| 브라우저 | Firefox ESR | Debian 보안팀이 패치, 텔레메트리 없음 |
+| 오피스 | LibreOffice (Writer/Calc/Impress) | MS Office 파일 호환, 동일 규격 폰트(Carlito/Caladea) 포함 |
+| 한국어 | fcitx5-hangul, Noto Sans CJK KR | 윈도우 폰트 이름(맑은 고딕 등) 자동 매핑 |
+| 게임 | `haneul-setup-gaming` | Steam(Flatpak) + Proton-GE + GameMode + MangoHud, NVIDIA 드라이버 선택 설치 |
+| 윈도우 앱 | `haneul-setup-windows-apps` | Wine + Bottles, .exe 더블클릭 |
+| 설치 | Calamares | 전체 디스크 암호화, 윈도우 듀얼부팅 자동 감지 |
+
+보안 설계는 [docs/security.md](docs/security.md), 설계 근거는 [docs/architecture.md](docs/architecture.md), 윈도우 사용자용 대응표는 [docs/windows-user-guide.md](docs/windows-user-guide.md) 를 보세요.
+
+## 저장소 구조
+
+```
+os.conf                       이름/버전/미러/라이브 기본값 (여기만 고치면 됨)
+auto/config                   live-build 옵션 (lb config)
+config/package-lists/         무엇을 설치할지 (파일 하나가 한 묶음)
+config/hooks/normal/          빌드 중 chroot 안에서 실행되는 스크립트
+config/includes.chroot_before_packages/   패키지 설치 *전* 에 넣을 파일 (dpkg 용량 절감 설정)
+config/includes.chroot_after_packages/    최종 시스템에 들어갈 파일
+  etc/sysctl.d, nftables.conf, modprobe.d, apparmor  보안 기본값
+  etc/xdg/xdg-haneul/         XFCE 윈도우 스타일 기본 설정 (패널, 단축키, 테마)
+  etc/calamares/              설치 프로그램
+  usr/local/bin/haneul-*      게임/윈도우앱 설치, 상태 확인 스크립트
+branding/                     로고, 배경화면, 부트 스플래시 (SVG)
+scripts/                      build.sh, test-qemu.sh, check.sh
+docs/                         설계 문서
+```
+
+## 커스터마이즈
+
+- **이름/버전 바꾸기**: `os.conf` 수정 후 `grep -ri haneul config branding` 로 남은 곳 확인.
+- **앱 빼고 더하기**: `config/package-lists/30-apps.list.chroot` 편집. 파일을 지우면 그 묶음 전체가 빠집니다.
+- **다른 언어 지원**: `config/includes.chroot_before_packages/etc/dpkg/dpkg.cfg.d/01-haneul-lean` 에 `path-include=/usr/share/locale/<언어>/*` 추가, `40-korean.list.chroot` 를 해당 입력기로 교체.
+- **포트 열기**: `/etc/nftables.d/` 에 `.nft` 파일 추가 (예시 파일 포함).
+
+## 현재 상태
+
+0.1.0 은 **첫 번째 빌드 가능한 스캐폴드**입니다. 설정 트리와 정적 검사는 완료됐지만, 실제 ISO 빌드와 하드웨어 테스트는 아직 이 저장소의 CI(`Build ISO` 워크플로)나 로컬에서 직접 돌려야 합니다. 알려진 검증 항목은 [docs/roadmap.md](docs/roadmap.md) 에 있습니다.
+
+## 라이선스
+
+빌드 설정과 스크립트는 MIT. 포함되는 소프트웨어는 각자의 라이선스(대부분 GPL/LGPL/MPL)를 따릅니다.

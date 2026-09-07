@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+cd "$(dirname "$0")/.."
+lb clean noauto "${@}"
+rm -f config/binary config/bootstrap config/chroot config/common config/source config/build
+rm -rf config/bootloaders
+rm -f build.log

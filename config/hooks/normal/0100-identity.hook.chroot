@@ -1,0 +1,52 @@
+#!/bin/sh
+# 배포판 정체성: os-release, 기본 앱 alternatives, 로케일 사전 생성
+set -e
+
+OS_ID=haneul
+if [ -f "/usr/lib/${OS_ID}/os-release" ]; then
+    rm -f /etc/os-release
+    cp "/usr/lib/${OS_ID}/os-release" /etc/os-release
+    cp "/usr/lib/${OS_ID}/os-release" /usr/lib/os-release
+fi
+
+# 로케일 사전 생성 (라이브 부팅 속도 향상)
+for loc in ko_KR.UTF-8 en_US.UTF-8; do
+    grep -q "^${loc} UTF-8" /etc/locale.gen 2>/dev/null || echo "${loc} UTF-8" >> /etc/locale.gen
+done
+locale-gen
+
+# 기본 브라우저 / 터미널
+update-alternatives --set x-www-browser /usr/bin/firefox-esr || true
+update-alternatives --set x-terminal-emulator /usr/bin/xfce4-terminal.wrapper || true
+echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
+
+# 한국어 입력기 환경변수 (X11 세션 전체에 적용)
+if ! grep -q XMODIFIERS /etc/environment 2>/dev/null; then
+    cat >> /etc/environment <<'ENV'
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+SDL_IM_MODULE=fcitx
+ENV
+fi
+
+# 브랜딩 이미지 (SVG -> PNG)
+BG=/usr/share/backgrounds/${OS_ID}
+if [ -f "${BG}/default.svg" ]; then
+    rsvg-convert -w 3840 -h 2160 "${BG}/default.svg" -o "${BG}/default.png"
+fi
+BR=/etc/calamares/branding/${OS_ID}
+if [ -f "${BR}/logo.svg" ]; then
+    rsvg-convert -w 128 -h 128 "${BR}/logo.svg" -o "${BR}/logo.png"
+    rsvg-convert -w 256 -h 256 "${BR}/logo.svg" -o "${BR}/welcome.png"
+fi
+ICON=/usr/share/icons/hicolor/scalable/apps/${OS_ID}.svg
+if [ -f "${ICON}" ]; then
+    mkdir -p /usr/share/pixmaps
+    rsvg-convert -w 48 -h 48 "${ICON}" -o "/usr/share/pixmaps/${OS_ID}.png"
+fi
+
+chmod 0755 /usr/bin/starthaneul /usr/lib/${OS_ID}/* /usr/local/bin/* 2>/dev/null || true
+gtk-update-icon-cache -f -q /usr/share/icons/hicolor || true
+update-desktop-database -q || true
+fc-cache -f || true

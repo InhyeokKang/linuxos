@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 윈도우 사용자가 손에 익은 단축키. 여기 없는 것은 XFCE 기본값이 그대로 적용됩니다. -->
+<channel name="xfce4-keyboard-shortcuts" version="1.0">
+  <property name="commands" type="empty">
+    <property name="default" type="empty">
+      <!-- Win 키: 시작 메뉴 -->
+      <property name="Super_L" type="string" value="xfce4-popup-whiskermenu"/>
+      <property name="Super_R" type="string" value="xfce4-popup-whiskermenu"/>
+      <!-- Win+E: 파일 탐색기 -->
+      <property name="&lt;Super&gt;e" type="string" value="thunar"/>
+      <!-- Win+R: 실행 -->
+      <property name="&lt;Super&gt;r" type="string" value="xfce4-appfinder --collapsed"/>
+      <!-- Win+I: 설정 -->
+      <property name="&lt;Super&gt;i" type="string" value="xfce4-settings-manager"/>
+      <!-- Win+L: 잠금 -->
+      <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
+      <!-- Win+V: 클립보드 기록 -->
+      <property name="&lt;Super&gt;v" type="string" value="xfce4-popup-clipman"/>
+      <!-- Win+A: 알림 / 볼륨 등 (믹서) -->
+      <property name="&lt;Super&gt;a" type="string" value="pavucontrol"/>
+      <!-- Win+P: 디스플레이 전환 -->
+      <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
+      <!-- Ctrl+Alt+Del / Ctrl+Shift+Esc: 작업 관리자 -->
+      <property name="&lt;Primary&gt;&lt;Alt&gt;Delete" type="string" value="xfce4-taskmanager"/>
+      <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="xfce4-taskmanager"/>
+      <!-- PrtSc: 전체 화면 캡처 -> 클립보드, Win+Shift+S: 영역 캡처 -->
+      <property name="Print" type="string" value="xfce4-screenshooter -f -c"/>
+      <property name="&lt;Super&gt;&lt;Shift&gt;s" type="string" value="xfce4-screenshooter -r -c"/>
+      <property name="&lt;Alt&gt;Print" type="string" value="xfce4-screenshooter -w -c"/>
+      <!-- 터미널 -->
+      <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="xfce4-terminal"/>
+      <!-- 검색 -->
+      <property name="&lt;Super&gt;s" type="string" value="xfce4-appfinder"/>
+      <property name="&lt;Alt&gt;F2" type="string" value="xfce4-appfinder --collapsed"/>
+      <property name="&lt;Alt&gt;F3" type="string" value="xfce4-appfinder"/>
+      <!-- 멀티미디어 키 -->
+      <property name="XF86Calculator" type="string" value="galculator"/>
+      <property name="XF86Explorer" type="string" value="thunar"/>
+      <property name="XF86HomePage" type="string" value="firefox-esr"/>
+      <property name="XF86WWW" type="string" value="firefox-esr"/>
+      <property name="XF86Display" type="string" value="xfce4-display-settings --minimal"/>
+    </property>
+  </property>
+  <property name="xfwm4" type="empty">
+    <property name="default" type="empty">
+      <!-- Win+D: 바탕화면 보기 -->
+      <property name="&lt;Super&gt;d" type="string" value="show_desktop_key"/>
+      <!-- Win+방향키: 창 스냅 (Aero Snap) -->
+      <property name="&lt;Super&gt;Up" type="string" value="maximize_window_key"/>
+      <property name="&lt;Super&gt;Down" type="string" value="hide_window_key"/>
+      <property name="&lt;Super&gt;Left" type="string" value="tile_left_key"/>
+      <property name="&lt;Super&gt;Right" type="string" value="tile_right_key"/>
+      <!-- 표준 -->
+      <property name="&lt;Alt&gt;F4" type="string" value="close_window_key"/>
+      <property name="&lt;Alt&gt;Tab" type="string" value="cycle_windows_key"/>
+      <property name="&lt;Alt&gt;&lt;Shift&gt;Tab" type="string" value="cycle_reverse_windows_key"/>
+      <property name="&lt;Alt&gt;space" type="string" value="popup_menu_key"/>
+      <property name="&lt;Alt&gt;F11" type="string" value="fullscreen_key"/>
+      <property name="&lt;Super&gt;Home" type="string" value="show_desktop_key"/>
+    </property>
+  </property>
+  <property name="providers" type="array">
+    <value type="string" value="xfwm4"/>
+    <value type="string" value="commands"/>
+  </property>
+</channel>

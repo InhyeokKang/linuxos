@@ -1,0 +1,39 @@
+#!/bin/sh
+# 보안 기본값: 서비스, 계정, AppArmor, 방화벽
+set -e
+
+# 서비스 활성화
+systemctl enable nftables.service
+systemctl enable apparmor.service
+systemctl enable zramswap.service
+systemctl enable fstrim.timer
+systemctl enable unattended-upgrades.service
+systemctl enable NetworkManager.service
+systemctl enable lightdm.service
+systemctl enable haneul-firstboot.service
+systemctl set-default graphical.target
+
+# 콘솔에서 Ctrl+Alt+Del 로 재부팅되지 않게 (데스크톱에서는 작업 관리자로 매핑)
+systemctl mask ctrl-alt-del.target
+
+# 사용하지 않는 서비스는 꺼 둠 (설치되어 있을 때만)
+for svc in ModemManager.service avahi-daemon.service avahi-daemon.socket; do
+    systemctl disable "$svc" 2>/dev/null || true
+done
+
+# root 직접 로그인 차단 (sudo 사용)
+passwd -l root >/dev/null 2>&1 || true
+
+# 새 사용자 홈 디렉터리는 본인만 접근 가능
+sed -i 's/^#\?DIR_MODE=.*/DIR_MODE=0700/' /etc/adduser.conf 2>/dev/null || true
+sed -i 's/^\(HOME_MODE\s\+\).*/\10700/' /etc/login.defs 2>/dev/null || true
+
+# AppArmor 프로필: 기본 제공 프로필 중 데스크톱에 안전한 것들 enforce
+if [ -d /etc/apparmor.d ]; then
+    for p in usr.bin.man usr.sbin.cupsd usr.sbin.cups-browsed; do
+        [ -f "/etc/apparmor.d/$p" ] && aa-enforce "/etc/apparmor.d/$p" >/dev/null 2>&1 || true
+    done
+fi
+
+# 방화벽 문법 검사 (빌드 단계에서 오류를 잡음)
+nft -c -f /etc/nftables.conf

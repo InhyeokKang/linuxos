@@ -1,0 +1,33 @@
+#!/bin/bash
+# Haneul OS 윈도우 프로그램(.exe) 실행 환경 설치
+#  - Wine (Debian) : .exe 더블클릭 실행
+#  - Bottles (Flatpak) : 프로그램별 격리된 윈도우 환경을 GUI 로 관리
+set -euo pipefail
+
+if [ "$(id -u)" -eq 0 ]; then
+    echo "일반 사용자로 실행하세요 (필요할 때 관리자 비밀번호를 묻습니다)." >&2
+    exit 1
+fi
+
+echo "== [1/3] Wine 설치 (32/64비트)"
+sudo dpkg --add-architecture i386
+sudo apt-get update
+sudo apt-get install -y wine wine64 wine32:i386 winetricks fonts-wine \
+    libgl1-mesa-dri:i386 mesa-vulkan-drivers:i386
+
+echo "== [2/3] Bottles 설치 (Flatpak)"
+flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install -y --system flathub com.usebottles.bottles
+
+echo "== [3/3] .exe 파일을 더블클릭하면 Wine 으로 열리도록 설정"
+for mime in application/x-ms-dos-executable application/x-msdownload application/x-msi application/vnd.microsoft.portable-executable; do
+    xdg-mime default wine.desktop "$mime" || true
+done
+
+cat <<MSG
+
+완료! .exe 파일을 더블클릭하면 Wine 으로 실행됩니다.
+ - 제대로 안 되는 프로그램은 Bottles 에서 새 병(bottle)을 만들어 설치해 보세요.
+ - 한글이 네모로 보이면: winetricks cjkfonts
+ - 참고: 안티치트(EAC/BattlEye)가 있는 온라인 게임과 일부 DRM 은 동작하지 않습니다.
+MSG

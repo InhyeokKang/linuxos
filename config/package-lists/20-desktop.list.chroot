@@ -1,0 +1,51 @@
+# XFCE 데스크톱 (윈도우 배치로 설정됨)
+xfce4-session
+xfce4-panel
+xfce4-settings
+xfwm4
+xfdesktop4
+xfconf
+xfce4-appfinder
+xfce4-whiskermenu-plugin
+xfce4-pulseaudio-plugin
+xfce4-power-manager
+xfce4-power-manager-plugins
+xfce4-notifyd
+xfce4-screenshooter
+xfce4-taskmanager
+xfce4-terminal
+xfce4-clipman-plugin
+xfce4-screensaver
+thunar
+thunar-archive-plugin
+thunar-volman
+tumbler
+mate-polkit
+
+# 로그인 화면
+lightdm
+lightdm-gtk-greeter
+
+# 테마 / 아이콘 / 폰트
+arc-theme
+gtk2-engines-murrine
+papirus-icon-theme
+adwaita-icon-theme
+fonts-noto-core
+fonts-noto-mono
+fonts-noto-cjk
+fonts-noto-color-emoji
+fonts-liberation
+fonts-crosextra-carlito
+fonts-crosextra-caladea
+fonts-dejavu-core
+librsvg2-bin
+
+# 앱 설치 (Flatpak + 앱스토어, .deb 더블클릭 설치)
+flatpak
+xdg-desktop-portal
+xdg-desktop-portal-gtk
+gnome-software
+gnome-software-plugin-flatpak
+packagekit
+apt-config-icons
