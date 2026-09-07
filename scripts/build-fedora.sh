@@ -64,6 +64,11 @@ cp apps/taengja/taengja "$WORK/root/usr/bin/taengja"
 cp apps/taengja/taengja.desktop "$WORK/root/usr/share/applications/taengja.desktop"
 cp branding/taengja-icon.svg "$WORK/root/usr/share/icons/hicolor/scalable/apps/taengja.svg"
 chmod 0755 "$WORK/root/usr/bin/taengja" "$WORK/root/usr/lib/taengja/taengja.py"
+mkdir -p "$WORK/root/usr/lib/kiyu-control"
+cp apps/kiyu-control/kiyu-control.py "$WORK/root/usr/lib/kiyu-control/"
+cp apps/kiyu-control/kiyu-control "$WORK/root/usr/bin/kiyu-control"
+cp branding/control-icon.svg "$WORK/root/usr/share/icons/hicolor/scalable/apps/kiyu-control.svg"
+chmod 0755 "$WORK/root/usr/bin/kiyu-control" "$WORK/root/usr/lib/kiyu-control/kiyu-control.py"
 
 KEYS=()
 k="/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-${FEDORA_RELEASE}-primary"

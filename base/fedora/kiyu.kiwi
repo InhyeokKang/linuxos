@@ -152,7 +152,10 @@
     <package name="xfce4-appfinder"/>
     <package name="xfce4-whiskermenu-plugin"/>
     <package name="xfce4-docklike-plugin"/>
-    <package name="xfce4-pulseaudio-plugin"/>
+    <!-- 컴포지터: 둥근 창 모서리·그림자 (xrender), 블러는 옵션 -->
+    <package name="picom"/>
+    <package name="brightnessctl"/>
+    <package name="libnotify"/>
     <package name="xfce4-power-manager"/>
     <package name="xfce4-notifyd"/>
     <package name="xfce4-screenshooter"/>

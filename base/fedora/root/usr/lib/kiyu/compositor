@@ -1,0 +1,21 @@
+#!/bin/sh
+# kiyu 컴포지터 시작: picom 이 있으면 xfwm4 자체 컴포지팅을 끄고 picom (둥근 모서리·그림자)을 띄운다.
+# 효과(블러)는 ~/.config/kiyu/effects=on 일 때만 추가 설정을 합친다. picom 이 없으면 xfwm4 컴포지팅으로 돌아간다.
+CONF_DIR=/etc/xdg/xdg-kiyu/picom
+STATE="${XDG_CONFIG_HOME:-$HOME/.config}/kiyu"
+mkdir -p "$STATE"
+if ! command -v picom >/dev/null 2>&1; then
+    xfconf-query -c xfwm4 -p /general/use_compositing -n -t bool -s true 2>/dev/null
+    exit 0
+fi
+# picom 이 이미 돌고 있으면 다시 시작 (효과 전환용)
+for p in /proc/[0-9]*; do
+    [ "$(tr '\0' ' ' < "$p/cmdline" 2>/dev/null | cut -d' ' -f1 | xargs basename 2>/dev/null)" = picom ] && kill "${p#/proc/}" 2>/dev/null
+done
+xfconf-query -c xfwm4 -p /general/use_compositing -n -t bool -s false 2>/dev/null
+CONF="$STATE/picom.conf"
+cat "$CONF_DIR/picom.conf" > "$CONF"
+if [ "$(cat "$STATE/effects" 2>/dev/null)" = on ] && [ -f "$CONF_DIR/effects-on.conf" ]; then
+    cat "$CONF_DIR/effects-on.conf" >> "$CONF"
+fi
+exec picom --config "$CONF" -b

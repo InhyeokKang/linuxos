@@ -69,7 +69,7 @@ if [ -f "${BG}/default.svg" ]; then
     find /usr/share/backgrounds -maxdepth 3 -type f -name '*.jxl' -exec cp "${BG}/default.png" {} \;
 fi
 # 패널 플러그인 in-process (wrapper 프로세스 제거)
-for plug in whiskermenu pulseaudio power-manager-plugin notification-plugin systray; do
+for plug in whiskermenu docklike launcher tasklist clock showdesktop separator notification-plugin systray; do
     d="/usr/share/xfce4/panel/plugins/${plug}.desktop"
     [ -f "$d" ] || continue
     if grep -q '^X-XFCE-Internal=' "$d"; then sed -i 's/^X-XFCE-Internal=.*/X-XFCE-Internal=true/' "$d"; else printf 'X-XFCE-Internal=true\n' >> "$d"; fi

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=빠른 설정
+Name[en]=Quick settings
+Comment=Wi-Fi, 블루투스, 소리, 밝기, 다크 모드, 효과
+Exec=kiyu-control
+Icon=kiyu-control
+Categories=Settings;
+NoDisplay=true
+StartupNotify=false

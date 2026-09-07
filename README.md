@@ -20,9 +20,13 @@ Xvfb 프리뷰(`make preview`)에서 찍은 실제 세션입니다. 앱 아이�
 |---|---|
 | ![desktop](docs/screenshots/01-desktop.png) | ![start menu](docs/screenshots/02-start-menu.png) |
 
-| 창 (Arc 테마, 윈도우식 버튼 배치) | Ctrl+Shift+Esc 작업 관리자 |
+| 창 (kiyu 룩: 둥근 모서리·그림자, 윈도우식 버튼 배치) | 빠른 설정 (Win+A) |
 |---|---|
-| ![windows](docs/screenshots/03-windows.png) | ![task manager](docs/screenshots/04-task-manager.png) |
+| ![windows](docs/screenshots/03-windows.png) | ![quick settings](docs/screenshots/04-quick-settings.png) |
+
+| 다크 모드 (빠른 설정에서 한 번에 전환) | |
+|---|---|
+| ![dark mode](docs/screenshots/07-dark-mode.png) | |
 
 | 탱자 새 탭 | HTTPS 사이트 (프록시 환경이라 외부 CSS 는 차단됨) |
 |---|---|

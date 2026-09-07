@@ -1,0 +1,21 @@
+#!/bin/sh
+# kiyu 밝은/어두운 모드 전환:  /usr/lib/kiyu/theme light|dark
+# GTK 테마·아이콘·패널 배경·xfwm4 를 한 번에 바꾼다. 사용자 gtk.css 는 테마 색(@theme_*)을 참조하므로 그대로 따라온다.
+mode=${1:-light}
+STATE="${XDG_CONFIG_HOME:-$HOME/.config}/kiyu"; mkdir -p "$STATE"
+q() { xfconf-query "$@" 2>/dev/null; }
+case "$mode" in
+  dark)
+    q -c xsettings -p /Net/ThemeName -n -t string -s Adwaita-dark
+    q -c xsettings -p /Net/IconThemeName -n -t string -s Papirus-Dark
+    q -c xfce4-panel -p /panels/dark-mode -n -t bool -s true
+    q -c xfce4-notifyd -p /theme -n -t string -s Default
+    ;;
+  *)
+    mode=light
+    q -c xsettings -p /Net/ThemeName -n -t string -s Adwaita
+    q -c xsettings -p /Net/IconThemeName -n -t string -s Papirus
+    q -c xfce4-panel -p /panels/dark-mode -n -t bool -s false
+    ;;
+esac
+echo "$mode" > "$STATE/theme"

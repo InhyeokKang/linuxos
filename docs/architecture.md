@@ -65,6 +65,18 @@ Recommends 를 끄고 빌드하므로(`--apt-recommends false`) 이미지가 작
 - 컴포지터는 켜되 그림자 끔: 티어링 방지(윈도우 사용자가 가장 먼저 느끼는 이질감)와 GPU 부하의 타협.
 - Plymouth(부팅 스플래시) 없음: 1~2초와 수십 MB 절약.
 
+### 5b. 룩앤필: 사양을 먹지 않는 "트렌디"
+
+- **배경**: 크림 종이 위 파스텔 곡선(새벽 언덕)과 귤 단면 로고. 정적 PNG 한 장이라 비용 0.
+- **작업표시줄**: 가운데 독(시작 + 고정/실행 앱, docklike) + 오른쪽 알약(트레이·빠른 설정·시계·알림). 윈도우 11 배치에 macOS 독 느낌.
+  배경은 xfconf 가 아니라 `~/.config/gtk-3.0/gtk.css` 의 `.xfce4-panel` 이 그려서 테마 색(다크 모드)을 따라간다.
+- **창**: xfwm4 자체 컴포지팅 대신 picom(xrender) — 둥근 모서리 12px, 부드러운 그림자, 짧은 페이드. CPU 1~3%.
+  유리 블러(glx, dual_kawase)는 GPU 없는 기기에서 비싸므로 기본 OFF, 빠른 설정 "효과" 스위치로 켠다 (`/usr/lib/kiyu/compositor`).
+- **빠른 설정** (`apps/kiyu-control`): Wi-Fi/블루투스/다크 모드/효과 토글, 소리·밝기, 배터리. 상주하지 않는 Python GTK 창(열려 있을 때만 ~20 MB).
+  소리·전원 패널 애플릿을 대체했고 볼륨 키는 `/usr/lib/kiyu/volume` + OSD 알림이 맡는다.
+- **다크 모드** (`/usr/lib/kiyu/theme`): Adwaita ↔ Adwaita-dark, Papirus ↔ Papirus-Dark, 패널 dark-mode 를 한 번에. gtk.css 는 `@theme_*` 색을 섞어 쓰므로 재시작 없이 따라온다.
+- **폰트**: Pretendard → IBM Plex Sans KR → Inter → 본고딕 순 대체 체인.
+
 ### 6. 윈도우 사용자 경험
 
 - 하단 패널: [시작][탐색기][브라우저][실행 중 창들] … [트레이][소리][전원][시계][알림][바탕화면 보기]

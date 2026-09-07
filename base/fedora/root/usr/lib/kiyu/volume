@@ -1,0 +1,16 @@
+#!/bin/sh
+# 키보드 볼륨 키 (패널 소리 애플릿을 빠른 설정으로 대체했으므로 여기서 처리) + 화면 OSD
+case "$1" in
+  up)   pactl set-sink-mute @DEFAULT_SINK@ 0; pactl set-sink-volume @DEFAULT_SINK@ +5% ;;
+  down) pactl set-sink-volume @DEFAULT_SINK@ -5% ;;
+  mute) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
+  *) exit 1 ;;
+esac
+v=$(pactl get-sink-volume @DEFAULT_SINK@ 2>/dev/null | grep -o '[0-9]*%' | head -1 | tr -d %)
+m=$(pactl get-sink-mute @DEFAULT_SINK@ 2>/dev/null | grep -c yes)
+if [ "$m" = 1 ] || [ "${v:-0}" = 0 ]; then icon=audio-volume-muted-symbolic; txt="음소거"
+elif [ "$v" -lt 34 ]; then icon=audio-volume-low-symbolic; txt="소리 $v%"
+elif [ "$v" -lt 67 ]; then icon=audio-volume-medium-symbolic; txt="소리 $v%"
+else icon=audio-volume-high-symbolic; txt="소리 $v%"; fi
+command -v notify-send >/dev/null 2>&1 && notify-send -a kiyu -i "$icon" -h int:value:"${v:-0}" -h string:x-canonical-private-synchronous:kiyu-volume -t 1500 "$txt"
+exit 0

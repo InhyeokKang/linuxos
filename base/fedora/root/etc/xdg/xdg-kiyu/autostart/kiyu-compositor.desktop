@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=kiyu compositor
+Exec=/usr/lib/kiyu/compositor
+NoDisplay=true
+OnlyShowIn=XFCE;

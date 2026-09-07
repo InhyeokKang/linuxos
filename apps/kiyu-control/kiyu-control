@@ -1,0 +1,3 @@
+#!/bin/sh
+# kiyu 빠른 설정 실행 래퍼 (토글: 떠 있으면 닫힘)
+exec /usr/bin/python3 /usr/lib/kiyu-control/kiyu-control.py "$@"

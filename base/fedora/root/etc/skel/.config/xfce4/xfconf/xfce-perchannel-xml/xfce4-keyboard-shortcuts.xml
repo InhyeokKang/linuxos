@@ -17,8 +17,12 @@
       <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
       <!-- Win+V: 클립보드 기록 -->
       <property name="&lt;Super&gt;v" type="string" value="xfce4-popup-clipman"/>
-      <!-- Win+A: 알림 / 볼륨 등 (믹서) -->
-      <property name="&lt;Super&gt;a" type="string" value="pavucontrol"/>
+      <!-- 볼륨 키: 소리 애플릿 대신 스크립트 + OSD -->
+      <property name="XF86AudioRaiseVolume" type="string" value="/usr/lib/kiyu/volume up"/>
+      <property name="XF86AudioLowerVolume" type="string" value="/usr/lib/kiyu/volume down"/>
+      <property name="XF86AudioMute" type="string" value="/usr/lib/kiyu/volume mute"/>
+      <!-- Win+A: 빠른 설정 (윈도우 11 과 동일) -->
+      <property name="&lt;Super&gt;a" type="string" value="kiyu-control"/>
       <!-- Win+P: 디스플레이 전환 -->
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <!-- Ctrl+Alt+Del / Ctrl+Shift+Esc: 작업 관리자 -->

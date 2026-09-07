@@ -1,16 +1,18 @@
-/* kiyu 룩 (Adwaita 기반). 사양에 영향 없는 시각 요소만: 둥근 모서리, 밝은 표면, 옅은 테두리, 주황 강조, 넉넉한 여백.
+/* kiyu 룩 (Adwaita / Adwaita-dark 위에 얹는 CSS). 사양에 영향 없는 시각 요소만: 둥근 모서리, 옅은 테두리,
+   귤색 강조, 넉넉한 여백. 색은 테마 색(@theme_*)을 섞어 만들므로 빠른 설정의 다크 모드가 그대로 따라온다.
    GTK 는 /etc 가 아니라 ~/.config/gtk-3.0/gtk.css 만 읽으므로 /etc/skel 로 배포 */
 @define-color kiyu_accent #f47c0c;
 @define-color kiyu_accent_dark #d96a08;
-@define-color kiyu_paper #faf8f4;
-@define-color kiyu_surface #ffffff;
-@define-color kiyu_border #e7e2da;
-@define-color kiyu_text #2b2a28;
-@define-color kiyu_muted #7b776f;
+@define-color kiyu_paper mix(@theme_bg_color, @kiyu_accent, 0.03);
+@define-color kiyu_surface @theme_base_color;
+@define-color kiyu_side mix(@theme_bg_color, @theme_base_color, 0.35);
+@define-color kiyu_border alpha(@theme_fg_color, 0.12);
+@define-color kiyu_text @theme_fg_color;
+@define-color kiyu_glass alpha(@theme_bg_color, 0.92);
 
 window.background, dialog.background, .background { background-color: @kiyu_paper; color: @kiyu_text; }
-.sidebar, placessidebar, .sidebar row, placessidebar row { background-color: #f3f0ea; color: @kiyu_text; border: none; }
-placessidebar row:selected, .sidebar row:selected { background-color: alpha(@kiyu_accent, 0.16); color: @kiyu_text; border-radius: 8px; }
+.sidebar, placessidebar, .sidebar row, placessidebar row { background-color: @kiyu_side; color: @kiyu_text; border: none; }
+placessidebar row:selected, .sidebar row:selected { background-color: alpha(@kiyu_accent, 0.18); color: @kiyu_text; border-radius: 8px; }
 toolbar, .toolbar, .primary-toolbar, .inline-toolbar { background-color: @kiyu_paper; border: none; box-shadow: none; padding: 6px; }
 menubar, .menubar { background-color: @kiyu_paper; border: none; box-shadow: none; padding: 2px 6px; }
 menubar > menuitem { border-radius: 6px; padding: 4px 8px; }
@@ -19,8 +21,8 @@ statusbar, .statusbar { background-color: @kiyu_paper; }
 
 /* 컨트롤 */
 button { border-radius: 10px; border: 1px solid @kiyu_border; background-image: none; background-color: @kiyu_surface; box-shadow: none; text-shadow: none; padding: 5px 12px; }
-button:hover { background-color: #fff7ef; border-color: #f0c9a2; }
-button:active, button:checked { background-color: alpha(@kiyu_accent, 0.16); border-color: alpha(@kiyu_accent, 0.5); }
+button:hover { background-color: mix(@kiyu_surface, @kiyu_accent, 0.06); border-color: alpha(@kiyu_accent, 0.45); }
+button:active, button:checked { background-color: alpha(@kiyu_accent, 0.18); border-color: alpha(@kiyu_accent, 0.5); }
 button.flat { background-color: transparent; border-color: transparent; }
 button.flat:hover { background-color: alpha(@kiyu_accent, 0.10); }
 button.suggested-action, button.suggested-action:hover { background-color: @kiyu_accent; border-color: @kiyu_accent_dark; color: #ffffff; }
@@ -29,9 +31,9 @@ entry:focus, spinbutton:focus { border-color: @kiyu_accent; box-shadow: 0 0 0 3p
 combobox button { border-radius: 10px; }
 switch { border-radius: 14px; }
 switch:checked { background-color: @kiyu_accent; border-color: @kiyu_accent_dark; }
-check, radio { border-color: #cfc9bf; }
 check:checked, radio:checked { background-color: @kiyu_accent; border-color: @kiyu_accent_dark; color: #ffffff; }
 scale highlight, progressbar progress, levelbar block.filled { background-color: @kiyu_accent; border-color: @kiyu_accent_dark; }
+scale slider { border-radius: 50%; background-color: @kiyu_surface; border: 1px solid alpha(@kiyu_accent, 0.6); box-shadow: none; }
 scrollbar slider { min-width: 6px; min-height: 6px; border-radius: 6px; background-color: alpha(@kiyu_text, 0.28); }
 scrollbar slider:hover { background-color: alpha(@kiyu_text, 0.45); }
 scrollbar { background-color: transparent; border: none; }
@@ -48,31 +50,35 @@ menu, .menu, .context-menu { background-color: @kiyu_surface; border: 1px solid 
 menuitem { border-radius: 8px; padding: 6px 10px; }
 menuitem:hover { background-color: alpha(@kiyu_accent, 0.14); color: @kiyu_text; }
 popover, popover.background { background-color: @kiyu_surface; border: 1px solid @kiyu_border; border-radius: 14px; }
-tooltip, tooltip.background { background-color: rgba(43,42,40,0.94); color: #ffffff; border-radius: 10px; border: none; }
-infobar, infobar.info, infobar.warning { border-radius: 10px; background-color: #fff3e6; color: @kiyu_text; }
+tooltip, tooltip.background { background-color: alpha(@theme_fg_color, 0.92); color: @theme_bg_color; border-radius: 10px; border: none; }
+infobar, infobar.info, infobar.warning { border-radius: 10px; background-color: alpha(@kiyu_accent, 0.12); color: @kiyu_text; }
 infobar.info *, infobar.warning * { color: @kiyu_text; }
 headerbar, .titlebar { background-color: @kiyu_paper; border-bottom: 1px solid @kiyu_border; box-shadow: none; }
 *:link, link, .link { color: @kiyu_accent_dark; }
 
 /* 바탕화면 아이콘 글자 */
-XfdesktopIconView.view, .XfdesktopIconView.view, XfdesktopIconView, .XfdesktopIconView { color: @kiyu_text; text-shadow: 0 0 3px rgba(255,255,255,0.9); }
+XfdesktopIconView.view, .XfdesktopIconView.view, XfdesktopIconView, .XfdesktopIconView { color: #2b2a28; text-shadow: 0 0 3px rgba(255,255,255,0.9); }
 XfdesktopIconView.view:selected, .XfdesktopIconView.view:selected, XfdesktopIconView:selected, .XfdesktopIconView:selected {
     color: #ffffff; background-color: alpha(@kiyu_accent, 0.85); border-radius: 8px; text-shadow: none; }
 
-/* 작업표시줄: 떠 있는 둥근 독 (블러 없는 반투명), 위/아래 여백 */
-.xfce4-panel { background-color: rgba(250, 248, 244, 0.90); border: 1px solid rgba(255,255,255,0.8); border-radius: 16px; color: @kiyu_text; }
-.xfce4-panel button { border-radius: 10px; border-color: transparent; background-color: transparent; padding: 4px 8px; }
+/* 작업표시줄: 가운데 독 + 오른쪽 알약. 바닥에 붙고 위 모서리만 둥글다 (윈도우 11 식). 블러 없는 반투명 */
+.xfce4-panel { background-color: alpha(@theme_bg_color, 0.92); border: 1px solid alpha(@theme_base_color, 0.7); border-bottom: none; border-radius: 18px 18px 0 0; padding: 4px 8px 2px 8px; color: @kiyu_text; }
+.xfce4-panel button, .xfce4-panel button.flat, .xfce4-panel button.toggle { border-radius: 12px; border: 1px solid transparent; background-color: transparent; background-image: none; box-shadow: none; padding: 4px 8px; }
 .xfce4-panel button:hover { background-color: alpha(@kiyu_accent, 0.12); }
 .xfce4-panel button:checked, .xfce4-panel button:active { background-color: alpha(@kiyu_accent, 0.20); }
-.xfce4-panel #whiskermenu-button { border-radius: 10px; }
+.xfce4-panel #whiskermenu-button { border-radius: 12px; }
+.xfce4-panel .docklike-button, .xfce4-panel #docklike button { padding: 4px 6px; }
 
 /* 시작 메뉴 */
-#whiskermenu-window, #whiskermenu-window.background { border-radius: 16px; border: 1px solid rgba(255,255,255,0.8); background-color: rgba(250, 248, 244, 0.96); }
+#whiskermenu-window, #whiskermenu-window.background { border-radius: 18px; border: 1px solid alpha(@theme_base_color, 0.7); background-color: @kiyu_glass; }
 #whiskermenu-window entry { border-radius: 22px; padding: 8px 14px; }
 #whiskermenu-window treeview.view, #whiskermenu-window .view, #whiskermenu-window iconview { background-color: transparent; }
 #whiskermenu-window treeview.view:selected, #whiskermenu-window .view:selected, #whiskermenu-window iconview:selected { background-color: alpha(@kiyu_accent, 0.16); color: @kiyu_text; border-radius: 10px; }
 #whiskermenu-window scrolledwindow.frame, #whiskermenu-window frame > border { border: none; }
 #whiskermenu-window button { padding: 6px 10px; }
 
+/* 빠른 설정 (kiyu-control) */
+#kiyu-control, #kiyu-control.background { border-radius: 18px; border: 1px solid alpha(@theme_base_color, 0.7); background-color: @kiyu_glass; }
+
 /* 알림 */
-#XfceNotifyWindow { border-radius: 14px; border: 1px solid rgba(255,255,255,0.8); background-color: rgba(250,248,244,0.96); color: @kiyu_text; }
+#XfceNotifyWindow { border-radius: 14px; border: 1px solid alpha(@theme_base_color, 0.7); background-color: @kiyu_glass; color: @kiyu_text; }
