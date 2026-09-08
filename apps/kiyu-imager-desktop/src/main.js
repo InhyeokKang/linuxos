@@ -65,7 +65,8 @@ ipcMain.handle('flash', async (evt, imagePath, drive, verify) => {
   const isDev = !app.isPackaged;
   const nodeBin = isDev ? process.execPath : process.execPath; // 배포 시 electron 바이너리를 node 모드로
   const writer = path.join(__dirname, 'writer.js');
-  const args = [writer, imagePath, drive.raw || drive.device, verify ? 'verify' : 'noverify', progressFile];
+  const target = process.platform === 'win32' ? (drive.raw || drive.device) : drive.device;
+  const args = [writer, imagePath, target, verify ? 'verify' : 'noverify', progressFile];
   const quoted = [nodeBin, ...args].map((a) => `"${a}"`).join(' ');
 
   let done = false, result = null;

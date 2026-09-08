@@ -4,8 +4,8 @@ kiyu ISO 를 USB·SD 카드에 굽는 **크로스 플랫폼**(Windows·macOS·Li
 쓰던 컴퓨터(주로 Windows)에서 이 프로그램으로 USB 를 만들고, 그 USB 로 새 기기를 부팅해 kiyu 를 설치한다.
 라즈베리파이 Imager 와 같은 역할.
 
-- 기술: Electron + balena `etcher-sdk`(쓰기·검증) + `drivelist`(드라이브 감지) + `sudo-prompt`(관리자 권한).
-  balenaEtcher 와 같은 라이브러리 스택이라 각 OS 의 저수준 쓰기·권한 처리가 검증돼 있다.
+- 기술: Electron + `drivelist`(드라이브 감지) + `sudo-prompt`(관리자 권한). 쓰기·검증은 순수 Node `fs`/`crypto` 로
+  구현해 네이티브 빌드 의존을 drivelist 하나로 줄였다(etcher-sdk 의 usb 네이티브 모듈이 최신 툴체인에서 빌드 실패해 제거).
 - 안전: 시스템 디스크는 목록에서 제외, 굽기 전 대상 모델·용량 확인, 쓰기 후 sha256 검증(기본 켬).
 - 압축 이미지(.zip/.xz/.gz)도 자동 해제하며 굽는다.
 
