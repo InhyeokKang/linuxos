@@ -2,6 +2,11 @@ name: Build kiyu Imager (desktop)
 # 크로스 플랫폼 굽기 도구를 Windows/macOS/Linux 설치본으로 빌드한다. 태그(v*) 푸시 시 릴리스에 첨부.
 on:
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: '이 태그의 릴리스에 설치본을 첨부 (예: v0.2.0). 비우면 아티팩트만'
+        required: false
+        default: ''
   push:
     branches: ['**']
     paths: ['apps/kiyu-imager-desktop/**', '.github/workflows/build-imager.yml']
@@ -54,7 +59,8 @@ jobs:
           path: apps/kiyu-imager-desktop/out/*
           if-no-files-found: warn
       - name: Attach to release
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/v') || github.event.inputs.release_tag != ''
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ github.event.inputs.release_tag || github.ref_name }}
           files: apps/kiyu-imager-desktop/out/*
