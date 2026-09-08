@@ -243,6 +243,8 @@ class Tile(Gtk.Button):
 class Control(Gtk.Window):
     def __init__(self):
         super().__init__(title="빠른 설정", type=Gtk.WindowType.TOPLEVEL)
+        # 안정적인 WM_CLASS: picom 이 이 창의 사각 그림자를 끄도록(shadow-exclude) 식별자를 고정한다.
+        self.set_wmclass("kiyu-control", "kiyu-control")
         self.set_name("kiyu-control")
         self.set_type_hint(Gdk.WindowTypeHint.DIALOG)
         self.set_decorated(False)
