@@ -1,5 +1,9 @@
 appId: org.kiyu.imager
 productName: kiyu Imager
+publish:
+  provider: github
+  owner: InhyeokKang
+  repo: linuxos
 directories:
   output: dist
   buildResources: build

@@ -17,5 +17,9 @@
   "devDependencies": {
     "electron": "44.2.0",
     "electron-builder": "26.15.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/InhyeokKang/linuxos.git"
   }
 }
