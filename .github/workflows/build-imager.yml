@@ -54,6 +54,8 @@ jobs:
           find dist -maxdepth 1 -type f \( -name '*.exe' -o -name '*.dmg' -o -name '*.AppImage' -o -name '*.zip' -o -name '*.blockmap' -o -name '*.yml' \) -exec cp {} out/ \; || true
           ls -la out
       - uses: actions/upload-artifact@v4
+        # 아티팩트 저장소 용량이 꽉 차도(6~12시간마다 재계산) 릴리스 첨부는 계속되도록 실패를 무시한다.
+        continue-on-error: true
         with:
           name: ${{ matrix.artifact }}
           path: apps/kiyu-imager-desktop/out/*
