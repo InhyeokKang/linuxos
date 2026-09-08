@@ -46,7 +46,7 @@ HANGUL = [
 # 3단계(phase=installer): 설치 프로그램(Anaconda) 을 띄워 브랜딩·언어 확인 (스크린샷)
 INSTALLER = [
     "echo '=== installer'; export XAUTHORITY=$HOME/.Xauthority; w=$(xdotool search --classname mousepad 2>/dev/null | tail -1); [ -n \"$w\" ] && xdotool windowclose $w; cat /etc/anaconda/profile.d/kiyu.conf 2>&1 | head -6; cat /.buildstamp 2>&1 | head -4; ls -la /usr/share/anaconda/pixmaps/ 2>&1 | head -8",
-    "sudo -E env DISPLAY=:0 XAUTHORITY=$HOME/.Xauthority /usr/bin/liveinst >/tmp/liveinst.log 2>&1 & sleep 60; ps -eo comm | grep -iE 'anaconda|liveinst' | sort | uniq -c; tail -5 /tmp/liveinst.log 2>/dev/null; sudo tail -5 /tmp/anaconda.log 2>/dev/null",
+    "(DISPLAY=:0 XAUTHORITY=$HOME/.Xauthority /usr/bin/liveinst >/tmp/liveinst.log 2>&1 &) ; sleep 75; ps -eo comm | grep -iE 'anaconda|liveinst|polkit' | sort | uniq -c; tail -5 /tmp/liveinst.log 2>/dev/null; sudo tail -5 /tmp/anaconda.log 2>/dev/null; xdotool search --name -i anaconda 2>/dev/null | head -3",
     "echo '=== END'",
 ]
 PHASES = {"hangul": HANGUL, "installer": INSTALLER}
