@@ -1,0 +1,16 @@
+#!/bin/bash
+# kiyu 코덱·미디어 설치 (Fedora): RPM Fusion 저장소 + 전체 ffmpeg + GStreamer 플러그인 + 하드웨어 가속(VA-API)
+#  Fedora 기본에는 특허 문제로 H.264/H.265/AAC 등이 빠져 있어 영상 사이트·동영상 파일 재생에 필요합니다.
+set -euo pipefail
+[ "$(id -u)" -ne 0 ] || { echo "일반 사용자로 실행하세요 (sudo 는 스크립트가 필요할 때 씁니다)." >&2; exit 1; }
+rel=$(rpm -E %fedora)
+echo "== [1/3] RPM Fusion 저장소"
+rpm -q rpmfusion-free-release >/dev/null 2>&1 || sudo dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${rel}.noarch.rpm"
+rpm -q rpmfusion-nonfree-release >/dev/null 2>&1 || sudo dnf install -y "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${rel}.noarch.rpm"
+echo "== [2/3] ffmpeg (전체) 와 GStreamer 플러그인"
+sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing || sudo dnf install -y ffmpeg --allowerasing
+sudo dnf install -y gstreamer1-plugins-bad-free-extras gstreamer1-plugins-ugly gstreamer1-plugin-libav lame\* --exclude=lame-devel
+echo "== [3/3] 하드웨어 가속 (VA-API)"
+if lspci -nn 2>/dev/null | grep -qiE 'VGA.*Intel'; then sudo dnf install -y intel-media-driver libva-utils; fi
+if lspci -nn 2>/dev/null | grep -qiE 'VGA.*(AMD|ATI)'; then sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld || true; sudo dnf install -y libva-utils; fi
+echo "완료. 브라우저·mpv 를 다시 실행하면 적용됩니다."

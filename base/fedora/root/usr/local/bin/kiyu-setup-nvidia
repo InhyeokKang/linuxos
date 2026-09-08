@@ -1,0 +1,28 @@
+#!/bin/bash
+# kiyu NVIDIA 전용 드라이버 설치 (RPM Fusion akmod-nvidia)
+#  - Secure Boot 가 켜져 있으면 모듈 서명 키를 만들어 MOK 에 등록해야 부팅 시 드라이버가 올라옵니다.
+#    이 스크립트가 키 생성과 등록 요청까지 하고, 재부팅 때 파란 MOK 화면에서 "Enroll MOK" 를 고르고
+#    여기서 정한 암호를 넣으면 됩니다.
+set -euo pipefail
+[ "$(id -u)" -ne 0 ] || { echo "일반 사용자로 실행하세요." >&2; exit 1; }
+if ! lspci -nn 2>/dev/null | grep -qiE '(VGA|3D).*NVIDIA'; then echo "NVIDIA 그래픽이 감지되지 않았습니다."; exit 0; fi
+rel=$(rpm -E %fedora)
+echo "== [1/4] RPM Fusion 저장소"
+rpm -q rpmfusion-free-release >/dev/null 2>&1 || sudo dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${rel}.noarch.rpm"
+rpm -q rpmfusion-nonfree-release >/dev/null 2>&1 || sudo dnf install -y "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${rel}.noarch.rpm"
+echo "== [2/4] 드라이버 (akmod-nvidia: 커널마다 자동 빌드)"
+sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-libs.i686 || sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda
+echo "== [3/4] Secure Boot"
+if command -v mokutil >/dev/null 2>&1 && mokutil --sb-state 2>/dev/null | grep -qi enabled; then
+    echo "Secure Boot 가 켜져 있습니다. 모듈 서명 키를 만들고 등록을 요청합니다."
+    sudo dnf install -y akmods mokutil openssl
+    [ -f /etc/pki/akmods/certs/public_key.der ] || sudo kmodgenca -a
+    echo "다음 화면에서 MOK 등록용 임시 암호를 정하세요 (재부팅 후 한 번 묻습니다)."
+    sudo mokutil --import /etc/pki/akmods/certs/public_key.der
+    echo "재부팅 → 파란 MOK 화면에서 Enroll MOK → Continue → 암호 입력 → 재부팅."
+else
+    echo "Secure Boot 꺼짐: 별도 등록 없이 동작합니다."
+fi
+echo "== [4/4] 모듈 빌드"
+sudo akmods --force || true
+echo "완료. 재부팅하면 NVIDIA 드라이버로 전환됩니다. (빌드에 몇 분 걸릴 수 있습니다)"

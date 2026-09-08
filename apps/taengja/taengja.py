@@ -39,8 +39,10 @@ DEFAULT_CONFIG = {
     "zoom": 1.0,
 }
 
-# 추적기/광고 차단 목록 (WebKit content-blocker 규칙). v0 는 대표적인 추적 도메인만 내장.
-# 이후 EasyPrivacy 등을 빌드 시 변환해 /usr/share/taengja/filters.json 로 제공 예정.
+# 추적기/광고 차단 목록 (WebKit content-blocker 규칙).
+#  - 빌드 시 EasyList / EasyPrivacy / List-KR 을 abp2webkit.py 로 변환한 /usr/share/taengja/filters/*.json 을 모두 읽고,
+#  - 아래 내장 소형 목록(대표 추적 도메인 + 서드파티 쿠키 차단)은 항상 함께 적용한다.
+FILTER_DIR = "/usr/share/taengja/filters"
 TRACKER_DOMAINS = [
     "google-analytics.com", "googletagmanager.com", "googletagservices.com", "googlesyndication.com",
     "doubleclick.net", "googleadservices.com", "adservice.google.com", "connect.facebook.net",
@@ -196,20 +198,49 @@ class Browser(Gtk.Application):
         self.context.connect("download-started", self._on_download_started)
         # kiyu: 내부 스킴 (홈, 검색)
         self.context.register_uri_scheme("kiyu", self._on_kiyu_scheme)
-        # 추적기 차단 목록 컴파일 (캐시됨)
-        self.content_filter = None
+        # 추적기·광고 차단 목록 컴파일 (컴파일 결과는 캐시 디렉터리에 저장되어 다음 실행부터 빠름)
+        self.content_filters = []
         if self.config["block_trackers"]:
-            store = WebKit2.UserContentFilterStore(path=os.path.join(CACHE_DIR, "filters"))
-            store.save("kiyu-trackers", GLib.Bytes.new(_filter_rules().encode()), None, self._on_filter_saved)
+            self.filter_store = WebKit2.UserContentFilterStore(path=os.path.join(CACHE_DIR, "filters"))
+            self.filter_store.save("kiyu-trackers", GLib.Bytes.new(_filter_rules().encode()), None, self._on_filter_saved)
+            try:
+                for name in sorted(os.listdir(FILTER_DIR)):
+                    if not name.endswith(".json"):
+                        continue
+                    path = os.path.join(FILTER_DIR, name)
+                    ident = name[:-5]
+                    self.filter_store.load(ident, None, self._on_filter_loaded, path)
+            except OSError:
+                pass
 
-    def _on_filter_saved(self, store, result):
+    def _apply_filter(self, f):
+        self.content_filters.append(f)
+        if self.window:
+            for view in self.window.views():
+                view.get_user_content_manager().add_filter(f)
+
+    def _on_filter_saved(self, store, result, _data=None):
         try:
-            self.content_filter = store.save_finish(result)
-            if self.window:
-                for view in self.window.views():
-                    view.get_user_content_manager().add_filter(self.content_filter)
+            self._apply_filter(store.save_finish(result))
         except GLib.Error as e:
             print("taengja: 필터 컴파일 실패:", e, file=sys.stderr)
+
+    def _on_filter_loaded(self, store, result, path):
+        """캐시된 컴파일 결과가 있으면 쓰고, 없거나 목록 파일이 더 새로우면 다시 컴파일한다."""
+        try:
+            f = store.load_finish(result)
+            cached = os.path.join(CACHE_DIR, "filters", "ContentRuleList-" + f.get_identifier())
+            if os.path.exists(cached) and os.path.getmtime(cached) >= os.path.getmtime(path):
+                self._apply_filter(f)
+                return
+        except GLib.Error:
+            pass
+        try:
+            with open(path, "rb") as fh:
+                data = fh.read()
+            store.save(os.path.basename(path)[:-5], GLib.Bytes.new(data), None, self._on_filter_saved)
+        except OSError as e:
+            print("taengja: 필터 읽기 실패:", path, e, file=sys.stderr)
 
     def _on_kiyu_scheme(self, request):
         uri = request.get_uri()
@@ -468,8 +499,8 @@ class BrowserWindow(Gtk.ApplicationWindow):
         s.set_default_charset("utf-8")
         s.set_user_agent_with_application_details("Taengja", VERSION)
         view.set_zoom_level(self.app.config["zoom"])
-        if self.app.content_filter is not None:
-            view.get_user_content_manager().add_filter(self.app.content_filter)
+        for f in self.app.content_filters:
+            view.get_user_content_manager().add_filter(f)
 
         view.connect("notify::title", lambda v, _p: self._update_tab(v))
         view.connect("notify::uri", lambda v, _p: self._update_tab(v))

@@ -11,6 +11,7 @@ import os
 import shutil
 import subprocess
 import sys
+import threading
 
 import gi
 
@@ -67,6 +68,37 @@ def wifi_status():
 
 def wifi_set(on):
     spawn(["nmcli", "radio", "wifi", "on" if on else "off"])
+
+
+def wifi_list(rescan=False):
+    """(ssid, signal, secured, active) 목록. 같은 SSID 는 가장 센 신호만."""
+    args = ["nmcli", "-t", "-f", "ACTIVE,SSID,SIGNAL,SECURITY", "dev", "wifi", "list"]
+    if rescan:
+        args += ["--rescan", "yes"]
+    best = {}
+    for line in run(args, timeout=15).splitlines():
+        parts = line.split(":")
+        if len(parts) < 4 or not parts[1]:
+            continue
+        active, ssid, sig, sec = parts[0] == "yes", parts[1], int(parts[2] or 0), parts[3].strip()
+        if ssid not in best or sig > best[ssid][1] or active:
+            best[ssid] = (ssid, sig, bool(sec and sec != "--"), active)
+    return sorted(best.values(), key=lambda t: (not t[3], -t[1]))
+
+
+def wifi_known(ssid):
+    return ssid in run(["nmcli", "-t", "-f", "NAME", "con", "show"]).splitlines()
+
+
+def wifi_connect(ssid, password=None):
+    if wifi_known(ssid) and not password:
+        r = subprocess.run(["nmcli", "con", "up", "id", ssid], capture_output=True, text=True, timeout=60)
+    else:
+        cmd = ["nmcli", "dev", "wifi", "connect", ssid]
+        if password:
+            cmd += ["password", password]
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+    return r.returncode == 0, (r.stderr or r.stdout).strip().splitlines()[-1:] or [""]
 
 
 def bt_status():
@@ -219,7 +251,7 @@ class Control(Gtk.Window):
         self.set_keep_above(True)
         self.set_resizable(False)
         self.set_default_size(340, -1)
-        self.connect("focus-out-event", lambda *_: self.quit())
+        self.connect("focus-out-event", self._on_focus_out)
         self.connect("key-press-event", self._key)
         self.connect("delete-event", lambda *_: self.quit())
 
@@ -227,8 +259,11 @@ class Control(Gtk.Window):
         prov.load_from_data(CSS)
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), prov, Gtk.STYLE_PROVIDER_PRIORITY_USER + 1)  # 사용자 gtk.css 보다 우선
 
+        self.stack = Gtk.Stack(transition_type=Gtk.StackTransitionType.SLIDE_LEFT_RIGHT, transition_duration=150)
+        self.add(self.stack)
         outer = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12, margin=16)
-        self.add(outer)
+        self.stack.add_named(outer, "main")
+        self.stack.add_named(self._build_wifi_page(), "wifi")
 
         # 헤더: 사용자 / 설정 / 잠금 / 전원
         head = Gtk.Box(spacing=8)
@@ -255,7 +290,14 @@ class Control(Gtk.Window):
         self.t_fx = Tile("preferences-desktop-theme-symbolic", "효과", effects_set)
         self.t_wifi.refresh_cb = self.refresh_wifi
         self.t_bt.refresh_cb = self.refresh_bt
-        grid.attach(self.t_wifi, 0, 0, 1, 1)
+        wbox = Gtk.Box(spacing=2)
+        wbox.pack_start(self.t_wifi, True, True, 0)
+        self.b_wifi_list = Gtk.Button.new_from_icon_name("go-next-symbolic", Gtk.IconSize.BUTTON)
+        self.b_wifi_list.get_style_context().add_class("flat")
+        self.b_wifi_list.set_tooltip_text("Wi-Fi 네트워크 선택")
+        self.b_wifi_list.connect("clicked", lambda *_: self.show_wifi_page())
+        wbox.pack_start(self.b_wifi_list, False, False, 0)
+        grid.attach(wbox, 0, 0, 1, 1)
         grid.attach(self.t_bt, 1, 0, 1, 1)
         grid.attach(self.t_dark, 0, 1, 1, 1)
         grid.attach(self.t_fx, 1, 1, 1, 1)
@@ -275,9 +317,102 @@ class Control(Gtk.Window):
         outer.pack_start(self.bat, False, False, 0)
 
         self.show_all()
+        self.stack.set_visible_child_name("main")
         self.refresh_all()
         self._place()
         self.present()
+
+    # ---------- Wi-Fi 목록 페이지 ----------
+    def _build_wifi_page(self):
+        page = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8, margin=16)
+        head = Gtk.Box(spacing=8)
+        back = Gtk.Button.new_from_icon_name("go-previous-symbolic", Gtk.IconSize.BUTTON)
+        back.get_style_context().add_class("flat")
+        back.connect("clicked", lambda *_: self.stack.set_visible_child_name("main"))
+        title = Gtk.Label(label="Wi-Fi 네트워크", xalign=0)
+        title.get_style_context().add_class("kc-title")
+        refresh = Gtk.Button.new_from_icon_name("view-refresh-symbolic", Gtk.IconSize.BUTTON)
+        refresh.get_style_context().add_class("flat")
+        refresh.connect("clicked", lambda *_: self.refresh_wifi_list(True))
+        head.pack_start(back, False, False, 0)
+        head.pack_start(title, True, True, 0)
+        head.pack_start(refresh, False, False, 0)
+        page.pack_start(head, False, False, 0)
+        self.wifi_status = Gtk.Label(label="", xalign=0)
+        self.wifi_status.get_style_context().add_class("sub")
+        page.pack_start(self.wifi_status, False, False, 0)
+        self.wifi_box = Gtk.ListBox()
+        self.wifi_box.set_selection_mode(Gtk.SelectionMode.NONE)
+        self.wifi_box.connect("row-activated", self._on_wifi_row)
+        sw = Gtk.ScrolledWindow()
+        sw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        sw.set_min_content_height(260)
+        sw.add(self.wifi_box)
+        page.pack_start(sw, True, True, 0)
+        return page
+
+    def show_wifi_page(self):
+        self.stack.set_visible_child_name("wifi")
+        self.refresh_wifi_list(False)
+
+    def refresh_wifi_list(self, rescan):
+        self.wifi_status.set_text("네트워크 찾는 중...")
+        for c in self.wifi_box.get_children():
+            self.wifi_box.remove(c)
+        threading.Thread(target=lambda: GLib.idle_add(self._fill_wifi, wifi_list(rescan)), daemon=True).start()
+
+    def _fill_wifi(self, nets):
+        for c in self.wifi_box.get_children():
+            self.wifi_box.remove(c)
+        for ssid, sig, secured, active in nets:
+            row = Gtk.ListBoxRow()
+            box = Gtk.Box(spacing=10, margin=6, margin_end=14)
+            level = "excellent" if sig > 75 else "good" if sig > 50 else "ok" if sig > 25 else "weak"
+            box.pack_start(Gtk.Image.new_from_icon_name(f"network-wireless-signal-{level}-symbolic", Gtk.IconSize.BUTTON), False, False, 0)
+            lbl = Gtk.Label(label=ssid, xalign=0)
+            if active:
+                lbl.get_style_context().add_class("kc-title")
+            box.pack_start(lbl, True, True, 0)
+            if active:
+                box.pack_start(Gtk.Label(label="연결됨"), False, False, 0)
+            if secured:
+                box.pack_start(Gtk.Image.new_from_icon_name("changes-prevent-symbolic", Gtk.IconSize.MENU), False, False, 0)
+            row.add(box)
+            row.ssid, row.secured, row.active = ssid, secured, active
+            self.wifi_box.add(row)
+        self.wifi_box.show_all()
+        self.wifi_status.set_text("" if nets else "네트워크가 없습니다 (Wi-Fi 가 꺼져 있거나 어댑터 없음)")
+        return False
+
+    def _on_wifi_row(self, _box, row):
+        if row.active:
+            return
+        password = None
+        if row.secured and not wifi_known(row.ssid):
+            dlg = Gtk.Dialog(title=row.ssid, transient_for=self, modal=True)
+            dlg.add_button("취소", Gtk.ResponseType.CANCEL)
+            dlg.add_button("연결", Gtk.ResponseType.OK)
+            dlg.set_default_response(Gtk.ResponseType.OK)
+            box = dlg.get_content_area()
+            box.set_spacing(8)
+            box.set_border_width(12)
+            box.add(Gtk.Label(label=f"'{row.ssid}' 의 네트워크 암호를 입력하세요", xalign=0))
+            entry = Gtk.Entry(visibility=False, activates_default=True, width_chars=28)
+            box.add(entry)
+            box.show_all()
+            ok = dlg.run() == Gtk.ResponseType.OK
+            password = entry.get_text()
+            dlg.destroy()
+            if not ok or not password:
+                return
+        self.wifi_status.set_text(f"'{row.ssid}' 에 연결하는 중...")
+
+        def work():
+            ok, msg = wifi_connect(row.ssid, password)
+            GLib.idle_add(self.wifi_status.set_text, "연결되었습니다" if ok else "연결 실패: " + (msg[0] if msg else ""))
+            GLib.idle_add(self.refresh_wifi_list, False)
+            GLib.idle_add(self.refresh_wifi)
+        threading.Thread(target=work, daemon=True).start()
 
     def _slider(self, parent, icon, setter, on_icon_click):
         row = Gtk.Box(spacing=8)
@@ -310,6 +445,7 @@ class Control(Gtk.Window):
     def refresh_wifi(self):
         on, sub = wifi_status()
         self.t_wifi.set_visible(on is not None)
+        self.b_wifi_list.set_visible(on is not None)
         if on is not None:
             self.t_wifi.set_active(on, sub)
         return False
@@ -354,6 +490,13 @@ class Control(Gtk.Window):
         w, h = self.get_size()
         self.move(geo.x + geo.width - w - MARGIN, geo.y + geo.height - h - PANEL_H)
 
+    def _on_focus_out(self, *_):
+        # 자식 대화상자(Wi-Fi 암호)로 포커스가 옮겨간 경우는 유지
+        for w in Gtk.Window.list_toplevels():
+            if w is not self and w.get_transient_for() is self and w.get_visible():
+                return
+        self.quit()
+
     def _key(self, _w, ev):
         if ev.keyval == Gdk.KEY_Escape:
             self.quit()
@@ -375,7 +518,9 @@ def main():
         pass
     with open(lock, "w") as f:
         f.write(str(os.getpid()))
-    Control()
+    win = Control()
+    if "--wifi" in sys.argv:  # Wi-Fi 네트워크 목록으로 바로 열기
+        win.show_wifi_page()
     Gtk.main()
     try:
         os.unlink(lock)

@@ -10,6 +10,9 @@
 - [x] 한글 입력: fcitx5 기본 프로필(두벌식 + 영어, 한/영·Shift+Space·오른쪽 Alt 전환) — 프리뷰에서 입력 검증, ISO 부팅 테스트 2단계(메모장 입력 스크린샷)로 자동 검증
 - [x] 설치 프로그램: Anaconda kiyu 프로필(Fedora 상속), 대화식 기본값(한국어·kr 자판·서울·btrfs·LUKS2 암호화 기본), 로고·상단 색 브랜딩, 부팅 테스트 3단계 스크린샷
 - [x] 라이브 바탕화면의 고정 디스크(라이브 매체) 아이콘 숨김, 알림 기록 항상 보관(종 아이콘 = 알림 센터)
+- [x] 탱자: EasyPrivacy/EasyList/List-KR 변환 차단 목록 (빌드 시 다운로드·변환, 실행 시 컴파일 캐시)
+- [x] 빠른 설정에 Wi-Fi 네트워크 목록·연결(암호 입력) 페이지
+- [x] `kiyu-setup-codecs`(RPM Fusion, ffmpeg, VA-API), `kiyu-setup-nvidia`(akmod + Secure Boot MOK 등록) — 실기기 미검증
 - [ ] GPU 있는 실기기에서 picom glx(둥근 모서리) 확인 — QEMU 는 렌더 노드가 없어 xrender 로 폴백됨
 - [ ] 바탕화면 시계·달력 위젯(선택), 통합 검색 런처
 

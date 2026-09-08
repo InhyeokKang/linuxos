@@ -74,6 +74,22 @@ if [ -f /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ]; th
     mkdir -p /etc/xdg/xfce4/panel
     cp /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml /etc/xdg/xfce4/panel/default.xml
 fi
+# 탱자 광고·추적 차단 목록: EasyList / EasyPrivacy / List-KR 을 받아 WebKit 규칙으로 변환 (실패해도 빌드는 계속,
+# 그때는 브라우저 내장 소형 목록만 쓴다). 결과: /usr/share/taengja/filters/*.json
+mkdir -p /usr/share/taengja/filters
+fl=/tmp/filters; mkdir -p "$fl"
+fetch() { curl -fsSL --max-time 60 --retry 2 -o "$2" "$1" 2>/dev/null && [ -s "$2" ]; }
+fetch https://easylist.to/easylist/easyprivacy.txt "$fl/easyprivacy.txt" || echo "경고: easyprivacy 다운로드 실패"
+fetch https://easylist.to/easylist/easylist.txt "$fl/easylist.txt" || echo "경고: easylist 다운로드 실패"
+fetch https://raw.githubusercontent.com/List-KR/List-KR/master/filter.txt "$fl/listkr.txt" || echo "경고: List-KR 다운로드 실패"
+if [ -x /usr/lib/taengja/abp2webkit.py ]; then
+    # 추적 차단(EasyPrivacy) 은 통째로, 광고(EasyList) 는 네트워크 규칙 위주, 한국 사이트(List-KR) 는 통째로
+    [ -s "$fl/easyprivacy.txt" ] && python3 /usr/lib/taengja/abp2webkit.py --max 30000 --no-cosmetic -o /usr/share/taengja/filters/10-easyprivacy.json "$fl/easyprivacy.txt"
+    [ -s "$fl/easylist.txt" ] && python3 /usr/lib/taengja/abp2webkit.py --max 30000 --no-cosmetic -o /usr/share/taengja/filters/20-easylist.json "$fl/easylist.txt"
+    [ -s "$fl/listkr.txt" ] && python3 /usr/lib/taengja/abp2webkit.py --max 15000 -o /usr/share/taengja/filters/30-listkr.json "$fl/listkr.txt"
+    ls -la /usr/share/taengja/filters/
+fi
+rm -rf "$fl"
 # 설치 프로그램(Anaconda) 브랜딩: 사이드바 로고와 상단 배경을 kiyu 로
 if [ -d /usr/share/anaconda/pixmaps ] && command -v rsvg-convert >/dev/null 2>&1; then
     rsvg-convert -w 160 -h 160 "$ICON" -o /usr/share/anaconda/pixmaps/sidebar-logo.png
