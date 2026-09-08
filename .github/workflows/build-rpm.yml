@@ -1,0 +1,36 @@
+name: Build kiyu-desktop RPM
+# kiyu 구성·앱을 RPM 으로 만들어 kiyu-repo 브랜치(dnf 저장소)에 올린다. 서명 키(KIYU_RPM_GPG_KEY, KIYU_RPM_GPG_PASS)
+# 시크릿이 있으면 RPM 과 repomd 를 서명하고 공개키를 함께 올린다.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['**']
+    paths: ['packaging/**', 'scripts/build-rpm.sh', 'scripts/ci-build-rpm.sh', 'scripts/lib/assemble-overlay.sh', '.github/workflows/build-rpm.yml']
+permissions:
+  contents: write
+jobs:
+  rpm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Build RPM in a Fedora container
+        run: |
+          docker run --rm -v "$PWD:/src" -w /src -e KIYU_RPM_GPG_KEY -e KIYU_RPM_GPG_PASS \
+            registry.fedoraproject.org/fedora:44 scripts/ci-build-rpm.sh
+        env:
+          KIYU_RPM_GPG_KEY: ${{ secrets.KIYU_RPM_GPG_KEY }}
+          KIYU_RPM_GPG_PASS: ${{ secrets.KIYU_RPM_GPG_PASS }}
+      - name: Publish repo to kiyu-repo branch
+        run: |
+          set -e
+          git config user.name "kiyu-ci"; git config user.email "ci@kiyu.invalid"
+          sha=$(git rev-parse --short HEAD)
+          rm -rf /tmp/repo && cp -a repo /tmp/repo
+          git checkout --orphan kiyu-repo
+          git rm -rfq . >/dev/null 2>&1 || true
+          cp -a /tmp/repo/. .
+          echo "kiyu-desktop dnf repo, built from $sha at $(date -u +%FT%TZ)" > README.txt
+          git add -A
+          git commit -qm "repo: kiyu-desktop from $sha"
+          git push -f origin kiyu-repo

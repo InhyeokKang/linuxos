@@ -51,30 +51,8 @@ REDHAT_SUPPORT_PRODUCT_VERSION=${FEDORA_RELEASE}
 OSREL
 printf '%s %s \\n \\l\n\n' "${OS_NAME}" "${OS_VERSION}" > "$WORK/root/usr/lib/${OS_ID}/issue"
 
-# 브랜딩 원본 동기화 (branding/ 이 단일 소스)
-mkdir -p "$WORK/root/usr/share/backgrounds/${OS_ID}" "$WORK/root/usr/share/icons/hicolor/scalable/apps"
-cp branding/wallpaper.svg "$WORK/root/usr/share/backgrounds/${OS_ID}/default.svg"
-cp branding/logo.svg "$WORK/root/usr/share/icons/hicolor/scalable/apps/${OS_ID}.svg"
-
-# 자체 앱 (apps/) 을 오버레이에 배치
-mkdir -p "$WORK/root/usr/src/${OS_ID}" "$WORK/root/usr/lib/taengja" "$WORK/root/usr/bin" "$WORK/root/usr/share/applications" "$WORK/root/usr/share/icons/hicolor/scalable/apps"
-cp apps/kiyu-superkey/kiyu-superkey.c "$WORK/root/usr/src/${OS_ID}/"
-cp apps/taengja/taengja.py apps/taengja/abp2webkit.py "$WORK/root/usr/lib/taengja/"
-cp apps/taengja/taengja "$WORK/root/usr/bin/taengja"
-cp apps/taengja/taengja.desktop "$WORK/root/usr/share/applications/taengja.desktop"
-cp branding/taengja-icon.svg "$WORK/root/usr/share/icons/hicolor/scalable/apps/taengja.svg"
-chmod 0755 "$WORK/root/usr/bin/taengja" "$WORK/root/usr/lib/taengja/taengja.py" "$WORK/root/usr/lib/taengja/abp2webkit.py"
-mkdir -p "$WORK/root/usr/lib/kiyu-control"
-cp apps/kiyu-control/kiyu-control.py "$WORK/root/usr/lib/kiyu-control/"
-cp apps/kiyu-control/kiyu-control "$WORK/root/usr/bin/kiyu-control"
-cp branding/control-icon.svg "$WORK/root/usr/share/icons/hicolor/scalable/apps/kiyu-control.svg"
-chmod 0755 "$WORK/root/usr/bin/kiyu-control" "$WORK/root/usr/lib/kiyu-control/kiyu-control.py"
-mkdir -p "$WORK/root/usr/lib/kiyu-update"
-cp apps/kiyu-update/kiyu-update.py "$WORK/root/usr/lib/kiyu-update/"
-cp apps/kiyu-update/kiyu-update "$WORK/root/usr/bin/kiyu-update"
-cp apps/kiyu-update/kiyu-update.desktop "$WORK/root/usr/share/applications/kiyu-update.desktop"
-cp branding/update-icon.svg "$WORK/root/usr/share/icons/hicolor/scalable/apps/kiyu-update.svg"
-chmod 0755 "$WORK/root/usr/bin/kiyu-update" "$WORK/root/usr/lib/kiyu-update/kiyu-update.py"
+# 브랜딩·자체 앱을 오버레이에 배치 (branding/, apps/ 가 단일 소스; RPM 빌드와 공용)
+scripts/lib/assemble-overlay.sh "$WORK/root" "${OS_ID}"
 
 KEYS=()
 k="/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-${FEDORA_RELEASE}-primary"

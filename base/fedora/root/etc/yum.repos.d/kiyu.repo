@@ -1,0 +1,11 @@
+# kiyu 구성·앱 업데이트 저장소 (kiyu-desktop RPM). 저장소 내용은 GitHub 의 kiyu-repo 브랜치.
+# 서명 키가 있을 때만 이미지 빌드(config.sh)가 enabled=1 로 바꾼다. 수동: sudo dnf config-manager setopt kiyu.enabled=1
+[kiyu]
+name=kiyu desktop updates
+baseurl=https://raw.githubusercontent.com/InhyeokKang/linuxos/kiyu-repo/
+enabled=0
+gpgcheck=1
+repo_gpgcheck=0
+gpgkey=https://raw.githubusercontent.com/InhyeokKang/linuxos/kiyu-repo/RPM-GPG-KEY-kiyu
+skip_if_unavailable=1
+metadata_expire=6h

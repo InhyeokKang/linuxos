@@ -13,6 +13,8 @@
 - [x] 탱자: EasyPrivacy/EasyList/List-KR 변환 차단 목록 (빌드 시 다운로드·변환, 실행 시 컴파일 캐시)
 - [x] 빠른 설정에 Wi-Fi 네트워크 목록·연결(암호 입력) 페이지
 - [x] `kiyu-setup-codecs`(RPM Fusion, ffmpeg, VA-API), `kiyu-setup-nvidia`(akmod + Secure Boot MOK 등록) — 실기기 미검증
+- [x] 유지보수 경로: kiyu-desktop RPM + kiyu-repo 브랜치 dnf 저장소(서명 시 자동 활성), `kiyu-upgrade-release`
+- [ ] 저장소 서명 키 시크릿 등록 (KIYU_RPM_GPG_KEY / KIYU_RPM_GPG_PASS) — 등록 전까지 저장소 비활성
 - [ ] GPU 있는 실기기에서 picom glx(둥근 모서리) 확인 — QEMU 는 렌더 노드가 없어 xrender 로 폴백됨
 - [ ] 바탕화면 시계·달력 위젯(선택), 통합 검색 런처
 

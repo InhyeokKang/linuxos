@@ -98,6 +98,19 @@ Recommends 를 끄고 빌드하므로(`--apt-recommends false`) 이미지가 작
 - 관리자 권한(UAC): polkit 에이전트가 비밀번호 창을 띄움. root 직접 로그인은 잠금.
 - Ctrl+Alt+Del 콘솔 재부팅은 mask, 데스크톱에서는 작업 관리자.
 
+### 7. 유지보수 경로: kiyu-desktop RPM 과 자체 저장소
+
+- ISO 를 다시 굽지 않고도 kiyu 구성(테마·패널·단축키), 자체 앱(탱자·빠른 설정·업데이트·Super 키), 브랜딩을 갱신할 수
+  있도록 `packaging/kiyu-desktop.spec` 으로 RPM 을 만든다. 파일 배치는 ISO 와 같은 `scripts/lib/assemble-overlay.sh`,
+  설치 후 반영은 같은 `/usr/lib/kiyu/apply-system` 을 쓴다 (ISO 의 config.sh 도 이 스크립트를 부른다).
+- `.github/workflows/build-rpm.yml` 이 Fedora 컨테이너에서 RPM 을 빌드하고 `createrepo_c` 로 저장소를 만들어
+  `kiyu-repo` 브랜치에 올린다. 저장소 URL 은 raw.githubusercontent.com 의 브랜치 경로다.
+- 서명: 시크릿 `KIYU_RPM_GPG_KEY`(armored 비밀키) / `KIYU_RPM_GPG_PASS` 가 있으면 RPM 과 repomd 를 서명하고
+  공개키 `RPM-GPG-KEY-kiyu` 를 함께 올린다. ISO 빌드는 이 공개키가 있을 때만 `/etc/yum.repos.d/kiyu.repo` 를 켠다
+  (서명 없는 저장소는 기본 비활성 — 보안 원칙).
+- 설치된 시스템에서는 설정 > 업데이트(PackageKit)가 이 저장소의 `kiyu-desktop` 갱신을 다른 업데이트와 함께 받는다.
+- Fedora 릴리스 업그레이드: `kiyu-upgrade-release` (dnf5 system-upgrade 를 감싼 도우미, 확인 후 다운로드·재부팅).
+
 ## 디렉터리 흐름 (live-build)
 
 ```

@@ -41,39 +41,7 @@ nft -c -f /etc/nftables/kiyu.nft
 passwd -l root >/dev/null 2>&1 || true
 sed -i 's/^\(HOME_MODE\s\+\).*/\10700/' /etc/login.defs 2>/dev/null || true
 
-# ---- 브랜딩 이미지 (SVG -> PNG) ----------------------------------------------
-BG=/usr/share/backgrounds/${OS_ID}
-[ -f "${BG}/default.svg" ] && rsvg-convert -w 3840 -h 2160 "${BG}/default.svg" -o "${BG}/default.png"
-ICON=/usr/share/icons/hicolor/scalable/apps/${OS_ID}.svg
-if [ -f "${ICON}" ]; then
-    mkdir -p /usr/share/pixmaps
-    rsvg-convert -w 48 -h 48 "${ICON}" -o "/usr/share/pixmaps/${OS_ID}.png"
-fi
-# XFCE/Fedora 기본 배경 파일들을 우리 배경으로 교체 (xfdesktop 4.20 은 첫 로그인에 컴파일된 기본 파일을 씀;
-# Fedora 는 /usr/share/backgrounds/default.png(.xml) 과 images/ 아래를 기본으로 가리킴)
-if [ -f "${BG}/default.svg" ]; then
-    find /usr/share/backgrounds -maxdepth 2 -type f ! -path "${BG}/*" \
-        \( -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.svg' -o -name '*.webp' -o -name '*.jxl' \) | while read -r f; do
-        case "$f" in *.svg) cp "${BG}/default.svg" "$f" ;; *) cp "${BG}/default.png" "$f" ;; esac
-    done
-    # 슬라이드쇼 xml 은 우리 png 하나만 가리키게
-    find /usr/share/backgrounds -maxdepth 3 -type f -name '*.xml' | while read -r f; do
-        printf '<background><static><duration>86400</duration><file>%s</file></static></background>\n' "${BG}/default.png" > "$f"
-    done
-    # xfdesktop(Fedora) 의 컴파일된 기본 경로: images/default.png 가 최우선 → 우리 png 로 생성
-    mkdir -p /usr/share/backgrounds/images
-    for f in /usr/share/backgrounds/images/default.png /usr/share/backgrounds/default.png; do
-        rm -f "$f"; cp "${BG}/default.png" "$f"
-    done
-    # Fedora 기본 jxl 원본(f*/default/*.jxl)도 우리 png 내용으로 (심볼릭 링크 대상 교체)
-    find /usr/share/backgrounds -maxdepth 3 -type f -name '*.jxl' -exec cp "${BG}/default.png" {} \;
-fi
-# 패널 기본 레이아웃을 xfce4-panel 의 default.xml 로도 설치: livesys-xfce 가 라이브 사용자 홈에
-# /etc/xdg/xfce4/panel/default.xml 을 복사하고, "패널 초기화" 도 이 파일을 쓰므로 여기에 kiyu 레이아웃을 둔다.
-if [ -f /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ]; then
-    mkdir -p /etc/xdg/xfce4/panel
-    cp /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml /etc/xdg/xfce4/panel/default.xml
-fi
+# ---- 브랜딩 이미지·배경·패널 기본값·플러그인 in-process 등: /usr/lib/kiyu/apply-system (RPM %post 와 공용) ----
 # 탱자 광고·추적 차단 목록: EasyList / EasyPrivacy / List-KR 을 받아 WebKit 규칙으로 변환 (실패해도 빌드는 계속,
 # 그때는 브라우저 내장 소형 목록만 쓴다). 결과: /usr/share/taengja/filters/*.json
 mkdir -p /usr/share/taengja/filters
@@ -90,25 +58,6 @@ if [ -x /usr/lib/taengja/abp2webkit.py ]; then
     ls -la /usr/share/taengja/filters/
 fi
 rm -rf "$fl"
-# 설치 프로그램(Anaconda) 브랜딩: 사이드바 로고와 상단 배경을 kiyu 로
-if [ -d /usr/share/anaconda/pixmaps ] && command -v rsvg-convert >/dev/null 2>&1; then
-    rsvg-convert -w 160 -h 160 "$ICON" -o /usr/share/anaconda/pixmaps/sidebar-logo.png
-    rsvg-convert -w 1024 -h 64 /usr/share/kiyu/anaconda-topbar.svg -o /usr/share/anaconda/pixmaps/topbar-bg.png 2>/dev/null || true
-fi
-# 패널 플러그인 in-process (wrapper 프로세스 제거)
-for plug in whiskermenu docklike launcher tasklist clock showdesktop separator notification-plugin systray; do
-    d="/usr/share/xfce4/panel/plugins/${plug}.desktop"
-    [ -f "$d" ] || continue
-    if grep -q '^X-XFCE-Internal=' "$d"; then sed -i 's/^X-XFCE-Internal=.*/X-XFCE-Internal=true/' "$d"; else printf 'X-XFCE-Internal=true\n' >> "$d"; fi
-done
-# picom 패키지의 자체 자동 시작은 끔 (/usr/lib/kiyu/compositor 가 백엔드 선택 후 띄움)
-f=/etc/xdg/autostart/picom.desktop
-if [ -f "$f" ] && ! grep -q '^Hidden=' "$f"; then echo 'Hidden=true' >> "$f"; fi
-# 프린터 큐 트레이 애플릿 끔 (메모리)
-for f in /etc/xdg/autostart/print-applet.desktop /etc/xdg/autostart/system-config-printer-applet.desktop; do
-    if [ -f "$f" ] && ! grep -q '^Hidden=' "$f"; then echo 'Hidden=true' >> "$f"; fi
-done
-
 # ---- kiyu-superkey 컴파일 (Super 탭 → 시작 메뉴; 소스는 apps/kiyu-superkey) ----------
 if [ -f /usr/src/kiyu/kiyu-superkey.c ] && command -v gcc >/dev/null 2>&1; then
     gcc -O2 -o /usr/bin/kiyu-superkey /usr/src/kiyu/kiyu-superkey.c -lX11 -lXtst
@@ -116,11 +65,21 @@ if [ -f /usr/src/kiyu/kiyu-superkey.c ] && command -v gcc >/dev/null 2>&1; then
     echo "kiyu-superkey built"
 fi
 
-# ---- 기본 앱 / 권한 --------------------------------------------------------------
-chmod 0755 /usr/bin/startkiyu /usr/lib/${OS_ID}/* /usr/local/bin/* /etc/X11/xinit/xinitrc.d/*.sh 2>/dev/null || true
-gtk-update-icon-cache -f -q /usr/share/icons/hicolor || true
-update-desktop-database -q || true
-fc-cache -f || true
+# ---- kiyu 업데이트 저장소: 서명 공개키가 올라와 있으면 켠다 (없으면 enabled=0 그대로) ----
+if curl -fsSL --max-time 20 -o /tmp/RPM-GPG-KEY-kiyu https://raw.githubusercontent.com/InhyeokKang/linuxos/kiyu-repo/RPM-GPG-KEY-kiyu 2>/dev/null \
+   && grep -q "BEGIN PGP PUBLIC KEY" /tmp/RPM-GPG-KEY-kiyu; then
+    install -D -m 0644 /tmp/RPM-GPG-KEY-kiyu /etc/pki/rpm-gpg/RPM-GPG-KEY-kiyu
+    rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-kiyu || true
+    sed -i 's|^enabled=0|enabled=1|; s|^gpgkey=.*|gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-kiyu|' /etc/yum.repos.d/kiyu.repo
+    echo "kiyu repo: enabled (signed)"
+else
+    echo "kiyu repo: 서명 키 없음, 저장소는 비활성 상태로 둠"
+fi
+rm -f /tmp/RPM-GPG-KEY-kiyu
+
+# ---- 파일 반영 (이미지 변환, 배경 교체, 패널 기본값, 캐시) ----
+chmod 0755 /usr/lib/${OS_ID}/apply-system
+/usr/lib/${OS_ID}/apply-system
 
 # ---- SELinux 라벨 -------------------------------------------------------------
 if [ -x /usr/sbin/setfiles ] && [ -f /etc/selinux/targeted/contexts/files/file_contexts ]; then

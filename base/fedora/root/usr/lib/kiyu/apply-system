@@ -1,0 +1,59 @@
+#!/bin/bash
+# kiyu 파일이 시스템에 놓인 뒤 반영하는 단계. ISO 빌드(config.sh)와 kiyu-desktop RPM 의 %post 가 같이 부른다.
+# 재실행해도 안전(멱등)해야 한다.
+set -uo pipefail
+OS_ID=$(. /etc/os-release 2>/dev/null; echo "${ID:-kiyu}")
+BG=/usr/share/backgrounds/${OS_ID}
+ICON=/usr/share/icons/hicolor/scalable/apps/${OS_ID}.svg
+have() { command -v "$1" >/dev/null 2>&1; }
+
+# ---- 브랜딩 이미지 (SVG -> PNG) ----
+if have rsvg-convert; then
+    [ -f "${BG}/default.svg" ] && rsvg-convert -w 3840 -h 2160 "${BG}/default.svg" -o "${BG}/default.png"
+    if [ -f "${ICON}" ]; then
+        mkdir -p /usr/share/pixmaps
+        rsvg-convert -w 48 -h 48 "${ICON}" -o "/usr/share/pixmaps/${OS_ID}.png"
+    fi
+    # 설치 프로그램(Anaconda) 브랜딩
+    if [ -d /usr/share/anaconda/pixmaps ] && [ -f "${ICON}" ]; then
+        rsvg-convert -w 160 -h 160 "${ICON}" -o /usr/share/anaconda/pixmaps/sidebar-logo.png
+        [ -f /usr/share/kiyu/anaconda-topbar.svg ] && rsvg-convert -w 1024 -h 64 /usr/share/kiyu/anaconda-topbar.svg -o /usr/share/anaconda/pixmaps/topbar-bg.png
+    fi
+fi
+# ---- XFCE/Fedora 기본 배경 파일들을 우리 배경으로 (xfdesktop 은 첫 로그인에 컴파일된 기본 파일을 씀) ----
+if [ -f "${BG}/default.png" ]; then
+    find /usr/share/backgrounds -maxdepth 2 -type f ! -path "${BG}/*" \
+        \( -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.svg' -o -name '*.webp' -o -name '*.jxl' \) | while read -r f; do
+        case "$f" in *.svg) cp "${BG}/default.svg" "$f" ;; *) cp "${BG}/default.png" "$f" ;; esac
+    done
+    find /usr/share/backgrounds -maxdepth 3 -type f -name '*.xml' | while read -r f; do
+        printf '<background><static><duration>86400</duration><file>%s</file></static></background>\n' "${BG}/default.png" > "$f"
+    done
+    mkdir -p /usr/share/backgrounds/images
+    for f in /usr/share/backgrounds/images/default.png /usr/share/backgrounds/default.png; do
+        rm -f "$f"; cp "${BG}/default.png" "$f"
+    done
+    find /usr/share/backgrounds -maxdepth 3 -type f -name '*.jxl' -exec cp "${BG}/default.png" {} \;
+fi
+# ---- 패널 기본 레이아웃을 xfce4-panel 의 default.xml 로 (livesys 복사·"패널 초기화" 가 이 파일을 씀) ----
+if [ -f /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ]; then
+    mkdir -p /etc/xdg/xfce4/panel
+    cp /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml /etc/xdg/xfce4/panel/default.xml
+fi
+# ---- 패널 플러그인 in-process (wrapper 프로세스 제거) ----
+for plug in whiskermenu docklike launcher tasklist clock showdesktop separator notification-plugin systray; do
+    d="/usr/share/xfce4/panel/plugins/${plug}.desktop"
+    [ -f "$d" ] || continue
+    if grep -q '^X-XFCE-Internal=' "$d"; then sed -i 's/^X-XFCE-Internal=.*/X-XFCE-Internal=true/' "$d"; else printf 'X-XFCE-Internal=true\n' >> "$d"; fi
+done
+# ---- 다른 패키지의 자동 시작 항목 정리 (picom 은 /usr/lib/kiyu/compositor 가 띄움, 프린터 애플릿은 메모리) ----
+for f in /etc/xdg/autostart/picom.desktop /etc/xdg/autostart/print-applet.desktop /etc/xdg/autostart/system-config-printer-applet.desktop; do
+    if [ -f "$f" ] && ! grep -q '^Hidden=' "$f"; then echo 'Hidden=true' >> "$f"; fi
+done
+# ---- 권한 / 캐시 ----
+chmod 0755 /usr/bin/startkiyu /usr/lib/kiyu/* /usr/local/bin/kiyu-* /etc/X11/xinit/xinitrc.d/*.sh 2>/dev/null || true
+have gtk-update-icon-cache && gtk-update-icon-cache -f -q /usr/share/icons/hicolor || true
+have update-desktop-database && update-desktop-database -q || true
+have fc-cache && fc-cache -f >/dev/null 2>&1 || true
+have dconf && [ -d /etc/dconf/db/local.d ] && dconf update || true
+exit 0

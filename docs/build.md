@@ -72,3 +72,12 @@ ps -eo rss,comm --sort=-rss | head -15    # 메모리 많이 쓰는 프로세스
 1. `os.conf` 의 `OS_VERSION` 올리기.
 2. `git tag v0.x.y && git push --tags`.
 3. GitHub Actions > **Build ISO** 워크플로 수동 실행 → 산출물 다운로드 → Release 에 첨부.
+
+## kiyu-desktop RPM
+
+```sh
+# Fedora 컨테이너 안에서
+dnf -y install rpm-build gcc libX11-devel libXtst-devel python3 curl git
+scripts/build-rpm.sh          # out/rpm/kiyu-desktop-<ver>-<n>.<sha>.fc44.x86_64.rpm
+```
+CI(`build-rpm.yml`)는 같은 스크립트로 빌드해 `kiyu-repo` 브랜치에 dnf 저장소를 올린다.

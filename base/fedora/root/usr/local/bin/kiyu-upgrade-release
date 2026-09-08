@@ -1,0 +1,14 @@
+#!/bin/bash
+# kiyu 를 다음 Fedora 릴리스로 올린다 (dnf5 system-upgrade: 내려받은 뒤 재부팅하며 적용).
+#   kiyu-upgrade-release            다음 릴리스로
+#   kiyu-upgrade-release 46         특정 릴리스로
+set -euo pipefail
+[ "$(id -u)" -ne 0 ] || { echo "일반 사용자로 실행하세요." >&2; exit 1; }
+cur=$(rpm -E %fedora); next=${1:-$((cur + 1))}
+echo "현재 Fedora ${cur} → ${next} 로 업그레이드합니다. 30분 이상 걸릴 수 있고 중간에 재부팅합니다."
+echo "중요한 파일은 먼저 백업하세요. 전원(노트북은 어댑터)을 연결한 상태여야 합니다."
+read -r -p "계속할까요? [y/N] " yn; [[ "${yn,,}" == y* ]] || exit 0
+sudo dnf5 upgrade --refresh -y
+sudo dnf5 system-upgrade download --releasever="${next}" -y
+echo "다운로드 완료. 이제 재부팅하며 업그레이드를 적용합니다."
+sudo dnf5 system-upgrade reboot
