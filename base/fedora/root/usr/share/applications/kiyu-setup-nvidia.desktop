@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=NVIDIA 드라이버 설치
+Name[en]=Install NVIDIA Driver
+Comment=NVIDIA 전용 그래픽 드라이버 설치 (Secure Boot 키 등록 안내 포함)
+Exec=xfce4-terminal --title="NVIDIA 드라이버 설치" -e "bash -c 'kiyu-setup-nvidia; echo; read -p \"Enter 를 누르면 닫힙니다.\"'"
+Icon=preferences-desktop-display
+Categories=System;Settings;
+Terminal=false
+Keywords=nvidia;driver;graphics;그래픽;드라이버;

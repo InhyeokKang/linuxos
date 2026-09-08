@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=릴리스 업그레이드
+Name[en]=Upgrade to Next Release
+Comment=다음 Fedora 릴리스로 시스템 업그레이드
+Exec=xfce4-terminal --title="릴리스 업그레이드" -e "bash -c 'kiyu-upgrade-release; echo; read -p \"Enter 를 누르면 닫힙니다.\"'"
+Icon=system-software-update
+Categories=System;Settings;
+Terminal=false
+Keywords=upgrade;release;업그레이드;릴리스;

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=코덱 설치
+Name[en]=Install Media Codecs
+Comment=영상·음악 재생용 코덱(RPM Fusion, ffmpeg)과 하드웨어 가속 설치
+Exec=xfce4-terminal --title="코덱 설치" -e "bash -c 'kiyu-setup-codecs; echo; read -p \"Enter 를 누르면 닫힙니다.\"'"
+Icon=applications-multimedia
+Categories=System;Settings;
+Terminal=false
+Keywords=codec;ffmpeg;media;코덱;동영상;
