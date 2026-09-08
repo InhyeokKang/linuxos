@@ -1,0 +1,482 @@
+
+localhost-live login: liveuser
+[  198.863938] audit: type=1100 audit(1788850554.366:114): pid=1029 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:local_login_t:s0-s0:c0.c1023 msg='op=PAM:authentication grantors=pam_unix acct="liveuser" exe="/usr/bin/login" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  198.875194] audit: type=1101 audit(1788850554.377:115): pid=1029 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:local_login_t:s0-s0:c0.c1023 msg='op=PAM:accounting grantors=pam_unix acct="liveuser" exe="/usr/bin/login" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  198.888548] audit: type=1103 audit(1788850554.378:116): pid=1029 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:local_login_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_unix acct="liveuser" exe="/usr/bin/login" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  198.901783] audit: type=1006 audit(1788850554.378:117): pid=1029 uid=0 subj=system_u:system_r:local_login_t:s0-s0:c0.c1023 old-auid=4294967295 auid=1000 tty=ttyS0 old-ses=4294967295 ses=3 res=1
+[  198.914833] audit: type=1300 audit(1788850554.378:117): arch=c000003e syscall=1 success=yes exit=4 a0=4 a1=7ffd26b5eef0 a2=4 a3=0 items=0 ppid=1 pid=1029 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=1000 fsgid=0 tty=ttyS0 ses=3 comm="login" exe="/usr/bin/login" subj=system_u:system_r:local_login_t:s0-s0:c0.c1023 key=(null)
+[  198.926690] audit: type=1327 audit(1788850554.378:117): proctitle=2F62696E2F6C6F67696E002D2D
+[  198.928975] audit: type=2300 audit(1788850554.378:118): pid=1029 uid=0 auid=1000 ses=3 subj=system_u:system_r:local_login_t:s0-s0:c0.c1023 msg='op=pam_selinux default-context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 selected-context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 exe="/usr/bin/login" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;start=5308df5267fe4b7a8b6d426eec1b2471;user=root;hostname=localhost-live;machineid=c617351096ce478087eb27910ddb4183;bootid=727eb6853bfb4fabb9541359a0d18065;pid=1029;pidfdid=518;comm=login;targetuser=liveuser;sessionid=3;type=session\[  198.953264] audit: type=1105 audit(1788850554.456:119): pid=1029 uid=0 auid=1000 ses=3 subj=system_u:system_r:local_login_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_selinux,pam_loginuid,pam_selinux,pam_namespace,pam_keyinit,pam_keyinit,pam_limits,pam_systemd,pam_unix,pam_umask,pam_lastlog2 acct="liveuser" exe="/usr/bin/login" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  198.963846] audit: type=1110 audit(1788850554.456:120): pid=1029 uid=0 auid=1000 ses=3 subj=system_u:system_r:local_login_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_unix acct="liveuser" exe="/usr/bin/login" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  198.971161] audit: type=1112 audit(1788850554.456:121): pid=1029 uid=0 auid=1000 ses=3 subj=system_u:system_r:local_login_t:s0-s0:c0.c1023 msg='op=login id=1000 exe="/usr/bin/login" hostname=localhost-live addr=? terminal=ttyS0 res=success'
+]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004h[liveuser@localhost-live ~]$ 
+
+##### SERIAL SHELL: logged_in=True
+export PS1='SHELL> '; stty cols 200; export DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
+[?2004l]3008;start=6058f764-3741-4422-bf6a-ce10b4c7eb97;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\]3008;end=6058f764-3741-4422-bf6a-ce10b4c7eb97;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== os-release'; cat /etc/os-release
+[?2004l]3008;start=060accac-e139-4a31-9e33-3d64ae63fed3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== os-release
+NAME="kiyu"
+VERSION="0.2.0 (saebyeok)"
+ID=kiyu
+ID_LIKE=fedora
+VERSION_ID=0.2.0
+VERSION_CODENAME=saebyeok
+PLATFORM_ID="platform:f44"
+PRETTY_NAME="kiyu 0.2.0 (saebyeok)"
+ANSI_COLOR="0;38;2;244;124;12"
+LOGO=kiyu
+HOME_URL="https://github.com/inhyeokkang/linuxos"
+SUPPORT_URL="https://github.com/inhyeokkang/linuxos"
+BUG_REPORT_URL="https://github.com/inhyeokkang/linuxos/issues"
+REDHAT_BUGZILLA_PRODUCT="Fedora"
+REDHAT_BUGZILLA_PRODUCT_VERSION=44
+REDHAT_SUPPORT_PRODUCT="Fedora"
+REDHAT_SUPPORT_PRODUCT_VERSION=44
+]3008;end=060accac-e139-4a31-9e33-3d64ae63fed3;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== uname'; uname -r; cat /proc/cmdline
+[?2004l]3008;start=752e62c3-d4e6-4536-97c2-99fdae9b98eb;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== uname
+7.1.13-200.fc44.x86_64
+root=live:CDLABEL=kiyu-0.2.0 rd.live.image console=tty0 console=ttyS0,115200 systemd.show_status=1
+]3008;end=752e62c3-d4e6-4536-97c2-99fdae9b98eb;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== memory'; free -m; grep -E 'MemTotal|MemAvailable|AnonPages|Shmem:|Slab|SUnreclaim|KernelStack|PageTables' /proc/meminfo
+[?2004l]3008;start=dc51cc41-46d0-49df-90c5-a3ee0f45c526;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== memory
+               total        used        free      shared  buff/cache   available
+Mem:            1953         534          83          14        1531        1419
+Swap:            976           0         976
+[01;31m[KMemTotal[m[K:        2000856 kB
+[01;31m[KMemAvailable[m[K:    1453132 kB
+[01;31m[KAnonPages[m[K:        214692 kB
+[01;31m[KShmem:[m[K             14796 kB
+[01;31m[KSlab[m[K:              97548 kB
+[01;31m[KSUnreclaim[m[K:        72424 kB
+[01;31m[KKernelStack[m[K:        4880 kB
+[01;31m[KPageTables[m[K:         9392 kB
+Sec[01;31m[KPageTables[m[K:         0 kB
+]3008;end=dc51cc41-46d0-49df-90c5-a3ee0f45c526;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== zram'; sudo /usr/sbin/zramctl 2>/dev/null || echo none
+[?2004l]3008;start=ac0409cd-47e1-40b1-89ec-3c1080ef9453;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== zram
+[  213.434358] kauditd_printk_skb: 6 callbacks suppressed
+[  213.434363] audit: type=1100 audit(1788850568.937:128): pid=3614 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:authentication grantors=pam_unix acct="liveuser" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  213.449032] audit: type=1101 audit(1788850568.951:129): pid=3614 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:accounting grantors=pam_unix acct="liveuser" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  213.456474] audit: type=1123 audit(1788850568.958:130): pid=3614 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='cwd="/home/liveuser" cmd="/usr/sbin/zramctl" exe="/usr/bin/sudo" terminal=ttyS0 res=success'
+[  213.464241] audit: type=1110 audit(1788850568.967:131): pid=3614 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;start=143d22b3e80340dd90d116b613820b9c;user=liveuser;hostname=localhost-live;machineid=c6[  213.495914] audit: type=1105 audit(1788850568.995:132): pid=3614 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+17351096ce478087eb27910ddb4183;bootid=727eb6853bfb4fabb9541359a0d18065;pid=3614;pidfdid=2253;comm=sudo;targetuser=root;type=session\NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
+/dev/zram0 zstd        976.5M   4K   64B   20K         [SWAP]
+]3008;end=143d22b3e80340dd90d116b613820b9c\[  213.546796] audit: type=1106 audit(1788850569.049:133): pid=3614 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_close grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  213.555357] audit: type=1104 audit(1788850569.050:134): pid=3614 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;end=ac0409cd-47e1-40b1-89ec-3c1080ef9453;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== pss by process (MB)'; sudo sh -c 'for p in /proc/[0-9]*; do c=$(cat $p/comm 2>/dev/null); v=$(awk "/^Pss:/{s+=\$2}END{print s+0}" $p/smaps_rollup 2>/dev/null); [ -n "$v" ] && [ "$v" -gt 0 ] && echo "$v $c"; done | sort -rn | awk "{t+=\$1; printf \"%6.1f %s\\n\", \$1/1024, \$2} END{printf \"TOTAL %.0f MB\\n\", t/1024}" | head -30'
+[?2004l]3008;start=37878152-b45f-46d6-bb36-50adcf9c5754;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== pss by process (MB)
+[  214.636734] audit: type=1101 audit(1788850570.139:135): pid=3629 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:accounting grantors=pam_unix acct="liveuser" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  214.646546] audit: type=1123 audit(1788850570.139:136): pid=3629 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='cwd="/home/liveuser" cmd=7368202D6320666F72207020696E202F70726F632F5B302D395D2A3B20646F20633D24286361742024702F636F6D6D20323E2F6465762F6E756C6C293B20763D242861776B20222F5E5073733A2F7B732B3D5C24327D454E447B7072696E7420732B307D222024702F736D6170735F726F6C6C757020323E2F6465762F6E756C6C293B205B202D6E2022247622205D202626205B2022247622202D67742030205D202626206563686F20222476202463223B20646F6E65207C20736F7274202D726E207C2061776B20227B742B3D5C24313B207072696E7466205C2225362E31662025735C5C6E5C222C205C24312F313032342C205C24327D20454E447B7072696E7466205C22544F54414C20252E3066204D425C5C6E5C222C20742F313032347D22207C2068656164202D3330 exe="/usr/bin/sudo" terminal=ttyS0 res=success'
+[  214.670384] audit: type=1110 audit(1788850570.149:137): pid=3629 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_env,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;start=fe0221c2708143a885b06917761cf311;user=liveuser;hostname=localhost-live;machineid=c617351096ce478087eb27910ddb4183;bootid=727eb6853bfb4fabb9541359a0d18065;pid=3629;pidfdid=5469;comm=sudo;targetuser=root;type=session\  88.5 Xorg
+  27.2 xfce4-notifyd
+  26.0 xfdesktop
+  20.2 xfce4-panel
+  16.3 fcitx5
+  14.6 nm-applet
+  11.4 xfwm4
+  10.1 NetworkManager
+   9.8 systemd
+   8.5 xfce4-session
+   8.5 tumblerd
+   8.1 xfce4-screensav
+   7.8 xfsettingsd
+   7.5 Thunar
+   7.1 systemd-journal
+   6.3 systemd-udevd
+   5.7 udisksd
+   5.7 fcitx5
+   5.6 systemd
+   5.5 systemd-resolve
+   4.2 xfce4-power-man
+   4.0 polkitd
+   3.8 xfce-polkit
+   3.5 systemd-logind
+   3.4 gvfs-udisks2-vo
+   3.3 lightdm
+   2.8 login
+   2.7 systemd-hostnam
+   2.7 upowerd
+   2.5 sudo
+]3008;end=fe0221c2708143a885b06917761cf311\]3008;end=37878152-b45f-46d6-bb36-50adcf9c5754;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== boot time'; systemd-analyze 2>/dev/null; systemd-analyze blame 2>/dev/null | head -12
+[?2004l]3008;start=845d0ee3-001f-4f3a-80ad-b75815cff9ad;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== boot time
+Startup finished in 1.430s (kernel) + 5.092s (initrd) + 31.458s (userspace) = 37.981s 
+graphical.target reached after 31.450s in userspace.
+16.585s ldconfig.service
+11.185s sys-devices-pnp0-00:04-00:04:0-00:04:0.0-tty-ttyS0.device
+11.185s dev-ttyS0.device
+11.153s dev-ttyS2.device
+11.153s sys-devices-platform-serial8250-serial8250:0-serial8250:0.2-tty-ttyS2.device
+11.136s dev-ttyS3.device
+11.136s sys-devices-platform-serial8250-serial8250:0-serial8250:0.3-tty-ttyS3.device
+11.055s sys-devices-pci0000:00-0000:00:01.1-ata2-host1-target1:0:0-1:0:0:0-block-sr0.device
+11.055s dev-disk-by\x2ddiskseq-2.device
+11.055s dev-disk-by\x2duuid-2026\x2d09\x2d08\x2d06\x2d49\x2d11\x2d00.device
+11.055s dev-disk-by\x2dpath-pci\x2d0000:00:01.1\x2data\x2d2.0.device
+11.055s dev-disk-by\x2dpath-pci\x2d0000:00:01.1\x2data\x2d2.device
+]3008;end=845d0ee3-001f-4f3a-80ad-b75815cff9ad;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== failed units'; systemctl --failed --no-pager --no-legend
+[?2004l]3008;start=d69d6d0d-ecde-4f8e-bdb3-4b1355c84148;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== failed units
+]3008;end=d69d6d0d-ecde-4f8e-bdb3-4b1355c84148;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== services'; for s in lightdm nftables firewalld apparmor zramswap dnf5-automatic.timer unattended-upgrades NetworkManager livesys; do printf '%s: %s\n' $s $(systemctl is-active $s 2>/dev/null); done
+[?2004l]3008;start=51707540-d340-4339-b6ba-3c1308aded26;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== services
+lightdm: active
+nftables: active
+firewalld: inactive
+apparmor: inactive
+zramswap: inactive
+dnf5-automatic.timer: active
+unattended-upgrades: inactive
+NetworkManager: active
+livesys: inactive
+]3008;end=51707540-d340-4339-b6ba-3c1308aded26;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== mac'; cat /sys/kernel/security/lsm 2>&1; echo; getenforce 2>/dev/null; sestatus 2>/dev/null | head -3; systemctl status apparmor --no-pager 2>&1 | head -4
+[?2004l]3008;start=d6b4b8da-72df-4fa8-950c-aca480e5f71c;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== mac
+lockdown,capability,yama,selinux,bpf,landlock,ipe,ima,evm
+Enforcing
+SELinux status:                 enabled
+SELinuxfs mount:                /sys/fs/selinux
+SELinux root directory:         /etc/selinux
+Unit apparmor.service could not be found.
+]3008;end=d6b4b8da-72df-4fa8-950c-aca480e5f71c;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== firewall'; sudo firewall-cmd --get-default-zone 2>/dev/null; sudo firewall-cmd --list-all 2>/dev/null | head -12; sudo /usr/sbin/nft list ruleset 2>/dev/null | head -8
+[?2004l]3008;start=314624e1-eb78-4e01-b258-d88601f58b85;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== firewall
+[  222.244700] kauditd_printk_skb: 3 callbacks suppressed
+[  222.244705] audit: type=1101 audit(1788850577.747:141): pid=4379 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:accounting grantors=pam_unix acct="liveuser" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  222.259110] audit: type=1123 audit(1788850577.747:142): pid=4379 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='cwd="/home/liveuser" cmd=6669726577616C6C2D636D64202D2D6765742D64656661756C742D7A6F6E65 exe="/usr/bin/sudo" terminal=ttyS0 res=failed'
+[  222.278848] audit: type=1101 audit(1788850577.781:143): pid=4381 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:accounting grantors=pam_unix acct="liveuser" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  222.285754] audit: type=1123 audit(1788850577.781:144): pid=4381 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='cwd="/home/liveuser" cmd=6669726577616C6C2D636D64202D2D6C6973742D616C6C exe="/usr/bin/sudo" terminal=ttyS0 res=failed'
+[  222.304602] audit: type=1101 audit(1788850577.807:145): pid=4384 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:accounting grantors=pam_unix acct="liveuser" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  222.313550] audit: type=1123 audit(1788850577.810:146): pid=4384 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='cwd="/home/liveuser" cmd=2F7573722F7362696E2F6E6674206C6973742072756C65736574 exe="/usr/bin/sudo" terminal=ttyS0 res=success'
+[  222.321323] audit: type=1110 audit(1788850577.824:147): pid=4384 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_env,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  222.348325] audit: type=1105 audit(1788850577.851:148): pid=4384 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+table inet filter {
+	chain input {
+		type filter hook input priority filter; policy drop;
+		ct state invalid drop
+		ct state established,related accept
+		iif "lo" accept
+		ip protocol icmp icmp type { destination-unreachable, time-exceeded, parameter-problem } accept
+		ip protocol icmp icmp type echo-request limit rate 5/second burst 5 packets accept
+[  222.477657] audit: type=1106 audit(1788850577.980:149): pid=4384 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_close grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  222.491354] audit: type=1104 audit(1788850577.981:150): pid=4384 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_env,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;end=314624e1-eb78-4e01-b258-d88601f58b85;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== sysctl'; /usr/sbin/sysctl kernel.kptr_restrict kernel.yama.ptrace_scope kernel.unprivileged_bpf_disabled vm.swappiness
+[?2004l]3008;start=eb265b4e-d4c6-4975-acd8-1c208a1c7d09;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== sysctl
+kernel.kptr_restrict = 2
+kernel.yama.ptrace_scope = 1
+kernel.unprivileged_bpf_disabled = 1
+vm.swappiness = 150
+]3008;end=eb265b4e-d4c6-4975-acd8-1c208a1c7d09;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== xsession'; ps -eo comm | grep -E '^(Xorg|lightdm|xfce4-session|xfwm4|xfce4-panel|xfdesktop|xcape|fcitx5|blueman-applet|applet.py|nm-applet)$' | sort | uniq -c
+[?2004l]3008;start=96e6c89f-a100-4751-a7a7-5a3a4a3d8d81;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== xsession
+      1 Xorg
+      2 fcitx5
+      2 lightdm
+      1 nm-applet
+      1 xfce4-panel
+      1 xfce4-session
+      1 xfdesktop
+      1 xfwm4
+]3008;end=96e6c89f-a100-4751-a7a7-5a3a4a3d8d81;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== wallpaper'; xfconf-query -c xfce4-desktop -l -v 2>/dev/null | grep last-image; ls -la /usr/share/backgrounds/xfce/ 2>&1 | head; dpkg-divert --list '*backgrounds*' 2>&1
+[?2004l]3008;start=7e788437-aa22-40fc-a336-72544113b50b;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== wallpaper
+/backdrop/screen0/monitor0/workspace0/[01;31m[Klast-image[m[K           /usr/share/backgrounds/kiyu/default.png
+/backdrop/screen0/monitorVirtual-1/workspace0/[01;31m[Klast-image[m[K   /usr/share/backgrounds/kiyu/default.png
+total 784
+drwxr-xr-x. 2 root root   4096  9월  8 15:25 .
+drwxr-xr-x. 6 root root   4096  9월  8 15:27 ..
+-rw-r--r--. 1 root root 668134  9월  8 15:27 xfce-blue.jpg
+-rw-r--r--. 1 root root   9360  9월  8 15:27 xfce-cp-dark.svg
+-rw-r--r--. 1 root root   9360  9월  8 15:27 xfce-flower.svg
+-rw-r--r--. 1 root root   9360  9월  8 15:27 xfce-leaves.svg
+-rw-r--r--. 1 root root   9360  9월  8 15:27 xfce-light.svg
+-rw-r--r--. 1 root root   9360  9월  8 15:27 xfce-mouserace.svg
+-rw-r--r--. 1 root root   9360  9월  8 15:27 xfce-shapes.svg
+-bash: dpkg-divert: command not found
+]3008;end=7e788437-aa22-40fc-a336-72544113b50b;exit=failure;status=127\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== xfconf-diag'; env | grep XDG_CONFIG_DIRS; systemctl --user show-environment 2>/dev/null | grep XDG_CONFIG_DIRS; ls ~/.config/xfce4/xfconf/xfce-perchannel-xml/ 2>&1; xfconf-query -c xfce4-panel -p /panels/panel-1/plugin-ids 2>&1 | head -3; xfconf-query -c xfce4-panel -l 2>&1 | head -5; rpm -q xfce4-docklike-plugin xfce-polkit mate-polkit 2>&1; ls /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/ 2>&1; ls /usr/libexec/livesys/sessions.d/ 2>&1
+[?2004l]3008;start=645b6bb2-7466-4af4-a61c-e16ffdb0fdab;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== xfconf-diag
+[01;31m[KXDG_CONFIG_DIRS[m[K=/etc/xdg/xdg-kiyu:/etc/xdg
+[01;31m[KXDG_CONFIG_DIRS[m[K=/etc/xdg/xdg-kiyu:/etc/xdg
+displays.xml  xfce4-desktop.xml             xfce4-notifyd.xml  xfce4-power-manager.xml  xfce4-session.xml  xsettings.xml
+thunar.xml    xfce4-keyboard-shortcuts.xml  xfce4-panel.xml    xfce4-screensaver.xml    xfwm4.xml
+값은 항목 4개를 가진 배열입니다:
+
+3
+/configver
+/panels
+/panels/dark-mode
+/panels/panel-1/autohide-behavior
+/panels/panel-1/background-rgba
+xfce4-docklike-plugin-0.5.1-1.fc44.x86_64
+xfce-polkit-0.3-17.fc44.x86_64
+package mate-polkit is not installed
+xfce4-keyboard-shortcuts.xml  xfce4-power-manager.xml  xfce4-session.xml  xsettings.xml
+[0m[01;32mlivesys-budgie[0m  [01;32mlivesys-cinnamon[0m  [01;32mlivesys-cosmic[0m  [01;32mlivesys-gnome[0m  [01;32mlivesys-i3[0m  [01;32mlivesys-kde[0m  [01;32mlivesys-lxde[0m  [01;32mlivesys-lxqt[0m  [01;32mlivesys-mate[0m  [01;32mlivesys-miraclewm[0m  [01;32mlivesys-soas[0m  [01;32mlivesys-sway[0m  [01;32mlivesys-xfce[0m
+]3008;end=645b6bb2-7466-4af4-a61c-e16ffdb0fdab;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== livesys-xfce'; cat /usr/libexec/livesys/sessions.d/livesys-xfce 2>&1 | grep -v '^#' | grep -v '^$' | head -60; ls -la ~/.config/xfce4/panel/ 2>&1 | head; grep -c whiskermenu ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml 2>&1; xfconf-query -c xfce4-panel -p /panels 2>&1 | tail -3; xfconf-query -c xfce4-panel -p /plugins/plugin-1 2>&1
+[?2004l]3008;start=8181ded0-99a6-4316-9b6c-4d482b891744;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== livesys-xfce
+mkdir -p /home/liveuser/.config/xfce4
+cat > /home/liveuser/.config/xfce4/helpers.rc << FOE
+MailReader=sylpheed-claws
+FileManager=Thunar
+WebBrowser=firefox
+FOE
+cat >> /home/liveuser/.xscreensaver << FOE
+mode:           off
+lock:           False
+dpmsEnabled:    False
+FOE
+rm -f /etc/xdg/autostart/xfconf-migration-4.6.desktop || :
+mkdir -p /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml
+cp /etc/xdg/xfce4/panel/default.xml /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+sed -i 's/^#autologin-user=.*/autologin-user=liveuser/' /etc/lightdm/lightdm.conf
+sed -i 's/^#autologin-user-timeout=.*/autologin-user-timeout=0/' /etc/lightdm/lightdm.conf
+sed -i 's/^#user-session=.*/user-session=xfce/' /etc/lightdm/lightdm.conf
+sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
+mkdir /home/liveuser/Desktop
+cp /usr/share/applications/liveinst.desktop /home/liveuser/Desktop
+rm -f /etc/xdg/autostart/org.mageia.dnfdragora-updater.desktop
+chmod +x /home/liveuser/Desktop/liveinst.desktop
+LIVEINST_DESKTOP_CHECKSUM="$(sha256sum /home/liveuser/Desktop/liveinst.desktop | awk '{print $1}')"
+sudo -u liveuser dbus-launch gio set -t string /home/liveuser/Desktop/liveinst.desktop metadata::xfce-exe-checksum ${LIVEINST_DESKTOP_CHECKSUM}
+total 16
+drwxr-xr-x. 3 liveuser liveuser 4096  9월  8 15:53 .
+drwxr-xr-x. 6 liveuser liveuser 4096  9월  8 15:53 ..
+-rw-r--r--. 1 liveuser liveuser  281  9월  8 15:53 docklike-2.rc
+drwx------. 2 liveuser liveuser 4096  9월  8 15:53 launcher-7
+1
+
+1
+2
+whiskermenu
+]3008;end=8181ded0-99a6-4316-9b6c-4d482b891744;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> [  229.085876] audit: type=1131 audit(1788850584.588:151): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-hostnamed comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[  229.106138] audit: type=1334 audit(1788850584.609:152): prog-id=72 op=UNLOAD
+echo '=== panel-diag'; xfce4-panel --version 2>&1 | head -1; xfconf-query -c xfce4-panel -l -v 2>&1 | head -70; xwininfo -root -tree 2>/dev/null | grep -iE 'xfce4-panel' | head -6; echo '-- user xml'; head -60 ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml 2>&1; echo '-- default.xml'; grep -c whiskermenu /etc/xdg/xfce4/panel/default.xml 2>&1; echo '-- logs'; journalctl --user -b --no-pager 2>/dev/null | grep -iE 'panel|docklike|picom' | tail -12; grep -iE 'panel|docklike|plugin' ~/.xsession-errors 2>/dev/null | tail -8; ls /usr/lib64/xfce4/panel/plugins/ 2>/dev/null | tr '\n' ' '; echo; cat ~/.config/kiyu/backend ~/.config/kiyu/picom.log 2>&1 | head -5
+[?2004l]3008;start=a19e9ba2-460e-4b3d-acd9-3d216c09e633;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== panel-diag
+xfce4-panel 4.20.7 (Xfce 4.20)
+/configver                                   2
+/panels                                      [1,2]
+/panels/dark-mode                            false
+/panels/panel-1/autohide-behavior            0
+/panels/panel-1/background-rgba              [0.992000,0.984000,0.969000,0.920000]
+/panels/panel-1/background-style             1
+/panels/panel-1/icon-size                    24
+/panels/panel-1/length                       100
+/panels/panel-1/length-adjust                false
+/panels/panel-1/plugin-ids                   [3,1,2,5]
+/panels/panel-1/position                     p=8;x=0;y=0
+/panels/panel-1/position-locked              true
+/panels/panel-1/size                         46
+/panels/panel-2/autohide-behavior            0
+/panels/panel-2/background-rgba              [0.000000,0.000000,0.000000,0.000000]
+/panels/panel-2/background-style             1
+/panels/panel-2/icon-size                    20
+/panels/panel-2/length                       1
+/panels/panel-2/length-adjust                true
+/panels/panel-2/plugin-ids                   [6,7,9,10,11]
+/panels/panel-2/position                     p=4;x=0;y=0
+/panels/panel-2/position-locked              true
+/panels/panel-2/size                         46
+/plugins/plugin-1                            whiskermenu
+/plugins/plugin-1/button-icon                kiyu
+/plugins/plugin-1/command-switchuser         dm-tool switch-to-greeter
+/plugins/plugin-1/confirm-session-command    false
+/plugins/plugin-1/favorites                  [taengja.desktop,thunar.desktop,org.gnome.Software.desktop,org.xfce.mousepad.desktop,libreoffice-writer.desktop,xfce-settings-manager.desktop,xfce4-terminal.desktop]
+/plugins/plugin-1/favorites-in-recent        true
+/plugins/plugin-1/hover-switch-category      true
+/plugins/plugin-1/launcher-icon-size         3
+/plugins/plugin-1/launcher-show-description  false
+/plugins/plugin-1/menu-height                620
+/plugins/plugin-1/menu-opacity               94
+/plugins/plugin-1/menu-width                 600
+/plugins/plugin-1/profile-shape              1
+/plugins/plugin-1/recent                     []
+/plugins/plugin-1/show-command-logout        false
+/plugins/plugin-1/show-command-logoutuser    true
+/plugins/plugin-1/show-command-menueditor    false
+/plugins/plugin-1/show-command-profile       false
+/plugins/plugin-1/show-command-restart       true
+/plugins/plugin-1/show-command-shutdown      true
+/plugins/plugin-1/show-command-suspend       true
+/plugins/plugin-1/show-command-switchuser    true
+/plugins/plugin-10                           notification-plugin
+/plugins/plugin-11                           showdesktop
+/plugins/plugin-2                            docklike
+/plugins/plugin-3                            separator
+/plugins/plugin-3/expand                     true
+/plugins/plugin-3/style                      0
+/plugins/plugin-5                            separator
+/plugins/plugin-5/expand                     true
+/plugins/plugin-5/style                      0
+/plugins/plugin-6                            systray
+/plugins/plugin-6/hide-new-items             false
+/plugins/plugin-6/icon-size                  18
+/plugins/plugin-6/known-items                [Fcitx]
+/plugins/plugin-6/known-legacy-items         [네트워크 관리 애플릿]
+/plugins/plugin-6/square-icons               true
+/plugins/plugin-7                            launcher
+/plugins/plugin-7/disable-tooltips           true
+/plugins/plugin-7/items                      [17888504031.desktop]
+/plugins/plugin-7/show-label                 false
+/plugins/plugin-9                            clock
+/plugins/plugin-9/digital-date-font          Pretendard 7
+/plugins/plugin-9/digital-date-format        %Y-%m-%d
+/plugins/plugin-9/digital-layout             1
+/plugins/plugin-9/digital-time-font          Pretendard Semi-Bold 9
+/plugins/plugin-9/digital-time-format        %H:%M
+-- user xml
+<?xml version="1.1" encoding="UTF-8"?>
+
+<channel name="xfce4-panel" version="1.0">
+  <property name="configver" type="int" value="2"/>
+  <property name="panels" type="array">
+    <value type="int" value="1"/>
+    <value type="int" value="2"/>
+    <property name="dark-mode" type="bool" value="false"/>
+    <property name="panel-1" type="empty">
+      <property name="position" type="string" value="p=8;x=0;y=0"/>
+      <property name="length" type="uint" value="100"/>
+      <property name="length-adjust" type="bool" value="false"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="size" type="uint" value="46"/>
+      <property name="icon-size" type="uint" value="24"/>
+      <property name="background-style" type="uint" value="1"/>
+      <property name="background-rgba" type="array">
+        <value type="double" value="0.99199999999999999"/>
+        <value type="double" value="0.98399999999999999"/>
+        <value type="double" value="0.96899999999999997"/>
+        <value type="double" value="0.92000000000000004"/>
+      </property>
+      <property name="autohide-behavior" type="uint" value="0"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="3"/>
+        <value type="int" value="1"/>
+        <value type="int" value="2"/>
+        <value type="int" value="5"/>
+      </property>
+    </property>
+    <property name="panel-2" type="empty">
+      <property name="position" type="string" value="p=4;x=0;y=0"/>
+      <property name="length" type="uint" value="1"/>
+      <property name="length-adjust" type="bool" value="true"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="size" type="uint" value="46"/>
+      <property name="icon-size" type="uint" value="20"/>
+      <property name="background-style" type="uint" value="1"/>
+      <property name="background-rgba" type="array">
+        <value type="double" value="0"/>
+        <value type="double" value="0"/>
+        <value type="double" value="0"/>
+        <value type="double" value="0"/>
+      </property>
+      <property name="autohide-behavior" type="uint" value="0"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="6"/>
+        <value type="int" value="7"/>
+        <value type="int" value="9"/>
+        <value type="int" value="10"/>
+        <value type="int" value="11"/>
+      </property>
+    </property>
+  </property>
+  <property name="plugins" type="empty">
+    <property name="plugin-3" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-1" type="string" value="whiskermenu">
+-- default.xml
+1
+-- logs
+I2026-09-08 15:53:27.512451 addonmanager.cpp:204] Loaded addon kimpanel
+I2026-09-08 15:53:27.860846 kimpanel.cpp:138] Kimpanel new owner: 
+libactions.so libapplicationsmenu.so libclipman.so libclock.so libdirectorymenu.so libdocklike.so liblauncher.so libnotification-plugin.so libpager.so libseparator.so libshowdesktop.so libsystray.so libtasklist.so libthunar-tpa.so libwhiskermenu.so libwindowmenu.so libxfce4powermanager.so 
+xrender
+cat: /home/liveuser/.config/kiyu/picom.log: No such file or directory
+]3008;end=a19e9ba2-460e-4b3d-acd9-3d216c09e633;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== desktop-diag'; xfdesktop --version 2>&1 | head -1; xrandr --listmonitors 2>&1 | head -4; xfconf-query -c xfce4-desktop -l -v 2>&1 | head -30; ls -la /usr/share/backgrounds/kiyu/ 2>&1; file /usr/share/backgrounds/kiyu/default.png 2>&1; python3 -c "import gi; gi.require_version('GdkPixbuf','2.0'); from gi.repository import GdkPixbuf as G; p=G.Pixbuf.new_from_file('/usr/share/backgrounds/kiyu/default.png'); print('pixbuf', p.get_width(), p.get_height(), p.get_has_alpha(), p.get_bits_per_sample())" 2>&1 | tail -1; journalctl --user -b --no-pager 2>/dev/null | grep -iE 'xfdesktop|backdrop|pixbuf' | tail -8; grep -iv 'dbind|Gtk-WARNING' ~/.xsession-errors 2>/dev/null | tail -10; ls ~/.cache/xfce4/desktop 2>&1 | head -3
+[?2004l]3008;start=02bf1c96-ffcc-449b-a667-324c35e51eae;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== desktop-diag
+xfdesktop 버전 4.20.2 입니다. xfce 4.20에서 실행 중입니다.
+Monitors: 1
+ 0: +Virtual-1 1280/325x800/203+0+0  Virtual-1
+/backdrop/screen0/monitor0/workspace0/color-style          0
+/backdrop/screen0/monitor0/workspace0/image-style          5
+/backdrop/screen0/monitor0/workspace0/last-image           /usr/share/backgrounds/kiyu/default.png
+/backdrop/screen0/monitorVirtual-1/workspace0/color-style  0
+/backdrop/screen0/monitorVirtual-1/workspace0/image-style  5
+/backdrop/screen0/monitorVirtual-1/workspace0/last-image   /usr/share/backgrounds/kiyu/default.png
+/desktop-icons/file-icons/show-device-fixed                false
+/desktop-icons/file-icons/show-device-removable            false
+/desktop-icons/file-icons/show-filesystem                  true
+/desktop-icons/file-icons/show-home                        true
+/desktop-icons/file-icons/show-network-volumes             false
+/desktop-icons/file-icons/show-removable                   false
+/desktop-icons/file-icons/show-trash                       true
+/desktop-icons/file-icons/show-unknown-removable           false
+/desktop-icons/icon-size                                   48
+/desktop-icons/show-tooltips                               true
+/desktop-icons/single-click                                false
+/desktop-icons/style                                       2
+/desktop-menu/show                                         true
+/desktop-menu/show-icons                                   true
+/last-settings-migration-version                           1
+total 676
+drwxr-xr-x. 2 root root   4096  9월  8 15:27 [0m[01;34m.[0m
+drwxr-xr-x. 6 root root   4096  9월  8 15:27 [01;34m..[0m
+-rw-r--r--. 1 root root 668134  9월  8 15:27 [01;35mdefault.png[0m
+-rw-r--r--. 1 root root   9360  9월  8 15:23 [01;35mdefault.svg[0m
+/usr/share/backgrounds/kiyu/default.png: PNG image data, 3840 x 2160, 8-bit/color RGB, non-interlaced
+pixbuf 3840 2160 False 8
+
+(xfwm4:1463): GLib-CRITICAL **: 15:56:49.767: g_hash_table_lookup: assertion 'hash_table != NULL' failed
+
+(xfwm4:1463): GLib-CRITICAL **: 15:56:49.776: g_hash_table_lookup: assertion 'hash_table != NULL' failed
+
+(xfwm4:1463): GLib-CRITICAL **: 15:56:51.196: g_hash_table_lookup: assertion 'hash_table != NULL' failed
+
+(xfwm4:1463): GLib-CRITICAL **: 15:56:51.196: g_hash_table_lookup: assertion 'hash_table != NULL' failed
+
+(xfwm4:1463): GLib-CRITICAL **: 15:56:51.221: g_hash_table_lookup: assertion 'hash_table != NULL' failed
+ls: cannot access '/home/liveuser/.cache/xfce4/desktop': No such file or directory
+]3008;end=02bf1c96-ffcc-449b-a667-324c35e51eae;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== wallpaper-diag'; ls -la /usr/share/backgrounds/ /usr/share/backgrounds/images/ 2>&1 | head -20; readlink -f /usr/share/backgrounds/images/default.png 2>&1; strings /usr/bin/xfdesktop | grep -i 'backgrounds\|desktop-base' | head -3; xfconf-query -c xfce4-desktop -l -v 2>/dev/null | grep -i image
+[?2004l]3008;start=e9e0e699-37c4-442b-8e80-dd88c0456a5b;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== wallpaper-diag
+/usr/share/backgrounds/:
+total 680
+drwxr-xr-x.   6 root root   4096  9월  8 15:27 .
+drwxr-xr-x. 190 root root   4096  9월  8 15:27 ..
+lrwxrwxrwx.   1 root root     30  2월  9  2026 default-dark.jxl -> ./f44/default/f44-01-night.jxl
+lrwxrwxrwx.   1 root root     28  2월  9  2026 default.jxl -> ./f44/default/f44-01-day.jxl
+-rw-r--r--.   1 root root 668134  9월  8 15:27 default.png
+lrwxrwxrwx.   1 root root     19  2월  9  2026 default.xml -> f44/default/f44.xml
+drwxr-xr-x.   3 root root   4096  9월  8 15:25 f44
+drwxr-xr-x.   2 root root   4096  9월  8 15:27 images
+drwxr-xr-x.   2 root root   4096  9월  8 15:27 kiyu
+drwxr-xr-x.   2 root root   4096  9월  8 15:25 xfce
+
+/usr/share/backgrounds/images/:
+total 664
+drwxr-xr-x. 2 root root   4096  9월  8 15:27 .
+drwxr-xr-x. 6 root root   4096  9월  8 15:27 ..
+lrwxrwxrwx. 1 root root     29  2월  9  2026 default-16_10.jxl -> ../f44/default/f44-01-day.jxl
+lrwxrwxrwx. 1 root root     29  2월  9  2026 default-16_9.jxl -> ../f44/default/f44-01-day.jxl
+lrwxrwxrwx. 1 root root     29  2월  9  2026 default-5_4.jxl -> ../f44/default/f44-01-day.jxl
+/usr/share/backgrounds/images/default.png
+/usr/share/backgrounds/images/default.jxl
+/usr/share/backgrounds/xfce/xfce-stripes.png
+/usr/share/backgrounds/xfce/xfce-teal.png
+/backdrop/screen0/monitor0/workspace0/[01;31m[Kimage[m[K-style          5
+/backdrop/screen0/monitor0/workspace0/last-[01;31m[Kimage[m[K           /usr/share/backgrounds/kiyu/default.png
+/backdrop/screen0/monitorVirtual-1/workspace0/[01;31m[Kimage[m[K-style  5
+/backdrop/screen0/monitorVirtual-1/workspace0/last-[01;31m[Kimage[m[K   /usr/share/backgrounds/kiyu/default.png
+]3008;end=e9e0e699-37c4-442b-8e80-dd88c0456a5b;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== im'; im-config -m 2>&1 | head -3; cat /etc/xdg/autostart/org.fcitx.Fcitx5.desktop 2>&1 | head -12; env | grep -E 'IM_MODULE|XMODIFIERS'
+[?2004l]3008;start=48b963a2-188c-43a1-bd73-a8a101016b76;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== im
+-bash: im-config: command not found
+cat: /etc/xdg/autostart/org.fcitx.Fcitx5.desktop: No such file or directory
+GTK_[01;31m[KIM_MODULE[m[K=fcitx
+[01;31m[KXMODIFIERS[m[K=@im=fcitx
+SDL_[01;31m[KIM_MODULE[m[K=fcitx
+QT_[01;31m[KIM_MODULE[m[K=fcitx
+]3008;end=48b963a2-188c-43a1-bd73-a8a101016b76;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== flatpak'; flatpak remotes 2>/dev/null || echo none
+[?2004l]3008;start=ecd891cc-77cc-46b5-b773-768cb7bb7e47;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== flatpak
+[1mName    Options[22m
+fedora  system,oci
+flathub system
+]3008;end=ecd891cc-77cc-46b5-b773-768cb7bb7e47;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== disk'; df -h / /run/live/medium 2>/dev/null
+[?2004l]3008;start=5f3f182d-ea37-4dba-a851-c1e1db7f43a1;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== disk
+Filesystem           Size  Used Avail Use% Mounted on
+/dev/mapper/live-rw  5.4G  4.0G  1.2G  78% /
+]3008;end=5f3f182d-ea37-4dba-a851-c1e1db7f43a1;exit=failure;status=1\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== END'
+[?2004l]3008;start=eae3b643-4189-4785-9aa7-7d17373ffae0;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=command;cwd=/home/liveuser\=== END
+]3008;end=eae3b643-4189-4785-9aa7-7d17373ffae0;exit=success\]3008;start=734e9c4e-f0d5-4f08-b375-0cf27b0758a3;machineid=c617351096ce478087eb27910ddb4183;user=liveuser;hostname=localhost-live;bootid=727eb685-3bfb-4fab-b954-1359a0d18065;pid=00000000000000003528;type=shell;cwd=/home/liveuser\[?2004hSHELL> 
