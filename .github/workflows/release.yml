@@ -1,0 +1,65 @@
+name: Release kiyu ISO
+# v* 태그를 푸시하면 ISO 를 빌드해 GitHub 릴리스에 첨부한다 (kiyu Imager 의 "최신 kiyu 내려받기" 가 이걸 받는다).
+# 태그 없이 수동 실행하면 빌드만 확인하고 릴리스는 만들지 않는다.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: '릴리스 태그 (예: v0.2.0). 비우면 릴리스 없이 빌드만'
+        required: false
+        default: ''
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  release:
+    name: Build ISO and release
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space on the runner
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup \
+            /opt/hostedtoolcache/CodeQL /usr/local/share/powershell /usr/share/swift \
+            /usr/local/share/boost /usr/lib/jvm /opt/microsoft "$AGENT_TOOLSDIRECTORY" || true
+          sudo docker image prune -af >/dev/null 2>&1 || true
+          sudo apt-get clean
+          df -h /
+      - name: Build in a Fedora container
+        run: |
+          docker run --rm --privileged \
+            -v "$PWD:/work" -w /work \
+            -e KIYU_BUILD_DIR=/work/base/fedora/.build \
+            registry.fedoraproject.org/fedora:44 bash -ec '
+              dnf install -y --setopt=install_weak_deps=False \
+                kiwi-cli kiwi-systemdeps-core kiwi-systemdeps-iso-media kiwi-systemdeps-bootloaders \
+                kiwi-systemdeps-filesystems librsvg2-tools python3 python3-pyyaml \
+                distribution-gpg-keys util-linux >/tmp/dnf.log 2>&1 || { tail -20 /tmp/dnf.log; exit 1; }
+              ./scripts/build-fedora.sh
+            '
+          sudo chown -R "$(id -u):$(id -g)" base/fedora/out
+      - name: Prepare release assets
+        id: prep
+        run: |
+          mkdir -p release
+          iso=$(find base/fedora/out -name '*.iso' | head -1)
+          [ -n "$iso" ] || { echo "ISO 없음"; exit 1; }
+          cp "$iso" release/
+          ( cd release && sha256sum ./*.iso > SHA256SUMS.txt )
+          ls -la release
+          echo "tag=${{ github.event.inputs.tag || github.ref_name }}" >> "$GITHUB_OUTPUT"
+      - name: Create release
+        if: startsWith(github.ref, 'refs/tags/v') || github.event.inputs.tag != ''
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.prep.outputs.tag }}
+          name: kiyu ${{ steps.prep.outputs.tag }}
+          body: |
+            kiyu 라이브 ISO. **kiyu Imager** 로 USB·SD 에 구워 부팅하세요.
+            설치 후 로그인 계정은 설치 프로그램에서 만듭니다. 라이브 세션 사용자는 `liveuser`(암호 없음).
+          files: |
+            release/*.iso
+            release/SHA256SUMS.txt
+          fail_on_unmatched_files: true
