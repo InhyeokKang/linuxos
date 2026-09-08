@@ -14,6 +14,7 @@ cp branding/logo.svg "$DEST/usr/share/icons/hicolor/scalable/apps/${OS_ID}.svg"
 cp branding/taengja-icon.svg "$DEST/usr/share/icons/hicolor/scalable/apps/taengja.svg"
 cp branding/control-icon.svg "$DEST/usr/share/icons/hicolor/scalable/apps/kiyu-control.svg"
 cp branding/update-icon.svg "$DEST/usr/share/icons/hicolor/scalable/apps/kiyu-update.svg"
+cp branding/imager-icon.svg "$DEST/usr/share/icons/hicolor/scalable/apps/kiyu-imager.svg"
 cp apps/kiyu-superkey/kiyu-superkey.c "$DEST/usr/src/${OS_ID}/"
 cp apps/taengja/taengja.py apps/taengja/abp2webkit.py "$DEST/usr/lib/taengja/"
 cp apps/taengja/taengja "$DEST/usr/bin/taengja"
@@ -23,5 +24,10 @@ cp apps/kiyu-control/kiyu-control "$DEST/usr/bin/kiyu-control"
 cp apps/kiyu-update/kiyu-update.py "$DEST/usr/lib/kiyu-update/"
 cp apps/kiyu-update/kiyu-update "$DEST/usr/bin/kiyu-update"
 cp apps/kiyu-update/kiyu-update.desktop "$DEST/usr/share/applications/kiyu-update.desktop"
-chmod 0755 "$DEST/usr/bin/taengja" "$DEST/usr/bin/kiyu-control" "$DEST/usr/bin/kiyu-update" \
-           "$DEST/usr/lib/taengja/"*.py "$DEST/usr/lib/kiyu-control/"*.py "$DEST/usr/lib/kiyu-update/"*.py
+cp apps/kiyu-imager/kiyu-imager.py "$DEST/usr/lib/kiyu-imager/"
+cp apps/kiyu-imager/kiyu-imager-write "$DEST/usr/lib/kiyu-imager/"
+cp apps/kiyu-imager/kiyu-imager "$DEST/usr/bin/kiyu-imager"
+cp apps/kiyu-imager/kiyu-imager.desktop "$DEST/usr/share/applications/kiyu-imager.desktop"
+chmod 0755 "$DEST/usr/bin/taengja" "$DEST/usr/bin/kiyu-control" "$DEST/usr/bin/kiyu-update" "$DEST/usr/bin/kiyu-imager" \
+           "$DEST/usr/lib/taengja/"*.py "$DEST/usr/lib/kiyu-control/"*.py "$DEST/usr/lib/kiyu-update/"*.py \
+           "$DEST/usr/lib/kiyu-imager/kiyu-imager.py" "$DEST/usr/lib/kiyu-imager/kiyu-imager-write"

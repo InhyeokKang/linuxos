@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- kiyu Imager: USB 메모리에 아래로 쓰는 화살표 -->
+  <rect x="92" y="120" width="72" height="108" rx="14" fill="#ff9a1c"/>
+  <rect x="108" y="104" width="40" height="28" rx="6" fill="#f47c0c"/>
+  <rect x="110" y="150" width="36" height="10" rx="5" fill="#fff3c9"/>
+  <rect x="110" y="170" width="36" height="10" rx="5" fill="#fff3c9"/>
+  <g fill="none" stroke="#f47c0c" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="128" y1="24" x2="128" y2="86"/>
+    <path d="M100 60 L128 88 L156 60"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=kiyu Imager
+Name[ko]=kiyu 이미저
+Comment=kiyu 를 USB·SD 카드에 굽습니다
+Comment[en]=Write kiyu to a USB drive or SD card
+Exec=kiyu-imager
+Icon=kiyu-imager
+Categories=System;Utility;
+Terminal=false
+Keywords=usb;sd;image;write;flash;굽기;이미지;부팅;설치;
+StartupNotify=true

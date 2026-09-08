@@ -47,6 +47,9 @@ install_and_overlay() {
     cp -a branding/control-icon.svg /usr/share/icons/hicolor/scalable/apps/kiyu-control.svg
     mkdir -p /usr/lib/kiyu-update && cp -a apps/kiyu-update/kiyu-update.py /usr/lib/kiyu-update/ && cp -a apps/kiyu-update/kiyu-update /usr/bin/ && cp -a apps/kiyu-update/kiyu-update.desktop /usr/share/applications/
     cp -a branding/update-icon.svg /usr/share/icons/hicolor/scalable/apps/kiyu-update.svg
+    mkdir -p /usr/lib/kiyu-imager && cp -a apps/kiyu-imager/kiyu-imager.py apps/kiyu-imager/kiyu-imager-write /usr/lib/kiyu-imager/ && cp -a apps/kiyu-imager/kiyu-imager /usr/bin/ && cp -a apps/kiyu-imager/kiyu-imager.desktop /usr/share/applications/
+    cp -a branding/imager-icon.svg /usr/share/icons/hicolor/scalable/apps/kiyu-imager.svg
+    cp -a apps/kiyu-imager/org.kiyu.imager.policy /usr/share/polkit-1/actions/ 2>/dev/null || true
     cp -a "$A/usr/share/backgrounds/kiyu" /usr/share/backgrounds/
     cp -a "$A/usr/share/icons/hicolor/scalable/apps/kiyu.svg" /usr/share/icons/hicolor/scalable/apps/
     cp -a branding/taengja-icon.svg /usr/share/icons/hicolor/scalable/apps/taengja.svg

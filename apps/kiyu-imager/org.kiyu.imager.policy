@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>kiyu</vendor>
+  <action id="org.kiyu.imager.write">
+    <description>Write a disk image to a removable drive</description>
+    <description xml:lang="ko">이동식 드라이브에 디스크 이미지 굽기</description>
+    <message>kiyu Imager 가 드라이브에 이미지를 쓰려고 합니다</message>
+    <message xml:lang="ko">kiyu Imager 가 드라이브에 이미지를 쓰려고 합니다</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/lib/kiyu-imager/kiyu-imager-write</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
+</policyconfig>

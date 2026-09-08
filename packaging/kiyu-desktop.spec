@@ -12,6 +12,7 @@ BuildRequires:  gcc libX11-devel libXtst-devel python3
 Requires:       xfce4-panel xfce4-whiskermenu-plugin xfce4-docklike-plugin xfwm4 xfdesktop picom
 Requires:       python3-gobject webkit2gtk4.1 PackageKit PackageKit-glib librsvg2-tools brightnessctl libnotify
 Requires:       fcitx5 fcitx5-hangul xdg-user-dirs
+Requires:       util-linux coreutils udisks2 polkit
 
 %description
 Desktop defaults, own apps (Taengja browser, quick settings, updater, Super key helper) and branding for kiyu.

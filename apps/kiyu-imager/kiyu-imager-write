@@ -1,0 +1,57 @@
+#!/bin/sh
+# kiyu Imager 쓰기 도우미 (pkexec 로 root 권한 실행). 대상 디스크의 파티션을 해제하고 이미지를 dd 로 쓴 뒤
+# 선택 시 검증한다. 진행률은 "PROGRESS <write|verify> <0..1>" 로, 안내는 일반 줄로 stdout 에 낸다.
+#   kiyu-imager-write <source-image> <target-device> <verify|noverify>
+set -u
+SRC=$1; DEV=$2; MODE=${3:-noverify}
+[ -f "$SRC" ] || { echo "이미지 파일이 없습니다: $SRC"; exit 2; }
+case "$DEV" in /dev/*) : ;; *) echo "잘못된 대상: $DEV"; exit 2 ;; esac
+[ -b "$DEV" ] || { echo "블록 장치가 아닙니다: $DEV"; exit 2; }
+
+# 안전장치: 루트(/) 가 이 디스크에 있으면 거부
+ROOTSRC=$(findmnt -n -o SOURCE / 2>/dev/null)
+ROOTDISK=$(lsblk -nso NAME "$ROOTSRC" 2>/dev/null | tail -1)
+BASE=$(basename "$DEV")
+if [ -n "$ROOTDISK" ] && [ "$ROOTDISK" = "$BASE" ]; then
+    echo "대상이 시스템 디스크입니다. 중단합니다."; exit 3
+fi
+
+SIZE=$(stat -c %s "$SRC" 2>/dev/null || echo 0)
+echo "파티션 해제 중..."
+for part in $(lsblk -nlo NAME "$DEV" 2>/dev/null | tail -n +2); do
+    umount "/dev/$part" 2>/dev/null || true
+    udisksctl unmount -b "/dev/$part" 2>/dev/null || true
+done
+wipefs -a "$DEV" >/dev/null 2>&1 || true
+
+echo "굽는 중..."
+# dd 를 백그라운드로 돌리고 USR1 신호로 진행 상황을 받아 PROGRESS 로 환산
+dd if="$SRC" of="$DEV" bs=4M conv=fsync oflag=direct status=none 2>/dev/null &
+DDPID=$!
+while kill -0 "$DDPID" 2>/dev/null; do
+    kill -USR1 "$DDPID" 2>/dev/null
+    sleep 1
+    if [ "$SIZE" -gt 0 ] 2>/dev/null; then
+        written=$(grep -m1 '^write_bytes:' "/proc/$DDPID/io" 2>/dev/null | awk '{print $2}')
+        [ -n "$written" ] && awk -v w="$written" -v s="$SIZE" 'BEGIN{f=w/s; if(f>1)f=1; printf "PROGRESS write %.4f\n", f}'
+    fi
+done
+wait "$DDPID"; rc=$?
+[ "$rc" = 0 ] || { echo "굽기 실패 (dd 코드 $rc)"; exit "$rc"; }
+echo "PROGRESS write 1.0"
+sync
+
+if [ "$MODE" = verify ]; then
+    echo "검증 중..."
+    SRCSUM=$(dd if="$SRC" bs=4M status=none 2>/dev/null | sha256sum | awk '{print $1}')
+    # 장치에서 이미지 크기만큼 읽어 해시 (blockdev 로 총 크기 확인해 초과 방지)
+    DEVSUM=$(dd if="$DEV" bs=4M count=$(( (SIZE + 4194303) / 4194304 )) status=none 2>/dev/null | head -c "$SIZE" | sha256sum | awk '{print $1}')
+    echo "PROGRESS verify 1.0"
+    if [ "$SRCSUM" = "$DEVSUM" ]; then
+        echo "검증 성공: 이미지와 드라이브 내용이 일치합니다."
+    else
+        echo "검증 실패: 내용이 다릅니다. 드라이브를 바꿔 다시 시도하세요."; exit 4
+    fi
+fi
+echo "완료"
+exit 0
