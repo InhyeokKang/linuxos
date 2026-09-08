@@ -1,7 +1,7 @@
 {
   "name": "kiyu-imager",
   "productName": "kiyu Imager",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "kiyu 를 USB·SD 카드에 굽는 크로스 플랫폼 도구",
   "license": "MIT",
   "author": "kiyu",

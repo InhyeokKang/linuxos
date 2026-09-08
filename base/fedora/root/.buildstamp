@@ -1,6 +1,6 @@
 [Main]
 Product=kiyu
-Version=0.2
+Version=1.0
 BugURL=https://github.com/InhyeokKang/linuxos/issues
 IsFinal=True
 UUID=202609080000.x86_64

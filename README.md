@@ -51,7 +51,7 @@ make test           # QEMU 로 부팅 (2 CPU / 2GB RAM 저사양 재현)
 make test-uefi      # UEFI 모드
 ```
 
-빌드 결과물은 `base/fedora/out/kiyu-0.2.0-x86_64.iso` 입니다. USB 에 그대로 쓰면(예: `dd`, Rufus, balenaEtcher) BIOS 와 UEFI(Secure Boot 포함) 모두에서 부팅됩니다. GitHub Actions 의 **Build ISO** 워크플로가 같은 것을 만들고 QEMU 로 부팅 테스트까지 합니다.
+빌드 결과물은 `base/fedora/out/kiyu-1.0-x86_64.iso` 입니다. USB 에 그대로 쓰면(예: `dd`, Rufus, balenaEtcher) BIOS 와 UEFI(Secure Boot 포함) 모두에서 부팅됩니다. GitHub Actions 의 **Build ISO** 워크플로가 같은 것을 만들고 QEMU 로 부팅 테스트까지 합니다.
 
 ## 무엇이 들어 있나
 
@@ -97,7 +97,7 @@ docs/                         설계 문서
 
 ## 현재 상태
 
-0.2.0 은 Fedora 베이스로의 전환 단계입니다. 0.1 (Debian) 은 CI 에서 ISO 빌드와 BIOS/UEFI(Secure Boot) 부팅, 자동 로그인, 8초 부팅, 메모리 측정까지 검증됐습니다. Fedora 이미지는 같은 파이프라인으로 검증 중이며 진행 상황은 [docs/roadmap.md](docs/roadmap.md) 에 있습니다.
+1.0 은 Fedora 베이스입니다. 0.1 (Debian) 은 CI 에서 ISO 빌드와 BIOS/UEFI(Secure Boot) 부팅, 자동 로그인, 8초 부팅, 메모리 측정까지 검증됐습니다. Fedora 이미지는 같은 파이프라인으로 검증 중이며 진행 상황은 [docs/roadmap.md](docs/roadmap.md) 에 있습니다.
 
 ## 라이선스
 

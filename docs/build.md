@@ -21,9 +21,9 @@ make build      # = sudo ./scripts/build.sh
 
 `base/fedora/out/build.log` 에 전체 로그가 남습니다. 결과물 (`base/fedora/out/`):
 
-- `kiyu-0.2.0-x86_64.iso` – USB/DVD/VM 공용
-- `kiyu-0.2.0-x86_64.iso.sha256`
-- `kiyu-0.2.0-x86_64.iso.packages` – 포함된 패키지 목록
+- `kiyu-1.0-x86_64.iso` – USB/DVD/VM 공용
+- `kiyu-1.0-x86_64.iso.sha256`
+- `kiyu-1.0-x86_64.iso.packages` – 포함된 패키지 목록
 
 ## ISO 없이 데스크톱 UI 만 보기
 
