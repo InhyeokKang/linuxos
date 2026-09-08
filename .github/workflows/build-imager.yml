@@ -21,6 +21,10 @@ jobs:
           - os: ubuntu-latest
             artifact: kiyu-imager-linux
     runs-on: ${{ matrix.os }}
+    env:
+      # usb 네이티브 모듈이 node-addon-api(C++17 필요)와 맞게 컴파일되도록 표준 강제 (Linux/macOS)
+      CXXFLAGS: -std=c++17
+      CFLAGS: -std=gnu11
     defaults:
       run:
         working-directory: apps/kiyu-imager-desktop
