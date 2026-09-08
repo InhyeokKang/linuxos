@@ -1,0 +1,67 @@
+
+[?2004l]3008;end=433e9c1a-28d4-4d21-b005-ea3aeba94991;exit=success\]3008;start=c0984bc5-414f-471f-8ecf-98b273c82ad3;machineid=ef2888453f3f4249af11668b3dd20017;user=liveuser;hostname=localhost-live;bootid=a8e25642-a025-45be-988a-c44426d3e18c;pid=00000000000000003446;type=shell;cwd=/home/liveuser\[?2004hSHELL> 
+
+##### SERIAL SHELL: logged_in=True
+export PS1='SHELL> '; stty cols 200; export DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
+[?2004l]3008;start=92cb5b61-c162-48a5-9b80-21bb761ebb38;machineid=ef2888453f3f4249af11668b3dd20017;user=liveuser;hostname=localhost-live;bootid=a8e25642-a025-45be-988a-c44426d3e18c;pid=00000000000000003446;type=command;cwd=/home/liveuser\]3008;end=92cb5b61-c162-48a5-9b80-21bb761ebb38;exit=success\]3008;start=c0984bc5-414f-471f-8ecf-98b273c82ad3;machineid=ef2888453f3f4249af11668b3dd20017;user=liveuser;hostname=localhost-live;bootid=a8e25642-a025-45be-988a-c44426d3e18c;pid=00000000000000003446;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== installer'; export XAUTHORITY=$HOME/.Xauthority; w=$(xdotool search --classname mousepad 2>/dev/null | tail -1); [ -n "$w" ] && xdotool windowclose $w; cat /etc/anaconda/profile.d/kiyu.conf 2>&1 | head -6; cat /.buildstamp 2>&1 | head -4; ls -la /usr/share/anaconda/pixmaps/ 2>&1 | head -8
+[?2004l]3008;start=a8eff396-af1a-430e-baf8-1267034c6b3e;machineid=ef2888453f3f4249af11668b3dd20017;user=liveuser;hostname=localhost-live;bootid=a8e25642-a025-45be-988a-c44426d3e18c;pid=00000000000000003446;type=command;cwd=/home/liveuser\=== installer
+# kiyu 설치 프로그램(Anaconda) 프로필. os-release 의 ID=kiyu 로 선택되며 Fedora 프로필을 상속한다.
+[Profile]
+profile_id = kiyu
+base_profile = fedora
+
+[Profile Detection]
+[Main]
+Product=kiyu
+Version=0.2
+BugURL=https://github.com/InhyeokKang/linuxos/issues
+total 216
+drwxr-xr-x.  8 root root   4096  9월  8 13:58 .
+drwxr-xr-x. 10 root root   4096  9월  8 13:50 ..
+-rw-r--r--.  1 root root   3728  3월 22  2025 anaconda_header.png
+drwxr-xr-x.  2 root root   4096  9월  8 13:55 atomic
+drwxr-xr-x.  2 root root   4096  9월  8 13:55 cloud
+-rw-r--r--.  1 root root   1072  3월 22  2025 fedora.css
+drwxr-xr-x.  3 root root   4096  9월  8 13:55 rnotes
+]3008;end=a8eff396-af1a-430e-baf8-1267034c6b3e;exit=success\]3008;start=c0984bc5-414f-471f-8ecf-98b273c82ad3;machineid=ef2888453f3f4249af11668b3dd20017;user=liveuser;hostname=localhost-live;bootid=a8e25642-a025-45be-988a-c44426d3e18c;pid=00000000000000003446;type=shell;cwd=/home/liveuser\[?2004hSHELL> sudo -E env DISPLAY=:0 XAUTHORITY=$HOME/.Xauthority /usr/bin/liveinst >/tmp/liveinst.log 2>&1 & sleep 60; ps -eo comm | grep -iE 'anaconda|liveinst' | sort | uniq -c; tail -5 /tmp/liveinst.log 2>/dev/null; sudo tail -5 /tmp/anaconda.log 2>/dev/null
+[?2004l]3008;start=f8ca7559-fef9-4a56-b3de-332962c23129;machineid=ef2888453f3f4249af11668b3dd20017;user=liveuser;hostname=localhost-live;bootid=a8e25642-a025-45be-988a-c44426d3e18c;pid=00000000000000003446;type=command;cwd=/home/liveuser\[2] 4761
+[  288.849202] audit: type=1101 audit(1788845320.892:153): pid=4761 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:accounting grantors=pam_unix acct="liveuser" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  288.857126] audit: type=1123 audit(1788845320.898:154): pid=4761 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='cwd="/home/liveuser" cmd=656E7620444953504C41593D3A302058415554484F524954593D2F686F6D652F6C697665757365722F2E58617574686F72697479202F7573722F62696E2F6C697665696E7374 exe="/usr/bin/sudo" terminal=ttyS0 res=success'
+[  288.867982] audit: type=1110 audit(1788845320.911:155): pid=4761 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_env,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  288.899745] audit: type=1105 audit(1788845320.942:156): pid=4761 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  289.106622] async_tx: api initialized (async)
+[  289.359374] device-mapper: multipath round-robin: version 1.2.0 loaded
+[  289.588577] No iBFT detected.
+[  289.740135] audit: type=1404 audit(1788845321.783:157): enforcing=0 old_enforcing=1 auid=1000 ses=3 enabled=1 old-enabled=1 lsm=selinux res=1
+[  289.778266] audit: type=1300 audit(1788845321.783:157): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7ffc5b719ed0 a2=1 a3=0 items=0 ppid=4766 pid=4801 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=pts0 ses=3 comm="setenforce" exe="/usr/bin/setenforce" subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key=(null)
+[  289.791444] audit: type=1327 audit(1788845321.783:157): proctitle=2F7573722F7362696E2F736574656E666F7263650030
+[  290.388810] audit: type=2313 audit(1788845322.432:158): pid=865 uid=81 auid=4294967295 ses=4294967295 subj=system_u:system_r:system_dbusd_t:s0-s0:c0.c1023 msg='avc:  op=setenforce lsm=selinux enforcing=0 res=1 exe="/usr/bin/dbus-broker" hostname=? addr=? terminal=? res=success'
+[  291.411611] audit: type=1130 audit(1788845323.454:159): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=lvm2-lvmdbusd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[  292.245859] audit: type=1130 audit(1788845324.289:160): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=webui-cockpit-ws comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[  295.476189] audit: type=1105 audit(1788845327.519:161): pid=4879 uid=0 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/pkexec" hostname=? addr=? terminal=? res=success'
+[  295.658974] audit: type=1404 audit(1788845327.702:162): enforcing=1 old_enforcing=0 auid=1000 ses=3 enabled=1 old-enabled=1 lsm=selinux res=1
+[  295.697300] audit: type=1300 audit(1788845327.702:162): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7ffd9e891200 a2=1 a3=0 items=0 ppid=4766 pid=4887 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=pts0 ses=3 comm="setenforce" exe="/usr/bin/setenforce" subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key=(null)
+[  295.706477] audit: type=1327 audit(1788845327.702:162): proctitle=2F7573722F7362696E2F736574656E666F72636500456E666F7263696E67
+[  295.713472] audit: type=1106 audit(1788845327.756:163): pid=4761 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_close grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  295.724284] audit: type=1104 audit(1788845327.756:164): pid=4761 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_env,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[1]   Done                       mousepad > /dev/null 2>&1
+[2]+  Done                       sudo -E env DISPLAY=:0 XAUTHORITY=$HOME/.Xauthority /usr/bin/liveinst > /tmp/liveinst.log 2>&1
+        ^^^^^^^^^^^
+    )
+    ^
+gi.repository.GLib.GError: g-io-error-quark: Error sending credentials: Error sending message: Broken pipe (44)
+Failed to connect to user scope bus via local transport: Operation not permitted (consider using --machine=<user>@.host --user to connect to bus of other user)
+[  348.910435] audit: type=1101 audit(1788845380.952:165): pid=4965 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:accounting grantors=pam_unix acct="liveuser" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  348.919425] audit: type=1123 audit(1788845380.955:166): pid=4965 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='cwd="/home/liveuser" cmd=7461696C202D35202F746D702F616E61636F6E64612E6C6F67 exe="/usr/bin/sudo" terminal=ttyS0 res=success'
+[  348.930709] audit: type=1110 audit(1788845380.965:167): pid=4965 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_env,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;start=d91f98020525498fae37a9d4cd357607;user=liveuser;hostname=localhost-live;machineid=ef2888453f3f4249af11668b3dd20017;bootid=a8e25642a02545be988ac44426d3e18c;pid=4965;pidfdid=2727;comm=sudo;targetuser=root;type=session\[  348.962156] audit: type=1105 audit(1788845381.004:168): pid=4965 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+14:28:47,125 INF main: /sbin/anaconda 44.30-2.fc44
+14:28:47,125 INF core.util: Reporting the IPMI event: 7
+14:28:47,501 INF startup_utils: check_memory(): total:2081, needed:320
+14:28:47,502 DBG startup_utils: Don't set up proxy variables.
+14:28:47,503 INF screensaver: Inhibiting screensaver.
+]3008;end=d91f98020525498fae37a9d4cd357607\[  348.990669] audit: type=1106 audit(1788845381.033:169): pid=4965 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_close grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;end=f8ca7[  348.999609] audit: type=1104 audit(1788845381.033:170): pid=4965 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_env,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+559-fef9-4a56-b3de-332962c23129;exit=success\]3008;start=c0984bc5-414f-471f-8ecf-98b273c82ad3;machineid=ef2888453f3f4249af11668b3dd20017;user=liveuser;hostname=localhost-live;bootid=a8e25642-a025-45be-988a-c44426d3e18c;pid=00000000000000003446;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== END'
+[?2004l]3008;start=e187020e-e7f3-4bb9-8497-0f1d362def0d;machineid=ef2888453f3f4249af11668b3dd20017;user=liveuser;hostname=localhost-live;bootid=a8e25642-a025-45be-988a-c44426d3e18c;pid=00000000000000003446;type=command;cwd=/home/liveuser\=== END
+]3008;end=e187020e-e7f3-4bb9-8497-0f1d362def0d;exit=success\]3008;start=c0984bc5-414f-471f-8ecf-98b273c82ad3;machineid=ef2888453f3f4249af11668b3dd20017;user=liveuser;hostname=localhost-live;bootid=a8e25642-a025-45be-988a-c44426d3e18c;pid=00000000000000003446;type=shell;cwd=/home/liveuser\[?2004hSHELL> 

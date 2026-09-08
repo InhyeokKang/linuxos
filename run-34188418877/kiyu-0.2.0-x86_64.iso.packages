@@ -135,11 +135,11 @@ device-mapper-persistent-data|(none)|1.3.3|1.fc44|x86_64|(none)|GPL-3.0-only AND
 device-mapper|(none)|1.02.212|2.fc44|x86_64|(none)|GPL-2.0-only
 diffutils|(none)|3.12|5.fc44|x86_64|(none)|GPL-3.0-or-later
 dnf-data|(none)|4.24.0|3.fc44|noarch|(none)|GPL-2.0-or-later AND GPL-1.0-only
-dnf5-plugin-automatic|(none)|5.4.3.0|2.fc44|x86_64|(none)|LGPL-2.1-or-later
-dnf5-plugins|(none)|5.4.3.0|2.fc44|x86_64|(none)|LGPL-2.1-or-later AND GPL-2.0-or-later
-dnf5daemon-server-polkit|(none)|5.4.3.0|2.fc44|noarch|(none)|GPL-2.0-or-later
-dnf5daemon-server|(none)|5.4.3.0|2.fc44|x86_64|(none)|GPL-2.0-or-later
-dnf5|(none)|5.4.3.0|2.fc44|x86_64|(none)|GPL-2.0-or-later
+dnf5-plugin-automatic|(none)|5.4.4.0|1.fc44|x86_64|(none)|LGPL-2.1-or-later
+dnf5-plugins|(none)|5.4.4.0|1.fc44|x86_64|(none)|LGPL-2.1-or-later AND GPL-2.0-or-later
+dnf5daemon-server-polkit|(none)|5.4.4.0|1.fc44|noarch|(none)|GPL-2.0-or-later
+dnf5daemon-server|(none)|5.4.4.0|1.fc44|x86_64|(none)|GPL-2.0-or-later
+dnf5|(none)|5.4.4.0|1.fc44|x86_64|(none)|GPL-2.0-or-later
 dns-root-data|(none)|2026260100|2.fc44|noarch|(none)|BSD-2-Clause and CC0-1.0
 dosfstools|(none)|4.2|18.fc44|x86_64|(none)|GPL-3.0-or-later
 double-conversion|(none)|3.4.0|3.fc44|x86_64|(none)|BSD-3-Clause
@@ -475,9 +475,9 @@ libdc1394|(none)|2.2.7|9.fc44|x86_64|(none)|LGPL-2.0-or-later
 libdecor|(none)|0.2.5|2.fc44|x86_64|(none)|MIT
 libdeflate|(none)|1.26|1.fc44|x86_64|(none)|MIT
 libdisplay-info|(none)|0.3.0|1.fc44|x86_64|(none)|MIT
-libdnf5-cli|(none)|5.4.3.0|2.fc44|x86_64|(none)|LGPL-2.1-or-later
-libdnf5-plugin-appstream|(none)|5.4.3.0|2.fc44|x86_64|(none)|LGPL-2.1-or-later
-libdnf5|(none)|5.4.3.0|2.fc44|x86_64|(none)|LGPL-2.1-or-later
+libdnf5-cli|(none)|5.4.4.0|1.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later
+libdnf5-plugin-appstream|(none)|5.4.4.0|1.fc44|x86_64|(none)|LGPL-2.1-or-later
+libdnf5|(none)|5.4.4.0|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 libdnf|(none)|0.75.0|2.fc44|x86_64|(none)|LGPL-2.1-or-later
 libdovi|(none)|3.3.2|3.fc44|x86_64|(none)|MIT AND (Apache-2.0 OR MIT) AND (Unlicense OR MIT) AND (Zlib OR Apache-2.0 OR MIT)
 libdrm|(none)|2.4.134|1.fc44|x86_64|(none)|MIT
@@ -642,7 +642,7 @@ libsmbclient|2|4.24.6|1.fc44|x86_64|(none)|GPL-3.0-or-later AND LGPL-3.0-or-late
 libsndfile|(none)|1.2.2|11.fc44|x86_64|(none)|LGPL-2.1-or-later AND GPL-2.0-or-later AND BSD-3-Clause
 libsodium|(none)|1.0.22|1.fc44|x86_64|(none)|ISC AND BSD-2-Clause AND CC0-1.0
 libsolv|(none)|0.7.39|1.fc44|x86_64|(none)|BSD-3-Clause
-libsoup3|(none)|3.6.6|9.fc44|x86_64|(none)|LGPL-2.0-or-later AND LGPL-2.1-or-later
+libsoup3|(none)|3.6.6|10.fc44|x86_64|(none)|LGPL-2.0-or-later AND LGPL-2.1-or-later
 libssh-config|(none)|0.12.2|1.fc44|noarch|(none)|LGPL-2.1-or-later
 libssh|(none)|0.12.2|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 libss|(none)|1.47.3|4.fc44|x86_64|(none)|MIT
@@ -661,7 +661,7 @@ libthai|(none)|0.1.30|2.fc44|x86_64|(none)|LGPL-2.1-or-later
 libtheora|1|1.1.1|41.fc44|x86_64|(none)|BSD-3-Clause
 libtiff|(none)|4.7.2|1.fc44|x86_64|(none)|libtiff
 libtinysparql|(none)|3.11.1|1.fc44|x86_64|(none)|LGPL-2.1-or-later
-libtirpc|(none)|1.3.7|2.fc44|x86_64|(none)|SISSL AND BSD-3-Clause
+libtirpc|(none)|1.3.7|2.rc1.fc44|x86_64|(none)|SISSL AND BSD-3-Clause
 libtool-ltdl|(none)|2.5.4|10.fc44|x86_64|(none)|LGPLv2+
 libudfread|(none)|1.2.0|3.fc44|x86_64|(none)|LGPL-2.0-or-later
 libudisks2|(none)|2.11.2|1.fc44|x86_64|(none)|LGPL-2.0-or-later
@@ -697,6 +697,7 @@ libwps|(none)|0.4.14|7.fc44|x86_64|(none)|LGPL-2.1-or-later OR MPL-2.0
 libxcb|(none)|1.17.0|7.fc44|x86_64|(none)|X11
 libxcrypt|(none)|4.5.2|3.fc44|x86_64|(none)|LGPL-2.1-or-later AND BSD-3-Clause AND BSD-2-Clause AND BSD-2-Clause-FreeBSD AND 0BSD AND CC0-1.0 AND LicenseRef-Fedora-Public-Domain
 libxcvt|(none)|0.1.2|11.fc44|x86_64|(none)|MIT AND HPND-sell-variant
+libxdo|1|3.20211022.1|10.fc44|x86_64|(none)|LicenseRef-Callaway-BSD
 libxfce4ui|(none)|4.20.2|2.fc44|x86_64|(none)|LicenseRef-Callaway-LGPLv2+
 libxfce4util|(none)|4.20.1|3.fc44|x86_64|(none)|LicenseRef-Callaway-LGPLv2+
 libxfce4windowing|(none)|4.20.4|3.fc44|x86_64|(none)|LGPL-2.1-or-later
@@ -864,7 +865,7 @@ python3-iso639|(none)|0.1.4|33.fc44|noarch|(none)|MIT
 python3-kickstart|(none)|3.69|1.fc44|noarch|(none)|GPL-2.0-only
 python3-langtable|(none)|0.0.71|1.fc44|noarch|(none)|GPL-3.0-or-later
 python3-libcomps|(none)|0.1.24|1.fc44|x86_64|(none)|GPL-2.0-or-later
-python3-libdnf5|(none)|5.4.3.0|2.fc44|x86_64|(none)|LGPL-2.1-or-later
+python3-libdnf5|(none)|5.4.4.0|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 python3-libdnf|(none)|0.75.0|2.fc44|x86_64|(none)|LGPL-2.1-or-later
 python3-libmount|(none)|2.41.5|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 python3-libreport|(none)|2.17.15|10.fc44|x86_64|(none)|GPL-2.0-or-later
@@ -1034,6 +1035,7 @@ xdg-desktop-portal-gtk|(none)|1.15.3|3.fc44|x86_64|(none)|LGPL-2.0-or-later
 xdg-desktop-portal|(none)|1.22.1|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 xdg-user-dirs|(none)|0.18|11.fc43|x86_64|(none)|GPL-2.0-or-later AND MIT
 xdg-utils|(none)|1.2.1|5.fc44|noarch|(none)|MIT
+xdotool|1|3.20211022.1|10.fc44|x86_64|(none)|LicenseRef-Callaway-BSD
 xevd-libs|(none)|0.5.0|6.fc44|x86_64|(none)|BSD-3-Clause
 xeve-libs|(none)|0.5.1|6.fc44|x86_64|(none)|BSD-3-Clause
 xfce-polkit|(none)|0.3|17.fc44|x86_64|(none)|GPL-2.0-or-later
