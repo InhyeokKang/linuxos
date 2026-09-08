@@ -8,7 +8,7 @@ mkdir -p "$DEST"
 cp -a base/fedora/root/. "$DEST/"
 mkdir -p "$DEST/usr/share/backgrounds/${OS_ID}" "$DEST/usr/share/icons/hicolor/scalable/apps" \
          "$DEST/usr/src/${OS_ID}" "$DEST/usr/lib/taengja" "$DEST/usr/lib/kiyu-control" "$DEST/usr/lib/kiyu-update" \
-         "$DEST/usr/bin" "$DEST/usr/share/applications"
+         "$DEST/usr/lib/kiyu-imager" "$DEST/usr/bin" "$DEST/usr/share/applications"
 cp branding/wallpaper.svg "$DEST/usr/share/backgrounds/${OS_ID}/default.svg"
 cp branding/logo.svg "$DEST/usr/share/icons/hicolor/scalable/apps/${OS_ID}.svg"
 cp branding/taengja-icon.svg "$DEST/usr/share/icons/hicolor/scalable/apps/taengja.svg"
