@@ -1,5 +1,5 @@
 name: Build kiyu Imager (desktop)
-# 크로스 플랫폼 굽기 도구를 Windows/macOS/Linux 설치본으로 빌드한다. 태그(v*) 푸시 시 릴리스에 첨부.
+# 굽기 도구를 Windows/Linux 설치본으로 빌드한다(macOS 미지원). 태그(v*) 푸시 시 릴리스에 첨부.
 on:
   workflow_dispatch:
     inputs:
@@ -21,8 +21,6 @@ jobs:
         include:
           - os: windows-latest
             artifact: kiyu-imager-windows
-          - os: macos-latest
-            artifact: kiyu-imager-macos
           - os: ubuntu-latest
             artifact: kiyu-imager-linux
     runs-on: ${{ matrix.os }}

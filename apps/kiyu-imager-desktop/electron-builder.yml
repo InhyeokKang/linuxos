@@ -10,16 +10,13 @@ directories:
 files:
   - src/**/*
   - package.json
-# 각 OS 설치본: Windows NSIS(.exe), macOS dmg, Linux AppImage
+# 각 OS 설치본: Windows NSIS(.exe), Linux AppImage (macOS 미지원)
 win:
   target: [nsis]
 nsis:
   oneClick: false
   perMachine: false
   allowToChangeInstallationDirectory: true
-mac:
-  target: [dmg]
-  category: public.app-category.utilities
 linux:
   target: [AppImage]
   icon: build/icon.png
