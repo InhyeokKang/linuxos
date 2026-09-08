@@ -1,5 +1,19 @@
 # kiyu Imager
 
+kiyu 를 USB·SD 에 굽는 도구는 두 가지다. 역할이 다르다.
+
+| | 데스크톱 (설치용) | 리눅스 내장 (가벼운 판) |
+|---|---|---|
+| 어디서 | **Windows·macOS·Linux** 아무 컴퓨터 | 이미 돌고 있는 kiyu 안 |
+| 용도 | 처음 kiyu 를 설치할 USB 만들기 | kiyu 사용자가 USB 를 더 만들 때 |
+| 소스 | `apps/kiyu-imager-desktop` (Electron + etcher-sdk) | `apps/kiyu-imager` (GTK) |
+| 배포 | 릴리스에서 설치본 다운로드 | kiyu 에 기본 포함 |
+
+처음 설치하는 사람은 **데스크톱 판**을 받아 쓴다. 아래는 리눅스 내장 판 설명.
+
+---
+
+
 kiyu 를 USB 메모리·SD 카드에 굽는 전용 도구 (라즈베리파이 Imager 식). kiyu 안에 기본 포함되며 시작 메뉴 > 시스템 에 있다.
 
 ## 흐름

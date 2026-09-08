@@ -1,0 +1,22 @@
+appId: org.kiyu.imager
+productName: kiyu Imager
+directories:
+  output: dist
+  buildResources: build
+files:
+  - src/**/*
+  - package.json
+# 각 OS 설치본: Windows NSIS(.exe), macOS dmg, Linux AppImage
+win:
+  target: [nsis]
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+mac:
+  target: [dmg]
+  category: public.app-category.utilities
+linux:
+  target: [AppImage]
+  icon: build/icon.png
+  category: Utility

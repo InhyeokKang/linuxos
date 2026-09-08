@@ -37,3 +37,6 @@
 /base/fedora/out/
 /base/fedora/.build/
 __pycache__/
+apps/kiyu-imager-desktop/node_modules/
+apps/kiyu-imager-desktop/dist/
+apps/kiyu-imager-desktop/out/

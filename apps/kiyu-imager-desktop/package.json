@@ -1,0 +1,22 @@
+{
+  "name": "kiyu-imager",
+  "productName": "kiyu Imager",
+  "version": "0.2.0",
+  "description": "kiyu 를 USB·SD 카드에 굽는 크로스 플랫폼 도구",
+  "license": "MIT",
+  "author": "kiyu",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --publish never"
+  },
+  "dependencies": {
+    "drivelist": "12.0.2",
+    "etcher-sdk": "10.2.14",
+    "sudo-prompt": "9.2.1"
+  },
+  "devDependencies": {
+    "electron": "44.2.0",
+    "electron-builder": "26.15.3"
+  }
+}
