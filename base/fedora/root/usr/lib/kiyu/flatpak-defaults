@@ -1,0 +1,16 @@
+#!/bin/sh
+# kiyu Flatpak 보안 기본값 (최소 권한). Flathub 앱이 호스트 파일시스템 전체에 접근하지 못하게 시스템 전역
+# override 를 걸고, 사용자·문서·다운로드·미디어 폴더만 열어 둔다. 개별 앱은 필요 시 사용자가 넓힌다.
+# flatpak 이 있을 때만 동작하며 재실행해도 안전(멱등: --reset 후 다시 적용).
+command -v flatpak >/dev/null 2>&1 || exit 0
+flatpak override --system --reset 2>/dev/null || true
+flatpak override --system \
+    --nofilesystem=host \
+    --nofilesystem=home \
+    --filesystem=xdg-download \
+    --filesystem=xdg-documents \
+    --filesystem=xdg-pictures \
+    --filesystem=xdg-music \
+    --filesystem=xdg-videos \
+    --filesystem=xdg-desktop 2>/dev/null || true
+exit 0

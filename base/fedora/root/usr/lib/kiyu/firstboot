@@ -13,5 +13,7 @@ fi
 if ! flatpak remotes --system 2>/dev/null | grep -q '^flathub'; then
     flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo || ok=0
 fi
+# Flatpak 최소 권한 기본값 (호스트 파일시스템 차단, 사용자 폴더만 허용)
+[ -x /usr/lib/kiyu/flatpak-defaults ] && /usr/lib/kiyu/flatpak-defaults || true
 [ "$ok" = 1 ] && date -u +%FT%TZ > /var/lib/kiyu/firstboot-done
 exit 0
