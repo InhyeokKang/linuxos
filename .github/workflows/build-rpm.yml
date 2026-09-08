@@ -29,6 +29,7 @@ jobs:
           rm -rf /tmp/repo && cp -a repo /tmp/repo
           git checkout --orphan kiyu-repo
           git rm -rfq . >/dev/null 2>&1 || true
+          git clean -fdxq
           cp -a /tmp/repo/. .
           echo "kiyu-desktop dnf repo, built from $sha at $(date -u +%FT%TZ)" > README.txt
           git add -A

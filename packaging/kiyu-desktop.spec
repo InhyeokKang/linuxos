@@ -1,5 +1,6 @@
 # kiyu-desktop: kiyu 의 데스크톱 구성(테마·패널·단축키), 자체 앱(탱자·빠른 설정·업데이트·Super 키), 브랜딩을
 # 설치된 시스템에 업데이트로 배포하기 위한 패키지. 소스 tarball 은 scripts/build-rpm.sh 가 만든다.
+%global debug_package %{nil}
 Name:           kiyu-desktop
 Version:        @VERSION@
 Release:        @RELEASE@%{?dist}
