@@ -26,7 +26,9 @@ jobs:
           set -e
           git config user.name "kiyu-ci"; git config user.email "ci@kiyu.invalid"
           sha=$(git rev-parse --short HEAD)
-          rm -rf /tmp/repo && cp -a repo /tmp/repo
+          # 컨테이너가 만든 파일은 root 소유라 sudo 로 옮기고 지운다
+          sudo rm -rf /tmp/repo && sudo cp -a repo /tmp/repo && sudo chown -R "$(id -u):$(id -g)" /tmp/repo
+          sudo rm -rf out repo
           git checkout --orphan kiyu-repo
           git rm -rfq . >/dev/null 2>&1 || true
           git clean -fdxq
