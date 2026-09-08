@@ -1,0 +1,8 @@
+[Main]
+Product=kiyu
+Version=0.2
+BugURL=https://github.com/InhyeokKang/linuxos/issues
+IsFinal=True
+UUID=202609080000.x86_64
+[Compose]
+Lorax=kiwi

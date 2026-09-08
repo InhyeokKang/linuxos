@@ -6,6 +6,7 @@ import socket, sys, time, re
 
 sock_path, out_path = sys.argv[1], sys.argv[2]
 deadline = time.time() + float(sys.argv[3] if len(sys.argv) > 3 else 180)
+PHASE = sys.argv[4] if len(sys.argv) > 4 else None  # hangul | installer (기본: 전체 점검)
 import os
 USER = os.environ.get("GUEST_USER", "live")
 PASSWORD = os.environ.get("GUEST_PASS", "live")
@@ -34,6 +35,21 @@ COMMANDS = [
     "echo '=== disk'; df -h / /run/live/medium 2>/dev/null",
     "echo '=== END'",
 ]
+
+# 2단계(phase=hangul): 한글 입력 검증 — 메모장을 띄워 한/영 키로 전환해 입력 (스크린샷으로 확인)
+HANGUL = [
+    "echo '=== hangul'; export XAUTHORITY=$HOME/.Xauthority; pgrep -x fcitx5 >/dev/null && echo 'fcitx5: running' || echo 'fcitx5: NOT running'; fcitx5-remote -n 2>&1; cat ~/.config/fcitx5/profile 2>&1 | head -5; env | grep -E 'IM_MODULE|XMODIFIERS'",
+    "mousepad >/dev/null 2>&1 & sleep 5; w=$(xdotool search --classname mousepad 2>/dev/null | tail -1); echo \"mousepad window: $w\"; xdotool windowsize $w 760 320; xdotool windowmove $w 260 200; xdotool windowactivate --sync $w; sleep 1; xdotool type --delay 60 'abc '; xdotool key Hangul; sleep 0.5; echo -n 'after Hangul key: '; fcitx5-remote -n; xdotool type --delay 100 'gksrmf dlqfur xptmxm'; sleep 1; xdotool key Hangul; sleep 0.3; xdotool type --delay 60 ' end'; sleep 1; echo typed",
+    "echo '=== END'",
+]
+
+# 3단계(phase=installer): 설치 프로그램(Anaconda) 을 띄워 브랜딩·언어 확인 (스크린샷)
+INSTALLER = [
+    "echo '=== installer'; export XAUTHORITY=$HOME/.Xauthority; w=$(xdotool search --classname mousepad 2>/dev/null | tail -1); [ -n \"$w\" ] && xdotool windowclose $w; cat /etc/anaconda/profile.d/kiyu.conf 2>&1 | head -6; cat /.buildstamp 2>&1 | head -4; ls -la /usr/share/anaconda/pixmaps/ 2>&1 | head -8",
+    "sudo -E env DISPLAY=:0 XAUTHORITY=$HOME/.Xauthority /usr/bin/liveinst >/tmp/liveinst.log 2>&1 & sleep 60; ps -eo comm | grep -iE 'anaconda|liveinst' | sort | uniq -c; tail -5 /tmp/liveinst.log 2>/dev/null; sudo tail -5 /tmp/anaconda.log 2>/dev/null",
+    "echo '=== END'",
+]
+PHASES = {"hangul": HANGUL, "installer": INSTALLER}
 
 s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 s.connect(sock_path)
@@ -71,6 +87,10 @@ logged_in = False
 for _ in range(8):
     if time.time() > deadline:
         break
+    # 앞 단계에서 이미 로그인해 둔 셸(PS1 = 'SHELL> ')이면 바로 진행
+    if wait_for(r"SHELL> $", 3):
+        logged_in = True
+        break
     if wait_for(r"login:", 10):
         send(USER + "\n")
         if wait_for(r"[Pp]assword:|비밀번호:|암호:", 8):
@@ -87,10 +107,10 @@ log.write(b"\n\n##### SERIAL SHELL: logged_in=%s\n" % str(logged_in).encode())
 if logged_in:
     send("export PS1='SHELL> '; stty cols 200; export DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus\n")
     read_for(2)
-    for cmd in COMMANDS:
+    for cmd in PHASES.get(PHASE, COMMANDS):
         if time.time() > deadline:
             break
         send(cmd + "\n")
-        wait_for(r"SHELL> $", 25)
+        wait_for(r"SHELL> $", 110 if PHASE else 25)
 log.close()
 sys.exit(0 if logged_in else 1)

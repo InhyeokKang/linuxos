@@ -188,6 +188,8 @@
     <package name="fcitx5-gtk"/>
     <package name="fcitx5-qt"/>
     <package name="fcitx5-configtool"/>
+    <!-- 부팅 테스트 자동 입력 (한글 검증) -->
+    <package name="xdotool"/>
     <package name="imsettings"/>
 
     <!-- 앱 설치 (Flatpak + 스토어) -->

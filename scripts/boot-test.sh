@@ -118,6 +118,13 @@ kill "$TAIL_PID" 2>/dev/null
 # 게스트 안에서 측정
 if GUEST_USER="$GUEST_USER" GUEST_PASS="$GUEST_PASS" GUEST_BASE="$BASE" python3 "$HERE/lib/serial-shell.py" "$TMP/serial" "$OUT/guest-report.txt" 200; then note "guest shell: ok"; else note "guest shell: login failed"; fi
 shot "$TMP/mon1" "$OUT/bios-final.png"
+if [ "$BASE" = fedora ] && [ "${GUEST_PHASES:-1}" = 1 ]; then
+    # 2단계: 한글 입력 검증 (메모장에 입력 후 스크린샷), 3단계: 설치 프로그램 브랜딩 (Anaconda 스크린샷)
+    if GUEST_USER="$GUEST_USER" GUEST_PASS="$GUEST_PASS" GUEST_BASE="$BASE" python3 "$HERE/lib/serial-shell.py" "$TMP/serial" "$OUT/guest-hangul.txt" 120 hangul; then note "guest hangul probe: ok"; else note "guest hangul probe: failed"; fi
+    shot "$TMP/mon1" "$OUT/bios-hangul.png"
+    if GUEST_USER="$GUEST_USER" GUEST_PASS="$GUEST_PASS" GUEST_BASE="$BASE" python3 "$HERE/lib/serial-shell.py" "$TMP/serial" "$OUT/guest-installer.txt" 150 installer; then note "guest installer probe: ok"; else note "guest installer probe: failed"; fi
+    shot "$TMP/mon1" "$OUT/bios-installer.png"
+fi
 mon "$TMP/mon1" "quit"; sleep 2; kill "$(cat "$TMP/qemu1.pid" 2>/dev/null)" 2>/dev/null
 
 grep -aE "Started .*Light Display Manager|lightdm|Reached target.*Graphical|Failed to start|FAILED" "$OUT/serial-bios.log" | sed 's/\x1b\[[0-9;]*m//g' | sort -u | head -20 | tee -a "$SUMMARY"

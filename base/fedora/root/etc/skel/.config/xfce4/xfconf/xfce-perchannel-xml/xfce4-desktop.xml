@@ -20,6 +20,9 @@
       <property name="show-home" type="bool" value="true"/>
       <property name="show-filesystem" type="bool" value="true"/>
       <property name="show-removable" type="bool" value="false"/>
+      <property name="show-device-fixed" type="bool" value="false"/>
+      <property name="show-device-removable" type="bool" value="false"/>
+      <property name="show-network-volumes" type="bool" value="false"/>
       <property name="show-trash" type="bool" value="true"/>
     </property>
   </property>

@@ -74,6 +74,11 @@ if [ -f /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ]; th
     mkdir -p /etc/xdg/xfce4/panel
     cp /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml /etc/xdg/xfce4/panel/default.xml
 fi
+# 설치 프로그램(Anaconda) 브랜딩: 사이드바 로고와 상단 배경을 kiyu 로
+if [ -d /usr/share/anaconda/pixmaps ] && command -v rsvg-convert >/dev/null 2>&1; then
+    rsvg-convert -w 160 -h 160 "$ICON" -o /usr/share/anaconda/pixmaps/sidebar-logo.png
+    rsvg-convert -w 1024 -h 64 /usr/share/kiyu/anaconda-topbar.svg -o /usr/share/anaconda/pixmaps/topbar-bg.png 2>/dev/null || true
+fi
 # 패널 플러그인 in-process (wrapper 프로세스 제거)
 for plug in whiskermenu docklike launcher tasklist clock showdesktop separator notification-plugin systray; do
     d="/usr/share/xfce4/panel/plugins/${plug}.desktop"
