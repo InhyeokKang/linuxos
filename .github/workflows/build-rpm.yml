@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches: ['**']
-    paths: ['packaging/**', 'scripts/build-rpm.sh', 'scripts/ci-build-rpm.sh', 'scripts/lib/assemble-overlay.sh', '.github/workflows/build-rpm.yml']
+    paths: ['packaging/**', 'apps/**', 'branding/**', 'base/fedora/root/**', 'scripts/build-rpm.sh', 'scripts/ci-build-rpm.sh', 'scripts/lib/assemble-overlay.sh', '.github/workflows/build-rpm.yml']
 permissions:
   contents: write
 jobs:

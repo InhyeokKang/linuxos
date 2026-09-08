@@ -130,6 +130,42 @@ class Config:
         self.save()
 
 
+class History:
+    """방문 기록 (최근 3000개). 주소창 자동완성과 메뉴의 최근 방문에 쓴다."""
+    MAX = 3000
+
+    def __init__(self):
+        self.path = os.path.join(DATA_DIR, "history.json")
+        try:
+            with open(self.path, encoding="utf-8") as f:
+                self.items = json.load(f)
+        except Exception:
+            self.items = []
+        self._dirty = False
+
+    def add(self, title, url):
+        if not url or url.startswith("kiyu:") or url.startswith("about:"):
+            return
+        self.items = [h for h in self.items if h["url"] != url]
+        self.items.insert(0, {"title": title or url, "url": url})
+        del self.items[self.MAX:]
+        self._dirty = True
+        GLib.timeout_add_seconds(5, self.flush)
+
+    def flush(self):
+        if self._dirty:
+            os.makedirs(DATA_DIR, exist_ok=True)
+            with open(self.path, "w", encoding="utf-8") as f:
+                json.dump(self.items, f, ensure_ascii=False)
+            self._dirty = False
+        return False
+
+    def clear(self):
+        self.items = []
+        self._dirty = True
+        self.flush()
+
+
 class Bookmarks:
     def __init__(self):
         self.path = os.path.join(DATA_DIR, "bookmarks.json")
@@ -159,6 +195,8 @@ class Browser(Gtk.Application):
         super().__init__(application_id=APP_ID, flags=Gio.ApplicationFlags.HANDLES_OPEN)
         self.config = Config()
         self.bookmarks = Bookmarks()
+        self.history = History()
+        self.downloads = []  # (download, row 위젯) — 다운로드 창용
         self.window = None
 
     # ---------- WebKit 전역 설정: 보안/자원 ----------
@@ -258,6 +296,10 @@ class Browser(Gtk.Application):
         download.connect("decide-destination", self._on_decide_destination)
         download.connect("finished", lambda d: self.window and self.window.flash("다운로드 완료: " + os.path.basename(d.get_destination() or "")))
         download.connect("failed", lambda d, e: self.window and self.window.flash("다운로드 실패: " + e.message))
+        self.downloads.insert(0, download)
+        del self.downloads[50:]
+        if self.window:
+            self.window.downloads_changed()
 
     def _on_decide_destination(self, download, suggested):
         folder = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD) or os.path.expanduser("~")
@@ -309,6 +351,8 @@ class Browser(Gtk.Application):
             ("zoom-reset", lambda *_: self.window.zoom(None), ["<Primary>0"]),
             ("bookmark", lambda *_: self.window.toggle_bookmark(), ["<Primary>d"]),
             ("find", lambda *_: self.window.show_find(), ["<Primary>f", "F3"]),
+            ("print", lambda *_: self.window.print_page(), ["<Primary>p"]),
+            ("downloads", lambda *_: self.window.show_downloads(), ["<Primary>j"]),
             ("fullscreen", lambda *_: self.window.toggle_fullscreen(), ["F11"]),
             ("quit", lambda *_: self.quit(), ["<Primary>q", "<Primary><Shift>w"]),
         ]:
@@ -357,7 +401,18 @@ class BrowserWindow(Gtk.ApplicationWindow):
         self.url.connect("icon-press", self._on_url_icon)
         toolbar.pack_start(self.url, True, True, 0)
 
+        self._setup_completion()
         self.bm_btn = self._tool_button(toolbar, "non-starred-symbolic", "북마크 (Ctrl+D)", "app.bookmark")
+        self.dl_btn = Gtk.MenuButton()
+        self.dl_btn.set_image(Gtk.Image.new_from_icon_name("folder-download-symbolic", Gtk.IconSize.BUTTON))
+        self.dl_btn.set_tooltip_text("다운로드 (Ctrl+J)")
+        self.dl_btn.set_relief(Gtk.ReliefStyle.NONE)
+        self.dl_pop = Gtk.Popover()
+        self.dl_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, margin=8, spacing=6)
+        self.dl_pop.add(self.dl_box)
+        self.dl_pop.connect("show", lambda *_: self._refresh_downloads())
+        self.dl_btn.set_popover(self.dl_pop)
+        toolbar.pack_start(self.dl_btn, False, False, 0)
         self._tool_button(toolbar, "tab-new-symbolic", "새 탭 (Ctrl+T)", "app.new-tab")
         menu_btn = Gtk.MenuButton()
         menu_btn.set_image(Gtk.Image.new_from_icon_name("open-menu-symbolic", Gtk.IconSize.BUTTON))
@@ -430,11 +485,17 @@ class BrowserWindow(Gtk.ApplicationWindow):
         box.pack_start(self.bm_box, False, False, 0)
         box.pack_start(Gtk.Separator(), False, False, 4)
 
-        for label, action in (("다운로드 폴더 열기", self._open_downloads), ("탱자 정보", self._about)):
+        self.hist_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        box.pack_start(Gtk.Label(label="최근 방문", xalign=0), False, False, 0)
+        box.pack_start(self.hist_box, False, False, 0)
+        box.pack_start(Gtk.Separator(), False, False, 4)
+
+        for label, action in (("다운로드 폴더 열기", self._open_downloads), ("인쇄...", self.print_page),
+                              ("방문 기록 지우기", self._clear_history), ("탱자 정보", self._about)):
             b = Gtk.ModelButton(text=label)
             b.connect("clicked", lambda _b, a=action: (pop.popdown(), a()))
             box.pack_start(b, False, False, 0)
-        pop.connect("show", lambda *_: self._refresh_bookmarks())
+        pop.connect("show", lambda *_: (self._refresh_bookmarks(), self._refresh_history()))
         box.show_all()
         return pop
 
@@ -471,6 +532,97 @@ class BrowserWindow(Gtk.ApplicationWindow):
         d.destroy()
 
     # ---------- 탭 ----------
+    # ---------- 기록 / 자동완성 / 다운로드 / 인쇄 ----------
+    def _setup_completion(self):
+        self.comp_store = Gtk.ListStore(str, str)  # 표시, URL
+        comp = Gtk.EntryCompletion()
+        comp.set_model(self.comp_store)
+        comp.set_text_column(0)
+        comp.set_minimum_key_length(2)
+        comp.set_inline_completion(False)
+        comp.set_popup_set_width(True)
+        comp.set_match_func(lambda c, key, it, *_: key.lower() in (self.comp_store[it][0] or "").lower(), None)
+        comp.connect("match-selected", self._on_completion)
+        self.url.set_completion(comp)
+        self.url.connect("focus-in-event", self._refill_completion)
+        self._refill_completion()
+
+    def _refill_completion(self, *_):
+        """북마크 + 방문 기록 전체를 자동완성 모델에 채운다 (주소창에 포커스가 올 때마다 새로 고침)."""
+        self.comp_store.clear()
+        seen = set()
+        for src in (self.app.bookmarks.items, self.app.history.items):
+            for h in src:
+                url, title = h["url"], h.get("title") or h["url"]
+                if url in seen:
+                    continue
+                seen.add(url)
+                self.comp_store.append([f"{title}  —  {url}" if title != url else url, url])
+        return False
+
+    def _on_completion(self, comp, model, it):
+        self.load(model[it][1])
+        return True
+
+    def _refresh_history(self):
+        for c in self.hist_box.get_children():
+            self.hist_box.remove(c)
+        for h in self.app.history.items[:8]:
+            b = Gtk.ModelButton(text=(h.get("title") or h["url"])[:60])
+            b.set_tooltip_text(h["url"])
+            b.connect("clicked", lambda _b, u=h["url"]: self.load(u))
+            self.hist_box.pack_start(b, False, False, 0)
+        self.hist_box.show_all()
+
+    def _clear_history(self):
+        self.app.history.clear()
+        self.flash("방문 기록을 지웠습니다")
+
+    def downloads_changed(self):
+        self.dl_btn.show()
+        if self.dl_pop.get_visible():
+            self._refresh_downloads()
+
+    def _refresh_downloads(self):
+        for c in self.dl_box.get_children():
+            self.dl_box.remove(c)
+        if not self.app.downloads:
+            self.dl_box.pack_start(Gtk.Label(label="다운로드한 항목이 없습니다"), False, False, 4)
+        for d in self.app.downloads[:10]:
+            row = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+            dest = d.get_destination() or ""
+            name = os.path.basename(GLib.filename_from_uri(dest)[0]) if dest.startswith("file:") else (dest or "다운로드")
+            top = Gtk.Box(spacing=6)
+            lbl = Gtk.Label(label=name, xalign=0)
+            lbl.set_ellipsize(3)
+            lbl.set_max_width_chars(40)
+            top.pack_start(lbl, True, True, 0)
+            open_btn = Gtk.Button.new_from_icon_name("folder-open-symbolic", Gtk.IconSize.MENU)
+            open_btn.set_relief(Gtk.ReliefStyle.NONE)
+            open_btn.set_tooltip_text("폴더에서 보기")
+            open_btn.connect("clicked", lambda *_: self._open_downloads())
+            top.pack_start(open_btn, False, False, 0)
+            row.pack_start(top, False, False, 0)
+            bar = Gtk.ProgressBar()
+            bar.set_fraction(d.get_estimated_progress())
+            done = d.get_estimated_progress() >= 1.0 or (d.get_response() is not None and d.get_received_data_length() and d.get_received_data_length() >= (d.get_response().get_content_length() or 1))
+            bar.set_text("완료" if done else f"{int(d.get_estimated_progress() * 100)}%")
+            bar.set_show_text(True)
+            d.connect("notify::estimated-progress", lambda dl, _p, b=bar: (b.set_fraction(dl.get_estimated_progress()), b.set_text(f"{int(dl.get_estimated_progress() * 100)}%")))
+            d.connect("finished", lambda dl, b=bar: (b.set_fraction(1.0), b.set_text("완료")))
+            d.connect("failed", lambda dl, e, b=bar: b.set_text("실패: " + e.message))
+            row.pack_start(bar, False, False, 0)
+            self.dl_box.pack_start(row, False, False, 0)
+        self.dl_box.show_all()
+
+    def show_downloads(self):
+        self.dl_btn.show()
+        self.dl_pop.popup()
+
+    def print_page(self):
+        op = WebKit2.PrintOperation.new(self.view())
+        op.run_dialog(self)
+
     def views(self):
         return [self.notebook.get_nth_page(i) for i in range(self.notebook.get_n_pages())]
 
@@ -503,6 +655,7 @@ class BrowserWindow(Gtk.ApplicationWindow):
             view.get_user_content_manager().add_filter(f)
 
         view.connect("notify::title", lambda v, _p: self._update_tab(v))
+        view.connect("load-changed", lambda v, ev: ev == WebKit2.LoadEvent.FINISHED and self.app.history.add(v.get_title(), v.get_uri()))
         view.connect("notify::uri", lambda v, _p: self._update_tab(v))
         view.connect("notify::estimated-load-progress", self._on_progress)
         view.connect("notify::is-loading", lambda v, _p: self._update_tab(v))
