@@ -1,0 +1,84 @@
+#!/bin/bash
+# kiyu 성능 점검: 램/CPU/GPU/영상 하드웨어 디코드(VA-API) 상태를 한눈에 보여준다.
+#  사용법:  kiyu-perf-check            # 현재 상태 요약
+#           kiyu-perf-check --watch    # 1초마다 갱신(4K 영상 틀어놓고 CPU/GPU 부하 관찰)
+# 읽기 전용 — 아무것도 설치·변경하지 않는다.
+set -euo pipefail
+
+hr(){ printf '\n\033[1m== %s ==\033[0m\n' "$1"; }
+have(){ command -v "$1" >/dev/null 2>&1; }
+
+summary(){
+  hr "메모리 (전체 시스템)"
+  free -h | awk 'NR==1||/Mem:/'
+  used_mb=$(free -m | awk '/Mem:/{print $3}')
+  printf '지금 데스크톱+실행 앱 합계: \033[1m%s MB\033[0m 사용 중\n' "$used_mb"
+
+  hr "메모리 상위 프로세스"
+  ps -eo rss,comm --sort=-rss | awk 'NR==1{print "  RSS(KB)  프로세스"} NR>1&&NR<=9{printf "%9d  %s\n",$1,$2}'
+  if pgrep -x chrome >/dev/null || pgrep -x chromium >/dev/null || pgrep -x chromium-browser >/dev/null; then
+    csum=$(ps -eo rss,comm | awk '/chrom/{s+=$1} END{printf "%.0f", s/1024}')
+    printf '크롬/크로미엄 전체 프로세스 합계: \033[1m%s MB\033[0m\n' "$csum"
+  fi
+
+  hr "CPU"
+  awk -F: '/model name/{print "  "$2; exit}' /proc/cpuinfo
+  printf '  코어/스레드: %s\n' "$(nproc)"
+  printf '  (실시간 부하는 --watch 로 관찰)\n'
+
+  hr "GPU"
+  lspci -nn 2>/dev/null | grep -iE 'VGA|3D|Display' | sed 's/^/  /' || echo "  lspci 없음"
+  glver=$(have glxinfo && glxinfo 2>/dev/null | awk -F': ' '/OpenGL renderer/{print $2; exit}')
+  [ -n "${glver:-}" ] && printf '  OpenGL 렌더러: %s\n' "$glver"
+
+  hr "영상 하드웨어 디코드 (VA-API)"
+  if have vainfo; then
+    if vainfo 2>/dev/null | grep -qE 'VAProfile'; then
+      echo "  VA-API 사용 가능. 디코드 지원 코덱:"
+      vainfo 2>/dev/null | grep -E 'VAProfile.*VLD' \
+        | sed -E 's/.*VAProfile([A-Za-z0-9]+).*/\1/' | sort -u \
+        | sed 's/^/    - /'
+      echo "  (4K 유튜브는 보통 VP9 또는 AV1 — 위 목록에 VP9/AV1 이 있어야 4K 하드웨어 디코드가 됨)"
+    else
+      echo "  VA-API 드라이버는 있으나 지원 프로파일이 안 잡힘 (드라이버 미설치일 수 있음)."
+      echo "  → kiyu-setup-codecs 로 드라이버 설치."
+    fi
+  else
+    echo "  vainfo 없음. kiyu-setup-codecs 를 먼저 실행하세요 (libva-utils 포함)."
+  fi
+
+  hr "브라우저 VA-API 사용 여부 확인법"
+  cat <<'EOF'
+  1) 크로미엄/크롬 주소창에 chrome://gpu 입력 → "Video Decode" 가
+     "Hardware accelerated" 여야 4K 부하가 GPU 로 감.
+  2) 4K 영상 재생 중 이 창에서:  kiyu-perf-check --watch
+     - GPU 디코드가 되면: CPU 사용률 낮게 유지, GPU 비디오 엔진만 바쁨.
+     - 소프트웨어 디코드면: CPU 여러 코어가 급등(프레임 드랍 위험).
+  3) 크롬에서 하드웨어 디코드가 안 잡히면:  kiyu-setup-chrome  실행.
+EOF
+}
+
+watch_loop(){
+  gpu_tool=""
+  if lspci -nn 2>/dev/null | grep -qiE 'VGA.*Intel' && have intel_gpu_top; then gpu_tool="intel_gpu_top -l"
+  elif lspci -nn 2>/dev/null | grep -qiE 'VGA.*(AMD|ATI)' && have radeontop; then gpu_tool="radeontop -d - -l 1"
+  elif have nvidia-smi; then gpu_tool="nvidia-smi --query-gpu=utilization.gpu,utilization.memory,utilization.encoder,utilization.decoder --format=csv,noheader"; fi
+  echo "Ctrl+C 로 종료. (GPU 도구: ${gpu_tool:-없음 — lspci/드라이버 확인})"
+  while true; do
+    printf '\033[H\033[2J'
+    date '+%H:%M:%S'
+    printf 'MEM 사용: %s MB / %s MB\n' "$(free -m|awk '/Mem:/{print $3}')" "$(free -m|awk '/Mem:/{print $2}')"
+    printf 'CPU(1s): %s%%\n' "$(top -bn1 | awk '/%Cpu/{printf "%.0f",$2+$4}')"
+    if [ -n "$gpu_tool" ]; then
+      echo "GPU:"
+      # shellcheck disable=SC2086  # gpu_tool 은 명령+인자로 일부러 분할한다
+      timeout 1.2 $gpu_tool 2>/dev/null | tail -3 | sed 's/^/  /'
+    fi
+    sleep 1
+  done
+}
+
+case "${1:-}" in
+  --watch|-w) watch_loop ;;
+  *) summary ;;
+esac

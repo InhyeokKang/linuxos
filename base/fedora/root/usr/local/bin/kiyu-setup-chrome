@@ -1,0 +1,64 @@
+#!/bin/bash
+# kiyu 웹 브라우저(크로미엄/크롬) 설치 + 영상 하드웨어 가속(VA-API) 켜기
+#  사용법:  kiyu-setup-chrome            # 권장: chromium-freeworld (VA-API·코덱 내장)
+#           kiyu-setup-chrome chrome     # 구글 크롬(공식) 설치
+#  4K 유튜브를 GPU 로 디코드하려면 (1) VA-API 드라이버 (kiyu-setup-codecs) 와
+#  (2) 브라우저의 VA-API 플래그가 둘 다 필요하다. 이 스크립트는 (2)를 자동으로 켠다.
+set -euo pipefail
+[ "$(id -u)" -ne 0 ] || { echo "일반 사용자로 실행하세요 (sudo 는 필요할 때 씁니다)." >&2; exit 1; }
+choice=${1:-chromium}
+rel=$(rpm -E %fedora)
+
+ensure_rpmfusion(){
+  rpm -q rpmfusion-free-release >/dev/null 2>&1 || sudo dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${rel}.noarch.rpm"
+  rpm -q rpmfusion-nonfree-release >/dev/null 2>&1 || sudo dnf install -y "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${rel}.noarch.rpm"
+}
+
+case "$choice" in
+  chrome|google|google-chrome)
+    echo "== 구글 크롬(공식) 설치"
+    echo "  참고: 리눅스판 크롬은 VA-API 하드웨어 디코드가 불안정할 수 있습니다."
+    echo "        4K 재생이 매끄럽지 않으면 'kiyu-setup-chrome' (chromium-freeworld) 를 권합니다."
+    sudo tee /etc/yum.repos.d/google-chrome.repo >/dev/null <<'REPO'
+[google-chrome]
+name=google-chrome
+baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
+enabled=1
+gpgcheck=1
+gpgkey=https://dl.google.com/linux/linux_signing_key.pub
+REPO
+    sudo dnf install -y google-chrome-stable
+    bin=google-chrome-stable ; desktop=google-chrome.desktop ;;
+  *)
+    echo "== chromium-freeworld 설치 (VA-API·독점 코덱 내장 — 4K 에 가장 무난)"
+    ensure_rpmfusion
+    sudo dnf install -y chromium-freeworld libva-utils
+    bin=chromium-freeworld ; desktop=chromium-freeworld.desktop
+    # 일부 버전은 chromium-browser.desktop 로 설치됨
+    [ -f "/usr/share/applications/$desktop" ] || desktop=chromium-browser.desktop ;;
+esac
+
+echo "== VA-API 플래그로 실행되도록 사용자 런처 override 생성"
+src="/usr/share/applications/$desktop"
+if [ ! -f "$src" ]; then
+  echo "  경고: $src 를 못 찾음. chrome://flags 에서 '#enable-features=VaapiVideoDecoder' 를 수동으로 켜세요." >&2
+  exit 0
+fi
+flags="--enable-features=VaapiVideoDecoder,VaapiVideoDecodeLinuxGL --ignore-gpu-blocklist"
+dest="$HOME/.local/share/applications/$desktop"
+mkdir -p "$HOME/.local/share/applications"
+# Exec 줄에 VA-API 플래그를 끼워 넣은 복사본을 만든다(시스템 파일은 안 건드림)
+sed -E "s#^(Exec=[^ ]+)#\\1 $flags#" "$src" > "$dest"
+update-desktop-database "$HOME/.local/share/applications" >/dev/null 2>&1 || true
+
+cat <<EOF
+
+완료.
+- 브라우저를 '$bin' (메뉴에서 실행) 로 열면 VA-API 하드웨어 디코드가 켜진 상태로 뜹니다.
+- 확인:  브라우저 주소창에 chrome://gpu → "Video Decode: Hardware accelerated" 인지 보기.
+- 부하 측정:  4K 영상 재생 중 터미널에서  kiyu-perf-check --watch
+- 4K 가 여전히 버벅이면: GPU 가 그 코덱(특히 AV1)을 디코드 못 하는 것일 수 있습니다.
+  유튜브가 AV1 을 주면 구형 GPU 는 소프트웨어로 풀어 CPU 가 튑니다. 확장 프로그램
+  'enhanced-h264ify' 로 AV1/VP9 대신 H.264 를 받게 하면 구형 기기에서 더 매끄럽습니다
+  (단 H.264 는 4K 를 제공하지 않는 영상이 많아 최대 1080p 로 제한될 수 있음).
+EOF
