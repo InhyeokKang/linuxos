@@ -33,6 +33,11 @@ Xvfb 프리뷰(`make preview`)에서 찍은 실제 세션입니다. 앱 아이�
 |---|---|
 | ![browser home](docs/screenshots/05-browser-home.png) | ![browser site](docs/screenshots/06-browser-site.png) |
 
+## 웹사이트
+
+영문 랜딩 페이지는 `web/index.html`. GitHub Pages 로 배포된다(`.github/workflows/pages.yml`; 최초 1회 저장소
+Settings > Pages > Source 를 "GitHub Actions" 로 설정). 릴리스 ISO 와 kiyu Imager 설치본은 GitHub Releases 에서 받는다.
+
 ## 빠른 시작
 
 ```bash

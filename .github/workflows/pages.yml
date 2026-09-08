@@ -1,0 +1,29 @@
+name: Deploy website (GitHub Pages)
+# web/ 의 정적 랜딩 페이지를 GitHub Pages 로 배포한다. 최초 1회 저장소 Settings > Pages > Source 를
+# "GitHub Actions" 로 바꿔야 게시된다.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['**']
+    paths: ['web/**', '.github/workflows/pages.yml']
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+      - id: deploy
+        uses: actions/deploy-pages@v4
