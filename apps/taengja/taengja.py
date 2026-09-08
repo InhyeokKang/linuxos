@@ -19,7 +19,7 @@ gi.require_version("WebKit2", "4.1")
 from gi.repository import Gdk, Gio, GLib, Gtk, WebKit2  # noqa: E402
 
 APP_ID = "org.kiyu.Taengja"
-APP_NAME = "탱자"
+APP_NAME = "Taengja"
 VERSION = "0.1.0"
 CONFIG_DIR = os.path.join(GLib.get_user_config_dir(), "taengja")
 DATA_DIR = os.path.join(GLib.get_user_data_dir(), "taengja")
@@ -491,7 +491,7 @@ class BrowserWindow(Gtk.ApplicationWindow):
         box.pack_start(Gtk.Separator(), False, False, 4)
 
         for label, action in (("다운로드 폴더 열기", self._open_downloads), ("인쇄...", self.print_page),
-                              ("방문 기록 지우기", self._clear_history), ("탱자 정보", self._about)):
+                              ("방문 기록 지우기", self._clear_history), ("Taengja 정보", self._about)):
             b = Gtk.ModelButton(text=label)
             b.connect("clicked", lambda _b, a=action: (pop.popdown(), a()))
             box.pack_start(b, False, False, 0)

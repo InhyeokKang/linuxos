@@ -1,7 +1,8 @@
 #!/bin/sh
-# kiyu 컴포지터 시작: picom 이 있으면 xfwm4 자체 컴포지팅을 끄고 picom (둥근 모서리·그림자)을 띄운다.
-#  - 백엔드: glx 를 먼저 시도하고(GPU 합성), 몇 초 안에 죽으면 xrender 로 폴백. xrender 에서는 24비트 창의
-#    둥근 모서리 바깥이 검게 남는 picom 문제가 있어 corner-radius 를 0 으로 둔다.
+# kiyu 컴포지터 시작: picom 이 있으면 xfwm4 자체 컴포지팅을 끄고 picom (그림자)을 띄운다.
+#  - 창은 모두 직사각형(corner-radius 0)이다. 둥근 모서리는 picom 그림자가 사각형이라 모서리 밖으로
+#    삐져나와 뾰족하게 보이는 문제가 있고, xrender 에서는 모서리 밖이 검게 남기까지 해서 아예 쓰지 않는다.
+#  - 백엔드: glx 를 먼저 시도하고(GPU 합성), 몇 초 안에 죽으면 xrender 로 폴백.
 #  - 효과(블러)는 ~/.config/kiyu/effects=on 일 때만(그리고 glx 일 때만) 추가 설정을 합친다.
 #  - picom 이 없으면 xfwm4 컴포지팅으로 돌아간다.
 CONF_DIR=/etc/xdg/xdg-kiyu/picom
@@ -36,7 +37,7 @@ fi
 # glx 시도. xfwm4/이전 picom 이 컴포지터 선택권을 아직 놓지 않았으면("Another composite manager") 잠시 기다려 재시도
 i=0
 while [ $i -lt 6 ]; do
-    make_conf glx 12 "$EFFECTS"
+    make_conf glx 0 "$EFFECTS"
     picom --config "$CONF" >"$STATE/picom.log" 2>&1 &
     PID=$!
     sleep 2

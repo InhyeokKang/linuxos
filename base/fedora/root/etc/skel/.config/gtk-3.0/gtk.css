@@ -78,8 +78,9 @@ XfdesktopIconView.view:selected, .XfdesktopIconView.view:selected, XfdesktopIcon
 .xfce4-panel #whiskermenu-button { border-radius: 12px; }
 .xfce4-panel .docklike-button, .xfce4-panel #docklike button { padding: 4px 6px; }
 
-/* 시작 메뉴 */
-#whiskermenu-window, #whiskermenu-window.background { border-radius: 18px; border: 1px solid alpha(@theme_base_color, 0.7); background-color: @kiyu_glass; }
+/* 시작 메뉴 — 모든 창은 직사각형(border-radius 0): 둥근 모서리는 불투명 창에서 모서리 밖이
+   검게 남고 picom 사각 그림자가 삐져나와 뾰족해 보이므로 쓰지 않는다. */
+#whiskermenu-window, #whiskermenu-window.background { border-radius: 0; border: 1px solid alpha(@theme_base_color, 0.7); background-color: @kiyu_glass; }
 #whiskermenu-window entry { border-radius: 22px; padding: 8px 14px; }
 #whiskermenu-window treeview.view, #whiskermenu-window .view, #whiskermenu-window iconview { background-color: transparent; }
 #whiskermenu-window treeview.view:selected, #whiskermenu-window .view:selected, #whiskermenu-window iconview:selected { background-color: alpha(@kiyu_accent, 0.16); color: @kiyu_text; border-radius: 10px; }
@@ -87,7 +88,7 @@ XfdesktopIconView.view:selected, .XfdesktopIconView.view:selected, XfdesktopIcon
 #whiskermenu-window button { padding: 6px 10px; }
 
 /* 빠른 설정 (kiyu-control) */
-#kiyu-control, #kiyu-control.background { border-radius: 18px; border: 1px solid alpha(@theme_base_color, 0.7); background-color: @kiyu_glass; }
+#kiyu-control, #kiyu-control.background { border-radius: 0; border: 1px solid alpha(@theme_base_color, 0.7); background-color: @kiyu_glass; }
 
 /* 알림 */
-#XfceNotifyWindow { border-radius: 14px; border: 1px solid alpha(@theme_base_color, 0.7); background-color: @kiyu_glass; color: @kiyu_text; }
+#XfceNotifyWindow { border-radius: 0; border: 1px solid alpha(@theme_base_color, 0.7); background-color: @kiyu_glass; color: @kiyu_text; }

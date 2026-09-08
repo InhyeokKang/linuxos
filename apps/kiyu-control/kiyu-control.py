@@ -194,7 +194,6 @@ def effects_set(on):
 
 # ---------- UI ----------
 CSS = b"""
-#kiyu-control { border-radius: 18px; }
 .kc-tile { border-radius: 14px; padding: 10px 12px; min-height: 44px; }
 .kc-tile.on { background-color: @kiyu_accent; color: #ffffff; border-color: @kiyu_accent_dark; }
 .kc-tile.on label { color: #ffffff; }
@@ -243,21 +242,17 @@ class Tile(Gtk.Button):
 class Control(Gtk.Window):
     def __init__(self):
         super().__init__(title="빠른 설정", type=Gtk.WindowType.TOPLEVEL)
-        # 안정적인 WM_CLASS: picom 이 이 창의 사각 그림자를 끄도록(shadow-exclude) 식별자를 고정한다.
         self.set_wmclass("kiyu-control", "kiyu-control")
         self.set_name("kiyu-control")
-        self.set_type_hint(Gdk.WindowTypeHint.DIALOG)
+        # DIALOG 힌트는 쓰지 않는다: GTK 가 대화상자 창에 CSD 둥근 모서리를 입히는데,
+        # 불투명·무장식 창에서는 그 둥근 모서리 바깥이 검은 삼각형으로 남는다. 힌트 없이 두면
+        # 다른 모든 창처럼 직사각형이 되고 picom 이 사각 그림자를 딱 맞게 그려 준다.
         self.set_decorated(False)
         self.set_skip_taskbar_hint(True)
         self.set_skip_pager_hint(True)
         self.set_keep_above(True)
         self.set_resizable(False)
         self.set_default_size(340, -1)
-        # RGBA 비주얼 + 투명 배경: 둥근 모서리 바깥이 검게 그려지지 않고 바탕화면이 비쳐 보이게 한다.
-        screen = self.get_screen()
-        vis = screen.get_rgba_visual()
-        if vis is not None:
-            self.set_visual(vis)
         self.connect("focus-out-event", self._on_focus_out)
         self.connect("key-press-event", self._key)
         self.connect("delete-event", lambda *_: self.quit())

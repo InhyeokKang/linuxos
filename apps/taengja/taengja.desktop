@@ -2,7 +2,6 @@
 Type=Application
 Version=1.0
 Name=Taengja
-Name[ko]=탱자
 GenericName=Web Browser
 GenericName[ko]=웹 브라우저
 Comment=kiyu's fast, private web browser
