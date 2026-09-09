@@ -9,7 +9,9 @@
 [ -d /run/initramfs/live ] || exec /usr/bin/startkiyu
 
 export XDG_CURRENT_DESKTOP=kiyu-installer
-xfwm4 --daemon 2>/dev/null || true                                   # 대화상자/창 배치용 창 관리자
+# 창 관리자. xfwm4 에는 --daemon 옵션이 없다(있는 줄 알고 쓰면 조용히 실패해 WM 없이 돌아간다).
+# 백그라운드로 띄우고, 합성(compositor)은 설치 화면에 불필요하므로 끈다.
+xfwm4 --compositor=off >/dev/null 2>&1 &
 command -v xsetroot >/dev/null 2>&1 && xsetroot -solid '#f7f3ec' 2>/dev/null   # kiyu 종이색 배경
 command -v xset >/dev/null 2>&1 && { xset s off; xset -dpms; } 2>/dev/null     # 설치 중 화면 꺼짐 방지
 
@@ -35,7 +37,7 @@ watch_window() {
 
 while :; do
     # 이미 설치 프로그램이 돌고 있으면 새로 띄우지 않는다("Installer already running" 방지)
-    if [ -e /run/anaconda/liveinst.lock ] && pgrep -x anaconda >/dev/null 2>&1; then
+    if [ -e /run/anaconda/liveinst.lock ] && pgrep -f '[a]naconda' >/dev/null 2>&1; then
         sleep 5; continue
     fi
 
