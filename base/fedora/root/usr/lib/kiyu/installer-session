@@ -1,25 +1,46 @@
 #!/bin/sh
 # kiyu 설치 전용 X 세션. 설치 매체(라이브 ISO/USB)로 부팅하면 lightdm 이 데스크톱 대신 이 세션으로
 # 자동 로그인한다(kiyu-live-installer.service 가 설정). 데스크톱 없이 창 관리자 + Anaconda 설치
-# 프로그램만 전체화면으로 띄운다 — 부팅하면 곧바로 "설치" 화면이 되게.
-#  - 설치가 끝나면 Anaconda 가 재부팅을 안내한다.
+# 프로그램만 띄운다 - 부팅하면 곧바로 "설치" 화면이 되게.
+#  - Anaconda 가 뜨기까지 걸리는 시간 동안 "준비 중" 스플래시를 보여준다(빈 화면 방지).
 #  - 사용자가 설치 프로그램을 그냥 닫으면 다시 띄운다(설치 매체에는 다른 화면이 없다).
 #  - 설치된 시스템에서 실수로 이 세션을 고르면 평소 kiyu 데스크톱 세션으로 넘긴다.
 [ -d /run/initramfs/live ] || exec /usr/bin/startkiyu
 
 export XDG_CURRENT_DESKTOP=kiyu-installer
-xfwm4 --daemon 2>/dev/null || true                                  # 대화상자·창 배치용 창 관리자
-command -v xsetroot >/dev/null 2>&1 && xsetroot -solid '#f7f3ec' 2>/dev/null  # kiyu 종이색 배경
+xfwm4 --daemon 2>/dev/null || true                                   # 대화상자/창 배치용 창 관리자
+command -v xsetroot >/dev/null 2>&1 && xsetroot -solid '#f7f3ec' 2>/dev/null   # kiyu 종이색 배경
 command -v xset >/dev/null 2>&1 && { xset s off; xset -dpms; } 2>/dev/null     # 설치 중 화면 꺼짐 방지
 
+# Anaconda 창이 뜰 때까지 "준비 중" 화면을 보여주고, 뜨면 닫는다. 최대 3분 뒤에는 무조건 닫는다.
+splash_up() {
+    [ -x /usr/lib/kiyu/installer-splash ] || return 0
+    /usr/lib/kiyu/installer-splash & SPLASH=$!
+    (
+        i=0
+        while [ $i -lt 360 ]; do
+            if xdotool search --onlyvisible --class '[Aa]naconda' >/dev/null 2>&1; then break; fi
+            i=$((i + 1)); sleep 0.5
+        done
+        kill "$SPLASH" 2>/dev/null
+    ) &
+}
+
 while :; do
+    splash_up
     if command -v liveinst >/dev/null 2>&1; then
         # liveinst(Anaconda) 는 root 가 필요하다. 라이브 사용자는 암호 없는 sudo 를 가지므로
         # X 접속 정보(DISPLAY/XAUTHORITY)만 넘겨 root 로 실행한다.
         command -v xhost >/dev/null 2>&1 && xhost +si:localuser:root >/dev/null 2>&1
         sudo env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" /usr/bin/liveinst
+    elif command -v anaconda >/dev/null 2>&1; then
+        # liveinst 래퍼가 없어도 Anaconda 본체가 있으면 GTK 설치 화면을 직접 띄운다
+        command -v xhost >/dev/null 2>&1 && xhost +si:localuser:root >/dev/null 2>&1
+        sudo env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" /usr/bin/anaconda --liveinst --graphical
     else
-        xmessage -center "설치 프로그램(liveinst)을 찾을 수 없습니다." 2>/dev/null || sleep 30
+        # 설치 프로그램이 아예 없는 이미지 - 빈 화면 대신 이유를 보여준다
+        /usr/lib/kiyu/installer-splash 2>/dev/null || sleep 30
     fi
+    kill "$SPLASH" 2>/dev/null
     sleep 2
 done

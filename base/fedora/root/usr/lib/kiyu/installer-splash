@@ -1,0 +1,62 @@
+#!/usr/bin/python3
+"""kiyu 설치 준비 화면.
+
+설치 매체로 부팅하면 Anaconda 가 뜨기까지 몇십 초가 걸린다. 그동안 빈 화면만 보이지 않도록
+"준비 중" 표시를 띄운다. installer-session 이 Anaconda 창을 감지하면 이 프로세스를 종료한다.
+"""
+import gi
+
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk, Gdk, GLib  # noqa: E402
+
+CSS = b"""
+#splash { background-color: #f7f3ec; }
+#title { font-size: 20pt; font-weight: 700; color: #2b2b2b; }
+#sub   { font-size: 11pt; color: #6b6b6b; }
+"""
+
+
+def main():
+    win = Gtk.Window(title="kiyu")
+    win.set_name("splash")
+    win.set_decorated(False)
+    win.fullscreen()
+    win.connect("delete-event", Gtk.main_quit)
+
+    prov = Gtk.CssProvider()
+    prov.load_from_data(CSS)
+    Gtk.StyleContext.add_provider_for_screen(
+        Gdk.Screen.get_default(), prov, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+    )
+
+    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=16)
+    box.set_halign(Gtk.Align.CENTER)
+    box.set_valign(Gtk.Align.CENTER)
+
+    icon = Gtk.Image.new_from_icon_name("kiyu", Gtk.IconSize.DIALOG)
+    icon.set_pixel_size(96)
+    box.pack_start(icon, False, False, 0)
+
+    title = Gtk.Label(label="kiyu 설치를 준비하고 있습니다")
+    title.set_name("title")
+    box.pack_start(title, False, False, 0)
+
+    sub = Gtk.Label(label="잠시만 기다려 주세요. 설치 프로그램이 곧 열립니다.")
+    sub.set_name("sub")
+    box.pack_start(sub, False, False, 0)
+
+    spinner = Gtk.Spinner()
+    spinner.set_size_request(32, 32)
+    spinner.start()
+    box.pack_start(spinner, False, False, 8)
+
+    win.add(box)
+    win.show_all()
+    Gtk.main()
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception:  # 스플래시 실패가 설치를 막아서는 안 된다
+        GLib.usleep(0)

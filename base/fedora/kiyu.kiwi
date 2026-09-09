@@ -241,7 +241,14 @@
     <package name="glibc-devel"/>
     <package name="kernel-headers"/>
     <package name="libxcrypt-devel"/>
-    <!-- Anaconda WebUI 와 그 cockpit 스택: Firefox 없인 못 쓰고, 있으면 liveinst 가 이를 우선해 GTK 화면이 안 뜬다 -->
+  </packages>
+
+  <!-- 강제 삭제(rpm -e, 의존성 무시): Anaconda WebUI 와 cockpit 스택.
+       WebUI 는 Firefox 키오스크 창이 있어야 화면이 뜨는데 kiyu 에는 Firefox 가 없다.
+       uninstall 로 지우면 이를 요구하는 anaconda-live(/usr/bin/liveinst) 까지 함께 지워져
+       설치 프로그램이 통째로 사라진다. delete 를 써서 이 패키지들만 없앤다. 그러면 liveinst 가
+       WebUI 경로를 건너뛰고 GTK 설치 화면(anaconda 그래픽 모드)을 띄운다. -->
+  <packages type="delete">
     <package name="anaconda-webui"/>
     <package name="cockpit-ws"/>
     <package name="cockpit-ws-selinux"/>
