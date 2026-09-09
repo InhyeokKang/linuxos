@@ -1,0 +1,19 @@
+/tmp/tmp.D8Y4GQfSzY/rootmnt/usr/share/backgrounds/:
+total 680
+drwxr-xr-x.   6 root root   4096 Sep  9 11:18 .
+drwxr-xr-x. 192 root root   4096 Sep  9 11:18 ..
+lrwxrwxrwx.   1 root root     30 Feb  9  2026 default-dark.jxl -> ./f44/default/f44-01-night.jxl
+lrwxrwxrwx.   1 root root     28 Feb  9  2026 default.jxl -> ./f44/default/f44-01-day.jxl
+-rw-r--r--.   1 root root 668134 Sep  9 11:18 default.png
+lrwxrwxrwx.   1 root root     19 Feb  9  2026 default.xml -> f44/default/f44.xml
+drwxr-xr-x.   3 root root   4096 Sep  9 11:16 f44
+drwxr-xr-x.   2 root root   4096 Sep  9 11:18 images
+drwxr-xr-x.   2 root root   4096 Sep  9 11:18 kiyu
+drwxr-xr-x.   2 root root   4096 Sep  9 11:17 xfce
+
+/tmp/tmp.D8Y4GQfSzY/rootmnt/usr/share/backgrounds/kiyu/:
+total 676
+drwxr-xr-x. 2 root root   4096 Sep  9 11:18 .
+drwxr-xr-x. 6 root root   4096 Sep  9 11:18 ..
+-rw-r--r--. 1 root root 668134 Sep  9 11:18 default.png
+-rw-r--r--. 1 root root   9360 Sep  9 11:14 default.svg

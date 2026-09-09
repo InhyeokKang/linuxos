@@ -1,28 +1,0 @@
-
-[?2004l]3008;end=b89b6d20-eeda-4d5c-a9dc-e26c29920a48;exit=success\]3008;start=150c3af9-518f-40f6-8ebe-53046cbac7d7;machineid=73d23d7650b94ebb85c51b1ba2d6dba5;user=liveuser;hostname=localhost-live;bootid=a299f9a4-ede9-47a9-b6af-7595d677c0dc;pid=00000000000000001828;type=shell;cwd=/home/liveuser\[?2004hSHELL> 
-
-##### SERIAL SHELL: logged_in=True
-export PS1='SHELL> '; stty cols 200; export DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
-[?2004l]3008;start=edbe236a-3458-43bf-8faa-a7f773eb1b45;machineid=73d23d7650b94ebb85c51b1ba2d6dba5;user=liveuser;hostname=localhost-live;bootid=a299f9a4-ede9-47a9-b6af-7595d677c0dc;pid=00000000000000001828;type=command;cwd=/home/liveuser\]3008;end=edbe236a-3458-43bf-8faa-a7f773eb1b45;exit=success\]3008;start=150c3af9-518f-40f6-8ebe-53046cbac7d7;machineid=73d23d7650b94ebb85c51b1ba2d6dba5;user=liveuser;hostname=localhost-live;bootid=a299f9a4-ede9-47a9-b6af-7595d677c0dc;pid=00000000000000001828;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== hangul'; export XAUTHORITY=$HOME/.Xauthority; pgrep -x fcitx5 >/dev/null && echo 'fcitx5: running' || echo 'fcitx5: NOT running'; fcitx5-remote -n 2>&1; cat ~/.config/fcitx5/profile 2>&1 | head -5; env | grep -E 'IM_MODULE|XMODIFIERS'
-[?2004l]3008;start=91640f9a-a846-4f0a-8766-6ee503b9c309;machineid=73d23d7650b94ebb85c51b1ba2d6dba5;user=liveuser;hostname=localhost-live;bootid=a299f9a4-ede9-47a9-b6af-7595d677c0dc;pid=00000000000000001828;type=command;cwd=/home/liveuser\=== hangul
-fcitx5: NOT running
-keyboard-us
-[Groups/0]
-Name=Default
-Default Layout=us
-DefaultIM=hangul
-
-GTK_[01;31m[KIM_MODULE[m[K=fcitx
-[01;31m[KXMODIFIERS[m[K=@im=fcitx
-SDL_[01;31m[KIM_MODULE[m[K=fcitx
-QT_[01;31m[KIM_MODULE[m[K=fcitx
-]3008;end=91640f9a-a846-4f0a-8766-6ee503b9c309;exit=success\]3008;start=150c3af9-518f-40f6-8ebe-53046cbac7d7;machineid=73d23d7650b94ebb85c51b1ba2d6dba5;user=liveuser;hostname=localhost-live;bootid=a299f9a4-ede9-47a9-b6af-7595d677c0dc;pid=00000000000000001828;type=shell;cwd=/home/liveuser\[?2004hSHELL> mousepad >/dev/null 2>&1 & sleep 5; w=$(xdotool search --classname mousepad 2>/dev/null | tail -1); echo "mousepad window: $w"; xdotool windowsize $w 760 320; xdotool windowmove $w 260 200; xdotool windowactivate --sync $w; sleep 1; xdotool type --delay 60 'abc '; xdotool key Hangul; sleep 0.5; echo -n 'after Hangul key: '; fcitx5-remote -n; xdotool type --delay 100 'gksrmf dlqfur xptmxm'; sleep 1; xdotool key Hangul; sleep 0.3; xdotool type --delay 60 ' end'; sleep 1; echo typed
-[?2004l]3008;start=0f915ef1-0f78-4d8d-9a3b-a2bfe71b9814;machineid=73d23d7650b94ebb85c51b1ba2d6dba5;user=liveuser;hostname=localhost-live;bootid=a299f9a4-ede9-47a9-b6af-7595d677c0dc;pid=00000000000000001828;type=command;cwd=/home/liveuser\[1] 2989
-mousepad window: 14680067
-Your windowmanager claims not to support _NET_ACTIVE_WINDOW, so the attempt to activate the window was aborted.
-xdo_activate_window on window:14680067 reported an error
-after Hangul key: hangul
-typed
-]3008;end=0f915ef1-0f78-4d8d-9a3b-a2bfe71b9814;exit=success\]3008;start=150c3af9-518f-40f6-8ebe-53046cbac7d7;machineid=73d23d7650b94ebb85c51b1ba2d6dba5;user=liveuser;hostname=localhost-live;bootid=a299f9a4-ede9-47a9-b6af-7595d677c0dc;pid=00000000000000001828;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== END'
-[?2004l]3008;start=b5531363-c5c5-434f-b69d-5fa22137f79e;machineid=73d23d7650b94ebb85c51b1ba2d6dba5;user=liveuser;hostname=localhost-live;bootid=a299f9a4-ede9-47a9-b6af-7595d677c0dc;pid=00000000000000001828;type=command;cwd=/home/liveuser\=== END
-]3008;end=b5531363-c5c5-434f-b69d-5fa22137f79e;exit=success\]3008;start=150c3af9-518f-40f6-8ebe-53046cbac7d7;machineid=73d23d7650b94ebb85c51b1ba2d6dba5;user=liveuser;hostname=localhost-live;bootid=a299f9a4-ede9-47a9-b6af-7595d677c0dc;pid=00000000000000001828;type=shell;cwd=/home/liveuser\[?2004hSHELL> 

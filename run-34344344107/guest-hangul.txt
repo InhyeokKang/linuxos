@@ -1,0 +1,26 @@
+
+[?2004l]3008;end=fc87b793-df08-4ad1-8379-c881f0e1039c;exit=success\]3008;start=3f3c70f1-1885-4053-957b-686530140bca;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=shell;cwd=/home/liveuser\[?2004hSHELL> 
+
+##### SERIAL SHELL: logged_in=True
+export PS1='SHELL> '; stty cols 200; export DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
+[?2004l]3008;start=e5cee6ad-561f-47f6-8a34-f65cd6591541;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=command;cwd=/home/liveuser\]3008;end=e5cee6ad-561f-47f6-8a34-f65cd6591541;exit=success\]3008;start=3f3c70f1-1885-4053-957b-686530140bca;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== hangul'; export XAUTHORITY=$HOME/.Xauthority; pgrep -x fcitx5 >/dev/null && echo 'fcitx5: running' || echo 'fcitx5: NOT running'; fcitx5-remote -n 2>&1; cat ~/.config/fcitx5/profile 2>&1 | head -5; env | grep -E 'IM_MODULE|XMODIFIERS'
+[?2004l]3008;start=688b9ca1-81de-4821-9e12-6b5297b86607;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=command;cwd=/home/liveuser\=== hangul
+fcitx5: NOT running
+Failed to get reply.
+[Groups/0]
+Name=Default
+Default Layout=us
+DefaultIM=hangul
+
+GTK_[01;31m[KIM_MODULE[m[K=fcitx
+[01;31m[KXMODIFIERS[m[K=@im=fcitx
+SDL_[01;31m[KIM_MODULE[m[K=fcitx
+QT_[01;31m[KIM_MODULE[m[K=fcitx
+]3008;end=688b9ca1-81de-4821-9e12-6b5297b86607;exit=success\]3008;start=3f3c70f1-1885-4053-957b-686530140bca;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=shell;cwd=/home/liveuser\[?2004hSHELL> mousepad >/dev/null 2>&1 & sleep 5; w=$(xdotool search --classname mousepad 2>/dev/null | tail -1); echo "mousepad window: $w"; xdotool windowsize $w 760 320; xdotool windowmove $w 260 200; xdotool windowactivate --sync $w; sleep 1; xdotool type --delay 60 'abc '; xdotool key Hangul; sleep 0.5; echo -n 'after Hangul key: '; fcitx5-remote -n; xdotool type --delay 100 'gksrmf dlqfur xptmxm'; sleep 1; xdotool key Hangul; sleep 0.3; xdotool type --delay 60 ' end'; sleep 1; echo typed
+[?2004l]3008;start=d30c3925-35ac-47ab-9079-53d64d5365ab;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=command;cwd=/home/liveuser\[1] 3064
+mousepad window: 16777219
+after Hangul key: hangul
+typed
+]3008;end=d30c3925-35ac-47ab-9079-53d64d5365ab;exit=success\]3008;start=3f3c70f1-1885-4053-957b-686530140bca;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== END'
+[?2004l]3008;start=2af275ec-404a-4d84-be16-5b3b98395b98;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=command;cwd=/home/liveuser\=== END
+]3008;end=2af275ec-404a-4d84-be16-5b3b98395b98;exit=success\]3008;start=3f3c70f1-1885-4053-957b-686530140bca;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=shell;cwd=/home/liveuser\[?2004hSHELL> 

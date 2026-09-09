@@ -1,0 +1,8 @@
+91:[ DEBUG   ]: 11:14:51 | bootstrap: No matches were found for the following plugin name patterns while disabling libdnf plugins: priorities, versionlock
+639:[ DEBUG   ]: 11:15:02 | system: No matches were found for the following plugin name patterns while disabling libdnf plugins: priorities, versionlock
+1374:[ DEBUG   ]: 11:15:12 | system:  libgpg-error                         x86_64 0:1.58-2.fc44                         fedora     941.6 KiB
+1887:[ DEBUG   ]: 11:15:33 | system: [ 571/1017] libgpg-error-0:1.58-2.fc44. 100% |   3.2 MiB/s | 254.1 KiB |  00m00s
+2353:[ DEBUG   ]: 11:16:13 | system: [  17/1019] Installing libgpg-error-0:1 100% |  42.1 MiB/s | 947.5 KiB |  00m00s
+3459:[ DEBUG   ]: 11:17:00 | system: >>> Failed to preset unit: Unit systemd-tmpfiles-clear.service does not exist
+4092:[ DEBUG   ]: 11:19:08 | Removed 18 files, 9 directories (total of 101 MiB). 0 errors occurred.
+4217:[ DEBUG   ]: 11:19:13 | system: No matches were found for the following plugin name patterns while disabling libdnf plugins: priorities, versionlock

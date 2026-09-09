@@ -1,0 +1,65 @@
+
+[?2004l]3008;end=909c6dd6-c21e-4628-8731-0ea7a76c2563;exit=success\]3008;start=3f3c70f1-1885-4053-957b-686530140bca;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=shell;cwd=/home/liveuser\[?2004hSHELL> 
+
+##### SERIAL SHELL: logged_in=True
+export PS1='SHELL> '; stty cols 200; export DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
+[?2004l]3008;start=1bc443c2-6038-438b-a549-62211b346718;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=command;cwd=/home/liveuser\]3008;end=1bc443c2-6038-438b-a549-62211b346718;exit=success\]3008;start=3f3c70f1-1885-4053-957b-686530140bca;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== installer'; export XAUTHORITY=$HOME/.Xauthority; w=$(xdotool search --classname mousepad 2>/dev/null | tail -1); [ -n "$w" ] && xdotool windowclose $w; cat /etc/anaconda/profile.d/kiyu.conf 2>&1 | head -6; cat /.buildstamp 2>&1 | head -4; ls -la /usr/share/anaconda/pixmaps/ 2>&1 | head -8
+[?2004l]3008;start=f6b53698-97d2-4767-b03e-47920cd3329f;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=command;cwd=/home/liveuser\=== installer
+# kiyu 설치 프로그램(Anaconda) 프로필. os-release 의 ID=kiyu 로 선택되며 Fedora 프로필을 상속한다.
+[Profile]
+profile_id = kiyu
+base_profile = fedora
+
+[Profile Detection]
+[Main]
+Product=kiyu
+Version=1.0
+BugURL=https://github.com/InhyeokKang/linuxos/issues
+total 224
+drwxr-xr-x.  8 root root   4096  9월  9 20:18 .
+drwxr-xr-x. 11 root root   4096  9월  9 20:19 ..
+-rw-r--r--.  1 root root   1255  3월 26 22:10 anaconda-password-show-off.svg
+-rw-r--r--.  1 root root   1447  3월 26 22:10 anaconda-password-show-on.svg
+-rw-r--r--.  1 root root   3728  3월 22  2025 anaconda_header.png
+drwxr-xr-x.  2 root root   4096  9월  9 20:16 atomic
+drwxr-xr-x.  2 root root   4096  9월  9 20:16 cloud
+]3008;end=f6b53698-97d2-4767-b03e-47920cd3329f;exit=success\]3008;start=3f3c70f1-1885-4053-957b-686530140bca;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=shell;cwd=/home/liveuser\[?2004hSHELL> (DISPLAY=:0 XAUTHORITY=$HOME/.Xauthority /usr/bin/liveinst >/tmp/liveinst.log 2>&1 &) ; sleep 75; ps -eo comm | grep -iE 'anaconda|liveinst|polkit' | sort | uniq -c; tail -5 /tmp/liveinst.log 2>/dev/null; sudo tail -5 /tmp/anaconda.log 2>/dev/null; xdotool search --name -i anaconda 2>/dev/null | head -3
+[?2004l]3008;start=385d8a82-85bc-4aec-a1de-0144d801836b;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=command;cwd=/home/liveuser\[1]+  Exit 1                     mousepad > /dev/null 2>&1
+[1;31m==== AUTHENTICATING FOR org.fedoraproject.pkexec.liveinst ====
+[0mAuthentication is required to run the installer
+Authenticating as: Live System User (liveuser)
+[  287.689205] audit: type=1100 audit(1788954029.661:176): pid=3186 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:authentication grantors=pam_unix acct="liveuser" exe="/usr/lib/polkit-1/polkit-agent-helper-1" hostname=? addr=? terminal=? res=success'
+[  287.695497] audit: type=1101 audit(1788954029.665:177): pid=3186 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:accounting grantors=pam_unix acct="liveuser" exe="/usr/lib/polkit-1/polkit-agent-helper-1" hostname=? addr=? terminal=? res=success'
+[1;31m==== AUTHENTICATION COMPLETE ====
+[0m[  287.723650] audit: type=1105 audit(1788954029.696:178): pid=3177 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/pkexec" hostname=? addr=? terminal=? res=success'
+[  287.761415] audit: type=1105 audit(1788954029.727:179): pid=3194 uid=0 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_systemd,pam_unix acct="liveuser" exe="/usr/bin/pkexec" hostname=? addr=? terminal=? res=success'
+[  287.853186] audit: type=1334 audit(1788954029.822:180): prog-id=78 op=LOAD
+[  287.854901] audit: type=1334 audit(1788954029.822:181): prog-id=79 op=LOAD
+[  287.856544] audit: type=1334 audit(1788954029.822:182): prog-id=80 op=LOAD
+[  288.171083] audit: type=1130 audit(1788954030.144:183): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-localed comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[  318.264738] audit: type=1131 audit(1788954060.236:184): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-localed comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[  318.284364] audit: type=1334 audit(1788954060.256:185): prog-id=80 op=UNLOAD
+[  318.286353] audit: type=1334 audit(1788954060.256:186): prog-id=79 op=UNLOAD
+[  318.288456] audit: type=1334 audit(1788954060.256:187): prog-id=78 op=UNLOAD
+      1 anaconda
+      3 liveinst
+      1 polkitd
+libEGL warning: Ensure your X server supports DRI3 to get accelerated rendering
+
+(zenity:3204): Gtk-WARNING **: 20:40:31.623: Unable to acquire session bus: Error receiving data: Connection reset by peer
+
+(zenity:3204): Gdk-WARNING **: 20:40:34.332: Vulkan: ../src/intel/vulkan/anv_physical_device.c:2650: Unable to open device : No such file or directory (VK_ERROR_INCOMPATIBLE_DRIVER)
+[  362.495285] audit: type=1101 audit(1788954104.466:188): pid=3241 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:accounting grantors=pam_unix acct="liveuser" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  362.500428] audit: type=1123 audit(1788954104.471:189): pid=3241 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='cwd="/home/liveuser" cmd=7461696C202D35202F746D702F616E61636F6E64612E6C6F67 exe="/usr/bin/sudo" terminal=ttyS0 res=success'
+[  362.506019] audit: type=1110 audit(1788954104.477:190): pid=3241 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_env,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;start=fe743ff042b448b79fcfe6208ec75ea6;user=liveuser;hostname=localhost-live;machineid=7fe5bd72e27242d9b7010dd328518fc5;bootid=408f0f51cbd24b218b6e1b57d3466321;pid=3241;pidfdid=1582;comm=sudo;targetuser=root;type=session\[  362.520928] audit: type=1105 audit(1788954104.489:191): pid=3241 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+20:36:34,266 DBG ui.common: Entered spoke: WelcomeLanguageSpoke
+20:36:34,269 WRN misc: /usr/lib64/python3.14/site-packages/gi/events.py:803: DeprecationWarning: 'asyncio.AbstractEventLoopPolicy' is deprecated and slated for removal in Python 3.16
+  AbstractEventLoopPolicy = getattr(asyncio, "AbstractEventLoopPolicy", object)
+
+20:36:38,283 INF core.threads: Thread Done: AnaPayloadThread (138914967811776)
+]3008;end=fe743ff042b448b79fcfe6208ec75ea6\[  362.533406] audit: type=1106 audit(1788954104.504:192): pid=3241 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_close grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  362.537499] audit: type=1104 audit(1788954104.504:193): pid=3241 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_env,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;end=385d8a82-85bc-4aec-a1de-0144d801836b;exit=success\]3008;start=3f3c70f1-1885-4053-957b-686530140bca;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== END'
+[?2004l]3008;start=365afd13-fc61-41dd-a237-fcdc349f6c28;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=command;cwd=/home/liveuser\=== END
+]3008;end=365afd13-fc61-41dd-a237-fcdc349f6c28;exit=success\]3008;start=3f3c70f1-1885-4053-957b-686530140bca;machineid=7fe5bd72e27242d9b7010dd328518fc5;user=liveuser;hostname=localhost-live;bootid=408f0f51-cbd2-4b21-8b6e-1b57d3466321;pid=00000000000000001897;type=shell;cwd=/home/liveuser\[?2004hSHELL> 
