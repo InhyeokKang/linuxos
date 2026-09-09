@@ -1,0 +1,388 @@
+
+[?2004l]3008;end=5cdb8304-e31a-43e9-abcc-5c540ee4f406;exit=success\]3008;start=dec2f6d4-d4d3-4d51-9f7a-9f167f59d62f;machineid=145e24c602ae41bd84792eb093877fdb;user=liveuser;hostname=localhost-live;bootid=7e5dd2d4-842b-46cd-a6e7-d57e0f1a5a5e;pid=00000000000000004605;type=shell;cwd=/home/liveuser\[?2004h[liveuser@localhost-live ~]$ [  439.965354] EXT4-fs (dm-1): unmounting filesystem 29255794-e250-4874-852f-545d08aff21d.
+[  440.118999] SELinux:  Permission firmware_load in class system not defined in policy.
+[  440.120939] SELinux:  Permission kexec_image_load in class system not defined in policy.
+[  440.122910] SELinux:  Permission kexec_initramfs_load in class system not defined in policy.
+[  440.124931] SELinux:  Permission policy_load in class system not defined in policy.
+[  440.126780] SELinux:  Permission x509_certificate_load in class system not defined in policy.
+[  440.128936] SELinux:  Permission map_create_as in class bpf not defined in policy.
+[  440.130749] SELinux:  Permission prog_load_as in class bpf not defined in policy.
+[  440.132564] SELinux:  Permission allowed in class io_uring not defined in policy.
+[  440.134373] SELinux:  Class memfd_file not defined in policy.
+[  440.135778] SELinux: the above unknown classes and permissions will be allowed
+[  440.137665] SELinux:  Converting 510 SID table entries...
+[  440.150038] SELinux:  policy capability network_peer_controls=1
+[  440.151509] SELinux:  policy capability open_perms=1
+[  440.152739] SELinux:  policy capability extended_socket_class=1
+[  440.154206] SELinux:  policy capability always_check_network=0
+[  440.155633] SELinux:  policy capability cgroup_seclabel=1
+[  440.156958] SELinux:  policy capability nnp_nosuid_transition=1
+[  440.158447] SELinux:  policy capability genfs_seclabel_symlinks=1
+[  440.159986] SELinux:  policy capability ioctl_skip_cloexec=0
+[  440.161371] SELinux:  policy capability userspace_initial_context=0
+[  440.162906] SELinux:  policy capability netlink_xperm=0
+[  440.164196] SELinux:  policy capability netif_wildcard=0
+[  440.165492] SELinux:  policy capability genfs_seclabel_wildcard=0
+[  440.166977] SELinux:  policy capability functionfs_seclabel=0
+[  440.168380] SELinux:  policy capability memfd_class=0
+[  440.169630] SELinux:  policy capability bpf_token_perms=0
+[  440.199998] audit: type=2310 audit(1788945375.788:590): pid=9791 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=30 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  440.209590] audit: type=2310 audit(1788945375.793:591): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=30 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  440.233023] audit: type=1403 audit(1788945375.677:592): auid=1000 ses=2 lsm=selinux res=1
+[  440.236168] audit: type=1300 audit(1788945375.677:592): arch=c000003e syscall=1 success=yes exit=3859312 a0=4 a1=74c113200000 a2=3ae370 a3=0 items=0 ppid=9815 pid=10001 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="load_policy" exe="/usr/bin/load_policy" subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 key=(null)
+[  440.245033] audit: type=1327 audit(1788945375.677:592): proctitle=2F7573722F7362696E2F6C6F61645F706F6C696379002D71
+[  440.320632] audit: type=2310 audit(1788945375.911:593): pid=867 uid=81 auid=4294967295 ses=4294967295 subj=system_u:system_r:system_dbusd_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=30 res=1 exe="/usr/bin/dbus-broker" hostname=? addr=? terminal=? res=success'
+[  440.398885] audit: type=1404 audit(1788945375.991:594): enforcing=1 old_enforcing=0 auid=1000 ses=2 enabled=1 old-enabled=1 lsm=selinux res=1
+[  440.403081] audit: type=2313 audit(1788945375.996:595): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=setenforce lsm=selinux enforcing=1 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  440.433180] audit: type=1300 audit(1788945375.991:594): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7ffcfb3a1dc0 a2=1 a3=0 items=0 ppid=9705 pid=10003 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="setenforce" exe="/usr/bin/setenforce" subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key=(null)
+[  440.441697] audit: type=1327 audit(1788945375.991:594): proctitle=2F7573722F7362696E2F736574656E666F72636500456E666F7263696E67
+[  446.357908] kauditd_printk_skb: 10 callbacks suppressed
+[  446.357912] audit: type=1105 audit(1788945382.093:604): pid=10216 uid=0 auid=1000 ses=2 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/pkexec" hostname=? addr=? terminal=? res=success'
+[  448.536261] audit: type=1111 audit(1788945384.000:605): pid=10240 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='op=change-system-time exe="/usr/bin/hwclock" hostname=? addr=? terminal=? res=success'
+[  448.540691] systemd-journald[754]: Time jumped backwards, rotating. (Dropped 1 similar message(s))
+[  448.939932] EXT4-fs (dm-1): write access unavailable, skipping orphan cleanup
+[  448.941600] EXT4-fs (dm-1): mounted filesystem 29255794-e250-4874-852f-545d08aff21d ro with ordered data mode. Quota mode: none.
+
+[?2004l]3008;end=02714060-5b8e-4b7e-bd4e-5921eb3bfde8;exit=success\]3008;start=dec2f6d4-d4d3-4d51-9f7a-9f167f59d62f;machineid=145e24c602ae41bd84792eb093877fdb;user=liveuser;hostname=localhost-live;bootid=7e5dd2d4-842b-46cd-a6e7-d57e0f1a5a5e;pid=00000000000000004605;type=shell;cwd=/home/liveuser\[?2004h[liveuser@localhost-live ~]$ [  453.205597] EXT4-fs (dm-1): unmounting filesystem 29255794-e250-4874-852f-545d08aff21d.
+[  453.354890] SELinux:  Permission firmware_load in class system not defined in policy.
+[  453.357545] SELinux:  Permission kexec_image_load in class system not defined in policy.
+[  453.360283] SELinux:  Permission kexec_initramfs_load in class system not defined in policy.
+[  453.363092] SELinux:  Permission policy_load in class system not defined in policy.
+[  453.365678] SELinux:  Permission x509_certificate_load in class system not defined in policy.
+[  453.368674] SELinux:  Permission map_create_as in class bpf not defined in policy.
+[  453.370872] SELinux:  Permission prog_load_as in class bpf not defined in policy.
+[  453.372552] SELinux:  Permission allowed in class io_uring not defined in policy.
+[  453.374185] SELinux:  Class memfd_file not defined in policy.
+[  453.375456] SELinux: the above unknown classes and permissions will be allowed
+[  453.377174] SELinux:  Converting 510 SID table entries...
+[  453.390316] SELinux:  policy capability network_peer_controls=1
+[  453.391637] SELinux:  policy capability open_perms=1
+[  453.392752] SELinux:  policy capability extended_socket_class=1
+[  453.394084] SELinux:  policy capability always_check_network=0
+[  453.395560] SELinux:  policy capability cgroup_seclabel=1
+[  453.396805] SELinux:  policy capability nnp_nosuid_transition=1
+[  453.398201] SELinux:  policy capability genfs_seclabel_symlinks=1
+[  453.399628] SELinux:  policy capability ioctl_skip_cloexec=0
+[  453.400958] SELinux:  policy capability userspace_initial_context=0
+[  453.402414] SELinux:  policy capability netlink_xperm=0
+[  453.403644] SELinux:  policy capability netif_wildcard=0
+[  453.404877] SELinux:  policy capability genfs_seclabel_wildcard=0
+[  453.406276] SELinux:  policy capability functionfs_seclabel=0
+[  453.407611] SELinux:  policy capability memfd_class=0
+[  453.408800] SELinux:  policy capability bpf_token_perms=0
+[  453.437395] audit: type=2310 audit(1788945389.018:606): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=31 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  453.446813] audit: type=2310 audit(1788945389.026:607): pid=10094 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=31 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  453.473313] audit: type=1403 audit(1788945388.905:608): auid=1000 ses=2 lsm=selinux res=1
+[  453.475628] audit: type=1300 audit(1788945388.905:608): arch=c000003e syscall=1 success=yes exit=3859312 a0=4 a1=7a18cea00000 a2=3ae370 a3=0 items=0 ppid=10125 pid=10300 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="load_policy" exe="/usr/bin/load_policy" subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 key=(null)
+[  453.483558] audit: type=1327 audit(1788945388.905:608): proctitle=2F7573722F7362696E2F6C6F61645F706F6C696379002D71
+[  453.567764] audit: type=2310 audit(1788945389.151:609): pid=867 uid=81 auid=4294967295 ses=4294967295 subj=system_u:system_r:system_dbusd_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=31 res=1 exe="/usr/bin/dbus-broker" hostname=? addr=? terminal=? res=success'
+[  453.644806] audit: type=1404 audit(1788945389.230:610): enforcing=1 old_enforcing=0 auid=1000 ses=2 enabled=1 old-enabled=1 lsm=selinux res=1
+[  453.651713] audit: type=2313 audit(1788945389.237:611): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=setenforce lsm=selinux enforcing=1 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  453.680652] audit: type=1300 audit(1788945389.230:610): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7ffcd86563f0 a2=1 a3=0 items=0 ppid=10008 pid=10302 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="setenforce" exe="/usr/bin/setenforce" subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key=(null)
+[  453.690755] audit: type=1327 audit(1788945389.230:610): proctitle=2F7573722F7362696E2F736574656E666F72636500456E666F7263696E67
+[  459.530266] kauditd_printk_skb: 10 callbacks suppressed
+[  459.530271] audit: type=1105 audit(1788945395.257:620): pid=10503 uid=0 auid=1000 ses=2 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/pkexec" hostname=? addr=? terminal=? res=success'
+[  462.068709] EXT4-fs (dm-1): write access unavailable, skipping orphan cleanup
+[  462.071146] EXT4-fs (dm-1): mounted filesystem 29255794-e250-4874-852f-545d08aff21d ro with ordered data mode. Quota mode: none.
+[  462.534457] audit: type=1111 audit(1788945398.000:621): pid=10536 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='op=change-system-time exe="/usr/bin/hwclock" hostname=? addr=? terminal=? res=success'
+[  466.422697] EXT4-fs (dm-1): unmounting filesystem 29255794-e250-4874-852f-545d08aff21d.
+[  466.591280] SELinux:  Permission firmware_load in class system not defined in policy.
+[  466.593205] SELinux:  Permission kexec_image_load in class system not defined in policy.
+[  466.595191] SELinux:  Permission kexec_initramfs_load in class system not defined in policy.
+[  466.597249] SELinux:  Permission policy_load in class system not defined in policy.
+[  466.599094] SELinux:  Permission x509_certificate_load in class system not defined in policy.
+[  466.601213] SELinux:  Permission map_create_as in class bpf not defined in policy.
+[  466.603122] SELinux:  Permission prog_load_as in class bpf not defined in policy.
+[  466.604938] SELinux:  Permission allowed in class io_uring not defined in policy.
+[  466.606747] SELinux:  Class memfd_file not defined in policy.
+[  466.608154] SELinux: the above unknown classes and permissions will be allowed
+[  466.610062] SELinux:  Converting 510 SID table entries...
+[  466.622187] SELinux:  policy capability network_peer_controls=1
+[  466.623656] SELinux:  policy capability open_perms=1
+[  466.624880] SELinux:  policy capability extended_socket_class=1
+[  466.626334] SELinux:  policy capability always_check_network=0
+[  466.627759] SELinux:  policy capability cgroup_seclabel=1
+[  466.629081] SELinux:  policy capability nnp_nosuid_transition=1
+[  466.630530] SELinux:  policy capability genfs_seclabel_symlinks=1
+[  466.632071] SELinux:  policy capability ioctl_skip_cloexec=0
+[  466.634539] SELinux:  policy capability userspace_initial_context=0
+[  466.636629] SELinux:  policy capability netlink_xperm=0
+[  466.638403] SELinux:  policy capability netif_wildcard=0
+[  466.640182] SELinux:  policy capability genfs_seclabel_wildcard=0
+[  466.642203] SELinux:  policy capability functionfs_seclabel=0
+[  466.644125] SELinux:  policy capability memfd_class=0
+[  466.645833] SELinux:  policy capability bpf_token_perms=0
+[  466.672499] audit: type=2310 audit(1788945402.237:622): pid=10392 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=32 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  466.682057] audit: type=2310 audit(1788945402.239:623): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=32 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  466.704470] audit: type=1403 audit(1788945402.127:624): auid=1000 ses=2 lsm=selinux res=1
+[  466.707257] audit: type=1300 audit(1788945402.127:624): arch=c000003e syscall=1 success=yes exit=3859312 a0=4 a1=7a7d5f400000 a2=3ae370 a3=0 items=0 ppid=10433 pid=10591 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="load_policy" exe="/usr/bin/load_policy" subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 key=(null)
+[  466.717663] audit: type=1327 audit(1788945402.127:624): proctitle=2F7573722F7362696E2F6C6F61645F706F6C696379002D71
+[  466.793132] audit: type=2310 audit(1788945402.361:625): pid=867 uid=81 auid=4294967295 ses=4294967295 subj=system_u:system_r:system_dbusd_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=32 res=1 exe="/usr/bin/dbus-broker" hostname=? addr=? terminal=? res=success'
+[  466.871166] audit: type=1404 audit(1788945402.441:626): enforcing=1 old_enforcing=0 auid=1000 ses=2 enabled=1 old-enabled=1 lsm=selinux res=1
+[  466.877192] audit: type=2313 audit(1788945402.447:627): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=setenforce lsm=selinux enforcing=1 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  466.908271] audit: type=1300 audit(1788945402.441:626): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7fffd99f03c0 a2=1 a3=0 items=0 ppid=10306 pid=10593 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="setenforce" exe="/usr/bin/setenforce" subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key=(null)
+[  466.918270] audit: type=1327 audit(1788945402.441:626): proctitle=2F7573722F7362696E2F736574656E666F72636500456E666F7263696E67
+
+[?2004l]3008;end=536d448e-2825-4f66-965d-27db84125148;exit=success\]3008;start=dec2f6d4-d4d3-4d51-9f7a-9f167f59d62f;machineid=145e24c602ae41bd84792eb093877fdb;user=liveuser;hostname=localhost-live;bootid=7e5dd2d4-842b-46cd-a6e7-d57e0f1a5a5e;pid=00000000000000004605;type=shell;cwd=/home/liveuser\[?2004h[liveuser@localhost-live ~]$ [  473.062945] kauditd_printk_skb: 10 callbacks suppressed
+[  473.062950] audit: type=1105 audit(1788945408.721:636): pid=10799 uid=0 auid=1000 ses=2 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/pkexec" hostname=? addr=? terminal=? res=success'
+[  475.531841] audit: type=1111 audit(1788945411.001:637): pid=10832 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='op=change-system-time exe="/usr/bin/hwclock" hostname=? addr=? terminal=? res=success'
+[  475.537886] systemd-journald[754]: Time jumped backwards, rotating.
+[  475.549885] EXT4-fs (dm-1): write access unavailable, skipping orphan cleanup
+[  475.551658] EXT4-fs (dm-1): mounted filesystem 29255794-e250-4874-852f-545d08aff21d ro with ordered data mode. Quota mode: none.
+[  479.828197] EXT4-fs (dm-1): unmounting filesystem 29255794-e250-4874-852f-545d08aff21d.
+[  480.001506] SELinux:  Permission firmware_load in class system not defined in policy.
+[  480.003756] SELinux:  Permission kexec_image_load in class system not defined in policy.
+[  480.006089] SELinux:  Permission kexec_initramfs_load in class system not defined in policy.
+[  480.008598] SELinux:  Permission policy_load in class system not defined in policy.
+[  480.010788] SELinux:  Permission x509_certificate_load in class system not defined in policy.
+[  480.013311] SELinux:  Permission map_create_as in class bpf not defined in policy.
+[  480.015514] SELinux:  Permission prog_load_as in class bpf not defined in policy.
+[  480.017670] SELinux:  Permission allowed in class io_uring not defined in policy.
+[  480.019834] SELinux:  Class memfd_file not defined in policy.
+[  480.021514] SELinux: the above unknown classes and permissions will be allowed
+[  480.023750] SELinux:  Converting 510 SID table entries...
+[  480.036163] SELinux:  policy capability network_peer_controls=1
+[  480.039144] SELinux:  policy capability open_perms=1
+[  480.040576] SELinux:  policy capability extended_socket_class=1
+[  480.041903] SELinux:  policy capability always_check_network=0
+[  480.043215] SELinux:  policy capability cgroup_seclabel=1
+[  480.044414] SELinux:  policy capability nnp_nosuid_transition=1
+[  480.045740] SELinux:  policy capability genfs_seclabel_symlinks=1
+[  480.047085] SELinux:  policy capability ioctl_skip_cloexec=0
+[  480.048324] SELinux:  policy capability userspace_initial_context=0
+[  480.049711] SELinux:  policy capability netlink_xperm=0
+[  480.050862] SELinux:  policy capability netif_wildcard=0
+[  480.052046] SELinux:  policy capability genfs_seclabel_wildcard=0
+[  480.053370] SELinux:  policy capability functionfs_seclabel=0
+[  480.054659] SELinux:  policy capability memfd_class=0
+[  480.055782] SELinux:  policy capability bpf_token_perms=0
+[  480.082834] audit: type=2310 audit(1788945415.605:638): pid=10687 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=33 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  480.093534] audit: type=2310 audit(1788945415.613:639): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=33 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  480.115541] audit: type=1403 audit(1788945415.496:640): auid=1000 ses=2 lsm=selinux res=1
+[  480.119019] audit: type=1300 audit(1788945415.496:640): arch=c000003e syscall=1 success=yes exit=3859312 a0=4 a1=72d5b4a00000 a2=3ae370 a3=0 items=0 ppid=10720 pid=10889 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="load_policy" exe="/usr/bin/load_policy" subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 key=(null)
+[  480.129396] audit: type=1327 audit(1788945415.496:640): proctitle=2F7573722F7362696E2F6C6F61645F706F6C696379002D71
+[  480.205711] audit: type=2310 audit(1788945415.729:641): pid=867 uid=81 auid=4294967295 ses=4294967295 subj=system_u:system_r:system_dbusd_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=33 res=1 exe="/usr/bin/dbus-broker" hostname=? addr=? terminal=? res=success'
+[  480.279280] audit: type=1404 audit(1788945415.804:642): enforcing=1 old_enforcing=0 auid=1000 ses=2 enabled=1 old-enabled=1 lsm=selinux res=1
+[  480.284997] audit: type=2313 audit(1788945415.808:643): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=setenforce lsm=selinux enforcing=1 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  480.317492] audit: type=1300 audit(1788945415.804:642): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7ffc9de176b0 a2=1 a3=0 items=0 ppid=10601 pid=10891 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="setenforce" exe="/usr/bin/setenforce" subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key=(null)
+[  480.323921] audit: type=1327 audit(1788945415.804:642): proctitle=2F7573722F7362696E2F736574656E666F72636500456E666F7263696E67
+
+[?2004l]3008;end=97991d12-2748-4e3c-b2ce-004e005d1fa9;exit=success\]3008;start=dec2f6d4-d4d3-4d51-9f7a-9f167f59d62f;machineid=145e24c602ae41bd84792eb093877fdb;user=liveuser;hostname=localhost-live;bootid=7e5dd2d4-842b-46cd-a6e7-d57e0f1a5a5e;pid=00000000000000004605;type=shell;cwd=/home/liveuser\[?2004h[liveuser@localhost-live ~]$ [  486.177260] kauditd_printk_skb: 10 callbacks suppressed
+[  486.177265] audit: type=1105 audit(1788945421.772:652): pid=11108 uid=0 auid=1000 ses=2 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/pkexec" hostname=? addr=? terminal=? res=success'
+[  488.523023] systemd-journald[754]: Time jumped backwards, rotating.
+[  488.525924] audit: type=1111 audit(1788945424.002:653): pid=11130 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='op=change-system-time exe="/usr/bin/hwclock" hostname=? addr=? terminal=? res=success'
+[  488.864580] EXT4-fs (dm-1): write access unavailable, skipping orphan cleanup
+[  488.866256] EXT4-fs (dm-1): mounted filesystem 29255794-e250-4874-852f-545d08aff21d ro with ordered data mode. Quota mode: none.
+[  493.150449] EXT4-fs (dm-1): unmounting filesystem 29255794-e250-4874-852f-545d08aff21d.
+[  493.323118] SELinux:  Permission firmware_load in class system not defined in policy.
+[  493.324872] SELinux:  Permission kexec_image_load in class system not defined in policy.
+[  493.326580] SELinux:  Permission kexec_initramfs_load in class system not defined in policy.
+[  493.328380] SELinux:  Permission policy_load in class system not defined in policy.
+[  493.330040] SELinux:  Permission x509_certificate_load in class system not defined in policy.
+[  493.331965] SELinux:  Permission map_create_as in class bpf not defined in policy.
+[  493.333591] SELinux:  Permission prog_load_as in class bpf not defined in policy.
+[  493.335244] SELinux:  Permission allowed in class io_uring not defined in policy.
+[  493.336891] SELinux:  Class memfd_file not defined in policy.
+[  493.338145] SELinux: the above unknown classes and permissions will be allowed
+[  493.339835] SELinux:  Converting 510 SID table entries...
+[  493.351797] SELinux:  policy capability network_peer_controls=1
+[  493.354381] SELinux:  policy capability open_perms=1
+[  493.355494] SELinux:  policy capability extended_socket_class=1
+[  493.356805] SELinux:  policy capability always_check_network=0
+[  493.358100] SELinux:  policy capability cgroup_seclabel=1
+[  493.359293] SELinux:  policy capability nnp_nosuid_transition=1
+[  493.360580] SELinux:  policy capability genfs_seclabel_symlinks=1
+[  493.361922] SELinux:  policy capability ioctl_skip_cloexec=0
+[  493.363169] SELinux:  policy capability userspace_initial_context=0
+[  493.364531] SELinux:  policy capability netlink_xperm=0
+[  493.365692] SELinux:  policy capability netif_wildcard=0
+[  493.366860] SELinux:  policy capability genfs_seclabel_wildcard=0
+[  493.368190] SELinux:  policy capability functionfs_seclabel=0
+[  493.369441] SELinux:  policy capability memfd_class=0
+[  493.370555] SELinux:  policy capability bpf_token_perms=0
+[  493.408456] audit: type=2310 audit(1788945428.940:654): pid=10986 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=34 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  493.418605] audit: type=2310 audit(1788945428.950:655): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=34 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  493.437081] audit: type=1403 audit(1788945428.830:656): auid=1000 ses=2 lsm=selinux res=1
+[  493.439765] audit: type=1300 audit(1788945428.830:656): arch=c000003e syscall=1 success=yes exit=3859312 a0=4 a1=735163400000 a2=3ae370 a3=0 items=0 ppid=11017 pid=11188 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="load_policy" exe="/usr/bin/load_policy" subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 key=(null)
+[  493.449861] audit: type=1327 audit(1788945428.830:656): proctitle=2F7573722F7362696E2F6C6F61645F706F6C696379002D71
+[  493.518671] audit: type=2310 audit(1788945429.054:657): pid=867 uid=81 auid=4294967295 ses=4294967295 subj=system_u:system_r:system_dbusd_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=34 res=1 exe="/usr/bin/dbus-broker" hostname=? addr=? terminal=? res=success'
+[  493.594427] audit: type=1404 audit(1788945429.130:658): enforcing=1 old_enforcing=0 auid=1000 ses=2 enabled=1 old-enabled=1 lsm=selinux res=1
+[  493.598218] audit: type=2313 audit(1788945429.134:659): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=setenforce lsm=selinux enforcing=1 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  493.631460] audit: type=1300 audit(1788945429.130:658): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7fffe619d370 a2=1 a3=0 items=0 ppid=10900 pid=11190 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="setenforce" exe="/usr/bin/setenforce" subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key=(null)
+[  493.637922] audit: type=1327 audit(1788945429.130:658): proctitle=2F7573722F7362696E2F736574656E666F72636500456E666F7263696E67
+
+[?2004l]3008;end=a45f1521-f9c5-4d81-aa8c-27c841b89d57;exit=success\]3008;start=dec2f6d4-d4d3-4d51-9f7a-9f167f59d62f;machineid=145e24c602ae41bd84792eb093877fdb;user=liveuser;hostname=localhost-live;bootid=7e5dd2d4-842b-46cd-a6e7-d57e0f1a5a5e;pid=00000000000000004605;type=shell;cwd=/home/liveuser\[?2004h[liveuser@localhost-live ~]$ [  499.518145] kauditd_printk_skb: 10 callbacks suppressed
+[  499.518149] audit: type=1105 audit(1788945435.252:668): pid=11394 uid=0 auid=1000 ses=2 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/pkexec" hostname=? addr=? terminal=? res=success'
+[  502.294619] EXT4-fs (dm-1): write access unavailable, skipping orphan cleanup
+[  502.296285] EXT4-fs (dm-1): mounted filesystem 29255794-e250-4874-852f-545d08aff21d ro with ordered data mode. Quota mode: none.
+[  502.526995] audit: type=1111 audit(1788945438.001:669): pid=11428 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='op=change-system-time exe="/usr/bin/hwclock" hostname=? addr=? terminal=? res=success'
+[  506.591596] EXT4-fs (dm-1): unmounting filesystem 29255794-e250-4874-852f-545d08aff21d.
+[  506.748264] SELinux:  Permission firmware_load in class system not defined in policy.
+[  506.750061] SELinux:  Permission kexec_image_load in class system not defined in policy.
+[  506.751850] SELinux:  Permission kexec_initramfs_load in class system not defined in policy.
+[  506.753679] SELinux:  Permission policy_load in class system not defined in policy.
+[  506.755344] SELinux:  Permission x509_certificate_load in class system not defined in policy.
+[  506.757282] SELinux:  Permission map_create_as in class bpf not defined in policy.
+[  506.758950] SELinux:  Permission prog_load_as in class bpf not defined in policy.
+[  506.760584] SELinux:  Permission allowed in class io_uring not defined in policy.
+[  506.762211] SELinux:  Class memfd_file not defined in policy.
+[  506.763522] SELinux: the above unknown classes and permissions will be allowed
+[  506.765242] SELinux:  Converting 510 SID table entries...
+[  506.777111] SELinux:  policy capability network_peer_controls=1
+[  506.778460] SELinux:  policy capability open_perms=1
+[  506.779593] SELinux:  policy capability extended_socket_class=1
+[  506.780930] SELinux:  policy capability always_check_network=0
+[  506.782213] SELinux:  policy capability cgroup_seclabel=1
+[  506.783385] SELinux:  policy capability nnp_nosuid_transition=1
+[  506.784684] SELinux:  policy capability genfs_seclabel_symlinks=1
+[  506.786017] SELinux:  policy capability ioctl_skip_cloexec=0
+[  506.787272] SELinux:  policy capability userspace_initial_context=0
+[  506.788633] SELinux:  policy capability netlink_xperm=0
+[  506.789774] SELinux:  policy capability netif_wildcard=0
+[  506.790961] SELinux:  policy capability genfs_seclabel_wildcard=0
+[  506.792285] SELinux:  policy capability functionfs_seclabel=0
+[  506.793528] SELinux:  policy capability memfd_class=0
+[  506.794643] SELinux:  policy capability bpf_token_perms=0
+[  506.824239] audit: type=2310 audit(1788945442.481:670): pid=11284 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=35 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  506.832522] audit: type=2310 audit(1788945442.481:671): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=35 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  506.856253] audit: type=1403 audit(1788945442.376:672): auid=1000 ses=2 lsm=selinux res=1
+[  506.859070] audit: type=1300 audit(1788945442.376:672): arch=c000003e syscall=1 success=yes exit=3859312 a0=4 a1=787638c00000 a2=3ae370 a3=0 items=0 ppid=11313 pid=11485 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="load_policy" exe="/usr/bin/load_policy" subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 key=(null)
+[  506.869162] audit: type=1327 audit(1788945442.376:672): proctitle=2F7573722F7362696E2F6C6F61645F706F6C696379002D71
+[  506.942217] audit: type=2310 audit(1788945442.605:673): pid=867 uid=81 auid=4294967295 ses=4294967295 subj=system_u:system_r:system_dbusd_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=35 res=1 exe="/usr/bin/dbus-broker" hostname=? addr=? terminal=? res=success'
+[  507.019321] audit: type=1404 audit(1788945442.687:674): enforcing=1 old_enforcing=0 auid=1000 ses=2 enabled=1 old-enabled=1 lsm=selinux res=1
+[  507.024465] audit: type=2313 audit(1788945442.691:675): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=setenforce lsm=selinux enforcing=1 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  507.054715] audit: type=1300 audit(1788945442.687:674): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7ffe8927e670 a2=1 a3=0 items=0 ppid=11198 pid=11487 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="setenforce" exe="/usr/bin/setenforce" subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key=(null)
+[  507.064767] audit: type=1327 audit(1788945442.687:674): proctitle=2F7573722F7362696E2F736574656E666F72636500456E666F7263696E67
+
+[?2004l]3008;end=77185c71-301e-4783-9662-9e031ae53990;exit=success\]3008;start=dec2f6d4-d4d3-4d51-9f7a-9f167f59d62f;machineid=145e24c602ae41bd84792eb093877fdb;user=liveuser;hostname=localhost-live;bootid=7e5dd2d4-842b-46cd-a6e7-d57e0f1a5a5e;pid=00000000000000004605;type=shell;cwd=/home/liveuser\[?2004h[liveuser@localhost-live ~]$ [  513.082525] kauditd_printk_skb: 10 callbacks suppressed
+[  513.082529] audit: type=1105 audit(1788945449.009:684): pid=11692 uid=0 auid=1000 ses=2 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/pkexec" hostname=? addr=? terminal=? res=success'
+[  515.530430] audit: type=1111 audit(1788945451.001:685): pid=11725 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='op=change-system-time exe="/usr/bin/hwclock" hostname=? addr=? terminal=? res=success'
+[  515.530799] systemd-journald[754]: Time jumped backwards, rotating. (Dropped 1 similar message(s))
+[  515.745369] EXT4-fs (dm-1): write access unavailable, skipping orphan cleanup
+[  515.747923] EXT4-fs (dm-1): mounted filesystem 29255794-e250-4874-852f-545d08aff21d ro with ordered data mode. Quota mode: none.
+[  520.036661] EXT4-fs (dm-1): unmounting filesystem 29255794-e250-4874-852f-545d08aff21d.
+[  520.206877] SELinux:  Permission firmware_load in class system not defined in policy.
+[  520.209465] SELinux:  Permission kexec_image_load in class system not defined in policy.
+[  520.212100] SELinux:  Permission kexec_initramfs_load in class system not defined in policy.
+[  520.214860] SELinux:  Permission policy_load in class system not defined in policy.
+[  520.217359] SELinux:  Permission x509_certificate_load in class system not defined in policy.
+[  520.220163] SELinux:  Permission map_create_as in class bpf not defined in policy.
+[  520.222594] SELinux:  Permission prog_load_as in class bpf not defined in policy.
+[  520.225047] SELinux:  Permission allowed in class io_uring not defined in policy.
+[  520.227523] SELinux:  Class memfd_file not defined in policy.
+[  520.229443] SELinux: the above unknown classes and permissions will be allowed
+[  520.231964] SELinux:  Converting 510 SID table entries...
+[  520.244614] SELinux:  policy capability network_peer_controls=1
+[  520.246562] SELinux:  policy capability open_perms=1
+[  520.248236] SELinux:  policy capability extended_socket_class=1
+[  520.250212] SELinux:  policy capability always_check_network=0
+[  520.252170] SELinux:  policy capability cgroup_seclabel=1
+[  520.253959] SELinux:  policy capability nnp_nosuid_transition=1
+[  520.255942] SELinux:  policy capability genfs_seclabel_symlinks=1
+[  520.257985] SELinux:  policy capability ioctl_skip_cloexec=0
+[  520.260791] SELinux:  policy capability userspace_initial_context=0
+[  520.262879] SELinux:  policy capability netlink_xperm=0
+[  520.264638] SELinux:  policy capability netif_wildcard=0
+[  520.266408] SELinux:  policy capability genfs_seclabel_wildcard=0
+[  520.268463] SELinux:  policy capability functionfs_seclabel=0
+[  520.270387] SELinux:  policy capability memfd_class=0
+[  520.272093] SELinux:  policy capability bpf_token_perms=0
+[  520.303268] audit: type=2310 audit(1788945455.831:686): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=36 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  520.310212] audit: type=2310 audit(1788945455.832:687): pid=11581 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=36 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  520.337859] audit: type=1403 audit(1788945455.706:688): auid=1000 ses=2 lsm=selinux res=1
+[  520.340589] audit: type=1300 audit(1788945455.706:688): arch=c000003e syscall=1 success=yes exit=3859312 a0=4 a1=765ae4a00000 a2=3ae370 a3=0 items=0 ppid=11610 pid=11783 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="load_policy" exe="/usr/bin/load_policy" subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 key=(null)
+[  520.350654] audit: type=1327 audit(1788945455.706:688): proctitle=2F7573722F7362696E2F6C6F61645F706F6C696379002D71
+[  520.421707] audit: type=2310 audit(1788945455.950:689): pid=867 uid=81 auid=4294967295 ses=4294967295 subj=system_u:system_r:system_dbusd_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=36 res=1 exe="/usr/bin/dbus-broker" hostname=? addr=? terminal=? res=success'
+[  520.506477] audit: type=1404 audit(1788945456.036:690): enforcing=1 old_enforcing=0 auid=1000 ses=2 enabled=1 old-enabled=1 lsm=selinux res=1
+[  520.514254] audit: type=2313 audit(1788945456.043:691): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=setenforce lsm=selinux enforcing=1 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  520.546731] audit: type=1300 audit(1788945456.036:690): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7ffcaec85410 a2=1 a3=0 items=0 ppid=11495 pid=11785 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="setenforce" exe="/usr/bin/setenforce" subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key=(null)
+[  520.554301] audit: type=1327 audit(1788945456.036:690): proctitle=2F7573722F7362696E2F736574656E666F72636500456E666F7263696E67
+
+[?2004l]3008;end=506cbaf9-2bf1-4feb-bd7c-a0825da21e48;exit=success\]3008;start=dec2f6d4-d4d3-4d51-9f7a-9f167f59d62f;machineid=145e24c602ae41bd84792eb093877fdb;user=liveuser;hostname=localhost-live;bootid=7e5dd2d4-842b-46cd-a6e7-d57e0f1a5a5e;pid=00000000000000004605;type=shell;cwd=/home/liveuser\[?2004h[liveuser@localhost-live ~]$ [  526.472628] kauditd_printk_skb: 10 callbacks suppressed
+[  526.472633] audit: type=1105 audit(1788945462.075:700): pid=12002 uid=0 auid=1000 ses=2 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/pkexec" hostname=? addr=? terminal=? res=success'
+[  528.993131] EXT4-fs (dm-1): write access unavailable, skipping orphan cleanup
+[  528.995596] EXT4-fs (dm-1): mounted filesystem 29255794-e250-4874-852f-545d08aff21d ro with ordered data mode. Quota mode: none.
+[  529.533697] audit: type=1111 audit(1788945465.000:701): pid=12024 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='op=change-system-time exe="/usr/bin/hwclock" hostname=? addr=? terminal=? res=success'
+[  533.288084] EXT4-fs (dm-1): unmounting filesystem 29255794-e250-4874-852f-545d08aff21d.
+[  533.453254] SELinux:  Permission firmware_load in class system not defined in policy.
+[  533.454968] SELinux:  Permission kexec_image_load in class system not defined in policy.
+[  533.456712] SELinux:  Permission kexec_initramfs_load in class system not defined in policy.
+[  533.458520] SELinux:  Permission policy_load in class system not defined in policy.
+[  533.460152] SELinux:  Permission x509_certificate_load in class system not defined in policy.
+[  533.462047] SELinux:  Permission map_create_as in class bpf not defined in policy.
+[  533.463670] SELinux:  Permission prog_load_as in class bpf not defined in policy.
+[  533.465275] SELinux:  Permission allowed in class io_uring not defined in policy.
+[  533.466866] SELinux:  Class memfd_file not defined in policy.
+[  533.468107] SELinux: the above unknown classes and permissions will be allowed
+[  533.469784] SELinux:  Converting 510 SID table entries...
+[  533.481738] SELinux:  policy capability network_peer_controls=1
+[  533.483043] SELinux:  policy capability open_perms=1
+[  533.484139] SELinux:  policy capability extended_socket_class=1
+[  533.485451] SELinux:  policy capability always_check_network=0
+[  533.486706] SELinux:  policy capability cgroup_seclabel=1
+[  533.487871] SELinux:  policy capability nnp_nosuid_transition=1
+[  533.489162] SELinux:  policy capability genfs_seclabel_symlinks=1
+[  533.490506] SELinux:  policy capability ioctl_skip_cloexec=0
+[  533.491722] SELinux:  policy capability userspace_initial_context=0
+[  533.493062] SELinux:  policy capability netlink_xperm=0
+[  533.494192] SELinux:  policy capability netif_wildcard=0
+[  533.495371] SELinux:  policy capability genfs_seclabel_wildcard=0
+[  533.496672] SELinux:  policy capability functionfs_seclabel=0
+[  533.497917] SELinux:  policy capability memfd_class=0
+[  533.499012] SELinux:  policy capability bpf_token_perms=0
+[  533.527947] audit: type=2310 audit(1788945469.041:702): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=37 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  533.533911] audit: type=2310 audit(1788945469.042:703): pid=11880 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=37 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  533.561997] audit: type=1403 audit(1788945468.939:704): auid=1000 ses=2 lsm=selinux res=1
+[  533.565376] audit: type=1300 audit(1788945468.939:704): arch=c000003e syscall=1 success=yes exit=3859312 a0=4 a1=75ce8c000000 a2=3ae370 a3=0 items=0 ppid=11902 pid=12080 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="load_policy" exe="/usr/bin/load_policy" subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 key=(null)
+[  533.575600] audit: type=1327 audit(1788945468.939:704): proctitle=2F7573722F7362696E2F6C6F61645F706F6C696379002D71
+[  533.649901] audit: type=2310 audit(1788945469.166:705): pid=867 uid=81 auid=4294967295 ses=4294967295 subj=system_u:system_r:system_dbusd_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=37 res=1 exe="/usr/bin/dbus-broker" hostname=? addr=? terminal=? res=success'
+[  533.730687] audit: type=1404 audit(1788945469.248:706): enforcing=1 old_enforcing=0 auid=1000 ses=2 enabled=1 old-enabled=1 lsm=selinux res=1
+[  533.734956] audit: type=2313 audit(1788945469.252:707): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=setenforce lsm=selinux enforcing=1 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  533.767617] audit: type=1300 audit(1788945469.248:706): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7ffe35db4230 a2=1 a3=0 items=0 ppid=11794 pid=12082 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="setenforce" exe="/usr/bin/setenforce" subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key=(null)
+[  533.774066] audit: type=1327 audit(1788945469.248:706): proctitle=2F7573722F7362696E2F736574656E666F72636500456E666F7263696E67
+
+[?2004l]3008;end=1fde09c0-7aa6-4338-94b7-2a8976320c29;exit=success\]3008;start=dec2f6d4-d4d3-4d51-9f7a-9f167f59d62f;machineid=145e24c602ae41bd84792eb093877fdb;user=liveuser;hostname=localhost-live;bootid=7e5dd2d4-842b-46cd-a6e7-d57e0f1a5a5e;pid=00000000000000004605;type=shell;cwd=/home/liveuser\[?2004h[liveuser@localhost-live ~]$ [  539.729274] kauditd_printk_skb: 10 callbacks suppressed
+[  539.729279] audit: type=1105 audit(1788945475.318:716): pid=12295 uid=0 auid=1000 ses=2 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/pkexec" hostname=? addr=? terminal=? res=success'
+[  542.263440] EXT4-fs (dm-1): write access unavailable, skipping orphan cleanup
+[  542.265851] EXT4-fs (dm-1): mounted filesystem 29255794-e250-4874-852f-545d08aff21d ro with ordered data mode. Quota mode: none.
+[  542.530915] audit: type=1111 audit(1788945478.000:717): pid=12319 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='op=change-system-time exe="/usr/bin/hwclock" hostname=? addr=? terminal=? res=success'
+[  546.555435] EXT4-fs (dm-1): unmounting filesystem 29255794-e250-4874-852f-545d08aff21d.
+[  546.723279] SELinux:  Permission firmware_load in class system not defined in policy.
+[  546.724998] SELinux:  Permission kexec_image_load in class system not defined in policy.
+[  546.726732] SELinux:  Permission kexec_initramfs_load in class system not defined in policy.
+[  546.728538] SELinux:  Permission policy_load in class system not defined in policy.
+[  546.730156] SELinux:  Permission x509_certificate_load in class system not defined in policy.
+[  546.732045] SELinux:  Permission map_create_as in class bpf not defined in policy.
+[  546.733687] SELinux:  Permission prog_load_as in class bpf not defined in policy.
+[  546.735272] SELinux:  Permission allowed in class io_uring not defined in policy.
+[  546.736889] SELinux:  Class memfd_file not defined in policy.
+[  546.738141] SELinux: the above unknown classes and permissions will be allowed
+[  546.739798] SELinux:  Converting 510 SID table entries...
+[  546.751736] SELinux:  policy capability network_peer_controls=1
+[  546.753012] SELinux:  policy capability open_perms=1
+[  546.754107] SELinux:  policy capability extended_socket_class=1
+[  546.755380] SELinux:  policy capability always_check_network=0
+[  546.756655] SELinux:  policy capability cgroup_seclabel=1
+[  546.757820] SELinux:  policy capability nnp_nosuid_transition=1
+[  546.759094] SELinux:  policy capability genfs_seclabel_symlinks=1
+[  546.760392] SELinux:  policy capability ioctl_skip_cloexec=0
+[  546.761635] SELinux:  policy capability userspace_initial_context=0
+[  546.762990] SELinux:  policy capability netlink_xperm=0
+[  546.764119] SELinux:  policy capability netif_wildcard=0
+[  546.765258] SELinux:  policy capability genfs_seclabel_wildcard=0
+[  546.766606] SELinux:  policy capability functionfs_seclabel=0
+[  546.767857] SELinux:  policy capability memfd_class=0
+[  546.768967] SELinux:  policy capability bpf_token_perms=0
+[  546.796610] audit: type=2310 audit(1788945482.316:718): pid=12176 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=38 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  546.806197] audit: type=2310 audit(1788945482.317:719): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=38 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  546.828202] audit: type=1403 audit(1788945482.215:720): auid=1000 ses=2 lsm=selinux res=1
+[  546.831649] audit: type=1300 audit(1788945482.215:720): arch=c000003e syscall=1 success=yes exit=3859312 a0=4 a1=709a73600000 a2=3ae370 a3=0 items=0 ppid=12219 pid=12375 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="load_policy" exe="/usr/bin/load_policy" subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 key=(null)
+[  546.841639] audit: type=1327 audit(1788945482.215:720): proctitle=2F7573722F7362696E2F6C6F61645F706F6C696379002D71
+[  546.912641] audit: type=2310 audit(1788945482.432:721): pid=867 uid=81 auid=4294967295 ses=4294967295 subj=system_u:system_r:system_dbusd_t:s0-s0:c0.c1023 msg='avc:  op=load_policy lsm=selinux seqno=38 res=1 exe="/usr/bin/dbus-broker" hostname=? addr=? terminal=? res=success'
+[  546.989817] audit: type=1404 audit(1788945482.511:722): enforcing=1 old_enforcing=0 auid=1000 ses=2 enabled=1 old-enabled=1 lsm=selinux res=1
+[  546.995814] audit: type=2313 audit(1788945482.518:723): pid=1555 uid=0 auid=1000 ses=2 subj=unconfined_u:system_r:install_t:s0-s0:c0.c1023 msg='avc:  op=setenforce lsm=selinux enforcing=1 res=1 exe="/usr/bin/dbus-daemon" sauid=0 hostname=? addr=? terminal=?'
+[  547.025576] audit: type=1300 audit(1788945482.511:722): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7ffc73550240 a2=1 a3=0 items=0 ppid=12090 pid=12377 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=2 comm="setenforce" exe="/usr/bin/setenforce" subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key=(null)
+[  547.035661] audit: type=1327 audit(1788945482.511:722): proctitle=2F7573722F7362696E2F736574656E666F72636500456E666F7263696E67
+
+
+##### SERIAL SHELL: logged_in=False

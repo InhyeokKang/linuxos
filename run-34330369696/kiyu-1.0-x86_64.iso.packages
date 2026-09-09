@@ -47,8 +47,8 @@ audit-libs|(none)|4.2.1|1.fc44|x86_64|(none)|LGPL-2.0-or-later
 augeas-libs|(none)|1.14.2|0.11.20260408gitada6219.fc44|x86_64|(none)|LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND (GPL-3.0-or-later WITH Bison-exception-2.2) AND Kazlib AND GPL-2.0-or-later AND BSD-2-Clause AND LicenseRef-Fedora-Public-Domain
 authselect-libs|(none)|1.7.1|1.fc44|x86_64|(none)|GPL-3.0-or-later
 authselect|(none)|1.7.1|1.fc44|x86_64|(none)|GPL-3.0-or-later
-autocorr-en|1|26.2.6.1|1.fc44|noarch|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-autocorr-ko|1|26.2.6.1|1.fc44|noarch|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+autocorr-en|1|26.2.6.3|1.fc44|noarch|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+autocorr-ko|1|26.2.6.3|1.fc44|noarch|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
 avahi-glib|(none)|0.9~rc2|8.fc44|x86_64|(none)|LGPL-2.1-or-later AND LGPL-2.0-or-later AND BSD-2-Clause-Views AND MIT
 avahi-libs|(none)|0.9~rc2|8.fc44|x86_64|(none)|LGPL-2.1-or-later AND LGPL-2.0-or-later AND BSD-2-Clause-Views AND MIT
 bash-completion|1|2.17|2.fc44|noarch|(none)|GPL-2.0-or-later
@@ -143,10 +143,10 @@ dnf5|(none)|5.4.4.0|1.fc44|x86_64|(none)|GPL-2.0-or-later
 dns-root-data|(none)|2026260100|2.fc44|noarch|(none)|BSD-2-Clause and CC0-1.0
 dosfstools|(none)|4.2|18.fc44|x86_64|(none)|GPL-3.0-or-later
 double-conversion|(none)|3.4.0|3.fc44|x86_64|(none)|BSD-3-Clause
-dracut-config-generic|(none)|108|7.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later AND GPL-2.0-only
-dracut-live|(none)|108|7.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later AND GPL-2.0-only
-dracut-network|(none)|108|7.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later AND GPL-2.0-only
-dracut|(none)|108|7.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later AND GPL-2.0-only
+dracut-config-generic|(none)|108|8.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later AND GPL-2.0-only
+dracut-live|(none)|108|8.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later AND GPL-2.0-only
+dracut-network|(none)|108|8.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later AND GPL-2.0-only
+dracut|(none)|108|8.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later AND GPL-2.0-only
 duktape|(none)|2.7.0|11.fc44|x86_64|(none)|MIT
 e2fsprogs-libs|(none)|1.47.3|4.fc44|x86_64|(none)|GPL-2.0-only AND LGPL-2.0-only
 e2fsprogs|(none)|1.47.3|4.fc44|x86_64|(none)|GPL-2.0-only
@@ -316,7 +316,7 @@ hunspell-en-US|(none)|0.20260225|2.fc44|noarch|(none)|LGPL-2.1-or-later AND LGPL
 hunspell-filesystem|(none)|1.7.3|1.fc44|x86_64|(none)|LGPL-2.1-or-later OR GPL-2.0-or-later OR MPL-1.1
 hunspell-ko|(none)|0.7.0|23.fc44|noarch|(none)|MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only
 hunspell|(none)|1.7.3|1.fc44|x86_64|(none)|LGPL-2.1-or-later OR GPL-2.0-or-later OR MPL-1.1
-hwdata|(none)|0.410|1.fc44|noarch|(none)|GPL-2.0-or-later
+hwdata|(none)|0.411|1.fc44|noarch|(none)|GPL-2.0-or-later
 hyphen-en|(none)|2.8.8|28.fc44|noarch|(none)|GPL-2.0-only OR LGPL-2.1-or-later OR MPL-1.1
 hyphen|(none)|2.8.8|28.fc44|x86_64|(none)|GPL-2.0-only OR LGPL-2.1-or-later OR MPL-1.1
 iceauth|(none)|1.0.10|4.fc44|x86_64|(none)|MIT-open-group
@@ -496,7 +496,7 @@ liberation-sans-fonts|1|2.1.5|15.fc44|noarch|(none)|OFL-1.1-RFN
 liberation-serif-fonts|1|2.1.5|15.fc44|noarch|(none)|OFL-1.1-RFN
 libetonyek|(none)|0.1.13|2.fc44|x86_64|(none)|MPL-2.0
 libevdev|(none)|1.13.7|1.fc44|x86_64|(none)|MIT
-libevent|(none)|2.1.12|17.fc44|x86_64|(none)|BSD-3-Clause AND ISC AND LicenseRef-Fedora-Public-Domain
+libevent|(none)|2.1.13|1.fc44|x86_64|(none)|BSD-3-Clause AND ISC AND LicenseRef-Fedora-Public-Domain
 libev|(none)|4.33|15.fc44|x86_64|(none)|BSD-2-Clause OR GPL-2.0-or-later
 libexif|(none)|0.6.26|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 libexttextcat|(none)|3.4.6|13.fc44|x86_64|(none)|BSD-3-Clause
@@ -598,21 +598,21 @@ libquadmath|(none)|16.2.1|2.fc44|x86_64|(none)|GPL-3.0-or-later AND LGPL-3.0-or-
 libqxp|(none)|0.0.2|33.fc44|x86_64|(none)|MPL-2.0
 librabbitmq|(none)|0.17.0|1.fc44|x86_64|(none)|MIT
 libraw1394|(none)|2.1.2|25.fc44|x86_64|(none)|LicenseRef-Callaway-LGPLv2+
-libreoffice-calc|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-core|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-data|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-graphicfilter|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-gtk3|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-impress|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-langpack-en|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-langpack-ko|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-ogltrans|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-opensymbol-fonts|1|26.2.6.1|1.fc44|noarch|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-pdfimport|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-pyuno|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-ure-common|1|26.2.6.1|1.fc44|noarch|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-ure|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
-libreoffice-writer|1|26.2.6.1|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-calc|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-core|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-data|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-graphicfilter|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-gtk3|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-impress|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-langpack-en|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-langpack-ko|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-ogltrans|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-opensymbol-fonts|1|26.2.6.3|1.fc44|noarch|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-pdfimport|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-pyuno|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-ure-common|1|26.2.6.3|1.fc44|noarch|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-ure|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
+libreoffice-writer|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LGPL-3.0-only AND LGPL-3.0-or-later AND CC0-1.0 AND BSD-3-Clause AND (LGPL-2.1-only OR SISSL) AND (MPL-2.0 OR LGPL-3.0-or-later) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-only) AND MIT
 libreport-anaconda|(none)|2.17.15|10.fc44|x86_64|(none)|GPL-2.0-or-later
 libreport-cli|(none)|2.17.15|10.fc44|x86_64|(none)|GPL-2.0-or-later
 libreport-filesystem|(none)|2.17.15|10.fc44|noarch|(none)|GPL-2.0-or-later
@@ -629,8 +629,8 @@ libsamplerate|(none)|0.2.2|12.fc44|x86_64|(none)|BSD-2-Clause
 libsbc|(none)|2.1|2.fc44|x86_64|(none)|GPL-2.0-only AND LGPL-2.1-or-later
 libseccomp|(none)|2.6.1|2.fc44|x86_64|(none)|LGPL-2.1-only
 libsecret|(none)|0.21.7|10.fc44|x86_64|(none)|LGPL-2.1-or-later AND Apache-2.0 AND (GPL-2.0-or-later OR TGPPL-1.0) AND LicenseRef-Fedora-Public-Domain AND GCR-docs
-libselinux-utils|(none)|3.11|1.fc44|x86_64|(none)|LicenseRef-Fedora-Public-Domain
-libselinux|(none)|3.11|1.fc44|x86_64|(none)|LicenseRef-Fedora-Public-Domain
+libselinux-utils|(none)|3.11|2.fc44|x86_64|(none)|LicenseRef-Fedora-Public-Domain
+libselinux|(none)|3.11|2.fc44|x86_64|(none)|LicenseRef-Fedora-Public-Domain
 libsemanage|(none)|3.11|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 libsepol|(none)|3.11|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 libshaderc|(none)|2026.1|1.fc44|x86_64|(none)|Apache-2.0
@@ -869,7 +869,7 @@ python3-libdnf5|(none)|5.4.4.0|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 python3-libdnf|(none)|0.75.0|2.fc44|x86_64|(none)|LGPL-2.1-or-later
 python3-libmount|(none)|2.41.5|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 python3-libreport|(none)|2.17.15|10.fc44|x86_64|(none)|GPL-2.0-or-later
-python3-libselinux|(none)|3.11|1.fc44|x86_64|(none)|LicenseRef-Fedora-Public-Domain
+python3-libselinux|(none)|3.11|2.fc44|x86_64|(none)|LicenseRef-Fedora-Public-Domain
 python3-libsemanage|(none)|3.11|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 python3-libs|(none)|3.14.7|1.fc44|x86_64|(none)|Python-2.0.1 AND MIT AND BSD-3-Clause AND MIT-CMU AND HPND-SMC AND BSD-2-Clause AND dtoa AND Unicode-3.0
 python3-meh|(none)|0.52|9.fc44|noarch|(none)|GPL-2.0-or-later
@@ -912,7 +912,7 @@ rpm-build-libs|(none)|6.0.2|1.fc44|x86_64|(none)|GPL-2.0-or-later
 rpm-libs|(none)|6.0.2|1.fc44|x86_64|(none)|GPL-2.0-or-later OR LGPL-2.1-or-later
 rpm-plugin-dbus-announce|(none)|6.0.2|1.fc44|x86_64|(none)|GPL-2.0-or-later
 rpm-plugin-selinux|(none)|6.0.2|1.fc44|x86_64|(none)|GPL-2.0-or-later
-rpm-sequoia|(none)|1.10.2|4.fc44|x86_64|(none)|LGPL-2.0-or-later AND Apache-2.0 AND BSD-3-Clause AND BSL-1.0 AND MIT AND Unicode-3.0 AND Unicode-DFS-2016 AND (Apache-2.0 OR MIT) AND (Unlicense OR MIT)
+rpm-sequoia|(none)|1.10.3|1.fc44|x86_64|(none)|LGPL-2.0-or-later AND Apache-2.0 AND BSD-3-Clause AND BSL-1.0 AND MIT AND Unicode-3.0 AND Unicode-DFS-2016 AND (Apache-2.0 OR MIT) AND (Unlicense OR MIT)
 rpm-sign-libs|(none)|6.0.2|1.fc44|x86_64|(none)|GPL-2.0-or-later
 rpm|(none)|6.0.2|1.fc44|x86_64|(none)|GPL-2.0-or-later
 rsync|(none)|3.5.0|1.fc44|x86_64|(none)|GPL-3.0-or-later
@@ -964,7 +964,7 @@ systemd-standalone-sysusers|(none)|259.8|1.fc44|x86_64|(none)|LGPL-2.1-or-later 
 systemd-udev|(none)|259.8|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 systemd|(none)|259.8|1.fc44|x86_64|(none)|LGPL-2.1-or-later AND MIT AND GPL-2.0-or-later
 taglib|(none)|2.3|2.fc44|x86_64|(none)|(LGPL-2.1-only OR MPL-1.1) AND BSD-2-Clause AND LGPL-2.1-only
-tar|2|1.35|8.fc44|x86_64|(none)|GPL-3.0-or-later
+tar|2|1.35|9.fc44|x86_64|(none)|GPL-3.0-or-later
 teamd|(none)|1.32|13.fc44|x86_64|(none)|LGPL-2.0-or-later
 tesseract-common|(none)|5.5.3|1.fc44|noarch|(none)|Apache-2.0
 tesseract-langpack-eng|(none)|4.1.0|12.fc44|noarch|(none)|Apache-2.0
@@ -1075,6 +1075,7 @@ xorg-x11-xinit|(none)|1.4.3|4.fc44|x86_64|(none)|X11-distribute-modifications-va
 xprop|(none)|1.2.8|5.fc44|x86_64|(none)|MIT
 xrandr|(none)|1.5.3|4.fc44|x86_64|(none)|HPND-sell-variant
 xrdb|(none)|1.2.2|7.fc44|x86_64|(none)|HPND-DEC AND MIT-open-group
+xsetroot|(none)|1.1.3|4.fc44|x86_64|(none)|MIT-open-group
 xset|(none)|1.2.5|9.fc44|x86_64|(none)|MIT-open-group
 xvidcore|(none)|1.3.7|19.fc44|x86_64|(none)|GPL-2.0-or-later
 xxhash-libs|(none)|0.8.3|4.fc44|x86_64|(none)|BSD-2-Clause
