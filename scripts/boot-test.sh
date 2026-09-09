@@ -11,6 +11,7 @@ mkdir -p "$OUT"; OUT=$(cd "$OUT" && pwd); ISO=$(cd "$(dirname "$ISO")" && pwd)/$
 HERE=$(cd "$(dirname "$0")" && pwd)
 TMP=$(mktemp -d)
 SUMMARY="$OUT/summary.txt"; : > "$SUMMARY"
+KS_CHECK_FAILED=0
 note() { echo "$*" | tee -a "$SUMMARY"; }
 
 KVM=()
@@ -62,6 +63,16 @@ if mount -o loop,ro "$ISO" "$TMP/mnt"; then
                     [ -f "$TMP/rootmnt/$f" ] && cp "$TMP/rootmnt/$f" "$OUT/rootfs/$(basename "$f")"
                 done
                 ls -la "$TMP/rootmnt/usr/share/backgrounds/" "$TMP/rootmnt/usr/share/backgrounds/kiyu/" > "$OUT/rootfs/backgrounds-ls.txt" 2>&1
+                # 킥스타트가 요구하는 것이 실제 이미지에 다 있는지 검사한다.
+                # 라이브 설치는 이 트리를 그대로 대상 시스템에 복사하므로, 여기에 없는
+                # 바이너리/유닛은 설치 중에도 없어서 Anaconda 가 크래시한다("결점 보고" 창).
+                if python3 "$HERE/lib/check-kickstart.py" --rootfs "$TMP/rootmnt" > "$OUT/kickstart-check.txt" 2>&1; then
+                    note "RESULT kickstart<->image: ok"
+                else
+                    note "FAIL kickstart<->image: 설치 중 크래시할 구성입니다 (results/kickstart-check.txt)"
+                    sed 's/^/    /' "$OUT/kickstart-check.txt" | tee -a "$SUMMARY"
+                    KS_CHECK_FAILED=1
+                fi
                 umount "$TMP/rootmnt"
                 note "rootfs: files extracted to results/rootfs"
             else
@@ -158,3 +169,7 @@ fi
 
 rm -rf "$TMP"
 note "done: $OUT"
+if [ "${KS_CHECK_FAILED:-0}" = 1 ]; then
+    note "== 킥스타트<->이미지 검사 실패로 종료 코드 1"
+    exit 1
+fi

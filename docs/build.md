@@ -66,12 +66,15 @@ ps -eo rss,comm --sort=-rss | head -15    # 메모리 많이 쓰는 프로세스
 | 빌드 중간 실패 후 재빌드 | `make clean` 후 다시 |
 | ISO 는 되는데 그래픽 로그인이 안 뜸 | QEMU 에서 `-device virtio-vga` 사용 여부, `build.log` 의 lightdm 관련 오류 확인 |
 | 한글 입력 안 됨 | 설치본에서 `imsettings-switch fcitx5` 후 재로그인 |
+| 설치 중간에 "결점 보고" 크래시 창 | 킥스타트가 이미지에 없는 것을 요구함. `python3 scripts/lib/check-kickstart.py --rootfs <마운트한 rootfs>` 로 확인 (`make check` 는 빌드 전 근사 검사, `boot-test.sh` 는 빌드된 이미지로 정확히 검사) |
 
 ## 릴리스
 
-1. `os.conf` 의 `OS_VERSION` 올리기.
-2. `git tag v0.x.y && git push --tags`.
-3. GitHub Actions > **Build ISO** 워크플로 수동 실행 → 산출물 다운로드 → Release 에 첨부.
+버전은 **v1.0 고정**입니다. 숫자를 올리지 않고 같은 태그를 덮어씁니다.
+
+1. 변경 사항을 `claude/lightweight-linux-os-1kbe9j` 에 푸시.
+2. GitHub Actions > **Release kiyu ISO** 워크플로를 `tag: v1.0` 으로 수동 실행.
+   ISO 빌드 → v1.0 릴리스의 `kiyu-1.0-x86_64.iso`, `SHA256SUMS.txt` 를 덮어씁니다.
 
 ## kiyu-desktop RPM
 
