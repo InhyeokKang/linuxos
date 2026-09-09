@@ -31,7 +31,7 @@ echo "[3/5] XML"
 python3 - <<'PY' || fail=1
 import sys, glob, xml.etree.ElementTree as ET
 ok = True
-for f in glob.glob("base/**/*.xml", recursive=True) + glob.glob("base/**/*.conf", recursive=True):
+for f in glob.glob("base/**/*.xml", recursive=True) + glob.glob("base/**/*.kiwi", recursive=True) + glob.glob("base/**/*.conf", recursive=True):
     if f.endswith(".conf") and "/fonts/" not in f:
         continue
     try:
