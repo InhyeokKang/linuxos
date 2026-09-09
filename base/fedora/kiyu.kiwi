@@ -65,7 +65,7 @@
     <package name="anaconda-install-env-deps"/>
     <!-- GTK 설치 화면. Fedora 44 의 anaconda-live 는 WebUI(anaconda-webui+cockpit+Firefox 키오스크)를
          끌어오는데, kiyu 는 Firefox 가 없어 백엔드만 돌고 화면이 안 그려진다. GTK 판을 넣고 WebUI 는 아래
-         uninstall 로 제거해 liveinst 가 "anaconda --liveinst --graphical" 만 띄우게 한다. -->
+         uninstall 로 제거해 liveinst 가 GTK(graphical) 모드의 anaconda 만 띄우게 한다. -->
     <package name="anaconda-gui"/>
 
     <!-- 시스템 -->
@@ -241,5 +241,13 @@
     <package name="glibc-devel"/>
     <package name="kernel-headers"/>
     <package name="libxcrypt-devel"/>
+    <!-- Anaconda WebUI 와 그 cockpit 스택: Firefox 없인 못 쓰고, 있으면 liveinst 가 이를 우선해 GTK 화면이 안 뜬다 -->
+    <package name="anaconda-webui"/>
+    <package name="cockpit-ws"/>
+    <package name="cockpit-ws-selinux"/>
+    <package name="cockpit-bridge"/>
+    <package name="cockpit-system"/>
+    <package name="cockpit-storaged"/>
+    <package name="cockpit-networkmanager"/>
   </packages>
 </image>
