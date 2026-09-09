@@ -31,10 +31,10 @@ alsa-ucm|(none)|1.2.16.1|1.fc44|noarch|(none)|BSD-3-Clause
 alsa-utils|(none)|1.2.16|1.fc44|x86_64|(none)|GPL-2.0-or-later
 alternatives|(none)|1.33|5.fc44|x86_64|(none)|GPL-2.0-only
 anaconda-core|(none)|44.30|2.fc44|x86_64|(none)|GPL-2.0-or-later AND MIT
+anaconda-gui|(none)|44.30|2.fc44|x86_64|(none)|GPL-2.0-or-later
 anaconda-install-env-deps|(none)|44.30|2.fc44|x86_64|(none)|GPL-2.0-or-later
-anaconda-live|(none)|44.30|2.fc44|noarch|(none)|GPL-2.0-or-later
 anaconda-tui|(none)|44.30|2.fc44|x86_64|(none)|GPL-2.0-or-later
-anaconda-webui|(none)|68|1.fc44|noarch|(none)|LGPL-2.1-or-later AND MIT
+anaconda-widgets|(none)|44.30|2.fc44|x86_64|(none)|GPL-2.0-or-later
 appstream-data|(none)|44|4.fc44|noarch|(none)|CC0-1.0 AND CC-BY-1.0 AND CC-BY-SA-1.0 AND GFDL-1.1-or-later
 appstream|(none)|1.1.3|1.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later
 arc-theme|(none)|20221218|13.fc44|noarch|(none)|GPL-3.0-or-later
@@ -55,6 +55,7 @@ bash-completion|1|2.17|2.fc44|noarch|(none)|GPL-2.0-or-later
 bash|(none)|5.3.9|3.fc44|x86_64|(none)|GPL-3.0-or-later
 binutils|(none)|2.46.1|1.fc44|x86_64|(none)|GPL-3.0-or-later AND (GPL-3.0-or-later WITH Bison-exception-2.2) AND (LGPL-2.0-or-later WITH GCC-exception-2.0) AND BSD-3-Clause AND GFDL-1.3-or-later AND GPL-2.0-or-later AND LGPL-2.1-or-later AND LGPL-2.0-or-later
 blivet-data|1|3.14.1|1.fc44|noarch|(none)|LGPL-2.1-or-later
+blivet-gui-runtime|(none)|2.6.0|12.fc44|noarch|(none)|GPL-2.0-or-later
 blueman|1|2.4.6|7.fc44|x86_64|(none)|GPL-2.0-or-later
 bluez-libs|(none)|5.87|6.fc44|x86_64|(none)|GPL-2.0-or-later
 bluez-obexd|(none)|5.87|6.fc44|x86_64|(none)|GPL-2.0-or-later
@@ -84,12 +85,6 @@ chrony|(none)|4.9|1.fc44|x86_64|(none)|GPL-2.0-only
 cjson|(none)|1.7.19|1.fc44|x86_64|(none)|MIT
 clucene-contribs-lib|(none)|2.3.3.4|55.20130812.e8e3d20git.fc44|x86_64|(none)|LicenseRef-Callaway-LGPLv2+ OR Apache-2.0
 clucene-core|(none)|2.3.3.4|55.20130812.e8e3d20git.fc44|x86_64|(none)|LicenseRef-Callaway-LGPLv2+ OR Apache-2.0
-cockpit-bridge|(none)|367|1.fc44|noarch|(none)|LGPL-2.1-or-later AND GPL-3.0-or-later AND MIT AND CC-BY-SA-3.0 AND BSD-3-Clause
-cockpit-networkmanager|(none)|367|1.fc44|noarch|(none)|LGPL-2.1-or-later AND GPL-3.0-or-later AND MIT AND CC-BY-SA-3.0 AND BSD-3-Clause
-cockpit-storaged|(none)|367|1.fc44|noarch|(none)|LGPL-2.1-or-later AND GPL-3.0-or-later AND MIT AND CC-BY-SA-3.0 AND BSD-3-Clause
-cockpit-system|(none)|367|1.fc44|noarch|(none)|LGPL-2.1-or-later AND GPL-3.0-or-later AND MIT AND CC-BY-SA-3.0 AND BSD-3-Clause
-cockpit-ws-selinux|(none)|367|1.fc44|x86_64|(none)|LGPL-2.1-or-later AND GPL-3.0-or-later AND MIT AND CC-BY-SA-3.0 AND BSD-3-Clause
-cockpit-ws|(none)|367|1.fc44|x86_64|(none)|LGPL-2.1-or-later AND GPL-3.0-or-later AND MIT AND CC-BY-SA-3.0 AND BSD-3-Clause
 codec2|(none)|1.2.0|9.fc44|x86_64|(none)|LGPL-2.1-only
 color-filesystem|(none)|1|38.fc44|noarch|(none)|LicenseRef-Not-Copyrightable
 colord-libs|(none)|1.4.8|4.fc44|x86_64|(none)|GPL-2.0-or-later AND LGPL-2.1-or-later
@@ -616,6 +611,7 @@ libreoffice-writer|1|26.2.6.3|1.fc44|x86_64|(none)|MPL-2.0 AND Apache-2.0 AND LG
 libreport-anaconda|(none)|2.17.15|10.fc44|x86_64|(none)|GPL-2.0-or-later
 libreport-cli|(none)|2.17.15|10.fc44|x86_64|(none)|GPL-2.0-or-later
 libreport-filesystem|(none)|2.17.15|10.fc44|noarch|(none)|GPL-2.0-or-later
+libreport-gtk|(none)|2.17.15|10.fc44|x86_64|(none)|GPL-2.0-or-later
 libreport-plugin-bugzilla|(none)|2.17.15|10.fc44|x86_64|(none)|GPL-2.0-or-later
 libreport-plugin-reportuploader|(none)|2.17.15|10.fc44|x86_64|(none)|GPL-2.0-or-later
 libreport-web|(none)|2.17.15|10.fc44|x86_64|(none)|GPL-2.0-or-later
@@ -794,7 +790,6 @@ openjpeg|(none)|2.5.4|3.fc44|x86_64|(none)|BSD-2-Clause AND MIT
 openldap|(none)|2.6.14|1.fc44|x86_64|(none)|OLDAP-2.8
 openpgm|(none)|5.3.128|6.fc44|x86_64|(none)|LGPL-2.1-or-later
 openssl-libs|1|3.5.8|1.fc44|x86_64|(none)|Apache-2.0
-openssl|1|3.5.8|1.fc44|x86_64|(none)|Apache-2.0
 opus|(none)|1.6|2.fc44|x86_64|(none)|BSD-3-Clause AND BSD-2-Clause
 orc|(none)|0.4.41|3.fc44|x86_64|(none)|BSD-2-Clause AND BSD-3-Clause
 os-prober|(none)|1.81|11.fc44|x86_64|(none)|GPL-2.0-or-later AND GPL-1.0-or-later
@@ -844,7 +839,6 @@ python-pip-wheel|(none)|26.0.1|3.fc44|noarch|(none)|MIT AND Python-2.0.1 AND Apa
 python3-audit|(none)|4.2.1|1.fc44|x86_64|(none)|LGPL-2.0-or-later
 python3-blivet|1|3.14.1|1.fc44|noarch|(none)|LGPL-2.1-or-later
 python3-blockdev|(none)|3.5.0|1.fc44|x86_64|(none)|LGPL-2.1-or-later
-python3-bugzilla|(none)|3.3.0|7.fc44|noarch|(none)|GPL-2.0-or-later
 python3-bytesize|(none)|2.12|2.fc44|x86_64|(none)|LGPL-2.1-or-later
 python3-cairo|(none)|1.28.0|5.fc44|x86_64|(none)|LGPL-2.1-only OR MPL-1.1
 python3-cffi|(none)|2.0.0|3.fc44|x86_64|(none)|MIT AND PSF-2.0
@@ -852,7 +846,6 @@ python3-charset-normalizer|(none)|3.4.4|2.fc44|noarch|(none)|MIT
 python3-crypt-r|(none)|3.13.1|9.fc44|x86_64|(none)|Python-2.0.1
 python3-cups|(none)|2.0.4|8.fc44|x86_64|(none)|GPL-2.0-or-later
 python3-dasbus|(none)|1.7|14.fc44|noarch|(none)|LGPL-2.1-or-later
-python3-dbus-next|(none)|0.2.3|18.fc44|noarch|(none)|MIT
 python3-dbus|(none)|1.4.0|9.fc44|x86_64|(none)|MIT
 python3-distro|(none)|1.9.0|11.fc44|noarch|(none)|Apache-2.0
 python3-dnf|(none)|4.24.0|3.fc44|noarch|(none)|GPL-2.0-or-later AND GPL-1.0-only
@@ -872,6 +865,7 @@ python3-libreport|(none)|2.17.15|10.fc44|x86_64|(none)|GPL-2.0-or-later
 python3-libselinux|(none)|3.11|2.fc44|x86_64|(none)|LicenseRef-Fedora-Public-Domain
 python3-libsemanage|(none)|3.11|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 python3-libs|(none)|3.14.7|1.fc44|x86_64|(none)|Python-2.0.1 AND MIT AND BSD-3-Clause AND MIT-CMU AND HPND-SMC AND BSD-2-Clause AND dtoa AND Unicode-3.0
+python3-meh-gui|(none)|0.52|9.fc44|noarch|(none)|GPL-2.0-or-later
 python3-meh|(none)|0.52|9.fc44|noarch|(none)|GPL-2.0-or-later
 python3-nftables|1|1.1.6|2.fc44|noarch|(none)|GPL-2.0-only
 python3-packaging|(none)|25.0|8.fc44|noarch|(none)|BSD-2-Clause OR Apache-2.0
@@ -966,6 +960,7 @@ systemd|(none)|259.8|1.fc44|x86_64|(none)|LGPL-2.1-or-later AND MIT AND GPL-2.0-
 taglib|(none)|2.3|2.fc44|x86_64|(none)|(LGPL-2.1-only OR MPL-1.1) AND BSD-2-Clause AND LGPL-2.1-only
 tar|2|1.35|9.fc44|x86_64|(none)|GPL-3.0-or-later
 teamd|(none)|1.32|13.fc44|x86_64|(none)|LGPL-2.0-or-later
+tecla|(none)|50.0|1.fc44|x86_64|(none)|GPL-2.0-or-later
 tesseract-common|(none)|5.5.3|1.fc44|noarch|(none)|Apache-2.0
 tesseract-langpack-eng|(none)|4.1.0|12.fc44|noarch|(none)|Apache-2.0
 tesseract-libs|(none)|5.5.3|1.fc44|x86_64|(none)|Apache-2.0
@@ -1083,7 +1078,6 @@ xz-libs|1|5.8.2|2.fc44|x86_64|(none)|0BSD
 xz|1|5.8.2|2.fc44|x86_64|(none)|0BSD AND GPL-2.0-or-later AND LicenseRef-Fedora-Public-Domain
 yajl|(none)|2.1.0|40.fc44|x86_64|(none)|ISC
 zchunk-libs|(none)|1.5.4|1.fc44|x86_64|(none)|BSD-2-Clause AND MIT
-zenity|(none)|4.2.2|1.fc44|x86_64|(none)|LGPL-2.1-or-later
 zeromq|(none)|4.3.5|22.fc43|x86_64|(none)|MPL-2.0 AND BSD-3-Clause AND MIT
 zimg|(none)|3.0.6|3.fc44|x86_64|(none)|WTFPL
 zip|(none)|3.0|45.fc44|x86_64|(none)|Info-ZIP

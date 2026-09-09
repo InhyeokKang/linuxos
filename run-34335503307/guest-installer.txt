@@ -1,0 +1,38 @@
+
+[?2004l]3008;end=c56dc45c-e953-4fc7-ada7-b710c461fde7;exit=success\]3008;start=73b9d4d6-e566-450b-a2e6-f73275f86a01;machineid=001899cc0af6441aafbd78e6d5cbef91;user=liveuser;hostname=localhost-live;bootid=0cf67507-102a-444d-bf87-7d3ff838f1f6;pid=00000000000000001382;type=shell;cwd=/home/liveuser\[?2004hSHELL> 
+
+##### SERIAL SHELL: logged_in=True
+export PS1='SHELL> '; stty cols 200; export DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
+[?2004l]3008;start=bc523bf9-49e4-443a-b147-3a733d62b800;machineid=001899cc0af6441aafbd78e6d5cbef91;user=liveuser;hostname=localhost-live;bootid=0cf67507-102a-444d-bf87-7d3ff838f1f6;pid=00000000000000001382;type=command;cwd=/home/liveuser\]3008;end=bc523bf9-49e4-443a-b147-3a733d62b800;exit=success\]3008;start=73b9d4d6-e566-450b-a2e6-f73275f86a01;machineid=001899cc0af6441aafbd78e6d5cbef91;user=liveuser;hostname=localhost-live;bootid=0cf67507-102a-444d-bf87-7d3ff838f1f6;pid=00000000000000001382;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== installer'; export XAUTHORITY=$HOME/.Xauthority; w=$(xdotool search --classname mousepad 2>/dev/null | tail -1); [ -n "$w" ] && xdotool windowclose $w; cat /etc/anaconda/profile.d/kiyu.conf 2>&1 | head -6; cat /.buildstamp 2>&1 | head -4; ls -la /usr/share/anaconda/pixmaps/ 2>&1 | head -8
+[?2004l]3008;start=beb76be4-a632-4319-800f-e537a819c88e;machineid=001899cc0af6441aafbd78e6d5cbef91;user=liveuser;hostname=localhost-live;bootid=0cf67507-102a-444d-bf87-7d3ff838f1f6;pid=00000000000000001382;type=command;cwd=/home/liveuser\=== installer
+# kiyu 설치 프로그램(Anaconda) 프로필. os-release 의 ID=kiyu 로 선택되며 Fedora 프로필을 상속한다.
+[Profile]
+profile_id = kiyu
+base_profile = fedora
+
+[Profile Detection]
+[Main]
+Product=kiyu
+Version=1.0
+BugURL=https://github.com/InhyeokKang/linuxos/issues
+total 224
+drwxr-xr-x.  8 root root   4096  9월  9 18:43 .
+drwxr-xr-x. 10 root root   4096  9월  9 18:43 ..
+-rw-r--r--.  1 root root   1255  3월 26 22:10 anaconda-password-show-off.svg
+-rw-r--r--.  1 root root   1447  3월 26 22:10 anaconda-password-show-on.svg
+-rw-r--r--.  1 root root   3728  3월 22  2025 anaconda_header.png
+drwxr-xr-x.  2 root root   4096  9월  9 18:40 atomic
+drwxr-xr-x.  2 root root   4096  9월  9 18:40 cloud
+]3008;end=beb76be4-a632-4319-800f-e537a819c88e;exit=success\]3008;start=73b9d4d6-e566-450b-a2e6-f73275f86a01;machineid=001899cc0af6441aafbd78e6d5cbef91;user=liveuser;hostname=localhost-live;bootid=0cf67507-102a-444d-bf87-7d3ff838f1f6;pid=00000000000000001382;type=shell;cwd=/home/liveuser\[?2004hSHELL> (DISPLAY=:0 XAUTHORITY=$HOME/.Xauthority /usr/bin/liveinst >/tmp/liveinst.log 2>&1 &) ; sleep 75; ps -eo comm | grep -iE 'anaconda|liveinst|polkit' | sort | uniq -c; tail -5 /tmp/liveinst.log 2>/dev/null; sudo tail -5 /tmp/anaconda.log 2>/dev/null; xdotool search --name -i anaconda 2>/dev/null | head -3
+[?2004l]3008;start=3600a554-d14b-4b05-a7a6-dcf7785d4c1b;machineid=001899cc0af6441aafbd78e6d5cbef91;user=liveuser;hostname=localhost-live;bootid=0cf67507-102a-444d-bf87-7d3ff838f1f6;pid=00000000000000001382;type=command;cwd=/home/liveuser\[1]+  Done                       mousepad > /dev/null 2>&1
+      1 polkitd
+-bash: /usr/bin/liveinst: No such file or directory
+[  336.878709] audit: type=1101 audit(1788948212.497:155): pid=2548 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:accounting grantors=pam_unix acct="liveuser" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  336.884942] audit: type=1123 audit(1788948212.503:156): pid=2548 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='cwd="/home/liveuser" cmd=7461696C202D35202F746D702F616E61636F6E64612E6C6F67 exe="/usr/bin/sudo" terminal=ttyS0 res=success'
+[  336.890422] audit: type=1110 audit(1788948212.506:157): pid=2548 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_env,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;start=9f954777476640ca9b71dca94c4008e9;user=liveuser;hostname=localhost-live;machineid=001899cc0af6441aafbd78e6d5cbef91;bootid=0cf67507102a444dbf877d3ff838f1f6;pid=2548;pidfdid=5445;comm=sudo;targetuser=root;type=session\[  336.902053] audit: type=1105 audit(1788948212.520:158): pid=2548 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_open grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;end=9f954777476640ca9b71dca94c4008e9\[  336.911213] audit: type=1106 audit(1788948212.528:159): pid=2548 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:session_close grantors=pam_keyinit,pam_limits,pam_keyinit,pam_limits,pam_systemd,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+[  336.916196] audit: type=1104 audit(1788948212.529:160): pid=2548 uid=1000 auid=1000 ses=3 subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 msg='op=PAM:setcred grantors=pam_env,pam_unix acct="root" exe="/usr/bin/sudo" hostname=localhost-live addr=? terminal=/dev/ttyS0 res=success'
+]3008;end=3600a554-d14b-4b05-a7a6-dcf7785d4c1b;exit=success\]3008;start=73b9d4d6-e566-450b-a2e6-f73275f86a01;machineid=001899cc0af6441aafbd78e6d5cbef91;user=liveuser;hostname=localhost-live;bootid=0cf67507-102a-444d-bf87-7d3ff838f1f6;pid=00000000000000001382;type=shell;cwd=/home/liveuser\[?2004hSHELL> echo '=== END'
+[?2004l]3008;start=ad47196a-baee-4539-b4a6-5c49aafa176b;machineid=001899cc0af6441aafbd78e6d5cbef91;user=liveuser;hostname=localhost-live;bootid=0cf67507-102a-444d-bf87-7d3ff838f1f6;pid=00000000000000001382;type=command;cwd=/home/liveuser\=== END
+]3008;end=ad47196a-baee-4539-b4a6-5c49aafa176b;exit=success\]3008;start=73b9d4d6-e566-450b-a2e6-f73275f86a01;machineid=001899cc0af6441aafbd78e6d5cbef91;user=liveuser;hostname=localhost-live;bootid=0cf67507-102a-444d-bf87-7d3ff838f1f6;pid=00000000000000001382;type=shell;cwd=/home/liveuser\[?2004hSHELL> 
