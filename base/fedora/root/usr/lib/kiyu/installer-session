@@ -16,6 +16,7 @@ while :; do
     if command -v liveinst >/dev/null 2>&1; then
         # liveinst(Anaconda) 는 root 가 필요하다. 라이브 사용자는 암호 없는 sudo 를 가지므로
         # X 접속 정보(DISPLAY/XAUTHORITY)만 넘겨 root 로 실행한다.
+        command -v xhost >/dev/null 2>&1 && xhost +si:localuser:root >/dev/null 2>&1
         sudo env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" /usr/bin/liveinst
     else
         xmessage -center "설치 프로그램(liveinst)을 찾을 수 없습니다." 2>/dev/null || sleep 30

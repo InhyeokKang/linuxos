@@ -63,6 +63,10 @@
     <package name="livesys-scripts"/>
     <package name="anaconda-live"/>
     <package name="anaconda-install-env-deps"/>
+    <!-- GTK 설치 화면. Fedora 44 의 anaconda-live 는 WebUI(anaconda-webui+cockpit+Firefox 키오스크)를
+         끌어오는데, kiyu 는 Firefox 가 없어 백엔드만 돌고 화면이 안 그려진다. GTK 판을 넣고 WebUI 는 아래
+         uninstall 로 제거해 liveinst 가 "anaconda --liveinst --graphical" 만 띄우게 한다. -->
+    <package name="anaconda-gui"/>
 
     <!-- 시스템 -->
     <package name="systemd"/>
