@@ -43,7 +43,7 @@ make test-uefi          # QEMU, UEFI (OVMF 필요: apt install ovmf)
 ./scripts/test-qemu.sh --uefi --disk           # 가상 디스크 붙여서 설치까지
 ```
 
-라이브 세션 로그인은 자동입니다 (사용자 `liveuser`, 비밀번호 없음). 바탕화면의 **kiyu 설치** 아이콘으로 Anaconda 를 실행합니다.
+설치 매체로 부팅하면 데스크톱 없이 곧바로 **Anaconda 설치 프로그램**이 뜹니다(`liveuser` 로 자동 로그인된 설치 전용 세션 `kiyu-installer`; `kiyu-live-installer.service` 가 lightdm 을 그 세션으로 돌립니다). 설치된 시스템에는 라이브 경로가 없어 평소 kiyu 데스크톱으로 부팅됩니다.
 
 ### 자원 사용량 측정
 

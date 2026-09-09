@@ -1,0 +1,14 @@
+#!/bin/sh
+# 설치 매체(라이브)로 부팅했을 때만: lightdm 이 데스크톱(kiyu 세션) 대신 설치 전용 세션
+# (kiyu-installer)으로 자동 로그인하도록 설정한다. livesys 가 써 둔 자동 로그인 설정보다 나중에
+# 읽히는 99- 파일이라 세션 이름이 이것으로 덮인다.
+# 설치된 시스템에서는 kiyu-live-installer.service 의 ConditionPathExists 에 걸려 실행되지 않으므로
+# 평소처럼 kiyu 데스크톱으로 부팅된다.
+mkdir -p /etc/lightdm/lightdm.conf.d
+cat > /etc/lightdm/lightdm.conf.d/99-kiyu-live-installer.conf <<'EOF'
+[Seat:*]
+autologin-user=liveuser
+autologin-user-timeout=0
+autologin-session=kiyu-installer
+user-session=kiyu-installer
+EOF

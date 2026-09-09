@@ -1,0 +1,14 @@
+[Unit]
+Description=kiyu: boot the install medium straight into the installer (no desktop)
+# 설치 매체(라이브)로 부팅했을 때만. 설치된 시스템에는 이 경로가 없어 실행되지 않는다.
+ConditionPathExists=/run/initramfs/live
+After=livesys.service
+Before=lightdm.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/lib/kiyu/live-installer-setup
+
+[Install]
+WantedBy=graphical.target

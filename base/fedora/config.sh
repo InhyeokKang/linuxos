@@ -32,6 +32,8 @@ en NetworkManager.service
 en chronyd.service
 en kiyu-firstboot.service
 en livesys.service; en livesys-late.service
+# 설치 매체로 부팅하면 데스크톱 없이 곧바로 설치 프로그램(Anaconda)이 뜨게 (설치된 시스템에선 조건에 걸려 무시)
+en kiyu-live-installer.service
 systemctl disable ModemManager.service 2>/dev/null || true
 # Ctrl+Alt+Del 로 콘솔에서 재부팅되지 않게 (Fedora 는 /etc 에 링크가 이미 있어 mask 대신 직접 /dev/null 로)
 rm -f /etc/systemd/system/ctrl-alt-del.target

@@ -135,6 +135,7 @@
     <package name="xorg-x11-xauth"/>
     <package name="xrandr"/>
     <package name="xset"/>
+    <package name="xsetroot"/>
     <package name="xprop"/>
     <package name="xrdb"/>
     <package name="mesa-dri-drivers"/>

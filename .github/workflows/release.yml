@@ -57,8 +57,8 @@ jobs:
           tag_name: ${{ steps.prep.outputs.tag }}
           name: kiyu ${{ steps.prep.outputs.tag }}
           body: |
-            kiyu 라이브 ISO. **kiyu Imager** 로 USB·SD 에 구워 부팅하세요.
-            설치 후 로그인 계정은 설치 프로그램에서 만듭니다. 라이브 세션 사용자는 `liveuser`(암호 없음).
+            kiyu 설치 ISO. **kiyu Imager** 로 USB·SD 에 구워 부팅하면 데스크톱 없이 곧바로 설치 프로그램이 뜹니다.
+            디스크 선택·로그인 계정 생성은 설치 프로그램에서 합니다. 설치 후 재부팅하면 kiyu 로 부팅됩니다.
           files: |
             release/*.iso
             release/SHA256SUMS.txt

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=kiyu installer
+Name[ko]=kiyu 설치
+Comment=Install kiyu to this computer (live medium boots straight into this)
+Comment[ko]=이 컴퓨터에 kiyu 를 설치합니다 (설치 매체로 부팅하면 바로 이 화면)
+Exec=/usr/lib/kiyu/installer-session
+Type=XSession
+DesktopNames=kiyu-installer

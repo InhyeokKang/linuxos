@@ -9,10 +9,10 @@ bad()  { printf 'FAIL: %s\n' "$*"; fail=1; }
 echo "[1/5] 셸 스크립트 문법"
 while IFS= read -r f; do
     if head -1 "$f" | grep -q bash; then bash -n "$f" || bad "$f"; else sh -n "$f" || bad "$f"; fi
-done < <(grep -rlE --exclude-dir=.git --exclude-dir=cache --exclude-dir=chroot --exclude-dir=binary '^#!\s*/(usr/)?bin/(env )?(ba)?sh' .)
+done < <(grep -rlE --exclude-dir=.git --exclude-dir=cache --exclude-dir=chroot --exclude-dir=binary --exclude-dir=out '^#!\s*/(usr/)?bin/(env )?(ba)?sh' .)
 if command -v shellcheck >/dev/null 2>&1; then
     # shellcheck disable=SC2046
-    shellcheck -x $(grep -rlE --exclude-dir=.git --exclude-dir=cache --exclude-dir=chroot --exclude-dir=binary '^#!\s*/(usr/)?bin/(env )?(ba)?sh' .) || bad "shellcheck"
+    shellcheck -x $(grep -rlE --exclude-dir=.git --exclude-dir=cache --exclude-dir=chroot --exclude-dir=binary --exclude-dir=out '^#!\s*/(usr/)?bin/(env )?(ba)?sh' .) || bad "shellcheck"
 else
     note "shellcheck 없음 (건너뜀)"
 fi
