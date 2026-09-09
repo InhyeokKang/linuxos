@@ -1,0 +1,16 @@
+kvm: yes
+rootfs: files extracted to results/rootfs
+base: fedora kernel: linux initrd: initrd
+volid: kiyu-1.0
+== BIOS direct-kernel boot
+guest shell: ok
+guest hangul probe: ok
+guest installer probe: ok
+         Starting lightdm.service - Light Display Manager...
+[  OK  ] Reached target graphical.target - Graphical Interface.
+[  OK  ] Started lightdm.service - Light Display Manager.
+RESULT bios: graphical target reached
+== UEFI boot
+ovmf: /usr/share/OVMF/OVMF_CODE_4M.ms.fd (Secure Boot keys)
+RESULT uefi: screenshots taken (uefi-menu.png, uefi-180s.png)
+done: /home/runner/work/linuxos/linuxos/results
