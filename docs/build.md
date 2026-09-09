@@ -45,6 +45,8 @@ make test-uefi          # QEMU, UEFI (OVMF 필요: apt install ovmf)
 
 설치 매체로 부팅하면 데스크톱 없이 곧바로 **Anaconda 설치 프로그램**이 뜹니다(`liveuser` 로 자동 로그인된 설치 전용 세션 `kiyu-installer`; `kiyu-live-installer.service` 가 lightdm 을 그 세션으로 돌립니다). 설치된 시스템에는 라이브 경로가 없어 평소 kiyu 데스크톱으로 부팅됩니다.
 
+설치 프로그램을 닫으면 `installer-finished` 화면이 떠서 **재부팅 / 전원 끄기 / 설치 다시 하기** 중에 고르게 합니다. Anaconda 는 라이브 설치에서 마지막 버튼을 "재부팅"이 아니라 "설치 종료"로만 주고 그냥 종료하기 때문입니다(`conf.system.can_reboot` 이 라이브에서 거짓). 설치 완료 여부는 `/tmp/anaconda.log` 의 "The installation has finished" 로 판단해 기본 버튼을 정합니다.
+
 ### 자원 사용량 측정
 
 라이브 세션 또는 설치본에서:
