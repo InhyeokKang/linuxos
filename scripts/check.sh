@@ -75,4 +75,7 @@ if command -v nft >/dev/null 2>&1; then
     nft -c -f base/debian/config/includes.chroot_after_packages/etc/nftables.conf 2>/dev/null || note "nft -c 실패 (include 경로 때문일 수 있음; 빌드 훅에서 재검사)"
 fi
 
+echo "[+] 킥스타트 <-> 이미지 패키지 정합성"
+python3 scripts/lib/check-kickstart.py || fail=1
+
 if [ "$fail" = 0 ]; then echo "모든 검사 통과"; else echo "검사 실패"; exit 1; fi
